@@ -4,7 +4,7 @@ export const MainMenu = [
     { name: 'Horoscope', url : '#', 
         sublinks: [
             { name: 'Horoscope', url : `${MAIN_URL}horoscope/horoscope.php`,  },
-            { name: 'Daily Horoscope', url : `${MAIN_URL}horoscope/daily-horoscope/aries.php`,},
+            { name: 'Daily Horoscope', url : `${MAIN_URL}horoscope/daily-horoscope.php`,},
             { name: 'Weekly Horoscope', url : `${MAIN_URL}horoscope/weekly-horoscope/aries.php`,},
             { name: 'Monthly Horoscope', url : `${MAIN_URL}horoscope/monthly-horoscope/aries.php`,},
             { name: 'Yearly Horoscope', url : `${MAIN_URL}horoscope/yearly-horoscope/aries.php`,

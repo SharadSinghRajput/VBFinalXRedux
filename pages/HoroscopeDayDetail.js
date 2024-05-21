@@ -1,11 +1,14 @@
 "use client"; 
+import Title from './pageAssets/Title';
+import Banner from './pageAssets/Banner';
+import Description from './pageAssets/Description';
+import { useRouter } from 'next/router';
 
 
 import Image from "next/image";
-import { useRouter } from 'next/router';
 
-export default function HomePage() {
-  const router = useRouter();
+export default function HomePage({data}) {
+    const router = useRouter();
   const people = [
     { name: 'Betting & Gambling', url: 'https://www.vinaybajrangi.com/astrology-for-betting.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/icons.png' },
     { name: 'All about Vastu', url: 'https://www.vinaybajrangi.com/vastu.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/allabout-vastu.png' },
@@ -39,30 +42,16 @@ export default function HomePage() {
     { name: "Pisces", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/pisces.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/pices.png", Link: "horoscope/daily-horoscope/pisces.php"}
   ]
 
-
   
   return (
     <>
-      <div class="container pt-4 pb-10  mx-auto">
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg">
-            <h2 class="text-xl text-orange-500 font-bold text-center mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
-            <ul role="list" className="grid gap-2 md:gap-4 grid-cols-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4  sm:gap-y-16 xl:col-span-4 p-0">
-              {people.map((person) => (
-                <li key={person.name} className="bg-orange-500 p-2 aspect-auto rounded-lg flex flex-col justify-center items-center p-2">
-                  <div className="flex flex-col items-center">
-                    <Image width={40} height={40} className="h-10 w-10" src={person.imgSrc} alt="" />
-                    <h3 className="mt-2 text-xs text-white text-base text-center leading-normal font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <div className='bg-white max-w-6xl mx-auto mt-5'>
+        <div class="grid grid-cols-1 gap-10">
           <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
             <h2 class="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
             <div class="flex flex-row flex-wrap gap-3 justify-center ">
               {Horoscope.map((person) => (
-                <button  key={person.name} onClick={()=> router.push(person.Link)} >
+                <button key={person.name} onClick={()=> router.push(person.Link)} >
                     <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
                     <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
                 </button>
@@ -70,6 +59,13 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        {data?.title && <Title titleData={data.title} />}
+            {data?.blogBannerImage && (
+            <div className="w-full md:w-full mb-5 mt-5">
+                <Banner BannerData={data.blogBannerImage} />
+            </div>
+            )}
+            {data?.description && <Description descData={data.description} />}
        </div>
        
     </>

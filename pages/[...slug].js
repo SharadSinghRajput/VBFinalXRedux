@@ -65,7 +65,7 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          console.log(responseData);
+          console.log("responseData", responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){
