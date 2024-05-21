@@ -12,7 +12,8 @@ import { Provider } from 'react-redux';
 const Layout = ({ children }) => {
   const router = useRouter();
   const { slug }  = router.query;
-  const lastValOfURL = slug[slug.length - 1];
+  // const lastValOfURL = slug[slug.length - 1];
+  const lastValOfURL = slug && Array.isArray(slug) ? slug[slug.length - 1] : null;
   return (
     
       <div className="flex flex-col min-h-screen">
