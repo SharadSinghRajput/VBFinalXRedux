@@ -39,8 +39,11 @@ export default function DailyHoroscopeDetailed({data}) {
         if(!data)return
     }, [])
 
-    
-    const zodiacSign = data.zodiacSignLangWise ? data.zodiacSignLangWise : false;
+    if(data){
+        const zodiacSign = data.zodiacSignLangWise ? data.zodiacSignLangWise : false;
+    }else{
+        const zodiacSign = false;
+    }
     console.log("zodiacSign", zodiacSign);
     const day = data.zodiacPeriod ? data.zodiacPeriod : false;
     const pageLanguage = data.language ? data.language : false;
