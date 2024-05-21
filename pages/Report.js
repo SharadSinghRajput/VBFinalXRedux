@@ -213,11 +213,13 @@ const DataExistMailList = (DataExistItem) => {
           {data.extraComponentData ? data.extraComponentData.Holder3 ? <Holder data={data.extraComponentData.Holder3} /> : <></> :<></>}
 
           <div className=''>
-            {/* {data.title ? <>
-              <div className='pb-5'>
-                <Title titleData={data.title}/>
-              </div>
-            </>:<></>} */}
+            {data ?
+              data.title ? <>
+                <div className='pb-5'>
+                  <Title titleData={data.title}/>
+                </div>
+              </>:<></>
+            : null}
 
             {data.extraComponentData ? data.extraComponentData.Holder4 ? <Holder data={data.extraComponentData.Holder4} /> : <></> :<></>}
             {data.extraComponentData ? data.extraComponentData.Holder5 ? <Holder data={data.extraComponentData.Holder5} /> : <></> :<></>}
@@ -1159,12 +1161,16 @@ const DataExistMailList = (DataExistItem) => {
                         <div className="bg-gray-50 px-4 py-6 sm:px-6">
                           <div className="flex items-start justify-between space-x-3">
                             <div className="space-y-1">
-                              {data.title ? <>
-                              <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                                {data.title}
-                              </Dialog.Title>
-                              </>:<></>}
-                              {data.shortDesc ? (<div className='text-sm text-gray-500' dangerouslySetInnerHTML={{ __html: data.shortDesc }} />) : (<></>)}
+                              {data ?
+                                data.title ? <>
+                                <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
+                                  {data.title}
+                                </Dialog.Title>
+                                </>:<></>
+                              : null}
+                              {data ?
+                                data.shortDesc ? (<div className='text-sm text-gray-500' dangerouslySetInnerHTML={{ __html: data.shortDesc }} />) : (<></>)
+                              : null}
                             </div>
                             <div className="flex h-7 items-center">
                               <button
