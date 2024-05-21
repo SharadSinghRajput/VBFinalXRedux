@@ -2,14 +2,16 @@
 import {useEffect, useState } from "react"
 import { useRouter } from 'next/router';
 import DailyHoroscope from './HoroscopeDetail';
-
 import SomethingWentWrong from './SomethingWentWrong';
 import PageNotFound from './PageNotFound';
 import DefaultPage from './DefaultPage';
-
 import {API_KEY, Domain_Secrete_Code, API_NEW_URL,} from '../config/config'
 import MiniCart from './pageAssets/MiniCart'
 import LanguageSelector from './pageAssets/languageSelector'
+import Home from "./Home"
+import AllSideBar from "./AllSideBar"
+
+
 
 import Page from './index';
 
@@ -63,7 +65,7 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          console.log(responseData);
+          console.log("responseData", responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){
@@ -138,6 +140,7 @@ export default function DynamicPage() {
       <Page>
           <PageComponent data={DataComponentWise} />
           <MiniCart Design={ShowMiniCartStyle}  />
+          <AllSideBar />
           {/* <LanguageSelector data={DataComponentWise.bilingualData} /> */}
       </Page>
       )
@@ -147,7 +150,8 @@ export default function DynamicPage() {
       return (
         <Page>
           <DefaultPage data={DefaultData} />
-          <LanguageSelector data={DefaultData.bilingualData} />
+          <AllSideBar />
+          {/* <LanguageSelector data={DefaultData.bilingualData} /> */}
         </Page>
       );
     }
@@ -155,7 +159,6 @@ export default function DynamicPage() {
   else {
     return (
       <Page>
-
         <div role="status" className='min-h-screen w-full flex justify-center items-center' >
           <svg aria-hidden="true" className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

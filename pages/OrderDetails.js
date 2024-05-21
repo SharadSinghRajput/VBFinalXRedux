@@ -196,24 +196,24 @@ export default function Cart() {
             console.log(JSON.stringify(dataToGet));
         } catch (error) {}
     };
-    
-
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [DealPrice, setDealPrice] = useState(0);
     const [MIcon, setMIcon] = useState("");
 
-
+    console.log("OrderDetailsBank", OrderDetailsBank);
     useEffect(() => {
         let totalPrice = 0;
         let DealPrice = 0;
         if(OrderDetailsBank){
             OrderDetailsBank.cartData.forEach(item => {
-                if(item.productData?.repotPrice[0]){
-                    totalPrice += item.productData?.repotPrice[0].price;
-                    DealPrice += Number(item.productData?.repotPrice[0].dealPrice) || Number(item.productData?.repotPrice[0].price);
-                    if(item.productData?.repotPrice[0].icon){
-                        setMIcon(item.productData?.repotPrice[0].icon)
+                if(item.productData){
+                    if(item.productData.repotPrice[0]){
+                        totalPrice += item.productData.repotPrice[0].price;
+                        DealPrice += Number(item.productData.repotPrice[0].dealPrice) || Number(item.productData.repotPrice[0].price);
+                        if(item.productData.repotPrice[0].icon){
+                            setMIcon(item.productData.repotPrice[0].icon)
+                        }
                     }
                 }
             });
@@ -223,7 +223,6 @@ export default function Cart() {
             console.log(DealPrice);
         }
     }, [OrderDetailsBank]);
-
     
 
     return (
@@ -321,7 +320,39 @@ export default function Cart() {
                                             </div>
                                         </div>
                                     </div>
-                                :null
+                                :
+                                <div key={index} className="flex space-x-6 border-b border-gray-200 py-4">
+                                        <Image
+                                            src={item.productData.banner}
+                                            alt={item.productData.banner}
+                                            width={96}
+                                            height={40}
+                                            className="rounded-md aspect-video object-cover"
+                                            priority
+                                        />
+                                        <div className="flex flex-auto flex-col">
+                                            <div>
+                                                <div className='flex gap-10 justify-between'>
+                                                    <h4 className="font-medium text-sm text-gray-900">
+                                                        {item.bundleDetailedData ?
+                                                            item.bundleDetailedData.map((item, index)=> (
+                                                                <span key={item}>{item.question} + </span>
+                                                            ))
+                                                        : null}
+                                                        
+                                                    </h4>
+                                                    <dl className="flex space-x-4 divide-x divide-gray-200 text-sm sm:space-x-6">
+                                                        <div className="flex">
+                                                            <dd className="ml-2 text-gray-700">{MIcon} {item.price}</dd>
+                                                        </div>
+                                                    </dl>
+                                                </div>
+                                                {item.productData.answer ?
+                                                    <ShortDescription descData={item.productData.answer} CharCount={100} />
+                                                :<></>}
+                                            </div>
+                                        </div>
+                                    </div>
 
                             ))
                         : null

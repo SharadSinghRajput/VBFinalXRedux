@@ -9,6 +9,7 @@ export default function Login() {
   const [LogSucessFull, setLogSucessFull] = useState(false);
   const { slug }  = router.query;
   const [PageSlug, setPageSlug] = useState("")
+  
   useEffect(()=>{
     if(slug){
       setPageSlug(slug[slug.length - 1])

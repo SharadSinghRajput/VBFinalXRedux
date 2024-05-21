@@ -17,7 +17,7 @@ const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
   imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -29,49 +29,50 @@ const userNavigation = [
   { name: 'Login', href: 'login' },
 ]
 const userNavigationActive = [
-    { name: 'Sign out', href: '#' },
+  { name: 'Sign out', href: '#' },
 ]
 const solutions = [
-    { name: 'Analytics', href: '#' },
-    { name: 'Engagement', href: '#' },
-    { name: 'Security', href: '#' },
-    { name: 'Integrations', href: '#' },
-    { name: 'Automations', href: '#' },
-    { name: 'Reports', href: '#' },
-  ]
+  { name: 'Analytics', href: '#' },
+  { name: 'Engagement', href: '#' },
+  { name: 'Security', href: '#' },
+  { name: 'Integrations', href: '#' },
+  { name: 'Automations', href: '#' },
+  { name: 'Reports', href: '#' },
+]
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function MainMenuComp() {
   const router = useRouter();
-
+  const startSessionTrigger = useSelector(state => state.session.startSessionTrigger);
+  console.log("startSessionTrigger", startSessionTrigger);
+  
   const [SessionAction, setSessionAction] = useState(false)
-
+  
   const GetSession = async () => {
     const SessionToken = getLocalStorageItem('tokenKey');
-        if(SessionToken !== null) {
-            setSessionAction(true)
-        }else{
-            setSessionAction(false)
-        }
-    };
+    if(SessionToken !== null) {
+      setSessionAction(true)
+    }else{
+      setSessionAction(false)
+    }
+  };
   useEffect(()=>{
+    if(startSessionTrigger){
       GetSession()
-  },[])
-  // const products = useSelector(state => state.ProductReducer.products);  
-  // const [CartNumber, setCartNumber] = useState(products.length);
+    }else{
+      GetSession()
+    }
+  },[startSessionTrigger])
   
-  // useEffect(()=>{
-  //   setCartNumber(products.lenght)
-  // },[products])
-
+  
   return (
     <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">
-            <div className="relative flex h-16 justify-between">
+            <div className="relative flex h-16 justify-between z-50">
               <div className="relative z-10 flex px-2 lg:px-0">
                 <div className="flex flex-shrink-0 items-center">
                     <Image src={Logo} alt="Logo" className="h-12 w-auto" />
@@ -155,6 +156,22 @@ export default function MainMenuComp() {
                             {({ active }) => (
                               <button
                                 onClick={()=>{
+                                  router.push("dashboard")
+                                  GetSession()
+                                }}
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700 w-full'
+                                )}
+                              >
+                                Dashboard
+                              </button>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item >
+                            {({ active }) => (
+                              <button
+                                onClick={()=>{
                                   localStorage.removeItem("tokenKey")
                                   router.push("/")
                                   GetSession()
@@ -217,10 +234,12 @@ export default function MainMenuComp() {
                                         {item.sublinks.map((item, index) => (    
                                             <Popover className="relative" key={index}>
                                                 {item.sublinksL2 ? <>
-                                                    <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
-                                                        <span className='text-left'>{item.name}</span>
-                                                        <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                    </Popover.Button>
+                                                    <div className='flex justify-between'>
+                                                        <a  href={item.url} className='text-left text-xs'>{item.name}</a>
+                                                        <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
+                                                            <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                                        </Popover.Button>
+                                                    </div>
 
                                                     <Transition
                                                         as={Fragment}
@@ -236,10 +255,13 @@ export default function MainMenuComp() {
                                                             {item.sublinksL2.map((item, index) => (    
                                                                 <Popover className="relative" key={index}>
                                                                     {item.sublinksL3 ? <>
-                                                                        <Popover.Button className="text-xs inline-flex items-center gap-x-1  font-medium leading-6 text-orange-800">
-                                                                            <span className='text-left'>{item.name}</span>
-                                                                            <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                                        </Popover.Button>
+
+                                                                      <div className='flex justify-between'>
+                                                                          <a  href={item.url} className='text-left text-xs'>{item.name}</a>
+                                                                          <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
+                                                                              <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                                                          </Popover.Button>
+                                                                      </div>
 
                                                                         <Transition
                                                                             as={Fragment}
@@ -255,10 +277,12 @@ export default function MainMenuComp() {
                                                                                 {item.sublinksL3.map((item, index) => (    
                                                                                     <Popover className="relative" key={index}>
                                                                                         {item.sublinksL3 ? <>
-                                                                                            <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
-                                                                                                <span className='text-left'>{item.name}</span>
-                                                                                                <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                                                            </Popover.Button>
+                                                                                          <div className='flex justify-between'>
+                                                                                              <a  href={item.url} className='text-left text-xs'>{item.name}</a>
+                                                                                              <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
+                                                                                                  <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                                                                              </Popover.Button>
+                                                                                          </div>
 
                                                                                             <Transition
                                                                                                 as={Fragment}
@@ -277,7 +301,7 @@ export default function MainMenuComp() {
                                                                                                 </Popover.Panel>
                                                                                             </Transition>
                                                                                         </>:<>
-                                                                                        <a key={item.name} onClick={() => router.push(item.url)} className="no-underline text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800 cursor-pointer">
+                                                                                        <a key={item.name} href={item.url} className="no-underline text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800 cursor-pointer">
                                                                                             {item.name}
                                                                                         </a>
                                                                                         </>}
@@ -287,7 +311,7 @@ export default function MainMenuComp() {
                                                                             </Popover.Panel>
                                                                         </Transition>
                                                                     </>:<>
-                                                                    <a key={item.name} onClick={() => router.push(item.url)} className="no-underline text-xs inline-flex items-center gap-x-1  font-medium leading-6 text-orange-800 cursor-pointer">
+                                                                    <a key={item.name} href={item.url} className="no-underline text-xs inline-flex items-center gap-x-1  font-medium leading-6 text-orange-800 cursor-pointer">
                                                                         {item.name}
                                                                     </a>
                                                                     </>}
@@ -297,7 +321,7 @@ export default function MainMenuComp() {
                                                         </Popover.Panel>
                                                     </Transition>
                                                 </>:<>
-                                                <a key={item.name} onClick={() => router.push(item.url)} className="no-underline text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800 cursor-pointer">
+                                                <a key={item.name} href={item.url} className="no-underline text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800 cursor-pointer">
                                                     {item.name}
                                                 </a>
                                                 </>}
@@ -307,7 +331,7 @@ export default function MainMenuComp() {
                                 </Popover.Panel>
                             </Transition>
                         </>:<>
-                            <a key={item.name} onClick={() => router.push(item.url)} className="no-underline text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800 cursor-pointer">
+                            <a key={item.name} href={item.url} className="no-underline text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800 cursor-pointer">
                                 {item.name}
                             </a>
                         </>}

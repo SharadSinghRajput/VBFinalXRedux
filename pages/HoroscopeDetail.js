@@ -260,7 +260,7 @@ export default function DailyHoroscopeDetailed({data}) {
     <MetaData data={data} />
     <div className="flex min-h-full flex-col">
         {data?.extraComponentData ? (
-            <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+            <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8 holder">
                 {data.extraComponentData.Holder1 && <Holder data={data.extraComponentData.Holder1} />}
                 {data.extraComponentData.Holder2 && <Holder data={data.extraComponentData.Holder2} />}
                 {data.extraComponentData.Holder3 && <Holder data={data.extraComponentData.Holder3} />}
@@ -279,8 +279,8 @@ export default function DailyHoroscopeDetailed({data}) {
                         {HoroscopeIcon.map((item, index) => (
                             <SwiperSlide key={index}> 
                                 <a className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer" onClick={() => router.push(item?.url)}>
-                                    <div className="flex justify-center items-center bg-white rounded-full p-5 w-30 h-30">
-                                        <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] p-3aspect-square rounded-lg' />
+                                    <div className="flex justify-center items-center bg-white rounded-full p-2">
+                                        <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
                                     </div>
                                     <span className='text-sm'>{item?.name}</span>
                                 </a>
@@ -290,14 +290,8 @@ export default function DailyHoroscopeDetailed({data}) {
                 </div>
             </div>
         </div>
+      
         <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-            {data?.extraComponentData ? (
-                <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-                    {data.extraComponentData.Holder4 && <Holder data={data.extraComponentData.Holder4} />}
-                    {data.extraComponentData.Holder5 && <Holder data={data.extraComponentData.Holder5} />}
-                    {data.extraComponentData.Holder6 && <Holder data={data.extraComponentData.Holder6} />}
-                </div>
-            ) : null}
             <div className="block w-full sm:top-8 sm:w-44">
                 <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 mt-5 rounded-lg">
                     <div className="flex justify-center items-center aries-pR1">
@@ -396,13 +390,7 @@ export default function DailyHoroscopeDetailed({data}) {
                         </span>
                     </a>
                     
-                    {data?.extraComponentData ? (
-                        <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-                            {data.extraComponentData.Holder7 && <Holder data={data.extraComponentData.Holder7} />}
-                            {data.extraComponentData.Holder8 && <Holder data={data.extraComponentData.Holder8} />}
-                            {data.extraComponentData.Holder9 && <Holder data={data.extraComponentData.Holder9} />}
-                        </div>
-                    ) : null}
+                    
                     
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
@@ -432,13 +420,7 @@ export default function DailyHoroscopeDetailed({data}) {
                             Get Instant Answer on {changeText} Matters in 'Yes' or 'No'
                         </span>
                     </a>
-                    {data?.extraComponentData ? (
-                        <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-                            {data.extraComponentData.Holder10 && <Holder data={data.extraComponentData.Holder10} />}
-                            {data.extraComponentData.Holder11 && <Holder data={data.extraComponentData.Holder11} />}
-                            {data.extraComponentData.Holder12 && <Holder data={data.extraComponentData.Holder12} />}
-                        </div>
-                    ) : null}
+                   
                     
                 </div>
             </main>
@@ -485,13 +467,7 @@ export default function DailyHoroscopeDetailed({data}) {
                     </div> 
                 </div>
             </div>
-            {data?.extraComponentData ? (
-                <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-                    {data.extraComponentData.Holder13 && <Holder data={data.extraComponentData.Holder13} />}
-                    {data.extraComponentData.Holder14 && <Holder data={data.extraComponentData.Holder14} />}
-                    {data.extraComponentData.Holder15 && <Holder data={data.extraComponentData.Holder15} />}
-                </div>
-            ) : null}
+           
             
         </div>
         

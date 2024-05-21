@@ -218,7 +218,7 @@ const [OrderDetailsData, setOrderDetailsData] = useState("")
           apiKey : API_KEY,
           userId : UserId
         };
-        const apiUrl = `${API_NEW_URL}recent-visited-report-api.php`;
+        const apiUrl = `${API_NEW_URL}recent-generated-report-api.php`;
         try {
           const response = await fetch(apiUrl, {
             method: 'POST',
@@ -268,6 +268,7 @@ const people = [
   },
 ]
 
+console.log("DataShowinPopup", DataShowinPopup )
   return (
     <>
     <div className='bg-white max-w-7xl mx-auto mt-5'>
@@ -546,7 +547,7 @@ const people = [
                       </div>
                     </div>
                     <div className="relative flex-1 px-4 py-6 sm:px-6">
-
+                      <div className='mb-2 ml-2 mr-2 text-sm text-black text-justify' dangerouslySetInnerHTML={{ __html: DataShowinPopup.generatedReport ? DataShowinPopup.generatedReport.replace(/\\r\\n/g, '<br/>') : '' }} />
                     </div>
                   </div>
                 </Dialog.Panel>

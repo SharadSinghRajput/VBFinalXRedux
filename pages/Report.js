@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { AddProduct } from '@/redux/actions';
 import { addProduct, removeProduct } from '../redux/ProductReducer';
 import { toggleGetProduct } from '../redux/triggerSlice';
+import { toggleStartSession } from '../redux/sessionSlice';
 import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import TopRowonReport from './pageAssets/TopRowonReport';
@@ -40,7 +41,7 @@ export default function Report({data}) {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [whichButton, setWhichButton] = useState(false)
-  const getProductTrigger = useSelector(state => state.trigger.getProductTrigger);
+  
 
 
   const [UnderId, setUnderId] = useState(false)
@@ -410,21 +411,31 @@ const DataExistMailList = (DataExistItem) => {
                                           </div>
                                           </dd>
                                         <dd className="P-0">
-                                        {DataExistMailList(crossItem.bundleId) ?
+                                        {SessionAction ?
+                                          DataExistMailList(crossItem.bundleId) ?
+                                            <button
+                                              type="button"
+                                              onClick={() => router.push("cart")}
+                                              className="text-xs font-bold block">
+                                                Added to Cart
+                                            </button>
+                                          :
+                                            <button
+                                            type="button"
+                                              onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
+                                              className="text-xs font-bold block">
+                                              {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
+                                            </button>
+                                        : 
                                           <button
                                             type="button"
-                                            onClick={() => router.push("cart")}
-                                            className="text-xs font-bold block">
-                                              Added to Cart
+                                            onClick={() => setOpenModal(true)}
+                                            className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              Add bundle
                                           </button>
-                                        :
-                                          <button
-                                          type="button"
-                                            onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
-                                            className="text-xs font-bold block">
-                                            {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
-                                          </button>
-                                        }
+                                          }
                                         </dd>
                                       </div>
                                     </dl>
@@ -432,25 +443,35 @@ const DataExistMailList = (DataExistItem) => {
                                 )) : null }
                               </ul>
                               <div className='flex justify-end'>
-                                {DataExistMailList(item.reportId) ? 
-                                  <button
-                                    type="button"
-                                    onClick={() => router.push("cart")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      Added to Cart
-                                  </button>
-                                 :
-                                  <button
-                                    type="button"
-                                    onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                  </button>
-                                 }
+                                {SessionAction ?
+                                  DataExistMailList(item.reportId) ? 
+                                    <button
+                                      type="button"
+                                      onClick={() => router.push("cart")}
+                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Added to Cart
+                                    </button>
+                                      :
+                                        <button
+                                          type="button"
+                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                          focus-visible:outline-orange-600">
+                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                        </button>
+                                    :
+                                    <button
+                                      type="button"
+                                      onClick={() => setOpenModal(true)}
+                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Buy this report
+                                    </button>
+                                  }
                                 </div>
                             </Disclosure.Panel>
                           </>
@@ -553,21 +574,31 @@ const DataExistMailList = (DataExistItem) => {
                                           </div>
                                           </dd>
                                         <dd className="P-0">
-                                        {DataExistMailList(crossItem.bundleId) ?
+                                        {SessionAction ?
+                                          DataExistMailList(crossItem.bundleId) ?
+                                            <button
+                                              type="button"
+                                              onClick={() => router.push("cart")}
+                                              className="text-xs font-bold block">
+                                                Added to Cart
+                                            </button>
+                                          :
+                                            <button
+                                            type="button"
+                                              onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
+                                              className="text-xs font-bold block">
+                                              {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
+                                            </button>
+                                        : 
                                           <button
                                             type="button"
-                                            onClick={() => router.push("cart")}
-                                            className="text-xs font-bold block">
-                                              Added to Cart
+                                            onClick={() => setOpenModal(true)}
+                                            className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              Add bundle
                                           </button>
-                                        :
-                                          <button
-                                          type="button"
-                                            onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
-                                            className="text-xs font-bold block">
-                                            {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
-                                          </button>
-                                        }
+                                          }
                                         </dd>
                                       </div>
                                     </dl>
@@ -575,25 +606,35 @@ const DataExistMailList = (DataExistItem) => {
                                 )) : null }
                               </ul>
                               <div className='flex justify-end'>
-                                {DataExistMailList(item.reportId) ? 
-                                  <button
-                                    type="button"
-                                    onClick={() => router.push("cart")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      Added to Cart
-                                  </button>
-                                 :
-                                  <button
-                                    type="button"
-                                    onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                  </button>
-                                 }
+                              {SessionAction ?
+                                  DataExistMailList(item.reportId) ? 
+                                    <button
+                                      type="button"
+                                      onClick={() => router.push("cart")}
+                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Added to Cart
+                                    </button>
+                                      :
+                                        <button
+                                          type="button"
+                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                          focus-visible:outline-orange-600">
+                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                        </button>
+                                    :
+                                    <button
+                                      type="button"
+                                      onClick={() => setOpenModal(true)}
+                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Buy this report
+                                    </button>
+                                  }
                                 </div>
                             </Disclosure.Panel>
                           </>
@@ -696,21 +737,31 @@ const DataExistMailList = (DataExistItem) => {
                                           </div>
                                           </dd>
                                         <dd className="P-0">
-                                        {DataExistMailList(crossItem.bundleId) ?
+                                        {SessionAction ?
+                                          DataExistMailList(crossItem.bundleId) ?
+                                            <button
+                                              type="button"
+                                              onClick={() => router.push("cart")}
+                                              className="text-xs font-bold block">
+                                                Added to Cart
+                                            </button>
+                                          :
+                                            <button
+                                            type="button"
+                                              onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
+                                              className="text-xs font-bold block">
+                                              {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
+                                            </button>
+                                        : 
                                           <button
                                             type="button"
-                                            onClick={() => router.push("cart")}
-                                            className="text-xs font-bold block">
-                                              Added to Cart
+                                            onClick={() => setOpenModal(true)}
+                                            className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              Add bundle
                                           </button>
-                                        :
-                                          <button
-                                          type="button"
-                                            onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
-                                            className="text-xs font-bold block">
-                                            {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
-                                          </button>
-                                        }
+                                          }
                                         </dd>
                                       </div>
                                     </dl>
@@ -718,25 +769,35 @@ const DataExistMailList = (DataExistItem) => {
                                 )) : null }
                               </ul>
                               <div className='flex justify-end'>
-                                {DataExistMailList(item.reportId) ? 
-                                  <button
-                                    type="button"
-                                    onClick={() => router.push("cart")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      Added to Cart
-                                  </button>
-                                 :
-                                  <button
-                                    type="button"
-                                    onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                  </button>
-                                 }
+                              {SessionAction ?
+                                  DataExistMailList(item.reportId) ? 
+                                    <button
+                                      type="button"
+                                      onClick={() => router.push("cart")}
+                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Added to Cart
+                                    </button>
+                                      :
+                                        <button
+                                          type="button"
+                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                          focus-visible:outline-orange-600">
+                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                        </button>
+                                    :
+                                    <button
+                                      type="button"
+                                      onClick={() => setOpenModal(true)}
+                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Buy this report
+                                    </button>
+                                  }
                                 </div>
                             </Disclosure.Panel>
                           </>
@@ -841,21 +902,31 @@ const DataExistMailList = (DataExistItem) => {
                                           </div>
                                           </dd>
                                         <dd className="P-0">
-                                        {DataExistMailList(crossItem.bundleId) ?
+                                        {SessionAction ?
+                                          DataExistMailList(crossItem.bundleId) ?
+                                            <button
+                                              type="button"
+                                              onClick={() => router.push("cart")}
+                                              className="text-xs font-bold block">
+                                                Added to Cart
+                                            </button>
+                                          :
+                                            <button
+                                            type="button"
+                                              onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
+                                              className="text-xs font-bold block">
+                                              {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
+                                            </button>
+                                        : 
                                           <button
                                             type="button"
-                                            onClick={() => router.push("cart")}
-                                            className="text-xs font-bold block">
-                                              Added to Cart
+                                            onClick={() => setOpenModal(true)}
+                                            className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              Add bundle
                                           </button>
-                                        :
-                                          <button
-                                          type="button"
-                                            onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
-                                            className="text-xs font-bold block">
-                                            {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
-                                          </button>
-                                        }
+                                          }
                                         </dd>
                                       </div>
                                     </dl>
@@ -863,25 +934,35 @@ const DataExistMailList = (DataExistItem) => {
                                 )) : null }
                               </ul>
                               <div className='flex justify-end'>
-                                {DataExistMailList(item.reportId) ? 
-                                  <button
-                                    type="button"
-                                    onClick={() => router.push("cart")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      Added to Cart
-                                  </button>
-                                 :
-                                  <button
-                                    type="button"
-                                    onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                  </button>
-                                 }
+                              {SessionAction ?
+                                  DataExistMailList(item.reportId) ? 
+                                    <button
+                                      type="button"
+                                      onClick={() => router.push("cart")}
+                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Added to Cart
+                                    </button>
+                                      :
+                                        <button
+                                          type="button"
+                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                          focus-visible:outline-orange-600">
+                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                        </button>
+                                    :
+                                    <button
+                                      type="button"
+                                      onClick={() => setOpenModal(true)}
+                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Buy this report
+                                    </button>
+                                  }
                                 </div>
                             </Disclosure.Panel>
                           </>
@@ -986,21 +1067,31 @@ const DataExistMailList = (DataExistItem) => {
                                           </div>
                                           </dd>
                                         <dd className="P-0">
-                                        {DataExistMailList(crossItem.bundleId) ?
+                                        {SessionAction ?
+                                          DataExistMailList(crossItem.bundleId) ?
+                                            <button
+                                              type="button"
+                                              onClick={() => router.push("cart")}
+                                              className="text-xs font-bold block">
+                                                Added to Cart
+                                            </button>
+                                          :
+                                            <button
+                                            type="button"
+                                              onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
+                                              className="text-xs font-bold block">
+                                              {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
+                                            </button>
+                                        : 
                                           <button
                                             type="button"
-                                            onClick={() => router.push("cart")}
-                                            className="text-xs font-bold block">
-                                              Added to Cart
+                                            onClick={() => setOpenModal(true)}
+                                            className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              Add bundle
                                           </button>
-                                        :
-                                          <button
-                                          type="button"
-                                            onClick={() => handleAddProduct(crossItem.bundleId, crossItem.bundleDealPrice ? crossItem.bundleDealPrice : crossItem.bundleTotalPrice, "Bundle")}
-                                            className="text-xs font-bold block">
-                                            {ProductAdding === crossItem.bundleId ? "Adding...": "Add bundle"}
-                                          </button>
-                                        }
+                                          }
                                         </dd>
                                       </div>
                                     </dl>
@@ -1008,25 +1099,35 @@ const DataExistMailList = (DataExistItem) => {
                                 )) : null }
                               </ul>
                               <div className='flex justify-end'>
-                                {DataExistMailList(item.reportId) ? 
-                                  <button
-                                    type="button"
-                                    onClick={() => router.push("cart")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      Added to Cart
-                                  </button>
-                                 :
-                                  <button
-                                    type="button"
-                                    onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                    focus-visible:outline-orange-600">
-                                      {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                  </button>
-                                 }
+                              {SessionAction ?
+                                  DataExistMailList(item.reportId) ? 
+                                    <button
+                                      type="button"
+                                      onClick={() => router.push("cart")}
+                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Added to Cart
+                                    </button>
+                                      :
+                                        <button
+                                          type="button"
+                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                          focus-visible:outline-orange-600">
+                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                        </button>
+                                    :
+                                    <button
+                                      type="button"
+                                      onClick={() => setOpenModal(true)}
+                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                      focus-visible:outline-orange-600">
+                                        Buy this report
+                                    </button>
+                                  }
                                 </div>
                             </Disclosure.Panel>
                           </>
@@ -1088,24 +1189,34 @@ const DataExistMailList = (DataExistItem) => {
                         <button onClick={()=> router.push(item.path)} className="text-sm font-bold leading-6 text-left text-gray-900">{item.title}</button>
                         <div className="mt-4 flex items-center gap-x-5">
                             <button type="button" className="text-sm font-semibold leading-6 text-gray-900">{item.price[0]?.icon} {item.price[0]?.price}</button>
-                            {DataExistMailList(item.reportID) ? 
-                                <button
-                                  type="button"
-                                  onClick={() => router.push("cart")}
-                                  className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                  hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                  focus-visible:outline-orange-600">
-                                    Added to Cart
-                                </button>
-                                :
-                                <button
-                                  type="button"
-                                  onClick={() => handleAddProduct(item.reportID, item.price[0] ? item.price[0].dealPrice ? item.price[0].dealPrice : item.price[0].price: "", "Single Product")}
-                                  className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-                                  >
-                                    {ProductAdding === item.reportID ? "Adding...": "Add to cart"}
-                                </button>
-                                }
+                            {SessionAction ?
+                              DataExistMailList(item.reportID) ? 
+                                  <button
+                                    type="button"
+                                    onClick={() => router.push("cart")}
+                                    className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-orange-600">
+                                      Added to Cart
+                                  </button>
+                                  :
+                                  <button
+                                    type="button"
+                                    onClick={() => handleAddProduct(item.reportID, item.price[0] ? item.price[0].dealPrice ? item.price[0].dealPrice : item.price[0].price: "", "Single Product")}
+                                    className="rounded-md bg-blue-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                                    >
+                                      {ProductAdding === item.reportID ? "Adding...": "Add to cart"}
+                                  </button>
+                            :
+                            <button
+                              type="button"
+                              onClick={() => setOpenModal(true)}
+                              className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                              hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                              focus-visible:outline-orange-600">
+                                Add to cart
+                            </button>
+                            }
                         </div>
                     </div>
                   ))}
@@ -1211,13 +1322,12 @@ const DataExistMailList = (DataExistItem) => {
           </div>
         </Dialog>
       </Transition.Root>
-  
           {openModal ?<>
           <div className='flex flex-col justify-center items-center z-30 backdrop-blur-md bg-white/20 fixed left-0 top-0 w-full h-full'>
-            <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 w-full max-w-96">
-                  <LoginForm />
+            <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 w-96">
+                <LoginForm />
             </div>
-            <button onClick={() => {setOpenModal(false), GetSession()}} className='w-full -mt-5 max-w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent'>Decline</button>
+            <button onClick={() => {setOpenModal(false), GetSession(), dispatch(toggleStartSession())}} className='-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent'>Decline</button>
           </div>
           </>:<></>}
       </div>
