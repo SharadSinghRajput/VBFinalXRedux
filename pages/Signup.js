@@ -414,8 +414,6 @@ export default function Login() {
                         :null}
                       </div>
                     </div>
-                    
-                    
                     <button type="button"
                     onClick={handleSignUp}
                     className="flex w-max items-center justify-center gap-2 px-2 rounded-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent">
@@ -437,7 +435,6 @@ export default function Login() {
                 </div>
               </div>
               </div>
-
               }
             </div>
 

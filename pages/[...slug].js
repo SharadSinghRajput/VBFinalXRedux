@@ -9,6 +9,7 @@ import {API_KEY, Domain_Secrete_Code, API_NEW_URL,} from '../config/config'
 import MiniCart from './pageAssets/MiniCart'
 import LanguageSelector from './pageAssets/languageSelector'
 import Home from "./Home"
+import AllSideBar from "./AllSideBar"
 
 
 
@@ -139,6 +140,7 @@ export default function DynamicPage() {
       <Page>
           <PageComponent data={DataComponentWise} />
           <MiniCart Design={ShowMiniCartStyle}  />
+          <AllSideBar />
           {/* <LanguageSelector data={DataComponentWise.bilingualData} /> */}
       </Page>
       )
@@ -148,6 +150,7 @@ export default function DynamicPage() {
       return (
         <Page>
           <DefaultPage data={DefaultData} />
+          <AllSideBar />
           {/* <LanguageSelector data={DefaultData.bilingualData} /> */}
         </Page>
       );

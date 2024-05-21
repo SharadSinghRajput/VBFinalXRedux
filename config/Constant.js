@@ -4,10 +4,10 @@ export const MainMenu = [
     { name: 'Horoscope', url : '#', 
         sublinks: [
             { name: 'Horoscope', url : `${MAIN_URL}horoscope/horoscope.php`,  },
-            { name: 'Daily Horoscope', url : `${MAIN_URL}horoscope/daily-horoscope.php`,},
-            { name: 'Weekly Horoscope', url : `${MAIN_URL}horoscope/weekly-horoscope.php`,},
-            { name: 'Monthly Horoscope', url : `${MAIN_URL}horoscope/monthly-horoscope.php`,},
-            { name: 'Yearly Horoscope', url : `${MAIN_URL}horoscope/yearly-horoscope.php`,
+            { name: 'Daily Horoscope', url : `${MAIN_URL}horoscope/daily-horoscope/aries.php`,},
+            { name: 'Weekly Horoscope', url : `${MAIN_URL}horoscope/weekly-horoscope/aries.php`,},
+            { name: 'Monthly Horoscope', url : `${MAIN_URL}horoscope/monthly-horoscope/aries.php`,},
+            { name: 'Yearly Horoscope', url : `${MAIN_URL}horoscope/yearly-horoscope/aries.php`,
             sublinksL2:[
                 { name: 'Aries Yearly Horoscope 2025', url : `${MAIN_URL}horoscope/aries-horoscope-2025.php`,},
                 { name: 'Yearly Horoscope 2025 for Taurus', url : `${MAIN_URL}horoscope/taurus-horoscope-2025.php`,},
