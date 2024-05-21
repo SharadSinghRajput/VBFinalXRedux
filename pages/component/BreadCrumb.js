@@ -1,6 +1,7 @@
 "use client"; 
 import { HomeIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 const pages = [
     { name: 'About', href: '#', current: false },
     { name: 'About us', href: '#', current: true },
@@ -8,7 +9,14 @@ const pages = [
 
 export default function BlogList({data}) {
     const router = useRouter();
-    console.log(data);
+    
+    useEffect(() => {
+        if (!data) return;
+      }, [data]);
+
+      if (!data || !Array.isArray(data)) {
+        return;
+    }
   return (
     <>
       <div className='bg-white max-w-6xl mx-auto mt-5 mb-5 '>

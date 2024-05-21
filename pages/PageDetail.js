@@ -43,15 +43,13 @@ export default function Example({data}) {
             </div>
           ) : (
             <>
-              {data.title && <Title titleData={data.title} />}
-              {data.blogBannerImage && (
-                <div className="w-[100%] md:w-[100%] mb-5 mt-5">
+              {data?.title && <Title titleData={data.title} />}
+              {data?.blogBannerImage && (
+                <div className="w-full md:w-full mb-5 mt-5">
                   <Banner BannerData={data.blogBannerImage} />
                 </div>
               )}
-              {data.description && (
-                <Description descData={data.description} />
-              )}
+              {data?.description && <Description descData={data.description} />}
             </>
           )}
         </div>
