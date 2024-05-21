@@ -606,7 +606,7 @@ export const MainMenu = [
         },
         {
             name: "Court / Legal issues",
-            url: `${MAIN_URL}court-cases.php`,
+            url: `${MAIN_URL}court-case-astrology`,
             sublinksL2: [
                 { name: "Bandhan Yoga", url: `${MAIN_URL}court-cases/bandhan-yoga.php`, }
             ]

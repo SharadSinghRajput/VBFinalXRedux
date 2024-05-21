@@ -10,7 +10,7 @@ export default function TopRow({data}) {
 
   return (
     <>
-      <div className={`${showFull ? "h-[100%] pb-24 mb-20" : "h-52"} overflow-hidden transition-all ease-in duration-200 relative`}> 
+      <div className={`${showFull ? "h-[100%] pb-24 mb-20" : "h-52"} overflow-hidden transition-all ease-in duration-200 relative z-0`}> 
         <div className={`${showFull ? "grid grid-cols-4": "grid grid-cols-4" }`}>
               {data.map((item, index) =>(
               <div  key={index} className="cursor-all-scroll p-5 px-2">

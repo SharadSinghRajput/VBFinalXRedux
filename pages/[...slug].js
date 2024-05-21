@@ -148,7 +148,7 @@ export default function DynamicPage() {
       return (
         <Page>
           <DefaultPage data={DefaultData} />
-          <LanguageSelector data={DefaultData.bilingualData} />
+          {/* <LanguageSelector data={DefaultData.bilingualData} /> */}
         </Page>
       );
     }
