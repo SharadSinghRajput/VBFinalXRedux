@@ -194,7 +194,7 @@ const GenderType = [
                                 name="gender"
                                 type="radio"
                                 onChange={()=> setGender(item.title)}
-                                className="h-4 w-4 border-gray-300 text-orange-500 focus:ring-orange-500"
+                                className="h-4 w-4 px-2 border-gray-300 text-orange-500 focus:ring-orange-500"
                             />
                             <label htmlFor={item.id} className="ml-3 block text-sm font-medium leading-6 text-gray-900">
                                 {item.title}
@@ -211,7 +211,7 @@ const GenderType = [
                                 id="name"
                                 value={Name}
                                 onChange={(value)=>setName(value.target.value)}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full  px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="Vinay Bajrangi"
                             />
                         </div>
@@ -223,7 +223,7 @@ const GenderType = [
                                 id="email"
                                 value={Email}
                                 onChange={(e) =>setEmail(e.target.value)}
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 placeholder="VinayBajrangi@gmail.com"
                             />
                         </div>
@@ -236,7 +236,7 @@ const GenderType = [
                             id="mobile"
                             value={Mobile}
                             onChange={(e) =>setMobile(e.target.value)}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             placeholder="+91 982497XXXX"
                         />
                     </div>

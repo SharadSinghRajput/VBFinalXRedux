@@ -10,7 +10,7 @@ export default function   DailyHoroscope({data}) {
   const router = useRouter();
   const { slug }  = router.query;
 
-
+console.log(data);
   useEffect(() => {
     const fetchCategoryList = async () => {
       const dataToFetch = {          
@@ -35,6 +35,7 @@ export default function   DailyHoroscope({data}) {
           throw new Error('Failed to fetch category list');
         }
         const data = await response.json();
+        console.log(data);
         if (data.success === true) {
           setCategoryList(data.data);
           
