@@ -279,8 +279,8 @@ export default function DailyHoroscopeDetailed({data}) {
                         {HoroscopeIcon.map((item, index) => (
                             <SwiperSlide key={index}> 
                                 <a className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer" onClick={() => router.push(item?.url)}>
-                                    <div className="flex justify-center items-center bg-white rounded-full p-5 w-30 h-30">
-                                        <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] p-3aspect-square rounded-lg' />
+                                    <div className="flex justify-center items-center bg-white rounded-full p-2">
+                                        <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
                                     </div>
                                     <span className='text-sm'>{item?.name}</span>
                                 </a>
