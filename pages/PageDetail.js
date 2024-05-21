@@ -50,10 +50,6 @@ export default function Example({data}) {
                 </div>
               )}
               {data?.description && <Description descData={data.description} />}
-<<<<<<< HEAD
-
-=======
->>>>>>> 38f60edb5e7719ce8f98302dec4680d6ff2542aa
             </>
           )}
         </div>

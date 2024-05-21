@@ -38,12 +38,15 @@ export default function DailyHoroscopeDetailed({data}) {
     useEffect(() => {
         if(!data)return
     }, [])
+    
+    useEffect(() => {
+        if(data){
+            const zodiacSign = data.zodiacSignLangWise ? data.zodiacSignLangWise : false;
+        }else{
+            const zodiacSign = false;
+        }
+    }, [data])
 
-    if(data){
-        const zodiacSign = data.zodiacSignLangWise ? data.zodiacSignLangWise : false;
-    }else{
-        const zodiacSign = false;
-    }
     console.log("zodiacSign", zodiacSign);
     const day = data.zodiacPeriod ? data.zodiacPeriod : false;
     const pageLanguage = data.language ? data.language : false;
@@ -301,12 +304,14 @@ export default function DailyHoroscopeDetailed({data}) {
                     <div className="flex justify-center items-center aries-pR1">
                         <div className="aries-pR"> 
                             <div className="flex justify-center items-center bg-white rounded-full p-5 w-20 h-20">
-                            <Image
-                                src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
-                                alt={`${zodiacSign} Icon`}
-                                width={50}
-                                height={50}
-                            />
+                                {zodiacSign ?
+                                    <Image
+                                        src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
+                                        alt={`${zodiacSign} Icon`}
+                                        width={50}
+                                        height={50}
+                                    />
+                                : null}
                             </div>
                             <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> {zodiacSign} </h5>
                         </div>
