@@ -212,7 +212,7 @@ export default function Login() {
                     onChange={(e) => {setOtp(e.target.value)}}
                     autoComplete="tel"
                     required
-                    className="block flex-1 rounded-r-md rounded-l-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                    className="block flex-1 rounded-r-md rounded-l-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                     placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -301,7 +301,7 @@ export default function Login() {
                           value={Name}
                           onChange={(e) => {setName(e.target.value)}}
                           required
-                          className="block flex-1 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                          className="block flex-1 rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                           placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -330,7 +330,7 @@ export default function Login() {
                           onChange={(e) => {setPhoneNumber(e.target.value)}}
                           autoComplete="tel"
                           required
-                          className="block flex-1 rounded-r-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                          className="block flex-1 rounded-r-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                           placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -347,7 +347,7 @@ export default function Login() {
                           onChange={(e) => {setEmail(e.target.value)}}
                           autoComplete="email"
                           required
-                          className="block flex-1 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                          className="block flex-1 rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                           placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -364,7 +364,7 @@ export default function Login() {
                           onChange={(e) => {setPassword(e.target.value), checkPasswordStrength()}}
                           autoComplete="email"
                           requtext-sm text-orange-500ired
-                          className="block flex-1 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                          className="block flex-1 rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                           placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         />
                         <button
@@ -402,7 +402,7 @@ export default function Login() {
                           onChange={(e) => {setSecPassword(e.target.value), matchBothPassword(e.target.value)}}
                           autoComplete="email"
                           required
-                          className="block flex-1 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                          className="block flex-1 rounded-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                           placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         />
                       </div>
@@ -418,7 +418,7 @@ export default function Login() {
                     
                     <button type="button"
                     onClick={handleSignUp}
-                    className="flex w-max items-center justify-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent">
+                    className="flex w-max items-center justify-center gap-2 px-2 rounded-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent">
                     Register
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>

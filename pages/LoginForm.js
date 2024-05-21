@@ -271,7 +271,7 @@ export default function Login({pageslug}) {
                         type="radio"
                         defaultChecked={notificationMethod.id === 'HmMale'}
                         onChange={(e)=> setGender(e.target.title)}
-                        className="h-4 w-4 border-gray-300 text-orange-500 focus:ring-orange-500"
+                        className="h-4 w-4 p-2 border-gray-300 text-orange-500 focus:ring-orange-500"
                     />
                     <label htmlFor={notificationMethod.id} className="ml-3 block text-sm font-medium leading-6 text-gray-900">
                         {notificationMethod.title}
@@ -305,7 +305,7 @@ export default function Login({pageslug}) {
                             selected={selectedDate}
                             onChange={handleChanges}
                             dateFormat="dd/MM/yyyy" 
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                     </div>
                 </div>
@@ -323,7 +323,7 @@ export default function Login({pageslug}) {
                             timeIntervals={15}
                             dateFormat="h:mm aa"
                             timeCaption="Time"
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                     </div>
                 </div>
@@ -347,7 +347,7 @@ export default function Login({pageslug}) {
                 name="countryCode"
                 value={value} 
                 onChange={(e) => handleChange(e)}
-                className="block w-1/4 rounded-l-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2
+                className="block w-1/4 rounded-l-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2
                 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                 {CountryCode.map((item, index)=>(
@@ -362,7 +362,7 @@ export default function Login({pageslug}) {
                 onChange={(e) => {setPhoneNumber(e.target.value)}}
                 autoComplete="tel"
                 required
-                className="block flex-1 rounded-r-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                className="block flex-1 rounded-r-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 
                 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
             </div>
@@ -379,7 +379,7 @@ export default function Login({pageslug}) {
                     onChange={(e) => {setOtp(e.target.value)}}
                     autoComplete="tel"
                     required
-                    className="block flex-1 rounded-r-md rounded-l-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
+                    className="block flex-1 p-2 rounded-r-md rounded-l-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
                     placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
                 </div>
