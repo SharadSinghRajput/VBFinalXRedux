@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React from "react";
 import styles from "../styles/Home.module.css";
+import Home from "./Home";
 
-export default function Home({ children }) {
+export default function HomePage({ children }) {
   return (
     <div className={styles.container}>
-      <main className="flex-grow">{children}</main>
-      <p>dfx</p>
+      <main className="flex-grow">{children || <Home />}</main>
     </div>
   );
 }

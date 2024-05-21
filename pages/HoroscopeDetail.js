@@ -38,19 +38,13 @@ export default function DailyHoroscopeDetailed({data}) {
     useEffect(() => {
         if(!data)return
     }, [])
-    
-    useEffect(() => {
-        if(data){
-            const zodiacSign = data.zodiacSignLangWise ? data.zodiacSignLangWise : false;
-        }else{
-            const zodiacSign = false;
-        }
-    }, [data])
+
+    const zodiacSign = data ? data.zodiacSignLangWise || false : false;
 
     console.log("zodiacSign", zodiacSign);
-    const day = data.zodiacPeriod ? data.zodiacPeriod : false;
-    const pageLanguage = data.language ? data.language : false;
-    const bilingualData = data.bilingualData ? data.bilingualData : false;
+    const day = data ? data.zodiacPeriod || false : false;
+    const pageLanguage = data ? data.language || false : false;
+    const bilingualData = data ? data.bilingualData || false : false;
     const [horoscopeData, setHoroscopeData] = useState("In Process");
     const [response, setResponse] = useState("In Process");
     const [activeButton, setActiveButton] = useState(null);
@@ -69,8 +63,8 @@ export default function DailyHoroscopeDetailed({data}) {
     }
     let changeDate = formattedDate;
     // const [changeDate, setChangeDate] = useState(formattedDate);
-    const CapitalizedZodiac = (zodiacSign ?? '').charAt(0).toUpperCase() + (zodiacSign ?? '').slice(1);
-    const CapitalizedCurrentDay = (currentDay ?? '').charAt(0).toUpperCase() + (currentDay ?? '').slice(1);
+    const CapitalizedZodiac = `${zodiacSign ?? ''}`.charAt(0).toUpperCase() + `${zodiacSign ?? ''}`.slice(1);
+    const CapitalizedCurrentDay = `${currentDay ?? ''}`.charAt(0).toUpperCase() + `${currentDay ?? ''}`.slice(1);
 
     const fetchCategoryWiseData = async (CapitalizedZodiac,currentDay,type,currentDate) => {
         try {
@@ -265,13 +259,14 @@ export default function DailyHoroscopeDetailed({data}) {
     <>
     <MetaData data={data} />
     <div className="flex min-h-full flex-col">
-        {data.extraComponentData ?
+        {data?.extraComponentData ? (
             <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-                {data.extraComponentData.Holder1 ? <Holder data={data.extraComponentData.Holder1} /> : <></> }
-                {data.extraComponentData.Holder2 ? <Holder data={data.extraComponentData.Holder2} /> : <></> }
-                {data.extraComponentData.Holder3 ? <Holder data={data.extraComponentData.Holder3} /> : <></> }
+                {data.extraComponentData.Holder1 && <Holder data={data.extraComponentData.Holder1} />}
+                {data.extraComponentData.Holder2 && <Holder data={data.extraComponentData.Holder2} />}
+                {data.extraComponentData.Holder3 && <Holder data={data.extraComponentData.Holder3} />}
             </div>
-        : null}
+        ) : null}
+
         <div className="bg-orange-500 mt-5">
             <div className="container py-6 mx-auto">
                 <div className=''>
@@ -296,22 +291,24 @@ export default function DailyHoroscopeDetailed({data}) {
             </div>
         </div>
         <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-            {data.extraComponentData ? data.extraComponentData.Holder3 ? <Holder data={data.extraComponentData.Holder4} /> : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder4 ? <Holder data={data.extraComponentData.Holder5} /> : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder5 ? <Holder data={data.extraComponentData.Holder6} /> : <></> :<></>}
+            {data?.extraComponentData ? (
+                <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+                    {data.extraComponentData.Holder4 && <Holder data={data.extraComponentData.Holder4} />}
+                    {data.extraComponentData.Holder5 && <Holder data={data.extraComponentData.Holder5} />}
+                    {data.extraComponentData.Holder6 && <Holder data={data.extraComponentData.Holder6} />}
+                </div>
+            ) : null}
             <div className="block w-full sm:top-8 sm:w-44">
                 <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 mt-5 rounded-lg">
                     <div className="flex justify-center items-center aries-pR1">
                         <div className="aries-pR"> 
                             <div className="flex justify-center items-center bg-white rounded-full p-5 w-20 h-20">
-                                {zodiacSign ?
-                                    <Image
-                                        src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
-                                        alt={`${zodiacSign} Icon`}
-                                        width={50}
-                                        height={50}
-                                    />
-                                : null}
+                            <Image
+                                src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
+                                alt={`${zodiacSign} Icon`}
+                                width={50}
+                                height={50}
+                            />
                             </div>
                             <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> {zodiacSign} </h5>
                         </div>
@@ -398,11 +395,15 @@ export default function DailyHoroscopeDetailed({data}) {
                             Unlock the secrets of {currentDay} and get your instant answer in Yes or No.
                         </span>
                     </a>
-
-                    {data.extraComponentData ? data.extraComponentData.Holder7 ? <Holder data={data.extraComponentData.Holder7} /> : <></> :<></>}
-                    {data.extraComponentData ? data.extraComponentData.Holder8 ? <Holder data={data.extraComponentData.Holder8} /> : <></> :<></>}
-                    {data.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
-
+                    
+                    {data?.extraComponentData ? (
+                        <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+                            {data.extraComponentData.Holder7 && <Holder data={data.extraComponentData.Holder7} />}
+                            {data.extraComponentData.Holder8 && <Holder data={data.extraComponentData.Holder8} />}
+                            {data.extraComponentData.Holder9 && <Holder data={data.extraComponentData.Holder9} />}
+                        </div>
+                    ) : null}
+                    
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
                     <div className="max-h-64 overflow-y-scroll scrollbar-red px-5">
@@ -431,10 +432,14 @@ export default function DailyHoroscopeDetailed({data}) {
                             Get Instant Answer on {changeText} Matters in 'Yes' or 'No'
                         </span>
                     </a>
-
-                    {data.extraComponentData ? data.extraComponentData.Holder10 ? <Holder data={data.extraComponentData.Holder10} /> : <></> :<></>}
-                    {data.extraComponentData ? data.extraComponentData.Holder11 ? <Holder data={data.extraComponentData.Holder11} /> : <></> :<></>}
-                    {data.extraComponentData ? data.extraComponentData.Holder12 ? <Holder data={data.extraComponentData.Holder12} /> : <></> :<></>}
+                    {data?.extraComponentData ? (
+                        <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+                            {data.extraComponentData.Holder10 && <Holder data={data.extraComponentData.Holder10} />}
+                            {data.extraComponentData.Holder11 && <Holder data={data.extraComponentData.Holder11} />}
+                            {data.extraComponentData.Holder12 && <Holder data={data.extraComponentData.Holder12} />}
+                        </div>
+                    ) : null}
+                    
                 </div>
             </main>
 
@@ -480,9 +485,14 @@ export default function DailyHoroscopeDetailed({data}) {
                     </div> 
                 </div>
             </div>
-            {data.extraComponentData ? data.extraComponentData.Holder13 ? <Holder data={data.extraComponentData.Holder13} /> : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder14 ? <Holder data={data.extraComponentData.Holder14} /> : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder15 ? <Holder data={data.extraComponentData.Holder15} /> : <></> :<></>}
+            {data?.extraComponentData ? (
+                <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+                    {data.extraComponentData.Holder13 && <Holder data={data.extraComponentData.Holder13} />}
+                    {data.extraComponentData.Holder14 && <Holder data={data.extraComponentData.Holder14} />}
+                    {data.extraComponentData.Holder15 && <Holder data={data.extraComponentData.Holder15} />}
+                </div>
+            ) : null}
+            
         </div>
         
         <div className="bg-[#091d5a] mt-5 mb-5">
@@ -506,97 +516,43 @@ export default function DailyHoroscopeDetailed({data}) {
                 </div>
             </div>
         </div>
-        {data.extraComponentData ? data.extraComponentData.Holder16 ? 
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                <Holder data={data.extraComponentData.Holder16} />
-            </div>
-        : <></> :<></>}
-        {data.extraComponentData ? data.extraComponentData.Holder17 ? 
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                <Holder data={data.extraComponentData.Holder17} />
-            </div>
-        : <></> :<></>}
-        {data.extraComponentData ? data.extraComponentData.Holder18 ? 
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                <Holder data={data.extraComponentData.Holder18} />
-            </div>
-        : <></> :<></>}
 
+        {data?.extraComponentData ? (
+            <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+                {data.extraComponentData.Holder16 && <Holder data={data.extraComponentData.Holder16} />}
+                {data.extraComponentData.Holder17 && <Holder data={data.extraComponentData.Holder17} />}
+                {data.extraComponentData.Holder18 && <Holder data={data.extraComponentData.Holder18} />}
+            </div>
+        ) : null}
    
         <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
             <QuestionsData />
         </div>
         <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 mt-5 rounded-lg">
             <div className="p-2 pt-2">
-                {data.description ?
+                {data?.description ?
                     <Description descData={data.description} />
                 :<></>}
             </div>
         </div>
 
-        {data.extraComponentData ? data.extraComponentData.Holder19 ? 
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                <Holder data={data.extraComponentData.Holder19} />
+        {data?.extraComponentData ? (
+            <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
+                {data.extraComponentData.Holder19 && <Holder data={data.extraComponentData.Holder19} />}
+                {data.extraComponentData.Holder20 && <Holder data={data.extraComponentData.Holder20} />}
+                {data.extraComponentData.Holder21 && <Holder data={data.extraComponentData.Holder21} />}
+                {data.extraComponentData.Holder22 && <Holder data={data.extraComponentData.Holder22} />}
+                {data.extraComponentData.Holder23 && <Holder data={data.extraComponentData.Holder23} />}
+                {data.extraComponentData.Holder24 && <Holder data={data.extraComponentData.Holder24} />}
+                {data.extraComponentData.Holder25 && <Holder data={data.extraComponentData.Holder25} />}
+                {data.extraComponentData.Holder26 && <Holder data={data.extraComponentData.Holder26} />}
+                {data.extraComponentData.Holder27 && <Holder data={data.extraComponentData.Holder27} />}
+                {data.extraComponentData.Holder28 && <Holder data={data.extraComponentData.Holder28} />}
+                {data.extraComponentData.Holder29 && <Holder data={data.extraComponentData.Holder29} />}
+                {data.extraComponentData.Holder30 && <Holder data={data.extraComponentData.Holder30} />}
             </div>
-        : <></> :<></>}
-        {data.extraComponentData ? data.extraComponentData.Holder20 ? 
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                <Holder data={data.extraComponentData.Holder20} />
-            </div>
-        : <></> :<></>}
-        {data.extraComponentData ? data.extraComponentData.Holder21 ? 
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                <Holder data={data.extraComponentData.Holder21} />
-            </div>
-        : <></> :<></>}
+        ) : null}
 
-        <VedicAstrologyCalculators />
-
-            {data.extraComponentData ? data.extraComponentData.Holder22 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder22} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder23 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder23} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder24 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder24} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder25 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder25} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder26 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder26} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder27 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder27} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder28 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder28} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder29 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder29} />
-                </div>
-            : <></> :<></>}
-            {data.extraComponentData ? data.extraComponentData.Holder30 ? 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-                    <Holder data={data.extraComponentData.Holder30} />
-                </div>
-            : <></> :<></>}
     </div>
     </>
   )

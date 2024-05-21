@@ -28,3 +28,318 @@ a {
     background: black;
   }
 }
+
+
+
+
+
+
+
+
+
+.atag{
+  text-decoration: none;
+}
+
+
+
+.font13{
+  font-size: 13px;
+}
+.MenuUL{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+.MainMenuLink {
+  text-decoration: none;
+  color: #323232;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+.DefaultuliMenu{
+  position: relative;
+}
+.DefaultulMenu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 15px 80px -48px black;
+  min-width: 200px;
+  left: 0;
+  top: 100%;
+  padding: 20px;
+  width: max-content;
+}
+.LavelOneLi:hover .levelTwo{
+  display: block;
+}
+.LavelTwoLi:hover .levelThree{
+  display: block;
+}
+.LavelThreeLi:hover .levelFour{
+  display: block;
+}
+.levelThree, .levelFour{
+  left: 100%;
+}
+.subMenuLink {
+  font-size: 13px;
+  color: #323232;
+  text-decoration: none;
+  border-bottom: 1px solid #00000014;
+  padding-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+.MenuRightBTNContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  height: 100%;
+}
+.MenuRightBTN {
+  background-color: #752b38;
+  padding: 5px 10px;
+  color: white;
+  font-size: 12px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.MenuBarBTN {
+color: #323232;
+}
+.MainMenuHeader {
+  box-shadow: 0px 0px 11px -10px black;
+  border-bottom: 1px solid #00000014;
+  padding: 10px 0;
+  position: relative;
+}
+
+@media only screen and (min-width: 1000px) {
+  .MenuBarBTN {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+ .MenuContent {
+  display: none;
+      position: absolute;
+      top: 100%;
+      width: 100% !important;
+      left: 0;
+      padding: 0;
+      background: #DE5800;
+  }
+  .MenuUL {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+  }
+  .DefaultulMenu {
+      position: relative;
+      width: 100%;
+      box-shadow: none;
+      left: 0;
+      padding:0;
+  }
+  .DefaultuliMenu {
+      width: 100%;
+  }
+  .MainMenuLink {
+      justify-content: space-between;
+  }
+  .subMenuLink {
+      padding: 0px 10px 10px 10px;
+      display: flex;
+      justify-content: space-between;
+  }
+  .LavelTwoLi:hover>a {
+      color: #f28937;
+      padding-top: 12px;
+      font-weight: bold;
+      font-size: 14px;
+  }
+  .LavelThreeLi:hover>a {
+      font-size: 12px;
+      font-weight: bold;
+      color: #f28937;
+  }
+  .levelFour {
+      background: #fff1e6;
+  }
+  .levelThree {
+      background: #fff1e6;
+  }
+  .LavelOneLi>a {
+      color: white;
+      border-bottom: 1px solid #ffffff1c;
+      padding-bottom: 5px;
+  }
+  .rowforMobileView {
+      display: flex;
+      flex-direction: row !important;
+  }
+  .rowforMobileView>div {
+      flex: 1;
+  }
+  .MenuRightBTNContainer {
+      justify-content: flex-end;
+  }
+  .ShowMenuInPhone {
+      display: block;
+  }
+}
+.new-blink-horoscope {
+  height: 20px;
+  font-size: 10px;
+  transform: rotate(355deg);
+  width: 50px;
+  text-align: center;
+  padding: 0px;
+  line-height: 16px;
+  position: absolute;
+  margin: -16px 0 5px 0;
+  border-radius: 1050px 0px 1050px 0px;
+  background: #e4772e;
+  color: #ffff00;
+  font-weight: 500;
+  animation: myanimation 10s infinite;
+  border: 2px solid #ffff00;
+}
+
+
+
+
+/* Serach CSS */
+
+.insidePop {
+  max-width: 500px;
+  width: 500px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.mainPopop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #00000033;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 50px;
+  transition:0.5s;
+}
+.mainPopopAnimate {
+  transform: scale(1.1);
+}
+
+.PopupHeader {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #F5F5F5;
+  justify-content: space-between;
+  align-items: center;
+}
+.PopupSearchBody {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #fff;
+  justify-content: space-between;
+  align-items: center;
+}
+.searchButtonStyle {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #323232;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+.SearchHeaderTitle{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom:0;
+}
+.SearchInput {
+  background-color: #f5f5f5;
+  flex: 1;
+  height: 40px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+/* marquee Css */
+
+.mainMarqueeContainer {
+  display: flex;
+  align-items: center;
+}
+.leftHeader {
+  width: 140px;
+  background: #d8263c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+.prTitlle {
+  color: white;
+  margin: 0;
+}
+.MarqueMaindiv {
+  background: #f12a43;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.marqueeLinkText {
+  color: white;
+  text-decoration: none;
+}
+.MarqueeControl {
+  display: flex;
+  gap: 10px;
+}
+.MarqueeControl {
+  display: flex;
+  gap: 10px;
+  background: #d4253b;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.MarqueeControlButton {
+  color: white;
+}
+.mainMarqueeContainerWithBg {
+  padding: 10px 0 10px;
+  background: #fef4e8;
+  width: 100%;
+}
