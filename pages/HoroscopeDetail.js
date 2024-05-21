@@ -39,15 +39,12 @@ export default function DailyHoroscopeDetailed({data}) {
         if(!data)return
     }, [])
 
-    if(data){
-        const zodiacSign = data.zodiacSignLangWise ? data.zodiacSignLangWise : false;
-    }else{
-        const zodiacSign = false;
-    }
+    const zodiacSign = data ? data.zodiacSignLangWise || false : false;
+
     console.log("zodiacSign", zodiacSign);
-    const day = data.zodiacPeriod ? data.zodiacPeriod : false;
-    const pageLanguage = data.language ? data.language : false;
-    const bilingualData = data.bilingualData ? data.bilingualData : false;
+    const day = data ? data.zodiacPeriod || false : false;
+    const pageLanguage = data ? data.language || false : false;
+    const bilingualData = data ? data.bilingualData || false : false;
     const [horoscopeData, setHoroscopeData] = useState("In Process");
     const [response, setResponse] = useState("In Process");
     const [activeButton, setActiveButton] = useState(null);
@@ -66,8 +63,8 @@ export default function DailyHoroscopeDetailed({data}) {
     }
     let changeDate = formattedDate;
     // const [changeDate, setChangeDate] = useState(formattedDate);
-    const CapitalizedZodiac = (zodiacSign ?? '').charAt(0).toUpperCase() + (zodiacSign ?? '').slice(1);
-    const CapitalizedCurrentDay = (currentDay ?? '').charAt(0).toUpperCase() + (currentDay ?? '').slice(1);
+    const CapitalizedZodiac = `${zodiacSign ?? ''}`.charAt(0).toUpperCase() + `${zodiacSign ?? ''}`.slice(1);
+    const CapitalizedCurrentDay = `${currentDay ?? ''}`.charAt(0).toUpperCase() + `${currentDay ?? ''}`.slice(1);
 
     const fetchCategoryWiseData = async (CapitalizedZodiac,currentDay,type,currentDate) => {
         try {
