@@ -32,7 +32,7 @@ import PageRelatedBlog from "./PageRelatedBlog"
 
 
 export default function Report({data}) {
-  console.log("datasdv", data);
+  console.log("data", data);
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   
@@ -201,11 +201,10 @@ const DataExistMailList = (DataExistItem) => {
   return (
     <>
       {data?.breadcrumb && <BreadCrumb data={data.breadcrumb} />}
-      <div className="max-w-6xl mx-auto  bg-white rounded-lg">
+      <div className="max-w-6xl mx-auto rounded-lg">
       {ProductId}
         {data ?
         <div className="p-5 pt-0">
-          <h1 className="justify-center leading-6 text-white">Today's Horoscope - Daily Horoscope </h1>
           {data.topRowData ? <>
             <TopRowonReport data={data.topRowData} />
           </>:<></>}
@@ -443,35 +442,47 @@ const DataExistMailList = (DataExistItem) => {
                                   </li>
                                 )) : null }
                               </ul>
-                              <div className='flex justify-end'>
+                              <div className='flex justify-end gap-4'>
+                                <button
+                                    type="button"
+                                    onClick={() => router.push(item.path)}
+                                    className="bg-orange-800 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-orange-600">
+                                      Know more
+                                  </button>
                                 {SessionAction ?
-                                  DataExistMailList(item.reportId) ? 
-                                    <button
-                                      type="button"
-                                      onClick={() => router.push("cart")}
-                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Added to Cart
-                                    </button>
+
+                                  item.repotPrice ?
+                                    DataExistMailList(item.reportId) ? 
+                                      <button
+                                        type="button"
+                                        onClick={() => router.push("cart")}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Added to Cart
+                                      </button>
+                                        :
+                                          <button
+                                            type="button"
+                                            onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                            className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                          </button>
+                                  : null
+
                                       :
-                                        <button
-                                          type="button"
-                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                          focus-visible:outline-orange-600">
-                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                        </button>
-                                    :
-                                    <button
-                                      type="button"
-                                      onClick={() => setOpenModal(true)}
-                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Buy this report
-                                    </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setOpenModal(true)}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Buy this report
+                                      </button>
                                   }
                                 </div>
                             </Disclosure.Panel>
@@ -606,35 +617,47 @@ const DataExistMailList = (DataExistItem) => {
                                   </li>
                                 )) : null }
                               </ul>
-                              <div className='flex justify-end'>
-                              {SessionAction ?
-                                  DataExistMailList(item.reportId) ? 
-                                    <button
-                                      type="button"
-                                      onClick={() => router.push("cart")}
-                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Added to Cart
-                                    </button>
+                              <div className='flex justify-end gap-4'>
+                                <button
+                                    type="button"
+                                    onClick={() => router.push(item.path)}
+                                    className="bg-orange-800 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-orange-600">
+                                      Know more
+                                  </button>
+                                {SessionAction ?
+
+                                  item.repotPrice ?
+                                    DataExistMailList(item.reportId) ? 
+                                      <button
+                                        type="button"
+                                        onClick={() => router.push("cart")}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Added to Cart
+                                      </button>
+                                        :
+                                          <button
+                                            type="button"
+                                            onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                            className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                          </button>
+                                  : null
+
                                       :
-                                        <button
-                                          type="button"
-                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                          focus-visible:outline-orange-600">
-                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                        </button>
-                                    :
-                                    <button
-                                      type="button"
-                                      onClick={() => setOpenModal(true)}
-                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Buy this report
-                                    </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setOpenModal(true)}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Buy this report
+                                      </button>
                                   }
                                 </div>
                             </Disclosure.Panel>
@@ -769,35 +792,47 @@ const DataExistMailList = (DataExistItem) => {
                                   </li>
                                 )) : null }
                               </ul>
-                              <div className='flex justify-end'>
-                              {SessionAction ?
-                                  DataExistMailList(item.reportId) ? 
-                                    <button
-                                      type="button"
-                                      onClick={() => router.push("cart")}
-                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Added to Cart
-                                    </button>
+                              <div className='flex justify-end gap-4'>
+                                <button
+                                    type="button"
+                                    onClick={() => router.push(item.path)}
+                                    className="bg-orange-800 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-orange-600">
+                                      Know more
+                                  </button>
+                                {SessionAction ?
+
+                                  item.repotPrice ?
+                                    DataExistMailList(item.reportId) ? 
+                                      <button
+                                        type="button"
+                                        onClick={() => router.push("cart")}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Added to Cart
+                                      </button>
+                                        :
+                                          <button
+                                            type="button"
+                                            onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                            className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                          </button>
+                                  : null
+
                                       :
-                                        <button
-                                          type="button"
-                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                          focus-visible:outline-orange-600">
-                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                        </button>
-                                    :
-                                    <button
-                                      type="button"
-                                      onClick={() => setOpenModal(true)}
-                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Buy this report
-                                    </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setOpenModal(true)}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Buy this report
+                                      </button>
                                   }
                                 </div>
                             </Disclosure.Panel>
@@ -934,35 +969,47 @@ const DataExistMailList = (DataExistItem) => {
                                   </li>
                                 )) : null }
                               </ul>
-                              <div className='flex justify-end'>
-                              {SessionAction ?
-                                  DataExistMailList(item.reportId) ? 
-                                    <button
-                                      type="button"
-                                      onClick={() => router.push("cart")}
-                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Added to Cart
-                                    </button>
+                              <div className='flex justify-end gap-4'>
+                                <button
+                                    type="button"
+                                    onClick={() => router.push(item.path)}
+                                    className="bg-orange-800 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-orange-600">
+                                      Know more
+                                  </button>
+                                {SessionAction ?
+
+                                  item.repotPrice ?
+                                    DataExistMailList(item.reportId) ? 
+                                      <button
+                                        type="button"
+                                        onClick={() => router.push("cart")}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Added to Cart
+                                      </button>
+                                        :
+                                          <button
+                                            type="button"
+                                            onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                            className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                          </button>
+                                  : null
+
                                       :
-                                        <button
-                                          type="button"
-                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                          focus-visible:outline-orange-600">
-                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                        </button>
-                                    :
-                                    <button
-                                      type="button"
-                                      onClick={() => setOpenModal(true)}
-                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Buy this report
-                                    </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setOpenModal(true)}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Buy this report
+                                      </button>
                                   }
                                 </div>
                             </Disclosure.Panel>
@@ -1099,35 +1146,47 @@ const DataExistMailList = (DataExistItem) => {
                                   </li>
                                 )) : null }
                               </ul>
-                              <div className='flex justify-end'>
-                              {SessionAction ?
-                                  DataExistMailList(item.reportId) ? 
-                                    <button
-                                      type="button"
-                                      onClick={() => router.push("cart")}
-                                      className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Added to Cart
-                                    </button>
+                              <div className='flex justify-end gap-4'>
+                                <button
+                                    type="button"
+                                    onClick={() => router.push(item.path)}
+                                    className="bg-orange-800 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                    focus-visible:outline-orange-600">
+                                      Know more
+                                  </button>
+                                {SessionAction ?
+
+                                  item.repotPrice ?
+                                    DataExistMailList(item.reportId) ? 
+                                      <button
+                                        type="button"
+                                        onClick={() => router.push("cart")}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Added to Cart
+                                      </button>
+                                        :
+                                          <button
+                                            type="button"
+                                            onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
+                                            className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-orange-600">
+                                              {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
+                                          </button>
+                                  : null
+
                                       :
-                                        <button
-                                          type="button"
-                                          onClick={() => handleAddProduct(item.reportId, item.repotPrice[0] ? item.repotPrice[0].dealPrice ? item.repotPrice[0].dealPrice : item.repotPrice[0].price: "", "Single Product")}
-                                          className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                          hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                          focus-visible:outline-orange-600">
-                                            {ProductAdding === item.reportId ? "Adding...": "Buy this report"}
-                                        </button>
-                                    :
-                                    <button
-                                      type="button"
-                                      onClick={() => setOpenModal(true)}
-                                      className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                                      hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                      focus-visible:outline-orange-600">
-                                        Buy this report
-                                    </button>
+                                      <button
+                                        type="button"
+                                        onClick={() => setOpenModal(true)}
+                                        className="bg-orange-600 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
+                                        hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                        focus-visible:outline-orange-600">
+                                          Buy this report
+                                      </button>
                                   }
                                 </div>
                             </Disclosure.Panel>
@@ -1143,6 +1202,9 @@ const DataExistMailList = (DataExistItem) => {
               {data.extraComponentData ? data.extraComponentData.Holder25 ? <Holder data={data.extraComponentData.Holder25} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder26 ? <Holder data={data.extraComponentData.Holder26} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder27 ? <Holder data={data.extraComponentData.Holder27} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder28 ? <Holder data={data.extraComponentData.Holder28} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder29 ? <Holder data={data.extraComponentData.Holder29} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder30 ? <Holder data={data.extraComponentData.Holder30} /> : <></> :<></>}
   
 
             {data.faqData && data.faqData.length !== 0 ? <>
@@ -1173,9 +1235,11 @@ const DataExistMailList = (DataExistItem) => {
                 ))}
               </div>
 
-              {data.extraComponentData ? data.extraComponentData.Holder28 ? <Holder data={data.extraComponentData.Holder28} /> : <></> :<></>}
-              {data.extraComponentData ? data.extraComponentData.Holder29 ? <Holder data={data.extraComponentData.Holder29} /> : <></> :<></>}
-              {data.extraComponentData ? data.extraComponentData.Holder30 ? <Holder data={data.extraComponentData.Holder30} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder31 ? <Holder data={data.extraComponentData.Holder31} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder32 ? <Holder data={data.extraComponentData.Holder32} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder33 ? <Holder data={data.extraComponentData.Holder33} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder34 ? <Holder data={data.extraComponentData.Holder34} /> : <></> :<></>}
+              {data.extraComponentData ? data.extraComponentData.Holder35 ? <Holder data={data.extraComponentData.Holder35} /> : <></> :<></>}
             </>:<></>}
 
             
@@ -1191,6 +1255,8 @@ const DataExistMailList = (DataExistItem) => {
                         <div className="mt-4 flex items-center gap-x-5">
                             <button type="button" className="text-sm font-semibold leading-6 text-gray-900">{item.price[0]?.icon} {item.price[0]?.price}</button>
                             {SessionAction ?
+
+                              item.price ? 
                               DataExistMailList(item.reportID) ? 
                                   <button
                                     type="button"
@@ -1208,6 +1274,8 @@ const DataExistMailList = (DataExistItem) => {
                                     >
                                       {ProductAdding === item.reportID ? "Adding...": "Add to cart"}
                                   </button>
+                                  : null
+
                             :
                             <button
                               type="button"
@@ -1298,9 +1366,11 @@ const DataExistMailList = (DataExistItem) => {
                           </div>
                         </div>
                         {/* Divider container */}
-                        <div className="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
-                          <ReportForm />
-                        </div>
+                        {data.reportID ?
+                          <div className="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
+                            <ReportForm reportID={data.reportID} />
+                          </div>
+                        : null}
                       </div>
                       {/* Action buttons */}
                       <div className="flex-shrink-0 border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -1312,7 +1382,6 @@ const DataExistMailList = (DataExistItem) => {
                           >
                             Cancel
                           </button>
-                        
                         </div>
                       </div>
                     </form>
@@ -1328,7 +1397,7 @@ const DataExistMailList = (DataExistItem) => {
             <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 w-96">
                 <LoginForm />
             </div>
-            <button onClick={() => {setOpenModal(false), GetSession(), dispatch(toggleStartSession())}} className='-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent'>Decline</button>
+            <button onClick={() => {setOpenModal(false), GetSession(), dispatch(toggleStartSession())}} className='-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent'>Close</button>
           </div>
           </>:<></>}
       </div>
@@ -1336,6 +1405,3 @@ const DataExistMailList = (DataExistItem) => {
     </>
   )
 }
-
-
-
