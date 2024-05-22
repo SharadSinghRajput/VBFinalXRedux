@@ -51,7 +51,7 @@ export default function DynamicPage() {
         const data = {
           "apiKey": "Sd_12547455dhseunhT_ksdfln",
           "domainSecreteCode": Domain_Secrete_Code,
-          "path": modifiedSlug,
+          "path": decodeURIComponent(modifiedSlug),
         }
         // const apiUrl = "https://www.aapkikismat.com/url-check-api.php";
         // const apiUrl = "https://www.aapkikismat.com/report-detail-tppm-api-test.php";
