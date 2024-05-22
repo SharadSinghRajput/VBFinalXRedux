@@ -561,7 +561,7 @@ export default function Cart() {
                                             id="first-name"
                                             value={Name}
                                             onChange={(e)=> setName(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -577,7 +577,7 @@ export default function Cart() {
                                             type="number"
                                             value={phone}
                                             onChange={(e)=> setPhone(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -593,7 +593,7 @@ export default function Cart() {
                                             type="email"
                                             value={email}
                                             onChange={(e)=> setEmail(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -609,7 +609,7 @@ export default function Cart() {
                                             id="street-address"
                                             value={Address}
                                             onChange={(e)=> setAddress(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                             />
                                     </div>
                                 </div>
@@ -627,7 +627,7 @@ export default function Cart() {
                                             <Combobox.Label className="block text-xs font-normal leading-5 text-gray-900">Country</Combobox.Label>
                                             <div className="relative mt-2">
                                                 <Combobox.Input
-                                                className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                                className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                                 onChange={(event) => setQuery(event.target.value)}
                                                 onBlur={() => setQuery('')}
                                                 displayValue={(person) => person?.name}
@@ -685,7 +685,7 @@ export default function Cart() {
                                             id="region"
                                             value={State}
                                             onChange={(e)=> setState(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                             />
                                     </div>
                                 </div>
@@ -701,7 +701,7 @@ export default function Cart() {
                                             id="city"
                                             value={City}
                                             onChange={(e)=> setCity(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                             />
                                     </div>
                                 </div>
@@ -717,7 +717,7 @@ export default function Cart() {
                                             id="postal-code"
                                             value={PostalCode}
                                             onChange={(e)=> setPostalCode(e.target.value)}
-                                            className="block w-full rounded-md border-[1px] border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-[1px] px-2 border-orange-200 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>

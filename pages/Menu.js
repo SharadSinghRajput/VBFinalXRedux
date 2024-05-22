@@ -46,7 +46,6 @@ function classNames(...classes) {
 export default function MainMenuComp() {
   const router = useRouter();
   const startSessionTrigger = useSelector(state => state.session.startSessionTrigger);
-  console.log("startSessionTrigger", startSessionTrigger);
   
   const [SessionAction, setSessionAction] = useState(false)
   

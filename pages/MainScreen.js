@@ -43,10 +43,10 @@ export default function HomePage() {
   
   return (
     <>
-      <div class="container pt-4 pb-10  mx-auto">
-        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+      <div className="container pt-4 pb-10  mx-auto">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg">
-            <h2 class="text-xl text-orange-500 font-bold text-center mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
+            <h2 className="text-xl text-orange-500 font-bold text-center mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
             <ul role="list" className="grid gap-2 md:gap-4 grid-cols-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4  sm:gap-y-16 xl:col-span-4 p-0">
               {people.map((person) => (
                 <li key={person.name} className="bg-orange-500 p-2 aspect-auto rounded-lg flex flex-col justify-center items-center p-2">
@@ -59,8 +59,8 @@ export default function HomePage() {
             </ul>
           </div>
           <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
-            <h2 class="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
-            <div class="flex flex-row flex-wrap gap-3 justify-center ">
+            <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
+            <div className="flex flex-row flex-wrap gap-3 justify-center ">
               {Horoscope.map((person) => (
                 <button  key={person.name} onClick={()=> router.push(person.Link)} >
                     <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />

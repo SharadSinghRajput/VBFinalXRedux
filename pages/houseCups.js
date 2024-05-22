@@ -128,8 +128,6 @@ import { RightArrow } from '../config/SvgConst';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
-
   
 export default function Kundli() {
     const router = useRouter();
@@ -166,8 +164,7 @@ export default function Kundli() {
                 if(astrologyData.status === true ){
                     TimeZone = astrologyData.timezone
                 }
-            } catch (error) {
-            }
+            } catch (error) {}
 
             if(TimeZone){
                 const data = {
@@ -183,7 +180,6 @@ export default function Kundli() {
                 try {
                     const astrologyData = await fetchAstrologyData(data, "bhav_madhya");
                     setHoroscopeChart(astrologyData);
-                    console.log("astrologyData", astrologyData);
                 } catch (error) {
                 }
             }
@@ -245,7 +241,6 @@ export default function Kundli() {
         HandleGenrateChart();
     },[])
 
-    console.log(HoroscopeChart);
 
 
   return (
@@ -256,7 +251,7 @@ export default function Kundli() {
                 <h2 className='text-sm font-bold'>What is a House Cusps and Sandhi?</h2>
                 <p className='text-sm mt-2'> As per astrology, the cusp of Sandhi or house is the confluence of two houses. The houses and signs appear in an anti-clockwise direction in an individual’s horoscope chart. Generally, houses numbered chronologically from numbers 1-12. The midpoint located on the left side of the chart is the first house, just like nine appearing on the face of the clock. So, the second house cusp would come to the forefront where there is eight on the clock. The 3rd cusp remains at seven while the 20th house cusp at 10. The 4th always remains at the lower part of the chart, whereas the 10th always remains at the top point. For the first sign, the cusp may start at any point as the signs drift in a clockwise direction, and houses remain constant. The first and seventh house shows the horizon on earth of someone’s birth. The location of the planet lies in the first six houses of the birth chart would become invisible as they lie below the horizon line. </p>
             </div>
-            <div className='bg-orange-500 border-b border-orange-200'>
+            <div className='bg-orange-500 border-b border-orange-200 mt-5'>
               <p className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white'>Bhav Madhya & Bhav Sandhi</p>
             </div>
             <div className='flex divide-x divide-orange-200'>
@@ -283,8 +278,8 @@ export default function Kundli() {
                       :
                         HoroscopeChart ?
                           HoroscopeChart.bhav_sandhi ?
-                          HoroscopeChart.bhav_sandhi.map((item)=>(
-                              <tr key={item.name} className='divide-x divide-orange-200'>
+                          HoroscopeChart.bhav_sandhi.map((item, index)=>(
+                              <tr key={index} className='divide-x divide-orange-200'>
                                   <td className='whitespace-nowrap px-3 py-2 text-xs text-gray-800'>house: {item.house}</td>
                                   <td className='whitespace-nowrap px-3 py-2 text-xs text-gray-800'>{item.sign}</td>
                                   <td className='whitespace-nowrap px-3 py-2 text-xs text-gray-800'>{item.degree}</td>
@@ -319,8 +314,8 @@ export default function Kundli() {
                       :
                         HoroscopeChart ?
                           HoroscopeChart.bhav_madhya ?
-                          HoroscopeChart.bhav_madhya.map((item)=>(
-                              <tr key={item.name} className='divide-x divide-orange-200'>
+                          HoroscopeChart.bhav_madhya.map((item, index)=>(
+                              <tr key={index} className='divide-x divide-orange-200'>
                                   <td className='whitespace-nowrap px-3 py-2 text-xs text-gray-800'>{item.sign}</td>
                                   <td className='whitespace-nowrap px-3 py-2 text-xs text-gray-800'>{item.degree}</td>
                               </tr>
@@ -334,8 +329,7 @@ export default function Kundli() {
               </div>
             </div>
             <div>
-              <div className='flex mt-5'>
-                
+              <div className='flex mt-10'>
                 <div className='gap-2 grid grid-cols-3 w-[60%]'>
                   {ChartList.map((item, index)=>(
                     <button onClick={() => HandleGenrateChart(item.value)} className={` ${HoroscopeChartBtnActive === item.value ? "bg-orange-500 text-white" : "bg-white" } border-orange-500 text-orange-500 border-[1px] flex gap-5 justify-between items-center rounded-lg px-4 py-2 text-xs`} key={index}>{item.label}
