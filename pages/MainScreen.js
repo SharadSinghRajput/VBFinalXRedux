@@ -49,7 +49,7 @@ export default function HomePage() {
     <>
       <div className="max-w-7xl pt-4 pb-10 mx-auto">
         <div className="flex flex-col-reverse md:grid md:grid-cols-2 gap-10">
-          <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg">
+          <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg shadow-2xl">
             <h2 className="text-xl text-blue-900 font-bold text-left mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
             <Swiper
               spaceBetween={10}
