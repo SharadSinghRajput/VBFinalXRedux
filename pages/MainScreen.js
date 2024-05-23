@@ -3,26 +3,30 @@
 
 import Image from "next/image";
 import { useRouter } from 'next/router';
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function HomePage() {
   const router = useRouter();
   const people = [
-    { name: 'Betting & Gambling', url: 'https://www.vinaybajrangi.com/astrology-for-betting.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/icons.png' },
-    { name: 'All about Vastu', url: 'https://www.vinaybajrangi.com/vastu.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/allabout-vastu.png' },
-    { name: 'Foreign Settlement', url: 'https://www.vinaybajrangi.com/foreign-travel.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/foreign-settlement.png' },
-    { name: 'Vastu for commercial', url: 'https://www.vinaybajrangi.com/vastu-for-commercial.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/vfc.png' },
-    { name: 'Past life Readings', url: 'https://www.vinaybajrangi.com/life-predictions.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/pastlife-readings.png' },
+    { name: 'Betting & Gambling', url: 'astrology-for-betting.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/icons.png' },
+    { name: 'All about Vastu', url: 'vastu.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/allabout-vastu.png' },
+    { name: 'Foreign Settlement', url: 'foreign-travel.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/foreign-settlement.png' },
+    { name: 'Vastu for commercial', url: 'vastu-for-commercial.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/vfc.png' },
+    { name: 'Past life Readings', url: 'life-predictions.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/pastlife-readings.png' },
     { name: 'Share market Astrology', url: 'https://www.vinaybajrangi.com/share-market-astrology.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/birth-time-correction.png' },
     { name: 'Birth time Correction', url: 'https://www.vinaybajrangi.com/time-rectification.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/btc.png' },
     { name: 'Your Astro Secrets', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/btc.png' },
-    // { name: 'Marriage Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/file-icons_ring.png' },
-    // { name: 'Property Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/property-astrology.png' },
-    // { name: 'Business Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ba.png' },
-    // { name: 'Court legal Issues', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/court-legal-Issues.png' },
-    // { name: 'Career Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/career-astrology.png' },
-    // { name: 'Health Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ha.png' },
-    // { name: 'Loan and Debt', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/loan-debt.png' },
-    // { name: 'Children Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/children-astrology.png' }
+  ]
+  const peopleSec = [
+    { name: 'Marriage Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/file-icons_ring.png' },
+    { name: 'Property Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/property-astrology.png' },
+    { name: 'Business Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ba.png' },
+    { name: 'Court legal Issues', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/court-legal-Issues.png' },
+    { name: 'Career Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/career-astrology.png' },
+    { name: 'Health Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ha.png' },
+    { name: 'Loan and Debt', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/loan-debt.png' },
+    { name: 'Children Astrology', url: 'https://www.vinaybajrangi.com/astrological-reports.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/children-astrology.png' }
   ]
   const Horoscope = [
     { name: "Aries", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/aries.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Aries.png", Link: "horoscope/daily-horoscope/aries.php" },
@@ -43,11 +47,103 @@ export default function HomePage() {
   
   return (
     <>
-      <div className="container pt-4 pb-10  mx-auto">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+      <div className="max-w-7xl pt-4 pb-10 mx-auto">
+        <div className="flex flex-col-reverse md:grid md:grid-cols-2 gap-10">
           <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg">
-            <h2 className="text-xl text-orange-500 font-bold text-center mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
-            <ul role="list" className="grid gap-2 md:gap-4 grid-cols-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4  sm:gap-y-16 xl:col-span-4 p-0">
+            <h2 className="text-xl text-blue-900 font-bold text-left mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={4}
+              breakpoints={{
+                100: {
+                  slidesPerView: 3,
+                },
+                500: {
+                  slidesPerView: 4,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+                1280: {
+                  slidesPerView: 4,
+                },
+                1530: {
+                  slidesPerView: 4,
+                },
+              }}
+              autoplay={{ delay: 3000 }}
+              loop={true}
+              // onSlideChange={() => console.log('slide change')}
+              // onSwiper={(swiper) => console.log(swiper)}
+            >
+              {people.map((item, index) => (
+                <SwiperSlide key={index} className="">
+                  <a
+                    className="bg-orange-500 p-2 min-h-32 rounded-lg flex flex-col justify-center items-center"
+                    href={item.url}>
+                    <Image
+                      src={item.imgSrc}
+                      width={60}
+                      height={60}
+                      alt={item.name}
+                      className="w-[60px] p-3 bg-orange-500 aspect-square rounded-lg"
+                    />
+                    <h3 className="mt-2 text-sm text-white text-center font-semibold tracking-tight leading-5">{item.name}</h3>
+                  </a>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={4}
+              className="mt-5"
+              breakpoints={{
+                100: {
+                  slidesPerView: 3,
+                },
+                500: {
+                  slidesPerView: 4,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+                1280: {
+                  slidesPerView: 4,
+                },
+                1530: {
+                  slidesPerView: 4,
+                },
+              }}
+              autoplay={{ delay: 3000 }}
+              loop={true}
+              // onSlideChange={() => console.log('slide change')}
+              // onSwiper={(swiper) => console.log(swiper)}
+            >
+              {peopleSec.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <a
+                    className="bg-orange-500 p-2 min-h-32 rounded-lg flex flex-col justify-center items-center"
+                    href={item.url}>
+                    <Image
+                      src={item.imgSrc}
+                      width={60}
+                      height={60}
+                      alt={item.name}
+                      className="w-[60px] p-3 bg-orange-500 aspect-square rounded-lg"
+                    />
+                    <h3 className="mt-2 text-sm text-white text-center font-semibold tracking-tight leading-5">{item.name}</h3>
+                  </a>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {/* <ul role="list" className="grid gap-2 md:gap-4 grid-cols-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4  sm:gap-y-16 xl:col-span-4 p-0">
+
               {people.map((person) => (
                 <li key={person.name} className="bg-orange-500 p-2 aspect-auto rounded-lg flex flex-col justify-center items-center p-2">
                   <div className="flex flex-col items-center">
@@ -56,7 +152,7 @@ export default function HomePage() {
                   </div>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
           <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
             <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>

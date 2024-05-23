@@ -1366,10 +1366,12 @@ const DataExistMailList = (DataExistItem) => {
                           </div>
                         </div>
                         {/* Divider container */}
-                        {data.reportID ?
-                          <div className="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
-                            <ReportForm reportID={data.reportID} />
-                          </div>
+                        {data ?
+                          data.reportID ?
+                            <div className="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
+                              <ReportForm reportID={data.reportID} />
+                            </div>
+                          : null
                         : null}
                       </div>
                       {/* Action buttons */}

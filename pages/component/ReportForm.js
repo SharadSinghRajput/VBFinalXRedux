@@ -10,6 +10,7 @@ import CountryCode from "../../config/CountryCode"
 
 import { API_KEY, Domain_Secrete_Code, API_NEW_URL } from "../../config/config";
 import { LocationData } from "../../config/location";
+import { useDispatch, useSelector } from 'react-redux';
 
 ("use client");
 
@@ -37,6 +38,8 @@ export default function Questions({ reportID }) {
   const [RegenRateButton, setRegenRateButton] = useState(false);
   const [Report, setReport] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch()
+
   function filterPeople(LocationData, SearchLocation) {
     return LocationData.filter((person) => {
       if (
@@ -74,15 +77,15 @@ export default function Questions({ reportID }) {
   };
 
 
+  const GetUserData = async () => {
+    const SessionToken = getLocalStorageItem('tokenKey');
+        if(SessionToken !== null) {
+            setSessionAction(true)
+        }
+    };
   useEffect(()=>{
-    const GetUserData = async () => {
-        const SessionToken = getLocalStorageItem('tokenKey');
-            if(SessionToken !== null) {
-                setSessionAction(true)
-            }
-        };
-    GetUserData()
-},[])
+    GetUserData();
+  },[])
 
 
 
@@ -114,9 +117,7 @@ useEffect(() => {
 
 
 
-  const HandleReportSubmit = async (event) => {
-
-
+  const HandleReportSubmit = async (see) => {
 
     let errorMessages = [];
     if (Name === "") {
@@ -144,6 +145,9 @@ useEffect(() => {
 
     setFormLoder(true);
 
+
+  console.log("checkSession", see);
+  if(see === "hit"){
     if(!SessionAction){
         const mobileData = {
             apiKey: API_KEY,
@@ -165,7 +169,7 @@ useEffect(() => {
           if (data.success === true) {
             setOtpSent(true)
             if(data.newUser === true){
-               setNewUser(true)
+              setNewUser(true)
             }
             setShowOtp(true)
           }
@@ -176,8 +180,8 @@ useEffect(() => {
         return;
     }
 
+  }
 
-    
     const convertDateTime = (dateTimeStr) => {
         const date = new Date(dateTimeStr);
         const updatedDate = date.toISOString().split('T')[0];
@@ -199,9 +203,6 @@ useEffect(() => {
       birthLatitude: selectedBirthLocation.latitude,
       birthLongitude: selectedBirthLocation.longitude,
       birthLocation: selectedBirthLocation.city_name,
-      currentLongitude: Longitude,
-      currentLatitude: Latitude,
-      currentLocation: "",
       shortReport: true,
     };
 
@@ -233,10 +234,8 @@ useEffect(() => {
 
 
 
-
   const VerifyOtp = async () => {
     setVerifyOtpLoder(true)
-
     const otpData = {
       mobile: parseInt(Mobile),
       otp: parseInt(Otp),
@@ -256,18 +255,14 @@ useEffect(() => {
       const data = await response.json();
       if(data.success === true){
         if(data.user){
-            setUserId(data.user.id)
             setLocalStorageItem('UserDataKey', data.user)
         }
+
         if(NewUser === true ){
+            UpdatedInfo(data.user.id)
             setNewUserData(true)
         }else{
             setVerifyOtpLoder(false)
-            if(pageslug === "login"){
-                router.push("dashboard");
-            }else{
-                setAllProcessComplete(true);
-            }
             const tokenLength = 32;
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let token = '';
@@ -275,13 +270,84 @@ useEffect(() => {
               token += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             setLocalStorageItem('tokenKey', token)
+            setShowOtp(false)
+            GetUserData();
+            HandleReportSubmit("donothit")
+            dispatch(toggleStartSession())
+            console.log("OTP Verified")
         }
+      }else{
+        alert( "Something went wrong. Please try again.");
+        setVerifyOtpLoder(false)
       }
     } catch (error) {
       setVerifyOtpLoder(false)
+      console.log(error)
     }
   };
 
+
+
+  const UpdatedInfo = async (userID) => {
+    console.log("Hit Hare")
+    const convertDateTime = (dateTimeStr) => {
+      const date = new Date(dateTimeStr);
+      const updatedDate = date.toISOString().split('T')[0];
+      const timeParts = date.toISOString().split('T')[1].split('.')[0];
+      return `${updatedDate} ${timeParts}`;
+    };
+
+    const formattedDateTime = convertDateTime(selectedDateTime.toISOString())
+    const requestData = {
+        apiKey : API_KEY,
+        sid : userID,
+        name : Name,
+        gender : Gender,
+        dob : formattedDateTime || "",
+        emailid : Email,
+        password : "",
+        place_of_birth :selectedBirthLocation.city_name || "",
+        birth_place_longitude : selectedBirthLocation.longitude || "",
+        birth_place_latitude : selectedBirthLocation.latitude || "",
+        current_location : "",
+        current_clongitude : "",
+        current_clatitude : "",
+    };
+
+    const API_URL = `${API_NEW_URL}update-profile-api.php`;
+    try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        if (data.success === true) {
+            const tokenLength = 32;
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let token = '';
+            for (let i = 0; i < tokenLength; i++) {
+              token += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            setLocalStorageItem('tokenKey', token)
+            setVerifyOtpLoder(false)
+            GetUserData();
+            setShowOtp(false)
+            HandleReportSubmit("donoepothit")
+            dispatch(toggleStartSession())
+        } else {
+            alert( "Something went wrong. Please try again.");
+            setVerifyOtpLoder(false)
+        }
+      } catch (error) {
+        alert( "Something went wrong. Please try again.");
+        setVerifyOtpLoder(false)
+      }
+  };
 
   
 
@@ -289,84 +355,6 @@ useEffect(() => {
 
   return (
     <>
-        {NewUserData ?
-            <form action="#" method="POST" className="space-y-6">
-                <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
-                    {notificationMethods.map((notificationMethod) => (
-                        <div key={notificationMethod.id} className="flex items-center">
-                        <input
-                            id={notificationMethod.id}
-                            name="notification-method"
-                            type="radio"
-                            defaultChecked={notificationMethod.id === 'HmMale'}
-                            onChange={(e)=> setGender(e.target.title)}
-                            className="h-4 w-4 p-2 border-gray-300 text-orange-500 focus:ring-orange-500"
-                        />
-                        <label htmlFor={notificationMethod.id} className="ml-3 block text-sm font-medium leading-6 text-gray-900">
-                            {notificationMethod.title}
-                        </label>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                    <div className="mt-2 flex">
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={Name}
-                        onChange={(e) => {setName(e.target.value)}}
-                        required
-                        className="block flex-1 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 
-                        placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                    />
-                    </div>
-                </div>
-                
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="sm:col-span-3">
-                        <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                            Date of Birth
-                        </label>
-                        <div className="mt-2">
-                            <DatePicker
-                                selected={selectedDate}
-                                onChange={handleChanges}
-                                dateFormat="dd/MM/yyyy" 
-                                className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="sm:col-span-3">
-                        <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
-                            Time of Birth
-                        </label>
-                        <div className="mt-2">
-                            <DatePicker
-                                selected={selectedTime}
-                                onChange={handleTimeChange}
-                                showTimeSelect
-                                showTimeSelectOnly
-                                timeIntervals={15}
-                                dateFormat="h:mm aa"
-                                timeCaption="Time"
-                                className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-5 ">
-                    <button type="button"
-                    onClick={UpdatedInfo}
-                    className="flex w-max items-center justify-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent">
-                    Updated Info
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </button>
-                </div>
-            </form>
-        : null}
       {ShowOtp ? <>
         <div className="flex flex-col justify-center items-center">
             <div className="max-w-96 w-full mb-2 mt-10">
@@ -412,7 +400,7 @@ useEffect(() => {
                         {timer > 0 ? (
                         <p className="text-xs font-bold text-blue-800">Resend OTP in {timer} seconds</p>
                         ) : (
-                        <button type="button" className='text-xs font-bold text-blue-800' onClick={() => HandleReportSubmit()}>Resend OTP</button>
+                        <button type="button" className='text-xs font-bold text-blue-800' onClick={() => HandleReportSubmit("hit")}>Resend OTP</button>
                         )}
                     </div>
                 </div>
@@ -722,8 +710,8 @@ useEffect(() => {
                     </div>
                     <br />
                     <button
-                    onClick={HandleReportSubmit}
-                    type="submit"
+                    onClick={()=> HandleReportSubmit("hit")}
+                    type="button"
                     className="w-[100%] inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#091d5a] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">
                     Submit
                     </button>
