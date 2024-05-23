@@ -69,7 +69,7 @@ export default function ArticleDetails({data}) {
                 {data.extraComponentData ? data.extraComponentData.Holder15 ? <Holder data={data.extraComponentData.Holder15} /> : <></> :<></>}
 
                 {data.tags ? <>
-                  <Tags TagData={TagsStore} />
+                  <Tags TagData={data.tags} />
                 </>:<></>}
                 {data.recommendedBlog ? <>
                   <div className="bg-whitemx-auto">
