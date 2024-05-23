@@ -1366,13 +1366,15 @@ const DataExistMailList = (DataExistItem) => {
                           </div>
                         </div>
                         {/* Divider container */}
-                        {data ?
+
+                       {data ?
                           data.reportID ?
                             <div className="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
                               <ReportForm reportID={data.reportID} />
                             </div>
                           : null
                         : null}
+               
                       </div>
                       {/* Action buttons */}
                       <div className="flex-shrink-0 border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -1407,6 +1409,3 @@ const DataExistMailList = (DataExistItem) => {
     </>
   )
 }
-
-
-
