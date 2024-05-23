@@ -56,58 +56,36 @@ export default function Kundli() {
 
 
     const fetchData = async () => {
-        const GetUserDataKundaliForm = getLocalStorageItem('KundliFromDataKey');
-        if (GetUserDataKundaliForm){
-            const UDataForm = JSON.parse(GetUserDataKundaliForm)
-            console.log(UDataForm)
-            const formattedDate = formatDate(UDataForm.dob);
-            const [DatePart] = UDataForm.dob.split(" ");
-            const dataForTimeZone = {
-                latitude:  UDataForm.birth_place_latitude,
-                longitude: UDataForm.birth_place_longitude,
-                date: DatePart,
+        const GetData = getLocalStorageItem('AstroAPIHitDataKey');
+        if (GetData){
+            const data = {
+                day: GetData.dobData.day,
+                month: GetData.dobData.month,
+                year: GetData.dobData.year,
+                hour: GetData.dobData.hour,
+                min: GetData.dobData.min,
+                lat: GetData.birth_place_latitude,
+                lon: GetData.birth_place_longitude,
+                tzone: GetData.tzone,
             };
-            let TimeZone;
             try {
-                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-                if(astrologyData.status === true ){
-                    TimeZone = astrologyData.timezone
-                }
+                const astrologyData = await fetchAstrologyData(data, "astro_details");
+                setAstrologyDetails(astrologyData);
+                console.log(astrologyData);
             } catch (error) {
             }
-         
-            if(TimeZone){
-                const data = {
-                    day: formattedDate.day,
-                    month: formattedDate.month,
-                    year: formattedDate.year,
-                    hour: formattedDate.hour,
-                    min: formattedDate.min,
-                    lat: UDataForm.birth_place_latitude,
-                    lon: UDataForm.birth_place_longitude,
-                    tzone: TimeZone,
-                };
-                try {
-                    const astrologyData = await fetchAstrologyData(data, "astro_details");
-                    setAstrologyDetails(astrologyData);
-                    console.log(astrologyData);
-                } catch (error) {
-                }
-                try {
-                    const VimshottariDashaData = await fetchAstrologyData(data, "current_vdasha");
-                    console.log(VimshottariDashaData);
-                    setVimshottariDasha(VimshottariDashaData);
-                } catch (error) {
-                }
+            try {
+                const VimshottariDashaData = await fetchAstrologyData(data, "current_vdasha");
+                console.log(VimshottariDashaData);
+                setVimshottariDasha(VimshottariDashaData);
+            } catch (error) {
+            }
 
 
-                try {
-                    const Chart = await fetchAstrologyData(data, "horo_chart_image/:chartId");
-                    setChartSvg(Chart);
-                } catch (error) {
-                }
-
-
+            try {
+                const Chart = await fetchAstrologyData(data, "horo_chart_image/:chartId");
+                setChartSvg(Chart);
+            } catch (error) {
             }
         }
 
@@ -132,7 +110,10 @@ export default function Kundli() {
   
   return (
     <div className="">
-        <div className={`bg-white mx-auto max-w-6xl mx-auto shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
+        <div>
+            
+        </div>
+        <div className={`bg-white max-w-6xl mx-auto shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             <h1 className='text-lg font-bold'>Your Astro Details</h1>
             <div className="mt-5 flow-root grid grid-cols-1 md:grid-cols-3">
 

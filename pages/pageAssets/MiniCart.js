@@ -51,7 +51,6 @@ export default function MiniCart({Design}) {
       };
     GetUserDetails();
   },[])
-  console.log(products);
 
   
   useEffect(()=>{

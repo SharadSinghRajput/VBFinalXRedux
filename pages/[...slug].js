@@ -1,4 +1,5 @@
 
+
 import {useEffect, useState } from "react"
 import { useRouter } from 'next/router';
 import DailyHoroscope from './HoroscopeDetail';
@@ -41,6 +42,7 @@ export default function DynamicPage() {
       // }
       // const lastValOfURL = slug[slug.length - 1];
       // const lastValOfURLWithoutExtension = lastValOfURL.replace('.php', '');
+      
       const FetchUrls = async () => {
         setPageComponent(null)
         setDataComponentWise("")
@@ -65,7 +67,7 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          console.log("responseData", responseData);
+          // console.log("dfvbc", responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){
