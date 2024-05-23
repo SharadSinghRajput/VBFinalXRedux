@@ -23,7 +23,7 @@ export default function HomePage() {
       <MainScreen />
       <Banner />
       <div className="bg-[#fef4e8]">
-        <div class="container pt-10 pb-10  mx-auto">
+        <div class="max-w-7xl pt-10 pb-10  mx-auto">
           <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
             <div><Panchang /></div>
             <div><Questions /></div>
@@ -31,7 +31,7 @@ export default function HomePage() {
         </div>
       </div>
       <VedicAstrologyCalculators />
-      <div class="container pt-10 pb-10  mx-auto">
+      <div class="max-w-7xl pt-10 pb-10  mx-auto">
         <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div><MoonSign /></div>
           <div><FreeKundli /></div>
