@@ -64,81 +64,81 @@ export default function DailyHoroscopeDetailed({data}) {
     let changeDate = formattedDate;
     // const [changeDate, setChangeDate] = useState(formattedDate);
     const CapitalizedZodiac = `${zodiacSign ?? ''}`.charAt(0).toUpperCase() + `${zodiacSign ?? ''}`.slice(1);
-    const CapitalizedCurrentDay = `${currentDay ?? ''}`.charAt(0).toUpperCase() + `${currentDay ?? ''}`.slice(1);
-
+    
     const fetchCategoryWiseData = async (CapitalizedZodiac,currentDay,type,currentDate) => {
         try {
             const astrologyData = await HoroscopeFetchAPI(CapitalizedZodiac, type, currentDay, currentDate, pageLanguage);
             // console.log(type);
             if(astrologyData){
-              return astrologyData;
+                return astrologyData;
             }else{
-              return false;
+                return false;
             }
-          } catch (error) {
+        } catch (error) {
             //console.error("Error fetching horoscope data:", error);
             return null; // Return null or handle the error as needed
-          }
+        }
     };
-   
+    
     const HitTheHoroscopeFunction = async (CapitalizedZodiac, currentDay, type, currentDate) => {
         const data = await fetchCategoryWiseData(CapitalizedZodiac, currentDay, type, currentDate);
         setHoroscopeData(data);
     };    
-
+    
     switch (day) {
         case 'tomorrow-horoscope':
-            today.setDate(today.getDate() + 1); // Increment by 1 day for tomorrow
-            currentDay = "tomorrow";
-            const formattedData = format(today, "do MMM yyyy");
-            TotalDays = formattedData;
-            changeDate = TotalDays;
-            HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
-            break;
-        case 'weekly-horoscope':
-            currentDay = "weekly";
-            const firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
-            const lastDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 7);
-            
-            const formattedStartOfWeek = formatDate(firstDayOfWeek);
-            const formattedEndOfWeek = formatDate(lastDayOfWeek);
-            
-            TotalDays = `${formattedStartOfWeek} to ${formattedEndOfWeek}`;
-            changeDate = TotalDays;
-            HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
-            break;
-        case 'monthly-horoscope':
-            currentDay = "monthly";
-            const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-            const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-            
-            const formattedStartOfMonth = formatDate(firstDayOfMonth);
-            const formattedEndOfMonth = formatDate(lastDayOfMonth);
-            
-            TotalDays = `${formattedStartOfMonth} to ${formattedEndOfMonth}`;
-            changeDate = TotalDays;
-            HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
-            break;
-        case 'yearly-horoscope':
-            currentDay = "yearly";
-            const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
-            const lastDayOfYear = new Date(today.getFullYear(), 11, 31);
-
-            const formattedStartOfYear = formatDate(firstDayOfYear);
-            const formattedEndOfYear = formatDate(lastDayOfYear);
-
-            TotalDays = `${formattedStartOfYear} to ${formattedEndOfYear}`;
-            changeDate = TotalDays;
-            HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
-            break;
-        default:
-        currentDay = "today";
-        const formattedDates = format(today, "do MMM yyyy");
-        TotalDays = formattedDates;
+        today.setDate(today.getDate() + 1); // Increment by 1 day for tomorrow
+        currentDay = "tomorrow";
+        const formattedData = format(today, "do MMM yyyy");
+        TotalDays = formattedData;
         changeDate = TotalDays;
         HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
-    }
+        break;
+        case 'weekly-horoscope':
+        currentDay = "weekly";
+        const firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
+        const lastDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 7);
 
+        const formattedStartOfWeek = formatDate(firstDayOfWeek);
+        const formattedEndOfWeek = formatDate(lastDayOfWeek);
+
+        TotalDays = `${formattedStartOfWeek} to ${formattedEndOfWeek}`;
+        changeDate = TotalDays;
+        HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
+        break;
+        case 'monthly-horoscope':   
+        currentDay = "monthly";
+        const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        
+        const formattedStartOfMonth = formatDate(firstDayOfMonth);
+        const formattedEndOfMonth = formatDate(lastDayOfMonth);
+        
+        TotalDays = `${formattedStartOfMonth} to ${formattedEndOfMonth}`;
+        changeDate = TotalDays;
+        HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
+        break;
+        case 'yearly-horoscope':
+        currentDay = "yearly";
+        const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+        const lastDayOfYear = new Date(today.getFullYear(), 11, 31);
+        
+        const formattedStartOfYear = formatDate(firstDayOfYear);
+        const formattedEndOfYear = formatDate(lastDayOfYear);
+        
+        TotalDays = `${formattedStartOfYear} to ${formattedEndOfYear}`;
+        changeDate = TotalDays;
+        HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
+        break;
+        default:
+            currentDay = "today";
+            const formattedDates = format(today, "do MMM yyyy");
+            TotalDays = formattedDates;
+            changeDate = TotalDays;
+            HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
+    }
+                    
+    const CapitalizedCurrentDay = `${currentDay ?? ''}`.charAt(0).toUpperCase() + `${currentDay ?? ''}`.slice(1);
     
     // Find the object corresponding to the zodiac sign
    
@@ -254,7 +254,6 @@ export default function DailyHoroscopeDetailed({data}) {
         
     ];    
 
-    console.log(data);
   return (
     <>
     <MetaData data={data} />
