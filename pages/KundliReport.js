@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
-import {API_KEY, Domain_Secrete_Code} from '../config/config'
+
 import {KundliCalculation} from '../config/json/KundliCalculation'
 import {KundliDosha} from '../config/json/KundliDosha'
 import { RightArrow, User, Date } from '../config/SvgConst';
@@ -34,11 +34,11 @@ const ServicesNew = [
           { name: "Astro Profile", link: "astro-details.php"},
           { name: "Kundli Chart", link: "kundli-chart.php"},
           { name: "House Cusps", link: "house-cups.php"},
-          { name: "Planet Ashtak",},
-          { name: "Sarvashtak", }
+          { name: "Planet Ashtak", link: "planet-ashtak.php"},
+          { name: "Sarvashtak", link: "sarvashtak.php"}
       ]},
       { name: 'Daily Forecast',  submenu: [
-          { name: "Daily Prediction",},
+          { name: "Daily Prediction", link: "daily-personalised-forecast.php"},
           { name: "Biorhythm",}
       ]},
 
@@ -89,8 +89,8 @@ export default function Kundli() {
 
 
     const handleSubmit = async () => {
-        const savedInputValue = getLocalStorageItem('KundliFromDataKey');
-        if (savedInputValue !== null) {
+        const savedInputValueNew = getLocalStorageItem('KundliFromDataKey');
+        if (savedInputValueNew !== null){
             const apiUrl = "https://www.aapkikismat.com/kundali-api.php"
             try { 
                 const response = await fetch(apiUrl, {
@@ -98,9 +98,11 @@ export default function Kundli() {
                     headers:{
                     'Content-Type' : 'application/json'
                     },
-                    body: savedInputValue
+                    body: JSON.stringify(savedInputValueNew)
                 });
                 const responsezData = await response.json();          
+                console.log(savedInputValueNew);
+                console.log(responsezData);
                 if(responsezData.success === true){
                     setKundaliReport(responsezData.data);
                 }
@@ -114,21 +116,18 @@ export default function Kundli() {
 
       useEffect(()=>{
           handleSubmit()
-          // eslint-disable-next-line react-hooks/exhaustive-deps
       },[])
 
     const GetUserData = async () => {
         const savedInputValue = getLocalStorageItem('UserInfoDataKey');
         if(savedInputValue !== null) {
            setUserInfo(savedInputValue);
-           console.log(savedInputValue);
         }
       };
 
       useEffect(()=>{
           GetUserData()
       },[])
-
 
 
       function formatDateString(inputDateStr) {
@@ -255,6 +254,7 @@ export default function Kundli() {
                                                 </dd> */}
                                             </div>
                                         </>:<></>}
+                                        <button type='button' className='text-sm w-full p-2 bg-blue-900 rounded-lg text-white' onClick={()=> router.push('kundli.php')}>Edit Information</button>
                                     </dl>
                                 </section>
                             </div>

@@ -68,9 +68,12 @@ export default function ArticleDetails({data}) {
                 {data.extraComponentData ? data.extraComponentData.Holder14 ? <Holder data={data.extraComponentData.Holder14} /> : <></> :<></>}
                 {data.extraComponentData ? data.extraComponentData.Holder15 ? <Holder data={data.extraComponentData.Holder15} /> : <></> :<></>}
 
+                {/* Changes in Tags  */}
                 {data.tags ? <>
-                  <Tags TagData={TagsStore} />
+                  <Tags TagData={data.tags} />
                 </>:<></>}
+
+
                 {data.recommendedBlog ? <>
                   <div className="bg-whitemx-auto">
                     <div className="border-b border-gray-200 bg-white px-0 py-5 pb-3 ">

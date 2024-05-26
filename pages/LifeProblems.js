@@ -66,6 +66,7 @@ export default function DailyHoroscope({data}) {
             body: JSON.stringify(DataToFetch)
           });
           const data = await response.json();
+          console.log(data)
           if(data.success === true){
             setCategoryList(data.data);
           }

@@ -1,4 +1,4 @@
-import { useState,} from 'react'
+import { useState, useEffect} from 'react'
 import CountryCode from "../config/CountryCode"
 import {API_KEY, API_NEW_URL} from '../config/config'
 import { useRouter } from 'next/router';
@@ -47,9 +47,12 @@ export default function Login({pageslug}) {
     setValue(e.target.value);
   };
 
-  const SendOtp = async (e) => {
-    e.preventDefault();
+  const SendOtp = async (ResendSignal) => {
     setSendOtpLoder(true)
+    console.log(ResendSignal)
+    if(ResendSignal){
+      setOtpSent(true)
+    }
     const mobileData = {
       apiKey: API_KEY,
       mobile: parseInt(phoneNumber),
@@ -80,7 +83,9 @@ export default function Login({pageslug}) {
 
       const data = await response.json();
       console.log(data);
+      
       if (data.success === true) {
+        setOtpSent(true)
         if(data.newUser === true){
            setNewUser(true)
         }
@@ -248,8 +253,30 @@ export default function Login({pageslug}) {
   };
 
   
-      
 
+  const [otpSent, setOtpSent] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (otpSent) {
+      setTimer(20); 
+      interval = setInterval(() => {
+        setTimer(prevTimer => {
+          if (prevTimer <= 1) {
+            clearInterval(interval);
+            setOtpSent(false)
+            return 0;
+          }
+          return prevTimer - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [otpSent]);
+  
+      
 
     return (
       <>      
@@ -350,9 +377,9 @@ export default function Login({pageslug}) {
                 className="block w-1/4 rounded-l-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2
                 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
-                {CountryCode.map((item, index)=>(
-                    <option key={index} value={item.code}>{item.code} {item.name}</option>
-                ))}
+                  {CountryCode.map((item, index)=>(
+                      <option key={index} value={item.code}>{item.code} {item.name}</option>
+                  ))}
                 </select>
                 <input
                 id="phone"
@@ -383,6 +410,17 @@ export default function Login({pageslug}) {
                     placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                 />
                 </div>
+            </div>
+            <div>
+              <div className="mt-2 flex">
+                <div>
+                  {timer > 0 ? (
+                    <p>Resend OTP in {timer} seconds</p>
+                  ) : (
+                    <button type="button" className='text-sm' onClick={() => SendOtp("ResendSignal")}>Resend OTP</button>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="flex justify-end">
                 {verifyOtpLoder ? <>

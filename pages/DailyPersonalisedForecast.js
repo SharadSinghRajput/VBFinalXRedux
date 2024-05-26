@@ -1,12 +1,10 @@
 
 import React, { useEffect, useState, Fragment } from 'react';
-import { formatDate } from '../config/formatDatetoAstrologyAPI'; 
-import { setLocalStorageItem, getLocalStorageItem } from '../config/localStorage';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import 'swiper/css';
 import { useRouter } from 'next/router';
-import fetchAstrologyData from '../config/getAstroAPI';
-import { CheckCircleIcon} from '@heroicons/react/20/solid'
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

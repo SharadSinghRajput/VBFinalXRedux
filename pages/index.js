@@ -5,7 +5,7 @@ import Home from "./Home";
 export default function HomePage({ children }) {
   return (
     <div className={styles.container}>
-      <main className="flex-grow">{children || <Home />}</main>
+      <main className="flex-grow bg-orange-50">{children || <Home />}</main>
     </div>
   );
 }
