@@ -1,18 +1,20 @@
 "use client"; 
 import { PaperClipIcon, ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
+import { useRouter } from "next/router";
 export default function Questions() {
+    const router = useRouter();
     const Questions= [
-        { title: "Online Report for Horoscope Matching", url: "https://www.vinaybajrangi.com/services/online-report/horoscope-matching.php" },
-        { title: "Will You be Successful in UPSC Exam?", url: "https://www.vinaybajrangi.com/services/online-report/will-i-be-successful-in-upsc-exam.php" },
-        { title: "Should You Invest in the Stock Market?", url: "https://www.vinaybajrangi.com/services/online-report/stock-market-2024.php" },
-        { title: "Know About Child Birth From Birth Chart", url: "https://www.vinaybajrangi.com/services/online-report/chances-of-child-in-birth-chart.php" },
-        { title: "Do you have the Yoga to do Business?", url: "https://www.vinaybajrangi.com/services/online-report/job-or-business.php" },
-        { title: "Know the Timing of your Marriage", url: "https://www.vinaybajrangi.com/services/online-report/know-your-marriage-timing.php" },
-        { title: "What will your Future Life Partner do? Job or Business?", url: "https://www.vinaybajrangi.com/services/online-report/know-future-life-partner-profession.php" },
-        { title: "Best Name for Your Baby", url: "https://www.vinaybajrangi.com/services/online-report/baby-naming.php" },
-        { title: "Find Saturn’s Secrets and how they affect you", url: "https://www.vinaybajrangi.com/services/online-report/know-about-saturn-secrets.php" },
-        { title: "Get Most accurate result on Manglik Dosh", url: "https://www.vinaybajrangi.com/services/online-report/mangal-dosha-calculator.php" },
-        { title: "Assess status and personality of your Future Life Partner", url: "https://www.vinaybajrangi.com/services/online-report/future-life-partner.php" },
+        { title: "Online Report for Horoscope Matching", url: "services/online-report/horoscope-matching.php" },
+        { title: "Will You be Successful in UPSC Exam?", url: "services/online-report/will-i-be-successful-in-upsc-exam.php" },
+        { title: "Should You Invest in the Stock Market?", url: "services/online-report/stock-market-2024.php" },
+        { title: "Know About Child Birth From Birth Chart", url: "services/online-report/chances-of-child-in-birth-chart.php" },
+        { title: "Do you have the Yoga to do Business?", url: "services/online-report/job-or-business.php" },
+        { title: "Know the Timing of your Marriage", url: "services/online-report/know-your-marriage-timing.php" },
+        { title: "What will your Future Life Partner do? Job or Business?", url: "services/online-report/know-future-life-partner-profession.php" },
+        { title: "Best Name for Your Baby", url: "services/online-report/baby-naming.php" },
+        { title: "Find Saturn’s Secrets and how they affect you", url: "services/online-report/know-about-saturn-secrets.php" },
+        { title: "Get Most accurate result on Manglik Dosh", url: "services/online-report/mangal-dosha-calculator.php" },
+        { title: "Assess status and personality of your Future Life Partner", url: "services/online-report/future-life-partner.php" },
         ]
   return (
     <>
@@ -28,6 +30,7 @@ export default function Questions() {
                         </div>
                         <div className="ml-4 flex-shrink-0">
                             <button
+                            onClick={() => router.push(item.url)}
                                 type="button"
                                 className="rounded text-xs bg-orange-500 px-2 py-1 text-xs font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             >

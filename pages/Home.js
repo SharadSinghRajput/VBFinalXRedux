@@ -14,6 +14,7 @@ import PopularReports from "./PopularReports"
 import Footer from "./Footer"
 import KundliForm from "./pageAssets/KundliForm";
 import { useRouter } from "next/router";
+import LongSticky from "./LongSticky"
 
 
 export default function HomePage() {
@@ -42,6 +43,8 @@ export default function HomePage() {
       </div>
       <Services />
       <Banner2 />
+      <LongSticky />
     </>
   )
 }
+

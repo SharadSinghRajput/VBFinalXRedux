@@ -254,7 +254,6 @@ export default function DailyHoroscopeDetailed({data}) {
         
     ];    
 
-    console.log(data);
   return (
     <>
     <MetaData data={data} />
