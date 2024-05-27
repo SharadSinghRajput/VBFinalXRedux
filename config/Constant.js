@@ -702,7 +702,7 @@ export const MainMenu = [
 
     },
     {
-        name: 'Calculators', url: '${MAIN_URL}calculator.php',
+        name: 'Calculators', url: `${MAIN_URL}calculator.php`,
     },
     {
         name: 'Kundli', url: '#',
