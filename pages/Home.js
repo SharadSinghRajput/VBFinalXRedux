@@ -6,12 +6,8 @@ import VedicAstrologyCalculators from "./VedicAstrologyCalculators"
 import Services from "./Services"
 import Banner2 from "./Banner2"
 import MoonSign from "./MoonSign"
-import FreeKundli from "./FreeKundli"
 import HoroscopeMatching from "./HoroscopeMatching"
 import Panchang from "./Panchang"
-import Menu from "./Menu"
-import PopularReports from "./PopularReports"
-import Footer from "./Footer"
 import KundliForm from "./pageAssets/KundliForm";
 import { useRouter } from "next/router";
 import LongSticky from "./LongSticky"
