@@ -21,52 +21,31 @@ export default function Kundli({data}) {
 
     const HandleGenrateChart = async () => {
         
-        const GetUserDataKundaliForm = getLocalStorageItem('KundliFromDataKey');
+        const GetUserDataKundaliForm = getLocalStorageItem('AstroAPIHitDataKey');
     
         if (GetUserDataKundaliForm) {
-            const UDataForm = JSON.parse(GetUserDataKundaliForm);
-            const formattedDate = formatDate(UDataForm.dob);
-            const [DatePart] = UDataForm.dob.split(" ");
-            const dataForTimeZone = {
-                latitude:  UDataForm.birth_place_latitude,
-                longitude: UDataForm.birth_place_longitude,
-                date: DatePart,
+            const data = {
+                day: GetUserDataKundaliForm.dobData.day,
+                month: GetUserDataKundaliForm.dobData.month,
+                year: GetUserDataKundaliForm.dobData.year,
+                hour: GetUserDataKundaliForm.dobData.hour,
+                min: GetUserDataKundaliForm.dobData.min,
+                lat: GetUserDataKundaliForm.birth_place_latitude,
+                lon: GetUserDataKundaliForm.birth_place_longitude,
+                tzone: GetUserDataKundaliForm.tzone,
             };
-            let TimeZone;
-    
             try {
-                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-                if (astrologyData.status === true) {
-                    TimeZone = astrologyData.timezone;
+                const astrologyData = await fetchAstrologyData(data, `sarvashtak`);
+                if (astrologyData && astrologyData.ashtak_points) {
+                    const horoscopeChartData = Object.entries(astrologyData.ashtak_points).map(([sign, values]) => ({
+                        sign,
+                        ...values
+                    }));
+                    setHoroscopeChart(horoscopeChartData);
+                    console.log(astrologyData.ashtak_points);
                 }
             } catch (error) {
-                console.error("Error fetching astrology data for timezone:", error);
-            }
-    
-            if (TimeZone) {
-                const data = {
-                    day: formattedDate.day,
-                    month: formattedDate.month,
-                    year: formattedDate.year,
-                    hour: formattedDate.hour,
-                    min: formattedDate.min,
-                    lat: UDataForm.birth_place_latitude,
-                    lon: UDataForm.birth_place_longitude,
-                    tzone: TimeZone,
-                };
-                try {
-                    const astrologyData = await fetchAstrologyData(data, `sarvashtak`);
-                    if (astrologyData && astrologyData.ashtak_points) {
-                        const horoscopeChartData = Object.entries(astrologyData.ashtak_points).map(([sign, values]) => ({
-                            sign,
-                            ...values
-                        }));
-                        setHoroscopeChart(horoscopeChartData);
-                        console.log(astrologyData.ashtak_points);
-                    }
-                } catch (error) {
-                    console.error("Error fetching astrology data for horoscope chart:", error);
-                }
+                console.error("Error fetching astrology data for horoscope chart:", error);
             }
         }
     };

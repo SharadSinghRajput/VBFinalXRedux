@@ -702,7 +702,10 @@ export const MainMenu = [
 
     },
     {
-        name: 'Calculators Kundli', url: '#',
+        name: 'Calculators', url: 'calculator.php',
+    },
+    {
+        name: 'Kundli', url: '#',
         sublinks: [
             { name: "Kundli", url: `${MAIN_URL}kundli.php`,},
             { name: "Kundli Matching", url: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`,},

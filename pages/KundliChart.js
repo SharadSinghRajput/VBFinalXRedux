@@ -45,7 +45,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "1.",
       text: "Your Rahu might be giving you sleepless nights. Know other disturbances Rahu can create in your life.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/rahu.php",
+        url: "planets/rahu.php",
         label: "Click here"
       }
     },
@@ -53,7 +53,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "2.",
       text: "Your Saturn may drag you back when you are just close to your goal. Know the reasons for delays and hurdles in most of your tasks.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/saturn.php",
+        url: "planets/saturn.php",
         label: "Click here to learn more."
       }
     },
@@ -61,7 +61,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "3.",
       text: "Mars can cause depression, stress, frustration, arguments and misunderstandings in this house.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/mars.php",
+        url: "planets/mars.php",
         label: "Click here to know what role Mars is playing for you."
       }
     },
@@ -69,7 +69,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "4.",
       text: "If looking for fame, success, govt. job and recognition, you should know the position of your Sun.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/sun.php",
+        url: "planets/sun.php",
         label: "Click here to learn more."
       }
     },
@@ -77,7 +77,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "5.",
       text: "A strong Jupiter guarantees wealth, fortunes, marital happiness, knowledge, and good children. Know the strength of your Jupiter to make out how lucky you are.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/jupiter.php",
+        url: "planets/jupiter.php",
         label: "Click here"
       }
     },
@@ -85,7 +85,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "6.",
       text: "Your love life will be in trouble if Venus doesn’t support you. A well-placed Venus gives comfort, wealth and attraction. To know about your Venus,",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/venus.php",
+        url: "planets/venus.php",
         label: "click here"
       }
     },
@@ -93,7 +93,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "7.",
       text: "Are you in business? Check your Mercury to know how much success you will get in the business. Good Mercury also gives good finance.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/mercury.php",
+        url: "planets/mercury.php",
         label: "Click here."
       }
     },
@@ -101,7 +101,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "8.",
       text: "Your Moon might be in trouble if you constantly remain worried, confused, sad, unsecured, or frustrated.",
       link: {
-        url: "https://www.vinaybajrangi.com/planets/moon.php",
+        url: "planets/moon.php",
         label: "Click here to learn more about your Moon."
       }
     },
@@ -109,7 +109,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "9.",
       text: "A strong 7th house gives good married life. Likewise, all houses bring a specific promise to your life. Know the blessings and curses of your life.",
       link: {
-        url: "https://www.vinaybajrangi.com/astrology-houses.php",
+        url: "astrology-houses.php",
         label: "Click here to learn more."
       }
     },
@@ -117,7 +117,7 @@ import { RightArrow } from '../config/SvgConst';
       number: "10.",
       text: "Saturn in transit can make you change your house or lose your job. The transit of planets has a significant impact on life. Know which planet will hit which area of life this month or year.",
       link: {
-        url: "https://www.vinaybajrangi.com/planetary-transit.php",
+        url: "planetary-transit.php",
         label: "Click to learn more"
       }
     }
@@ -132,7 +132,7 @@ function classNames(...classes) {
 
 
   
-export default function Kundli() {
+export default function Kundli({data}) {
     const router = useRouter();
     const [query, setQuery] = useState('')
     const [open, setOpen] = useState(true)
@@ -150,41 +150,23 @@ export default function Kundli() {
     
     const fetchData = async () => {
 
-        const GetUserDataKundaliForm = getLocalStorageItem('KundliFromDataKey');
-        if (GetUserDataKundaliForm){
-            const UDataForm = JSON.parse(GetUserDataKundaliForm)
-            const formattedDate = formatDate(UDataForm.dob);
-            const [DatePart] = UDataForm.dob.split(" ");
-            const dataForTimeZone = {
-                latitude:  UDataForm.birth_place_latitude,
-                longitude: UDataForm.birth_place_longitude,
-                date: DatePart,
-            };
-            let TimeZone;
-            try {
-                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-                if(astrologyData.status === true ){
-                    TimeZone = astrologyData.timezone
-                }
-            } catch (error) {
-            }
-            if(TimeZone){
-                const data = {
-                    day: formattedDate.day,
-                    month: formattedDate.month,
-                    year: formattedDate.year,
-                    hour: formattedDate.hour,
-                    min: formattedDate.min,
-                    lat: UDataForm.birth_place_latitude,
-                    lon: UDataForm.birth_place_longitude,
-                    tzone: TimeZone,
-                };
-                try {
-                    const astrologyData = await fetchAstrologyData(data, "planets");
-                    setHoroscopeChart(astrologyData);
-                } catch (error) {
-                }
-            }
+        const GetData = getLocalStorageItem('AstroAPIHitDataKey');
+        if (GetData){
+          const data = {
+              day: GetData.dobData.day,
+              month: GetData.dobData.month,
+              year: GetData.dobData.year,
+              hour: GetData.dobData.hour,
+              min: GetData.dobData.min,
+              lat: GetData.birth_place_latitude,
+              lon: GetData.birth_place_longitude,
+              tzone: GetData.tzone,
+          };
+          try {
+              const astrologyData = await fetchAstrologyData(data, "planets");
+              setHoroscopeChart(astrologyData);
+          } catch (error) {
+          }
         }
 
     }
@@ -194,44 +176,24 @@ export default function Kundli() {
 
     
     const HandleGenrateChart = async (value) => {
-        console.log(value ? value : "D1");
         setHoroscopeChartBtnActive(value ? value : "D1")
-        const GetUserDataKundaliForm = getLocalStorageItem('KundliFromDataKey');
-        if (GetUserDataKundaliForm){
-            const UDataForm = JSON.parse(GetUserDataKundaliForm)
-            const formattedDate = formatDate(UDataForm.dob);
-            const [DatePart] = UDataForm.dob.split(" ");
-            const dataForTimeZone = {
-                latitude:  UDataForm.birth_place_latitude,
-                longitude: UDataForm.birth_place_longitude,
-                date: DatePart,
-            };
-            let TimeZone;
-            try {
-                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-                if(astrologyData.status === true ){
-                    TimeZone = astrologyData.timezone
-                }
-            } catch (error) {
-            }
-            if(TimeZone){
-                const data = {
-                    day: formattedDate.day,
-                    month: formattedDate.month,
-                    year: formattedDate.year,
-                    hour: formattedDate.hour,
-                    min: formattedDate.min,
-                    lat: UDataForm.birth_place_latitude,
-                    lon: UDataForm.birth_place_longitude,
-                    tzone: TimeZone,
-                };
-                try {
-                    const astrologyData = await fetchAstrologyData(data, `horo_chart_image/${value ? value : "D1"}`);
-                    setSvgChart(astrologyData);
-                    console.log(astrologyData);
-                } catch (error) {
-                }
-            }
+        const GetData = getLocalStorageItem('AstroAPIHitDataKey');
+        if (GetData){
+          const data = {
+              day: GetData.dobData.day,
+              month: GetData.dobData.month,
+              year: GetData.dobData.year,
+              hour: GetData.dobData.hour,
+              min: GetData.dobData.min,
+              lat: GetData.birth_place_latitude,
+              lon: GetData.birth_place_longitude,
+              tzone: GetData.tzone,
+          };
+          try {
+              const astrologyData = await fetchAstrologyData(data, `horo_chart_image/${value ? value : "D1"}`);
+              setSvgChart(astrologyData);
+          } catch (error) {
+          }
         }
     }
   
@@ -248,6 +210,11 @@ export default function Kundli() {
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                         <table className="min-w-full divide-y divide-orange-200">
+                            <thead className="bg-orange-500">
+                                <tr>
+                                    <th scope="col" colSpan={8} className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Planetary Positions Details</th>
+                                </tr>
+                            </thead>
                             <thead className="bg-orange-500">
                                 <tr>
                                     <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Planet</th>
@@ -318,7 +285,9 @@ export default function Kundli() {
                                             <a href={item.link.url}>{item.text}</a>
                                         </p>
                                     </div>
-                                    <button type="button" className=" text-white rounded-lg h-auto bg-orange-500 flex-none p-3 text-xs flex justify-center items-center focus-visible:outline-offset-[-4px]">
+                                    <button
+                                    onClick={ ()=> router.push(item.link.url)}
+                                    type="button" className=" text-white rounded-lg h-auto bg-orange-500 flex-none p-3 text-xs flex justify-center items-center focus-visible:outline-offset-[-4px]">
                                         {item.link.label}
                                         <RightArrow width={20} height={20} />
                                     </button>

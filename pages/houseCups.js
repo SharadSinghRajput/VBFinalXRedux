@@ -146,43 +146,24 @@ export default function Kundli() {
 
     
     const fetchData = async () => {
-        const GetUserDataKundaliForm = getLocalStorageItem('KundliFromDataKey');
+        const GetUserDataKundaliForm = getLocalStorageItem('AstroAPIHitDataKey');
         if (GetUserDataKundaliForm){
-            const UDataForm = JSON.parse(GetUserDataKundaliForm)
-            const formattedDate = formatDate(UDataForm.dob);
-            const [DatePart] = UDataForm.dob.split(" ");
-
-            const dataForTimeZone = {
-                latitude:  UDataForm.birth_place_latitude,
-                longitude: UDataForm.birth_place_longitude,
-                date: DatePart,
-            };
-
-            let TimeZone;
-            try {
-                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-                if(astrologyData.status === true ){
-                    TimeZone = astrologyData.timezone
-                }
-            } catch (error) {}
-
-            if(TimeZone){
-                const data = {
-                    day: formattedDate.day,
-                    month: formattedDate.month,
-                    year: formattedDate.year,
-                    hour: formattedDate.hour,
-                    min: formattedDate.min,
-                    lat: UDataForm.birth_place_latitude,
-                    lon: UDataForm.birth_place_longitude,
-                    tzone: TimeZone,
-                };
-                try {
-                    const astrologyData = await fetchAstrologyData(data, "bhav_madhya");
-                    setHoroscopeChart(astrologyData);
-                } catch (error) {
-                }
-            }
+          const data = {
+            day: GetUserDataKundaliForm.dobData.day,
+              month: GetUserDataKundaliForm.dobData.month,
+              year: GetUserDataKundaliForm.dobData.year,
+              hour: GetUserDataKundaliForm.dobData.hour,
+              min: GetUserDataKundaliForm.dobData.min,
+              lat: GetUserDataKundaliForm.birth_place_latitude,
+              lon: GetUserDataKundaliForm.birth_place_longitude,
+              tzone: GetUserDataKundaliForm.tzone,
+          };
+          try {
+              const astrologyData = await fetchAstrologyData(data, "bhav_madhya");
+              setHoroscopeChart(astrologyData);
+              console.log("astrologyData", astrologyData);
+          } catch (error) {
+          }
         }
     }
 
@@ -197,43 +178,24 @@ export default function Kundli() {
 
         setHoroscopeChartBtnActive(value ? value : "D1")
 
-        const GetUserDataKundaliForm = getLocalStorageItem('KundliFromDataKey');
+        const GetData = getLocalStorageItem('AstroAPIHitDataKey');
         
-        if (GetUserDataKundaliForm){
-            const UDataForm = JSON.parse(GetUserDataKundaliForm)
-            const formattedDate = formatDate(UDataForm.dob);
-            const [DatePart] = UDataForm.dob.split(" ");
-            const dataForTimeZone = {
-                latitude:  UDataForm.birth_place_latitude,
-                longitude: UDataForm.birth_place_longitude,
-                date: DatePart,
-            };
-            let TimeZone;
-
-            try {
-                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-                if(astrologyData.status === true ){
-                    TimeZone = astrologyData.timezone
-                }
-            } catch (error) {}
-
-            if(TimeZone){
-                const data = {
-                    day: formattedDate.day,
-                    month: formattedDate.month,
-                    year: formattedDate.year,
-                    hour: formattedDate.hour,
-                    min: formattedDate.min,
-                    lat: UDataForm.birth_place_latitude,
-                    lon: UDataForm.birth_place_longitude,
-                    tzone: TimeZone,
-                };
-                try {
-                    const astrologyData = await fetchAstrologyData(data, `horo_chart_image/${value ? value : "D1"}`);
-                    setSvgChart(astrologyData);
-                } catch (error) {
-                }
-            }
+        if (GetData){
+          const data = {
+            day: GetData.dobData.day,
+            month: GetData.dobData.month,
+            year: GetData.dobData.year,
+            hour: GetData.dobData.hour,
+            min: GetData.dobData.min,
+            lat: GetData.birth_place_latitude,
+            lon: GetData.birth_place_longitude,
+            tzone: GetData.tzone,
+          };
+          try {
+              const astrologyData = await fetchAstrologyData(data, `horo_chart_image/${value ? value : "D1"}`);
+              setSvgChart(astrologyData);
+          } catch (error) {
+          }
         }
     }
   
