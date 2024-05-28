@@ -39,7 +39,7 @@ export default function TopRow({data}) {
             <div className="rounded-lg shadow-lg bg-white p-5 mt-5">
                 {data.title ? <Tag className="text-lg font-bold mb-5">{data.title}</Tag> : null }
                 {data.image ? <Image src={data.image} width={1200} height={300} />: null}
-                {description ? <div className="text-sm text-gray-900 text-justify" dangerouslySetInnerHTML={{ __html: description }}/> :null}
+                {description ? <div className="text-base text-gray-900 text-justify" dangerouslySetInnerHTML={{ __html: description }}/> :null}
             </div>
         </>
     );
