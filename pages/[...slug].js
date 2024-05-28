@@ -67,7 +67,7 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          // console.log("dfvbc", responseData);
+          
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){

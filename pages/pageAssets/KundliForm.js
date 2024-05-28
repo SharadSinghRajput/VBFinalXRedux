@@ -74,6 +74,7 @@ export default function Banner(props) {
   const filteredPeople = filterPeople(LocationData, SearchLocation);
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     if (selectedDateTime || selectedDateTime) {
       if (!selectedDateTime) console.log("date not entered");
@@ -157,7 +158,23 @@ export default function Banner(props) {
             tzone: TimeZone,
 
         }
-        
+
+        const datatoHitBasic = {
+          day: AstroDataBack.dobData.day,
+          month: AstroDataBack.dobData.month,
+          year: AstroDataBack.dobData.year,
+          hour: AstroDataBack.dobData.hour,
+          min: AstroDataBack.dobData.min,
+          lat: AstroDataBack.birth_place_latitude,
+          lon: AstroDataBack.birth_place_longitude,
+          tzone: AstroDataBack.tzone,
+        };
+        try {
+          const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
+          setLocalStorageItem("AstroDetailKey", AstroDetail);
+          console.log("AstroDetail", AstroDetail);
+        } catch (error) {}
+
         try {
             setLocalStorageItem("KundliFromDataKey", data);
             setLocalStorageItem("UserInfoDataKey", UserInfoData);

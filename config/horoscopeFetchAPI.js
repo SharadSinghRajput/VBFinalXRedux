@@ -3,6 +3,7 @@ import {API_KEY, API_NEW_URL} from '../config/config'
 
 
 export default async function handler(HoroscopeSign, TypeToHit, HoroscopeDayWise, finalFormattedDate, language = "English") {
+  
   try {
     const options = {
       method: 'POST',
@@ -24,3 +25,8 @@ export default async function handler(HoroscopeSign, TypeToHit, HoroscopeDayWise
     return false;
   }
 }
+
+
+
+// https://www.aapkikismat.com//aapkikismat-api-horoscope.php?zodiac_sign=Aries&api_key=Sd_12547455dhseunhT_ksdfln&language=English&type=overall&horoscopeperiod=today&date=2024-05-27
+// https://www.aapkikismat.com//aapkikismat-api-horoscope.php?zodiac_sign=Scorpio&api_key=Sd_12547455dhseunhT_ksdfln&language=English&type=overall&horoscopeperiod=today&date=05-27-2024

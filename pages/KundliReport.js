@@ -39,12 +39,12 @@ const ServicesNew = [
       ]},
       { name: 'Daily Forecast',  submenu: [
           { name: "Daily Prediction", link: "daily-personalised-forecast.php"},
-          { name: "Biorhythm",}
+          { name: "Biorhythm", link: "biorhythm.php"}
       ]},
 
       { name: 'Horoscope Dasha', submenu: [
-          { name: "Vimshottari Dasha",},
-          { name: "Yogini Dasha",},
+          { name: "Vimshottari Dasha", link: "vimshottari-dasha.php"},
+          { name: "Yogini Dasha", link: "vimshottari-dasha.php"},
           { name: "Char Dasha",}
       ]},
       {name: 'Horoscope Dosha', submenu: [
@@ -100,9 +100,7 @@ export default function Kundli() {
                     },
                     body: JSON.stringify(savedInputValueNew)
                 });
-                const responsezData = await response.json();          
-                console.log(savedInputValueNew);
-                console.log(responsezData);
+                const responsezData = await response.json();
                 if(responsezData.success === true){
                     setKundaliReport(responsezData.data);
                 }

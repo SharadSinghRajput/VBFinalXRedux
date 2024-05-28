@@ -4,6 +4,9 @@ import React, { useEffect, useState, Fragment } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'swiper/css';
 import { useRouter } from 'next/router';
+import HoroscopeFetchAPI from '../config/horoscopeFetchAPI';
+import { setLocalStorageItem, getLocalStorageItem } from '../config/localStorage';
+import fetchAstrologyData from '../config/getAstroAPI';
 
 
 function classNames(...classes) {
@@ -15,6 +18,7 @@ function classNames(...classes) {
 export default function Kundli({data}) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState(2);
+    const pageLanguage = data ? data.language || false : false;
 
     const clients = [
         {
@@ -46,11 +50,90 @@ export default function Kundli({data}) {
         setActiveTab(tabIndex);
     };
   
-    // useEffect(() => {
-    //     HandleGenrateChart();
-    // },[])
 
-    //console.log(HoroscopeChart);
+    const [ZodiacSign, setZodiacSign] = useState("");
+    const [currentDate, setCurrentDate] = useState("");
+    const [currentDay, setcurrentDay] = useState("today");
+    const [Forecast, setForecast] = useState("");
+
+    useEffect(() => {
+        const GetDataThird = getLocalStorageItem('AstroDetailKey');
+        const AstroDet = getLocalStorageItem('AstroAPIHitDataKey');
+        if(GetDataThird && AstroDet){
+            fetchData(AstroDet)
+        }
+    }, []); 
+
+    const fetchData = async (AstroDet) => {
+        
+        const data = {
+            day: AstroDet.dobData.day,
+            month: AstroDet.dobData.month,
+            year: AstroDet.dobData.year,
+            hour: AstroDet.dobData.hour,
+            min: AstroDet.dobData.min,
+            lat: AstroDet.birth_place_latitude,
+            lon: AstroDet.birth_place_longitude,
+            tzone: AstroDet.tzone,
+        };
+        try {
+            const VimshottariDashaData = await fetchAstrologyData(data, `biorhythm`);
+            console.log("VimshottariDashaData",  VimshottariDashaData);
+        } catch (error) {
+        }
+    }
+    // const fetchData = async (sign, tZone) => {
+    //     const ZodiacSign = sign.toLowerCase()
+    //     const data = {
+    //         timezone: tZone
+    //     }
+    //     try {
+    //         const VimshottariDashaData = await fetchAstrologyData(data, `sun_sign_prediction/daily/${ZodiacSign}`);
+    //         setForecast(VimshottariDashaData);
+    //     } catch (error) {
+    //     }
+    // }
+
+
+
+    // useEffect(() => {
+    //     console.log("astrologyData");
+    //     const GetData = getLocalStorageItem('AstroAPIHitDataKey');
+    //     const GetDataSec = getLocalStorageItem('KundliFromDataKey');
+    //     const GetDataThird = getLocalStorageItem('AstroDetailKey');
+
+    //     if(GetData || GetDataSec || GetDataThird){
+    //         console.log("astrologyData 2");
+    //         const CapitalizedZodiac = GetDataThird.sign
+    //         const currentDate = GetDataSec.cdate
+
+    //         setZodiacSign(CapitalizedZodiac)
+    //         setCurrentDate(currentDate)
+
+    //         fetchCategoryWiseData(CapitalizedZodiac, currentDate)
+    //     }
+
+    // }, []); 
+
+    // const fetchCategoryWiseData = async (Zodiac, currentDate) => {
+    //     console.log("astrologyData 3");
+    //     const Sign = Zodiac || ZodiacSign
+    //     const date = currentDate || currentDate
+    //     const type = false
+
+    //     let [datePart, timePart] = date.split(' ');
+    //     let [month, day, year] = datePart.split('-');
+    //     let formattedDate = `${year}-${month}-${day}`;
+    //     console.log(formattedDate);
+    //     try {
+    //         const astrologyData = await HoroscopeFetchAPI(Sign, type, currentDay, formattedDate, pageLanguage);
+    //         console.log(astrologyData);
+            
+            
+    //       } catch (error) {
+    //         return null;
+    //       }
+    // };
 
   return (
     <>
