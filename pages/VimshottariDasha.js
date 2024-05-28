@@ -9,6 +9,7 @@ import { setLocalStorageItem, getLocalStorageItem } from '../config/localStorage
 import fetchAstrologyData from '../config/getAstroAPI';
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
+import { formatDate } from '../config/formatDatetoAstrologyAPI';
 
 
 function classNames(...classes) {
@@ -19,10 +20,12 @@ function classNames(...classes) {
   
 export default function Kundli({data}) {
 const [Vdasha, setVdasha] = useState("")
+const [CurrentVdasha, setCurrentVdasha] = useState("")
 const [selectedDateTime, setselectedDateTime] = useState(new Date());
 
 const handleDateChange = (date) => {
   setselectedDateTime(date);
+  fetchDataCurrent(date)
 };
 
 let inputProps = {
@@ -52,38 +55,50 @@ let inputProps = {
         }
     }, []);
 
+
+
     useEffect(() => {
-        fetchDataCurrent()    
+        fetchDataCurrent(selectedDateTime)
     }, []);
 
-    const fetchDataCurrent = async () => {
-
-        const convertDateTime = (dateTimeStr) => {
-            const date = new Date(dateTimeStr);
-            const updatedDate = date.toISOString().split('T')[0];
-            const timeParts = date.toISOString().split('T')[1].split('.')[0];
-            return `${updatedDate} ${timeParts}`;
-        };
-
-        const formattedDateTime = convertDateTime(selectedDateTime.toISOString())
-        console.log(formattedDateTime);
 
 
-        // const data = {
-        //     day: AstroDet.dobData.day,
-        //     month: AstroDet.dobData.month,
-        //     year: AstroDet.dobData.year,
-        //     hour: AstroDet.dobData.hour,
-        //     min: AstroDet.dobData.min,
-        //     lat: AstroDet.birth_place_latitude,
-        //     lon: AstroDet.birth_place_longitude,
-        //     tzone: AstroDet.tzone,
-        // };
-        // try {
-        //     const currentVdasha = await fetchAstrologyData(data, `current_vdasha_all`);
-        //     setVdasha(currentVdasha);
-        // } catch (error) {
-        // }
+
+    const fetchDataCurrent = async (dateGet) => {
+        const GetData = getLocalStorageItem('AstroAPIHitDataKey');
+        if(GetData){
+            const convertDateTime = (dateTimeStr) => {
+                const date = new Date(dateTimeStr);
+                const updatedDate = date.toISOString().split('T')[0];
+                const timeParts = date.toISOString().split('T')[1].split('.')[0];
+                return `${updatedDate} ${timeParts}`;
+            };
+
+
+            const formattedDateTime = convertDateTime(dateGet.toISOString())
+            const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
+
+            if(DateFormateforAstrologyAPI){
+                const data = {
+                    day: DateFormateforAstrologyAPI.day,
+                    month: DateFormateforAstrologyAPI.month,
+                    year: DateFormateforAstrologyAPI.year,
+                    hour: DateFormateforAstrologyAPI.hour,
+                    min: DateFormateforAstrologyAPI.min,
+                    lat: GetData.birth_place_latitude,
+                    lon: GetData.birth_place_longitude,
+                    tzone: GetData.tzone,
+                };
+
+                try {
+                    const currentVdasha = await fetchAstrologyData(data, `current_vdasha_all`);
+                    setCurrentVdasha(currentVdasha);
+                } catch (error) {}
+            }
+
+        }
+
+
     }
 
 
@@ -115,7 +130,6 @@ let inputProps = {
         const [year, blank ,time] = yearAndTime.trim().split(' ');
         const FinalTake = new Date(`${year}-${month}-${day} ${time}`);
 
-
         const [eday, emonth, eyearAndTime] = endDate.split('-');
         const [eyear, eblank, etime] = eyearAndTime.trim().split(' ');
         const FinalEndDate = new Date(`${eyear}-${emonth}-${eday} ${etime}`);
@@ -131,11 +145,10 @@ let inputProps = {
     {data ? (
     <div className="">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
-        <h1 className='text-lg font-bold'>Today's Biorhythm</h1>
+        <h1 className='text-lg font-bold'>Vimshottari Dasha</h1>
             <div className="my-5">
                 <div className='my-2 flex flex-col sm:flex-row gap-10'>
                     <div className='flex-1'>
-                        <h4 className='text-base font-bold'>Vimshottari Dasha</h4>
                         <p className='text-sm text-justify'>Vimshottari Dasha is the most accurate and logical Dasha system to foretell the events of one’s present, past, and future life, such as career, marital, and health predictions. It can foretell any event in your astrology chart. Vimshottari has a certain cyclic order, known as the planet’s Mahadasha. It works on the theory of Nakshatras. It starts from the birth of an individual’s life and goes until the end of his or her life. Mahadasha and Antardasha are the two principal categories of Vimshottari, whereas Antardasha gives the more accurate time, whereas the first Mahadasha is foretold by Moon’s transiting Nakshatra at the birth of time. </p>
                     </div>
                     <div className='flex-1'>
@@ -149,6 +162,7 @@ let inputProps = {
                             <Datetime
                                 inputProps={inputProps}
                                 onChange={handleDateChange}
+                                closeOnSelect={ true }
                                 className="block w-44 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-900  sm:text-sm sm:leading-6"
                             />
                             </div>
@@ -161,15 +175,15 @@ let inputProps = {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-orange-100 bg-white">
-                                {Vdasha && Vdasha.major && Vdasha.major.dasha_period ? (
-                                    Vdasha.major.dasha_period.map((item, index) => (
+                                {CurrentVdasha && CurrentVdasha.major && CurrentVdasha.major.dasha_period ? (
+                                    CurrentVdasha.major.dasha_period.map((item, index) => (
                                         getCurrentMajorPeriod(item.start, item.end) ? 
                                         <tr key={index}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                                                 <b>{item.planet}</b>
                                             </td>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                                                <b>Start :- </b>{formatDateString(item.start)} to <br/> <b>End :- </b> {formatDateString(item.end)}
+                                                <b className='text-orange-500'>Start :- </b>{formatDateString(item.start)} to <br/> <b className='text-orange-500'>End :- </b> {formatDateString(item.end)}
                                             </td>
                                         </tr>
                                         : null
@@ -186,15 +200,15 @@ let inputProps = {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-orange-100 bg-white">
-                                {Vdasha && Vdasha.minor && Vdasha.minor.dasha_period ? (
-                                    Vdasha.minor.dasha_period.map((item, index) => (
+                                {CurrentVdasha && CurrentVdasha.minor && CurrentVdasha.minor.dasha_period ? (
+                                    CurrentVdasha.minor.dasha_period.map((item, index) => (
                                         getCurrentMajorPeriod(item.start, item.end) ? 
                                         <tr key={index}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                                                 <b>{item.planet}</b>
                                             </td>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                                                <b>Start :- </b>{formatDateString(item.start)} to <br/> <b>End :- </b> {formatDateString(item.end)}
+                                                <b className='text-orange-500'>Start :- </b>{formatDateString(item.start)} to <br/> <b className='text-orange-500'>End :- </b> {formatDateString(item.end)}
                                             </td>
                                         </tr>
                                         : null
@@ -211,15 +225,15 @@ let inputProps = {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-orange-100 bg-white">
-                                {Vdasha && Vdasha.sub_minor && Vdasha.sub_minor.dasha_period ? (
-                                    Vdasha.sub_minor.dasha_period.map((item, index) => (
+                                {CurrentVdasha && CurrentVdasha.sub_minor && CurrentVdasha.sub_minor.dasha_period ? (
+                                    CurrentVdasha.sub_minor.dasha_period.map((item, index) => (
                                         getCurrentMajorPeriod(item.start, item.end) ? 
                                         <tr key={index}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                                                 <b>{item.planet}</b>
                                             </td>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                                                <b>Start :- </b>{formatDateString(item.start)} to <br/> <b>End :- </b> {formatDateString(item.end)}
+                                                <b className='text-orange-500'>Start :- </b>{formatDateString(item.start)} to <br/> <b className='text-orange-500'>End :- </b> {formatDateString(item.end)}
                                             </td>
                                         </tr>
                                         : null
@@ -236,15 +250,15 @@ let inputProps = {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-orange-100 bg-white">
-                                {Vdasha && Vdasha.sub_sub_minor && Vdasha.sub_sub_minor.dasha_period ? (
-                                    Vdasha.sub_sub_minor.dasha_period.map((item, index) => (
+                                {CurrentVdasha && CurrentVdasha.sub_sub_minor && CurrentVdasha.sub_sub_minor.dasha_period ? (
+                                    CurrentVdasha.sub_sub_minor.dasha_period.map((item, index) => (
                                         getCurrentMajorPeriod(item.start, item.end) ? 
                                         <tr key={index}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                                                 <b>{item.planet}</b>
                                             </td>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                                                <b>Start :- </b>{formatDateString(item.start)} to <br/> <b>End :- </b> {formatDateString(item.end)}
+                                                <b className='text-orange-500'>Start :- </b>{formatDateString(item.start)} to <br/> <b className='text-orange-500'>End :- </b> {formatDateString(item.end)}
                                             </td>
                                         </tr>
                                         : null
@@ -261,15 +275,15 @@ let inputProps = {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-orange-100 bg-white">
-                                {Vdasha && Vdasha.sub_sub_sub_minor && Vdasha.sub_sub_sub_minor.dasha_period ? (
-                                    Vdasha.sub_sub_sub_minor.dasha_period.map((item, index) => (
+                                {CurrentVdasha && CurrentVdasha.sub_sub_sub_minor && CurrentVdasha.sub_sub_sub_minor.dasha_period ? (
+                                    CurrentVdasha.sub_sub_sub_minor.dasha_period.map((item, index) => (
                                         getCurrentMajorPeriod(item.start, item.end) ? 
                                         <tr key={index}>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                                                 <b>{item.planet}</b>
                                             </td>
                                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                                                <b>Start :- </b>{formatDateString(item.start)} to <br/> <b>End :- </b> {formatDateString(item.end)}
+                                                <b className='text-orange-500'>Start :- </b>{formatDateString(item.start)} to <br/> <b className='text-orange-500'>End :- </b> {formatDateString(item.end)}
                                             </td>
                                         </tr>
                                         : null

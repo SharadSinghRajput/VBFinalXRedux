@@ -113,6 +113,7 @@ export default function Banner(props) {
             const minutes = String(date.getMinutes()).padStart(2, '0');
             return `${month}-${day}-${year} ${hours}:${minutes}`;
           }
+          
           const CurrentDate = formatDateIn(new Date());
           console.log(formattedDateTime);
 
