@@ -107,8 +107,9 @@ const [biorhythm, setBiorhythm] = useState("")
             <div className="my-5">
                 <h4 className='text-base font-bold border-b-2 border-b-orange-500 pb-2'>Physical Biorhythm</h4>
                 <div className='my-2 flex flex-col sm:flex-row gap-4'>
-                    <p className='text-sm flex-1'>This cycle is related to various physical attributes of your body. The complete cycle lasts for 23 days, which affects your physical strength, energy level, and resistance. The high phase will make you vigorous, active, and physically fit, whereas the low may exhaust your energy and make you weak and less active.</p>
-                    <div className='w-56 sm:border-l-2 border-l-orange-500'>
+                    <p className='text-sm text-justify'>This cycle is related to various physical attributes of your body. The complete cycle lasts for 23 days, which affects your physical strength, energy level, and resistance. The high phase will make you vigorous, active, and physically fit, whereas the low may exhaust your energy and make you weak and less active.</p>
+                    <div className='bg-orange-100 rounded-lg p-5'>
+                        <h3 class="font-bold text-sm text-center mb-5">Physical <br /> Biorhythm Percentage :</h3>
                         {biorhythm ? 
                             biorhythm.physical ?
                             CircularProgressBar(biorhythm.physical.percent)
@@ -120,8 +121,9 @@ const [biorhythm, setBiorhythm] = useState("")
             <div className="my-5">
                 <h4 className='text-base font-bold border-b-2 border-b-orange-500 pb-2'>Emotional Biorhythm</h4>
                 <div className='my-2 flex flex-col sm:flex-row gap-4'>
-                    <p className='text-sm flex-1'>This cycle is related to the nervous system, also known as the sensitivity rhythm affects your emotional states. This is a complete cycle that lasts for 28 days. The high phase will make you creative, loved, and warm, whereas the low phase will make you unproductive or negative in your day-to-day life.</p>
-                    <div className='w-56 sm:border-l-2 border-l-orange-500'>
+                    <p className='text-sm flex-1 text-justify'>This cycle is related to the nervous system, also known as the sensitivity rhythm affects your emotional states. This is a complete cycle that lasts for 28 days. The high phase will make you creative, loved, and warm, whereas the low phase will make you unproductive or negative in your day-to-day life.</p>
+                    <div className='bg-orange-100 rounded-lg p-5'>
+                        <h3 class="font-bold text-sm text-center mb-5">Emotional <br /> Biorhythm Percentage :</h3>
                         {biorhythm ? 
                             biorhythm.emotional ?
                             CircularProgressBar(biorhythm.emotional.percent)
@@ -133,8 +135,9 @@ const [biorhythm, setBiorhythm] = useState("")
             <div className="my-5">
                 <h4 className='text-base font-bold border-b-2 border-b-orange-500 pb-2'>Intellectual Biorhythm</h4>
                 <div className='my-2 flex flex-col sm:flex-row gap-4'>
-                    <p className='text-sm flex-1'>This cycle affects your learning speed, memory, and brain alertness. It lasts for 33 days. Its high phase will make you creative and intellectually strong, so you will be capable of generating new ideas, whereas you may face difficulty in grasping ideas and concepts during its low phase.</p>
-                    <div className='w-56 sm:border-l-2 border-l-orange-500'>
+                    <p className='text-sm flex-1 text-justify'>This cycle affects your learning speed, memory, and brain alertness. It lasts for 33 days. Its high phase will make you creative and intellectually strong, so you will be capable of generating new ideas, whereas you may face difficulty in grasping ideas and concepts during its low phase.</p>
+                    <div className='bg-orange-100 rounded-lg p-5'>
+                        <h3 class="font-bold text-sm text-center mb-5">Intellectual <br /> Biorhythm Percentage :</h3>
                         {biorhythm ? 
                             biorhythm.intellectual ?
                             CircularProgressBar(biorhythm.intellectual.percent)
@@ -146,8 +149,9 @@ const [biorhythm, setBiorhythm] = useState("")
             <div className="my-5">
                 <h4 className='text-base font-bold border-b-2 border-b-orange-500 pb-2'>Average Biorhythm</h4>
                 <div className='my-2 flex flex-col sm:flex-row gap-4'>
-                    <p className='text-sm flex-1'>Biorhythms are the existential cycles that regulates your intellect, emotion and health. Each cycle has its own function as it oscillates through a sine wave between the value of positive and negative. The high points of the cycle indicate success while the low points may bring critical situation. These points predict the level of different aspects in your day to day life. The quality of your life can improve gradually by monitoring your action and Biorhythm accordingly.</p>
-                    <div className='w-56 sm:border-l-2 border-l-orange-500'>
+                    <p className='text-sm flex-1 text-justify'>Biorhythms are the existential cycles that regulates your intellect, emotion and health. Each cycle has its own function as it oscillates through a sine wave between the value of positive and negative. The high points of the cycle indicate success while the low points may bring critical situation. These points predict the level of different aspects in your day to day life. The quality of your life can improve gradually by monitoring your action and Biorhythm accordingly.</p>
+                    <div className='bg-orange-100 rounded-lg p-5'>
+                        <h3 class="font-bold text-sm text-center mb-5">Average <br /> Biorhythm Percentage :</h3>
                         {biorhythm ? 
                             biorhythm.average ?
                             CircularProgressBar(biorhythm.average.percent)

@@ -74,6 +74,7 @@ export default function Banner(props) {
   const filteredPeople = filterPeople(LocationData, SearchLocation);
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     if (selectedDateTime || selectedDateTime) {
       if (!selectedDateTime) console.log("date not entered");
