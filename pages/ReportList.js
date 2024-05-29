@@ -38,9 +38,8 @@ console.log(data);
         console.log(data);
         if (data.success === true) {
           setCategoryList(data.data);
-          
         } else {
-          setCategoryList("");
+          setCategoryList("notfound");
         }
       } catch (error) {
         console.log(error);
@@ -55,10 +54,10 @@ console.log(data);
   const breadcrumbbtn = "inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
 
   return (
-    <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mt-5 mb-5 rounded-lg">
+    <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 pt-5 rounded-lg">
       <div className="">
         {/* <h1 className="justify-center leading-6 text-white">Today's Horoscope - Daily Horoscope </h1> */}
-        {CategoryList ? <>
+        {CategoryList && CategoryList !== "notfound" ? <>
           <div className='grid grid-cols-2 md:grid-cols-2 gap-5'>
               {CategoryList.map((item, index)=>(
                   <div key={index} className='border-t border-gray-200 p-5 flex gap-4'>
@@ -83,7 +82,17 @@ console.log(data);
                   </div>
               ))}
           </div>
-        </>:<>
+        </>
+        : CategoryList === "notfound" ?
+          <button
+            type="button"
+            className="relative w-full flex flex-col justify-center items-center rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-folder-x"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="m9.5 10.5 5 5"/><path d="m14.5 10.5-5 5"/></svg>
+            <span className="mt-2 block text-sm font-semibold text-gray-900">Data not found</span>
+          </button>
+        :
+        <>
         <div role="status" className='py-24 w-full flex justify-center items-center' >
           <svg aria-hidden="true" className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
