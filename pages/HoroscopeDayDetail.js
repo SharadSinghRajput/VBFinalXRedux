@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import Image from "next/image";
 
 export default function HomePage({data}) {
-    const router = useRouter();
+  const router = useRouter();
   const people = [
     { name: 'Betting & Gambling', url: 'https://www.vinaybajrangi.com/astrology-for-betting.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/icons.png' },
     { name: 'All about Vastu', url: 'https://www.vinaybajrangi.com/vastu.php', imgSrc: 'https://www.vinaybajrangi.com/asset_frontend/img/life-icons/allabout-vastu.png' },
