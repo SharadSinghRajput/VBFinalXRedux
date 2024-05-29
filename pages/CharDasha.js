@@ -15,8 +15,8 @@ function classNames(...classes) {
 }
 
 export default function Kundli({ data }) {
-  const [currentYoginiDasha, setcurrentYoginiDasha] = useState("");
-  const [currentYoginiDashaTop, setCurrentYoginiDashaTop] = useState("");
+  const [majorChardasha, setMajorChardasha] = useState("");
+  const [currentChardasha, setCurrentChardasha] = useState("");
   const [TodayyDate, setTodayyDate] = useState("");
   console.log("TodayyDate", TodayyDate);
   useEffect(() => {
@@ -34,8 +34,9 @@ export default function Kundli({ data }) {
           tzone: AstroDet.tzone,
         };
         try {
-          const currentVdasha = await fetchAstrologyData(data, `major_yogini_dasha`);
-          setcurrentYoginiDasha(currentVdasha);
+          const major_chardasha = await fetchAstrologyData(data, `major_chardasha`);
+          setMajorChardasha(major_chardasha);
+          
         } catch (error) {}
       };
       fetchData();
@@ -68,6 +69,7 @@ export default function Kundli({ data }) {
           return `${updatedDate} ${timeParts}`;
         };
         const formattedDateTime = convertDateTime(new Date());
+
         const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
         setTodayyDate(formattedDateTime)
         console.log("formattedDateTime", formattedDateTime)
@@ -99,8 +101,9 @@ export default function Kundli({ data }) {
             tzone: TimeZone,
           };
           try {
-            const YoginiDasha = await fetchAstrologyData(data, `current_yogini_dasha`);
-            setCurrentYoginiDashaTop(YoginiDasha);
+            const YoginiDasha = await fetchAstrologyData(data, `current_chardasha`);
+            setCurrentChardasha(YoginiDasha);
+            console.log("current_chardasha", YoginiDasha);
           } catch (error) {}
         }
       }
@@ -159,25 +162,21 @@ export default function Kundli({ data }) {
       {data ? (
         <div className="">
           <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
-            <h1 className="text-lg font-bold">Yogini Dasha</h1>
+            <h1 className="text-lg font-bold">Char Maha Dasha </h1>
             <div className="flex-1">
               <p className="text-base text-justify">
-                Quite similar to Vimshottari, Yogini Dasha is also an important Dasha of Vedic
-                astrology. The Nakshatra Dasha depends on the Moon’s position. Each has
-                corresponding planets or node. All in all, there are 8 Yoginis, while Ketu has no
-                role to play. The total time period of Yogini Dasha is 36 years. Astrologers need to
-                know the strength of planets to tell about Yogini Dasha.{" "}
+                As per Vedic astrology, Jamini Chara dashas are based more on signs than planets. There are signs fully based on time periods. It is also known by another name ‘Rashi Dasha. Chara’s are used to foretell the astrological intentions. Astrologers predict the Chara Dasha through the position of Karakas (7 Chara Karakas), and they are Dara Karaka, Gnati, Putra, Matri, Bhratri, and Amatya. 
               </p>
             </div>
             <div className="my-5">
               <div className="flex-1">
-              <p className="text-base font-bold">Current Yogini Dasha -
+                <p className="text-base font-bold">Current Yogini Dasha -
                 {TodayyDate ?
-                <span className="bg-orange-500 p-1 px-2 text-white">{formatDateStringNew(TodayyDate)}</span>
+                    <span className="bg-orange-500 p-1 px-2 text-white">{formatDateStringNew(TodayyDate)}</span>
                 : null}
                 </p>
                 <div className="grid grid-cols-2 mt-5 gap-2">
-                  {currentYoginiDashaTop && currentYoginiDashaTop.major_dasha ? (
+                  {currentChardasha && currentChardasha.major_dasha ? (
                     <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                       <thead className="bg-blue-900">
                         <tr>
@@ -192,14 +191,12 @@ export default function Kundli({ data }) {
                       <tbody className="divide-y divide-orange-100 bg-white">
                         <tr>
                           <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                            <b>{currentYoginiDashaTop.major_dasha.dasha_name}</b>
+                            <b>{currentChardasha.major_dasha.sign_name}</b>
                           </td>
                           <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                             <b className="text-orange-500">Start :- </b>
-                            {formatDateStringNew(
-                              currentYoginiDashaTop.major_dasha.start_date,
-                            )}<br /> <b className="text-orange-500">End :- </b>{" "}
-                            {formatDateStringNew(currentYoginiDashaTop.major_dasha.end_date)}
+                            {currentChardasha.major_dasha.start_date}<br /> <b className="text-orange-500">End :- </b>{" "}
+                            {currentChardasha.major_dasha.end_date}
                           </td>
                         </tr>
                       </tbody>
@@ -208,7 +205,7 @@ export default function Kundli({ data }) {
                     <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
                     <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
                   </>}
-                  {currentYoginiDashaTop && currentYoginiDashaTop.sub_dasha ? (
+                  {currentChardasha && currentChardasha.sub_dasha ? (
                     <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                       <thead className="bg-blue-900">
                         <tr>
@@ -223,23 +220,21 @@ export default function Kundli({ data }) {
                       <tbody className="divide-y divide-orange-100 bg-white">
                         <tr>
                           <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                            <b>{currentYoginiDashaTop.sub_dasha.dasha_name}</b>
+                            <b>{currentChardasha.sub_dasha.sign_name}</b>
                           </td>
                           <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                             <b className="text-orange-500">Start :- </b>
-                            {formatDateStringNew(
-                              currentYoginiDashaTop.sub_dasha.start_date,
-                            )}<br /> <b className="text-orange-500">End :- </b>{" "}
-                            {formatDateStringNew(currentYoginiDashaTop.sub_dasha.end_date)}
+                            {currentChardasha.sub_dasha.start_date}<br /> <b className="text-orange-500">End :- </b>{" "}
+                            {currentChardasha.sub_dasha.end_date}
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                  ) :  <>
-                  <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                  <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                </>}
-                  {currentYoginiDashaTop && currentYoginiDashaTop.sub_sub_dasha ? (
+                  ) : <>
+                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  </>}
+                  {currentChardasha && currentChardasha.sub_sub_dasha ? (
                     <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                       <thead className="bg-blue-900">
                         <tr>
@@ -247,29 +242,27 @@ export default function Kundli({ data }) {
                             scope="col"
                             colSpan={3}
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">
-                            Prtyantar Dasha{" "}
+                            Antar Dasha{" "}
                           </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-orange-100 bg-white">
                         <tr>
                           <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
-                            <b>{currentYoginiDashaTop.sub_sub_dasha.dasha_name}</b>
+                            <b>{currentChardasha.sub_sub_dasha.sign_name}</b>
                           </td>
                           <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-left text-gray-900 sm:pl-6">
                             <b className="text-orange-500">Start :- </b>
-                            {formatDateStringNew(
-                              currentYoginiDashaTop.sub_sub_dasha.start_date,
-                            )}<br /> <b className="text-orange-500">End :- </b>{" "}
-                            {formatDateStringNew(currentYoginiDashaTop.sub_sub_dasha.end_date)}
+                            {currentChardasha.sub_sub_dasha.start_date}<br /> <b className="text-orange-500">End :- </b>{" "}
+                            {currentChardasha.sub_sub_dasha.end_date}
                           </td>
                         </tr>
                       </tbody>
                     </table>
-                  ) :  <>
-                  <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                  <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                </>}
+                  ) : <>
+                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                  </>}
                 </div>
               </div>
             </div>
@@ -280,9 +273,9 @@ export default function Kundli({ data }) {
                     <tr>
                       <th
                         scope="col"
-                        colSpan={3}
+                        colSpan={4}
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">
-                        Yogini Maha Dasha{" "}
+                        Char Maha Dasha{" "}
                       </th>
                     </tr>
                     <tr>
@@ -290,6 +283,11 @@ export default function Kundli({ data }) {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">
                         Dasha Planet
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">
+                        Duration
                       </th>
                       <th
                         scope="col"
@@ -304,17 +302,20 @@ export default function Kundli({ data }) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-orange-100 bg-white">
-                    {currentYoginiDasha
-                      ? currentYoginiDasha.map((item, index) => (
+                    {majorChardasha
+                      ? majorChardasha.map((item, index) => (
                           <tr key={index}>
                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-900 sm:pl-6">
-                              {item.dasha_name}
+                              {item.sign_name}
                             </td>
                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-900 sm:pl-6">
-                              {formatDateStringNew(item.start_date)}
+                              {item.duration}
                             </td>
                             <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-900 sm:pl-6">
-                              {formatDateStringNew(item.end_date)}
+                              {item.start_date}
+                            </td>
+                            <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-900 sm:pl-6">
+                              {item.end_date}
                             </td>
                           </tr>
                         ))
