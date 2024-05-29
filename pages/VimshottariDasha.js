@@ -10,6 +10,7 @@ import fetchAstrologyData from '../config/getAstroAPI';
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { formatDate } from '../config/formatDatetoAstrologyAPI';
+import getUserLocation from "../config/GetLocation";
 
 
 function classNames(...classes) {
@@ -65,8 +66,24 @@ let inputProps = {
 
 
     const fetchDataCurrent = async (dateGet) => {
-        const GetData = getLocalStorageItem('AstroAPIHitDataKey');
-        if(GetData){
+        let Latitude;
+        let Longitude;
+    
+        const getUserLocationPromise = () => {
+            return new Promise((resolve) => {
+                getUserLocation(function (location) {
+                    resolve(location);
+                });
+            });
+        };
+    
+        const location = await getUserLocationPromise();
+    
+        Latitude = parseFloat(location.Latitude);
+        Longitude = parseFloat(location.Longitude);
+
+        if (Latitude && Longitude) {
+
             const convertDateTime = (dateTimeStr) => {
                 const date = new Date(dateTimeStr);
                 const updatedDate = date.toISOString().split('T')[0];
@@ -74,29 +91,49 @@ let inputProps = {
                 return `${updatedDate} ${timeParts}`;
             };
 
-
             const formattedDateTime = convertDateTime(dateGet.toISOString())
             const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
+            const [DatePart] = formattedDateTime.split(" ");
+            console.log(DatePart);
 
-            if(DateFormateforAstrologyAPI){
-                const data = {
-                    day: DateFormateforAstrologyAPI.day,
-                    month: DateFormateforAstrologyAPI.month,
-                    year: DateFormateforAstrologyAPI.year,
-                    hour: DateFormateforAstrologyAPI.hour,
-                    min: DateFormateforAstrologyAPI.min,
-                    lat: GetData.birth_place_latitude,
-                    lon: GetData.birth_place_longitude,
-                    tzone: GetData.tzone,
-                };
+            const dataForTimeZone = {
+                latitude: Latitude,
+                longitude: Longitude,
+            };
+            
+            let TimeZone;
+            try {
+                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
+                if (astrologyData.status === true) {
+                    TimeZone = astrologyData.timezone;
+                }
+            } catch (error) {console.error(error)}
 
-                try {
-                    const currentVdasha = await fetchAstrologyData(data, `current_vdasha_all`);
-                    setCurrentVdasha(currentVdasha);
-                } catch (error) {}
+            if(TimeZone){
+
+                
+    
+                if(DateFormateforAstrologyAPI){
+                    const data = {
+                        day: DateFormateforAstrologyAPI.day,
+                        month: DateFormateforAstrologyAPI.month,
+                        year: DateFormateforAstrologyAPI.year,
+                        hour: DateFormateforAstrologyAPI.hour,
+                        min: DateFormateforAstrologyAPI.min,
+                        lat: Latitude,
+                        lon: Longitude,
+                        tzone: TimeZone,
+                    };
+    
+                    try {
+                        const currentVdasha = await fetchAstrologyData(data, `current_vdasha_all`);
+                        setCurrentVdasha(currentVdasha);
+                    } catch (error) {}
+                }
+
             }
-
         }
+
 
 
     }
@@ -144,30 +181,32 @@ let inputProps = {
 
     {data ? (
     <div className="">
-        <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
+        <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
         <h1 className='text-lg font-bold'>Vimshottari Dasha</h1>
             <div className="my-5">
-                <div className='my-2 flex flex-col sm:flex-row gap-10'>
-                    <div className='flex-1'>
-                        <p className='text-sm text-justify'>Vimshottari Dasha is the most accurate and logical Dasha system to foretell the events of one’s present, past, and future life, such as career, marital, and health predictions. It can foretell any event in your astrology chart. Vimshottari has a certain cyclic order, known as the planet’s Mahadasha. It works on the theory of Nakshatras. It starts from the birth of an individual’s life and goes until the end of his or her life. Mahadasha and Antardasha are the two principal categories of Vimshottari, whereas Antardasha gives the more accurate time, whereas the first Mahadasha is foretold by Moon’s transiting Nakshatra at the birth of time. </p>
-                    </div>
-                    <div className='flex-1'>
-                        <div>
-                            <label
-                            htmlFor="first-name"
-                            className="block text-sm font-medium leading-6 text-gray-900 w-80">
-                            Date of Birth
-                            </label>
-                            <div className="mt-2">
-                            <Datetime
-                                inputProps={inputProps}
-                                onChange={handleDateChange}
-                                closeOnSelect={ true }
-                                className="block w-44 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-900  sm:text-sm sm:leading-6"
-                            />
-                            </div>
+                <div className='flex-1'>
+                    <p className='text-sm text-justify'>Vimshottari Dasha is the most accurate and logical Dasha system to foretell the events of one’s present, past, and future life, such as career, marital, and health predictions. It can foretell any event in your astrology chart. Vimshottari has a certain cyclic order, known as the planet’s Mahadasha. It works on the theory of Nakshatras. It starts from the birth of an individual’s life and goes until the end of his or her life. Mahadasha and Antardasha are the two principal categories of Vimshottari, whereas Antardasha gives the more accurate time, whereas the first Mahadasha is foretold by Moon’s transiting Nakshatra at the birth of time. </p>
+                </div>
+                <div className='my-2 mt-6 flex flex-col gap-5'>
+                    <div className='w-full'>
+                        <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium leading-6 text-gray-900 w-80">
+                        Current Vimshottari Dasha
+                        </label>
+                        <div className="mt-2">
+                        <Datetime
+                            inputProps={inputProps}
+                            onChange={handleDateChange}
+                            closeOnSelect={ true }
+                            className="block w-44 rounded-md border-0 py-1.5 px-2 text-gray-900
+                            shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-900
+                            sm:text-sm sm:leading-6"
+                        />
                         </div>
-                        <div className='mt-5'>
+                    </div>
+                    <div className='grid grid-cols-2 gap-2'>
+                        <div className=''>
                             <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                                 <thead className="bg-blue-900">
                                     <tr>
@@ -188,11 +227,18 @@ let inputProps = {
                                         </tr>
                                         : null
                                     ))
-                                ) : null}
+                                ) : 
+                                <>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                </>
+                                }
                                 </tbody>
                             </table>
                         </div>
-                        <div className='mt-5'>
+                        <div >
                             <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                                 <thead className="bg-blue-900">
                                     <tr>
@@ -213,11 +259,16 @@ let inputProps = {
                                         </tr>
                                         : null
                                     ))
-                                ) : null}
+                                ) : <>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                </>}
                                 </tbody>
                             </table>
                         </div>
-                        <div className='mt-5'>
+                        <div>
                             <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                                 <thead className="bg-blue-900">
                                     <tr>
@@ -238,11 +289,16 @@ let inputProps = {
                                         </tr>
                                         : null
                                     ))
-                                ) : null}
+                                ) : <>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                </>}
                                 </tbody>
                             </table>
                         </div>
-                        <div className='mt-5'>
+                        <div>
                             <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                                 <thead className="bg-blue-900">
                                     <tr>
@@ -263,11 +319,16 @@ let inputProps = {
                                         </tr>
                                         : null
                                     ))
-                                ) : null}
+                                ) : <>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                </>}
                                 </tbody>
                             </table>
                         </div>
-                        <div className='mt-5'>
+                        <div>
                             <table className="min-w-full divide-y divide-gray-300 overflow-hidden shadow-lg bg-white rounded-lg">
                                 <thead className="bg-blue-900">
                                     <tr>
@@ -288,7 +349,12 @@ let inputProps = {
                                         </tr>
                                         : null
                                     ))
-                                ) : null}
+                                ) : <>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                </>}
                                 </tbody>
                             </table>
                         </div>
