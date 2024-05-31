@@ -26,7 +26,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Questions({ reportID }) {
+export default function Questions({ reportID, language }) {
   const [SearchLocation, setSearchLocation] = useState("");
   const [Gender, setGender] = useState("Male");
   const [Name, setName] = useState("");
@@ -191,7 +191,6 @@ useEffect(() => {
 
     const formattedDateTime = convertDateTime(selectedDateTime.toISOString())
 
-
     const data = {
       apiKey: API_KEY,
       name: Name,
@@ -204,6 +203,7 @@ useEffect(() => {
       birthLongitude: selectedBirthLocation.longitude,
       birthLocation: selectedBirthLocation.city_name,
       shortReport: true,
+      language : language || "",
     };
 
     const apiUrl = "https://www.aapkikismat.com/report-api.php";
