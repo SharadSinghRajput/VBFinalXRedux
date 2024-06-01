@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, removeProduct } from '../redux/ProductReducer';
 import { toggleGetProduct } from '../redux/triggerSlice';
 import { toggleStartSession } from '../redux/sessionSlice';
+import MetaData from './pageAssets/MetaData';
 import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import TopRowonReport from './pageAssets/TopRowonReport';
@@ -215,6 +216,7 @@ const DataExistMailList = (DataExistItem) => {
 
   return (
     <>
+      <MetaData data={data} />
       {data?.breadcrumb && <BreadCrumb data={data.breadcrumb} />}
       <div className="max-w-6xl mx-auto rounded-lg">
       {ProductId}
