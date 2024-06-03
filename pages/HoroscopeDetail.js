@@ -334,7 +334,7 @@ export default function DailyHoroscopeDetailed({data}) {
                     </button>
                 </div>
 
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-5 rounded-lg">
+                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-[86px] sm:mt-5 rounded-lg">
                     <button className={`w-full p-2 rounded-lg ${buttonStyle('love')}`} onClick={() => handleButtonClick('love')}> 
                         <h5 className="text-center font-bold"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
                     </button>
@@ -361,7 +361,7 @@ export default function DailyHoroscopeDetailed({data}) {
                     <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
                         <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
                     </div>
-                    <div className="max-h-72 overflow-y-scroll scrollbar-red px-5 mt-2">
+                    <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 mt-2">
                         <p className="text-justify text-sm pb-2 text-white">
                             {horoscopeData === "In Process" ? (
                                 <div class="text-center">
@@ -392,7 +392,7 @@ export default function DailyHoroscopeDetailed({data}) {
                     
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
-                    <div className="max-h-64 overflow-y-scroll scrollbar-red px-5">
+                    <div className="max-h-[284px] overflow-y-scroll scrollbar-red px-5">
                         <p className="text-justify text-sm pb-2 text-white">
                             {response === "In Process" ? (
                                 <div class="text-center">
