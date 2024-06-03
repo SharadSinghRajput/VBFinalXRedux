@@ -13,7 +13,7 @@ import { format } from 'date-fns';
 import HoroscopeFetchAPI from '../config/horoscopeFetchAPI';
 import MetaData from './pageAssets/MetaData';
 import { useRouter } from 'next/router';
-
+import { MAIN_URL } from '../config/config';
 export default function HoroscopePageData({data}) {
   const router = useRouter();
   // const [response, setResponse] = useState("In Process");
@@ -126,6 +126,11 @@ export default function HoroscopePageData({data}) {
   }
   // console.log("Horoscope Data: ",TotalDays);
 
+  const handleClick = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${MAIN_URL}${url}`);
+  };
+
   return (
     <>
       <MetaData data={data} />
@@ -230,10 +235,13 @@ export default function HoroscopePageData({data}) {
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
                       {Horoscope.map((person) => (
-                        <button key={person.name} onClick={()=> router.push(person.Link)} >
+                        <a key={person.name}
+                          href={`${MAIN_URL}${person.Link}`}
+                          onClick={(e) => handleClick(e, person.Link)}
+                        >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
                             <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
-                        </button>
+                        </a>
                       ))}
                     </div>
                   </div>

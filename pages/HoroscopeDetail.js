@@ -245,7 +245,12 @@ export default function DailyHoroscopeDetailed({data}) {
         { name: "Career Astrology", img: careerAstrology, url: `${MAIN_URL}career-astrology.php` },
         { name: "Health Astrology", img: Ha, url: `${MAIN_URL}health-astrology.php` }
         
-    ];    
+    ];   
+    
+    const handleClickRouter = (e, url) => {
+        e.preventDefault(); // Prevent the default anchor behavior
+        router.push(`${MAIN_URL}${url}`);
+    };
 
   return (
     <>
@@ -263,22 +268,21 @@ export default function DailyHoroscopeDetailed({data}) {
             <div className="container py-6 mx-auto">
                 <div className=''>
                     <p className="text-lg mb-2 text-center text-white font-bold">Free Daily / Weekly / Monthly Horoscope</p>
-                    <Swiper
-                        spaceBetween={50}
-                        slidesPerView={12}
-                        autoplay={{ delay: 3000 }}
-                    >
+                    <div class="flex flex-row flex-wrap gap-3 justify-center ">
                         {HoroscopeIcon.map((item, index) => (
-                            <SwiperSlide key={index}> 
-                                <a className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer" onClick={() => router.push(item?.url)}>
-                                    <div className="flex justify-center items-center bg-white rounded-full p-2">
-                                        <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
-                                    </div>
-                                    <span className='text-sm'>{item?.name}</span>
-                                </a>
-                            </SwiperSlide>                    
+                            <a  
+                                key={item.name}
+                                className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer"
+                                href={`${MAIN_URL}${item?.url}`}
+                                onClick={(e) => handleClickRouter(e, item?.url)}
+                            >
+                                <div className="flex justify-center items-center bg-white rounded-full p-2">
+                                    <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
+                                </div>
+                                <span className='text-sm'>{item?.name}</span>
+                            </a>                
                         ))}
-                    </Swiper>
+                    </div>
                 </div>
             </div>
         </div>
@@ -353,7 +357,7 @@ export default function DailyHoroscopeDetailed({data}) {
             <main className="flex-1 ">
                 <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
                     <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
-                        <h2 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h2>
+                        <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
                     </div>
                     <div className="max-h-72 overflow-y-scroll scrollbar-red px-5 mt-2">
                         <p className="text-justify text-sm pb-2 text-white">

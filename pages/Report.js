@@ -24,7 +24,7 @@ import Banner from './pageAssets/Banner';
 import TopRowonReport from './pageAssets/TopRowonReport';
 import Description from './pageAssets/Description';
 import MiniCart from './pageAssets/MiniCart'
-import MetaData from './pageAssets/MetaData';
+// import MetaData from './pageAssets/MetaData';
 import Holder from './pageAssets/Holder'
 import BreadCrumb from "./component/BreadCrumb"
 import PriceInfo from "./component/PriceInfo"

@@ -5,10 +5,10 @@ import { Faqs } from '../config/Faqs'
 
 export default function FaqSection() {
     return (
-        <div className='mx-auto max-w-6xl mx-auto shadow-2xl p-5 mt-5 mb-5 rounded-lg'>
-            <div className="relative isolate bg-white container">
+        <div className='mx-auto max-w-6xl mx-auto shadow-2xl p-5 mb-5 rounded-lg'>
+            <div className="relative isolate bg-orange-50 container">
                 <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-                    <div className="relative px-6 pb-20 lg:static lg:px-8 lg:py-48">
+                    <div className="relative px-6 pb-20 lg:static lg:px-8 lg:py-5">
                         <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
                             <div className="absolute inset-y-0 left-0 -z-50 w-full overflow-hidden ring-1 ring-white/5">
                                 <div
@@ -68,7 +68,7 @@ export default function FaqSection() {
                             <Image width={150} height={150} src="https://www.vinaybajrangi.com/asset_frontend/img/logo.png" alt="Logo" className="w-auto bg-cover" />
                         </div>
                     </div>
-                    <form action="#" method="POST" className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+                    <form action="#" method="POST" className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-5">
                         <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
                             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                                 <div className="sm:col-span-2">
@@ -143,11 +143,11 @@ export default function FaqSection() {
                         </div>
                     </form>
                 </div>
-                <div className='px-40 -mt-48'>
+                <div className='-mt-2'>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.9374681264085!2d77.37607101505012!3d28.601652692228765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce57d79904367%3A0x2f94ff1146a7b30e!2sDr.%20Vinay%20Bajrangi!5e0!3m2!1sen!2sin!4v1657187354638!5m2!1sen!2sin" width="100%" height="380" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
-            <div className="bg-white py-8 container">
+            <div className="bg-orange-50 py-8 container">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
                     <div className="mx-auto max-w-4xl  divide-y divide-gray-900/10">
                         <h2 className="text-2xl font-bold  leading-10 tracking-tight text-gray-900 w-2/4">Frequently asked questions</h2>

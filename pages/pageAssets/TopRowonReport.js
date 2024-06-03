@@ -1,5 +1,7 @@
 
 import { useState } from 'react';
+import {MAIN_URL} from '../../config/config'
+
 export default function TopRow({data}) {
     const [showFull, setShowFull] = useState(false)
 
@@ -14,7 +16,7 @@ export default function TopRow({data}) {
         <div className={`${showFull ? "grid grid-cols-2 sm:grid-cols-4": "grid grid-cols-3 sm:grid-cols-4" }`}>
               {data.map((item, index) =>(
               <div  key={index} className="cursor-all-scroll p-5 px-2">
-                  <a href={item.path}
+                  <a href={MAIN_URL+item.path}
                   className={`w-full gap-1 flex transition-all h-full ease-in duration-300 relative group`}>
                     
                     <span className='flex flex-1 flex-col p-5 text-black z-10 h-full rounded-lg border-[1px] font-normal text-base items-end BGBlur'>{item.title}
