@@ -235,7 +235,7 @@ export default function HoroscopePageData({data}) {
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
                       {Horoscope.map((person) => (
-                        <a key={person.name}
+                        <a key={person.name} 
                           href={`${MAIN_URL}${person.Link}`}
                           onClick={(e) => handleClick(e, person.Link)}
                         >

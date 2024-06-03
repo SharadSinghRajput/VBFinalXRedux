@@ -255,7 +255,7 @@ export default function DailyHoroscopeDetailed({data}) {
   return (
     <>
     <MetaData data={data} />
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-full flex-col p-6 sm:p-0">
         {data?.extraComponentData ? (
             <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8 holder">
                 {data.extraComponentData.Holder1 && <Holder data={data.extraComponentData.Holder1} />}
@@ -264,7 +264,7 @@ export default function DailyHoroscopeDetailed({data}) {
             </div>
         ) : null}
 
-        <div className="bg-orange-500 mt-5">
+        <div className="bg-orange-500 p-6 sm:p-0">
             <div className="container py-6 mx-auto">
                 <div className=''>
                     <p className="text-lg mb-2 text-center text-white font-bold">Free Daily / Weekly / Monthly Horoscope</p>
@@ -287,8 +287,10 @@ export default function DailyHoroscopeDetailed({data}) {
             </div>
         </div>
       
-        <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-6 sm:px-6 lg:px-8">
-            <div className="block w-full sm:top-8 sm:w-44">
+        <div class="mx-auto flex flex-col sm:flex-row w-full max-w-7xl items-start gap-x-8 px-0 py-6 sm:px-6 lg:px-8">
+        
+        <div class="flex w-full">
+            <div className="block w-40 pr-4 sm:pr-8 sm:w-30 sm:top-8">
                 <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 mt-5 rounded-lg">
                     <div className="flex justify-center items-center aries-pR1">
                         <div className="aries-pR"> 
@@ -354,7 +356,7 @@ export default function DailyHoroscopeDetailed({data}) {
                 </div>
             </div>
 
-            <main className="flex-1 ">
+            <main className="flex-1 w-80 sm:w-70">
                 <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
                     <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
                         <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
@@ -420,71 +422,96 @@ export default function DailyHoroscopeDetailed({data}) {
                     
                 </div>
             </main>
+        </div>
 
-            <div className="block w-full sm:w-96 sm:top-8">
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
-                    <h3 className='text-indigo-950 text-center text-sm font-bold'>Lucky Number and Colour for: {formattedDate}</h3>
-                    <h2 className='text-indigo-950 text-lg font-bold text-center'>Number - 1</h2>
-                    <h3 className='text-sm text-center text-indigo-950 font-bold'>Colour - Orange</h3>
-                </div>
-                
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-5 mt-5 rounded-lg">
-                    <h3 className='text-white text-center text-sm font-bold'>Mantra Of the day  for: {formattedDate}</h3>
-                    <h2 className='text-white text-lg font-bold text-center'>Mantra </h2>
-                    <h3 className='text-sm text-center text-white font-bold'>Om Ang Angrakaya Namah!</h3>
-                </div>
-                
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-[#091d5a] p-5 mt-5 rounded-lg">
-                    <h3 className='text-white text-center text-sm font-bold'>Remedy for: {formattedDate}</h3>
-                    <h2 className='text-white text-lg font-bold text-center'>Remedy </h2>
-                    <h3 className='text-sm text-center text-white font-bold'>Recite Bajrang Baardha</h3>
-                </div>
-
-                <div className='flex-1 gap-3 mt-5'>
-                    <div className='grid gap-3 grid-cols-2'>
-                        {Services.map((item, index) => (
-                            <div key={index} className="bg-orange-500 rounded-md py-3 min-h-15">
-                                <a className="text-xs text-white flex-col text-center flex justify-center items-center no-underline" href={item?.Link}>
-                                    <Image width={40} height={40} className="w-[40px] md:w-[50px] lg:w-[75px] aspect-square object-contain" src={item?.ImgUrl} alt={item?.name} />
-                                    <span className="text-xs text-white">{item?.name}</span>
-                                </a>
-                            </div>
-                        ))}
-                    </div>
-                    <div className='bg-white mt-5 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
-                        <Image 
-                            width={40} 
-                            height={40} 
-                            className='w-10' 
-                            src="/asset_frontend/img/newsicon.png" 
-                            alt="Astrology News and Articles"
-                        />
-                        <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
-                    </div> 
-                </div>
+        <div className="block w-full sm:w-auto sm:top-8">
+            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
+                <h3 className='text-indigo-950 text-center text-sm font-bold'>Lucky Number and Colour for: {formattedDate}</h3>
+                <h2 className='text-indigo-950 text-lg font-bold text-center'>Number - 1</h2>
+                <h3 className='text-sm text-center text-indigo-950 font-bold'>Colour - Orange</h3>
             </div>
-           
+            
+            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-5 mt-5 rounded-lg">
+                <h3 className='text-white text-center text-sm font-bold'>Mantra Of the day  for: {formattedDate}</h3>
+                <h2 className='text-white text-lg font-bold text-center'>Mantra </h2>
+                <h3 className='text-sm text-center text-white font-bold'>Om Ang Angrakaya Namah!</h3>
+            </div>
+            
+            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-[#091d5a] p-5 mt-5 rounded-lg">
+                <h3 className='text-white text-center text-sm font-bold'>Remedy for: {formattedDate}</h3>
+                <h2 className='text-white text-lg font-bold text-center'>Remedy </h2>
+                <h3 className='text-sm text-center text-white font-bold'>Recite Bajrang Baardha</h3>
+            </div>
+
+            <div className='flex-1 gap-3 mt-5'>
+                <div className='grid gap-3 grid-cols-2'>
+                    {Services.map((item, index) => (
+                        <div key={index} className="bg-orange-500 rounded-md py-3 min-h-15">
+                            <a className="text-xs text-white flex-col text-center flex justify-center items-center no-underline" href={item?.Link}>
+                                <Image width={40} height={40} className="w-[40px] md:w-[50px] lg:w-[75px] aspect-square object-contain" src={item?.ImgUrl} alt={item?.name} />
+                                <span className="text-xs text-white">{item?.name}</span>
+                            </a>
+                        </div>
+                    ))}
+                </div>
+                <div className='bg-white mt-5 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                    <Image 
+                        width={40} 
+                        height={40} 
+                        className='w-10' 
+                        src="/asset_frontend/img/newsicon.png" 
+                        alt="Astrology News and Articles"
+                    />
+                    <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
+                </div> 
+            </div>
+        </div>
+       
             
         </div>
         
-        <div className="bg-[#091d5a] mt-5 mb-5">
+        <div className="bg-[#091d5a] mt-5 mb-5 flex min-h-full flex-col">
             <div className="container py-4 mx-auto">
                 <div className=''>
                     <p className="text-lg text-center mb-5 text-white font-bold">Astrological Solutions for all life's problems</p>
-                    <Swiper
-                        spaceBetween={50}
-                        slidesPerView={9}
-                        >
-                        {Questions.map((item, index) => (
-                            <SwiperSlide key={index}>
-                                <a className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center" href={item?.url}>
-                                    <Image src={item?.img} width={80} height={80} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-full' alt={item?.name} />
-                                    <span>{item?.name}</span>
-                                </a>    
-                            </SwiperSlide>                    
-                        ))}
+                    <div className='flex flex-row flex-wrap gap-3 justify-center'>
+                        <Swiper
+                            spaceBetween={50}
+                            slidesPerView={9}
+                            breakpoints={{
+                                400: {
+                                  slidesPerView: 3,
+                                },
+                                500: {
+                                  slidesPerView: 4,
+                                },
+                                768: {
+                                  slidesPerView: 5,
+                                },
+                                1024: {
+                                  slidesPerView: 7,
+                                },
+                                1280: {
+                                  slidesPerView: 8,
+                                },
+                                1530: {
+                                  slidesPerView: 10,
+                                },
+                              }}
+                              autoplay={{ delay: 3000 }}
+                              loop={true}
+                            >
+                            {Questions.map((item, index) => (
+                                <SwiperSlide key={index}>
+                                    <a className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center" href={item?.url}>
+                                        <Image src={item?.img} width={80} height={80} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-full' alt={item?.name} />
+                                        <span>{item?.name}</span>
+                                    </a>    
+                                </SwiperSlide>                    
+                            ))}
 
-                    </Swiper>
+                        </Swiper>
+                    </div>
                 </div>
             </div>
         </div>
