@@ -23,6 +23,7 @@ import Banner from './pageAssets/Banner';
 import TopRowonReport from './pageAssets/TopRowonReport';
 import Description from './pageAssets/Description';
 import MiniCart from './pageAssets/MiniCart'
+import MetaData from './pageAssets/MetaData';
 import Holder from './pageAssets/Holder'
 import BreadCrumb from "./component/BreadCrumb"
 import PriceInfo from "./component/PriceInfo"
@@ -215,6 +216,7 @@ const DataExistMailList = (DataExistItem) => {
 
   return (
     <>
+      <MetaData data={data} />
       {data?.breadcrumb && <BreadCrumb data={data.breadcrumb} />}
       <div className="max-w-6xl mx-auto rounded-lg">
       {ProductId}
