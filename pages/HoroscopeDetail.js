@@ -310,48 +310,48 @@ export default function DailyHoroscopeDetailed({data}) {
 
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('daily')} className={`w-full p-2 rounded-lg ${buttonStyleDay('today')}`}>
-                        <h5 className="text-center font-bold"> Your Daily </h5>
+                        <h5 className="text-center font-bold text-sm"> Your Daily </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('tomorrow')} className={`w-full p-2 rounded-lg ${buttonStyleDay('tomorrow')}`}>
-                        <h5 className="text-center font-bold"> Your Tomorrow </h5>
+                        <h5 className="text-center font-bold text-sm"> Your Tomorrow </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('weekly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('weekly')}`}>
-                        <h5 className="text-center font-bold"> Your Weekly </h5>
+                        <h5 className="text-center font-bold text-sm"> Your Weekly </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('monthly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('monthly')}`}>
-                        <h5 className="text-center font-bold"> Your Monthly </h5>
+                        <h5 className="text-center font-bold text-sm"> Your Monthly </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('yearly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('yearly')}`}> 
-                        <h5 className="text-center font-bold"> Your Yearly </h5>
+                        <h5 className="text-center font-bold text-sm"> Your Yearly </h5>
                     </button>
                 </div>
 
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-[86px] sm:mt-5 rounded-lg">
                     <button className={`w-full p-2 rounded-lg ${buttonStyle('love')}`} onClick={() => handleButtonClick('love')}> 
-                        <h5 className="text-center font-bold"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
+                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button className={`w-full p-2 rounded-lg ${buttonStyle('finance')}`} onClick={() => handleButtonClick('finance')}> 
-                        <h5 className="text-center font-bold"> {CapitalizedCurrentDay} Finance for: {changeDate}</h5>
+                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Finance for: {changeDate}</h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button className={`w-full p-2 rounded-lg ${buttonStyle('career')}`} onClick={() => handleButtonClick('career')}> 
-                        <h5 className="text-center font-bold"> {CapitalizedCurrentDay} Career for: {changeDate}</h5>
+                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Career for: {changeDate}</h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button className={`w-full p-2 rounded-lg ${buttonStyle('health')}`} onClick={() => handleButtonClick('health')}> 
-                        <h5 className="text-center font-bold"> {CapitalizedCurrentDay} Health for: {changeDate}</h5>
+                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Health for: {changeDate}</h5>
                     </button>
                 </div>
             </div>
