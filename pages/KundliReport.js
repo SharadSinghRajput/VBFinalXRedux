@@ -45,7 +45,7 @@ const ServicesNew = [
       { name: 'Horoscope Dasha', submenu: [
           { name: "Vimshottari Dasha", link: "vimshottari-dasha.php"},
           { name: "Yogini Dasha", link: "vimshottari-dasha.php"},
-          { name: "Char Dasha",}
+          { name: "Char Dasha", link: "char-dasha.php"}
       ]},
       {name: 'Horoscope Dosha', submenu: [
           { name: "Kaalsarp Dosha",},
@@ -147,7 +147,7 @@ export default function Kundli() {
   
   return (
     <div className="">
-        <div className={`bg-[#091d5a] mx-auto max-w-6xl mx-auto shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
+        <div className={`bg-[#091d5a] mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             <div className="container py-4 pt-0 mx-auto">
                 <div>
                     <div className="sm:hidden">
@@ -300,7 +300,7 @@ export default function Kundli() {
             </div>
         </div>
 
-        <div className='container mx-auto pt-10 max-w-6xl mx-auto shadow-2xl bg-white p-5 mt-5 mb-5 rounded-lg'>
+        <div className='container mx-auto pt-10 max-w-6xl shadow-2xl bg-white p-5 mt-5 mb-5 rounded-lg'>
             <div>
                 <h2 className='text-lg font-bold mb-5'>Your Kundli Calculation</h2>
                 <Swiper

@@ -55,8 +55,7 @@ export default function DynamicPage() {
           "domainSecreteCode": Domain_Secrete_Code,
           "path": decodeURIComponent(modifiedSlug),
         }
-        // const apiUrl = "https://www.aapkikismat.com/url-check-api.php";
-        // const apiUrl = "https://www.aapkikismat.com/report-detail-tppm-api-test.php";
+        
         const apiUrl = "https://www.aapkikismat.com/report-detail-tppm-path-api-test.php";
         try {
           const response = await fetch(apiUrl, {
@@ -67,7 +66,7 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          
+          console.log(responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){

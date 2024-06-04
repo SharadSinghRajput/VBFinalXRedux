@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useEffect, useState } from 'react';
 import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
@@ -9,9 +9,8 @@ import Holder from './pageAssets/Holder';
 
 
 
-
 export default function DefaultPage({data}) {
-  
+
   return (
     <>
     <MetaData data={data} />
