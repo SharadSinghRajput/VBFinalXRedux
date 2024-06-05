@@ -252,6 +252,14 @@ export default function DailyHoroscopeDetailed({data}) {
         router.push(`${MAIN_URL}${url}`);
     };
 
+    const urlPath = router.asPath;
+    const pathSegments = urlPath.split('/');
+    pathSegments.splice(pathSegments.length - 1, 0, changeText);
+    let newUrlPath = pathSegments.join('/');
+    if (newUrlPath.startsWith('/')) {
+        newUrlPath = newUrlPath.substring(1);
+    }
+
   return (
     <>
     <MetaData data={data} />
@@ -405,8 +413,18 @@ export default function DailyHoroscopeDetailed({data}) {
                                     </div>
                                 </div>
                                 ) : (
-                                    response
+                                    <>
+                                    {response} &nbsp; 
+                                    <a 
+                                        className="text-sm text-white font-bold underline" 
+                                        href={`${MAIN_URL}${newUrlPath ? newUrlPath : ""}`}
+                                        onClick={(e) => handleClickRouter(e, newUrlPath ? newUrlPath : "")}
+                                    >
+                                        Read More About {changeText}...
+                                    </a>
+                                    </>
                             )}
+                            
                         </p>
                     </div>
                     <a
