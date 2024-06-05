@@ -239,7 +239,7 @@ const DataExistMailList = (DataExistItem) => {
 
 
             <div className="relative isolate overflow-hidden bg-gray-900 px-8 py-8 sm:py-8 rounded-lg mb-5 mt-5">
-              {data.bannerImage ?
+              {data.title ?
                 <div
                   className={`?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=824838&sat=-100&exp=15&blend-mode=multiply, absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center`}
                 />
@@ -269,52 +269,35 @@ const DataExistMailList = (DataExistItem) => {
                   />
                 </div>
                 <div className="flex gap-4">
-                <div>
-                  {data.titleLogo2 ? (
-                    <Image
-                      width={100}
-                      height={100}
-                      src={data.titleLogo2}
-                      alt={data.title || "Banner Image"}
-                      className="w-full rounded-lg "
-                      priority
-                    />
-                  ) : (null)}
-                  </div>
-                  <div className="">
-                    {data.title ?
-                      <h2 className="text-4xl font-bold text-center tracking-tight text-white">{data.title}</h2>
-                    : null}
-                  </div>
-                  <div>
-                  {data.titleLogo1 ? (
-                    <Image
-                      width={100}
-                      height={100}
-                      src={data.titleLogo1}
-                      alt={data.title || "Banner Image"}
-                      className="w-full rounded-lg "
-                      priority
-                    />
-                  ) : (null)}
-                  </div>
-                  {/* <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-                    <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-                      {links.map((link) => (
-                        <a key={link.name} href={link.href}>
-                          {link.name} <span aria-hidden="true">&rarr;</span>
-                        </a>
-                      ))}
+                    <div>
+                    {data.titleLogo2 ? (
+                      <Image
+                        width={100}
+                        height={100}
+                        src={data.titleLogo2}
+                        alt={data.title || "Banner Image"}
+                        className="w-full rounded-lg "
+                        priority
+                      />
+                    ) : (null)}
                     </div>
-                    <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-                      {stats.map((stat) => (
-                        <div key={stat.name} className="flex flex-col-reverse">
-                          <dt className="text-base leading-7 text-gray-300">{stat.name}</dt>
-                          <dd className="text-2xl font-bold leading-9 tracking-tight text-white">{stat.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div> */}
+                    <div className="">
+                      {data.title ?
+                        <h2 className="text-4xl font-bold text-center tracking-tight text-white">{data.title}</h2>
+                      : null}
+                    </div>
+                    <div>
+                      {data.titleLogo1 ? (
+                        <Image
+                          width={100}
+                          height={100}
+                          src={data.titleLogo1}
+                          alt={data.title || "Banner Image"}
+                          className="w-full rounded-lg "
+                          priority
+                        />
+                      ) : (null)}
+                    </div>
                 </div>
               </div>
 
@@ -346,7 +329,7 @@ const DataExistMailList = (DataExistItem) => {
                         </div>
                       </>:<>
                         {data.price[0].price ? <>
-                          <p className='text-2xl font-bold max-w-max mb-2'>{data.price[0].icon} {data.price[0].price}</p>
+                          <p className='text-2xl text-white font-bold max-w-max mb-2'>{data.price[0].icon} {data.price[0].price}</p>
                         </>:<></>}
                       </>}
                     </>:<></>}

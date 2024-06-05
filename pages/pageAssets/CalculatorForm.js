@@ -32,6 +32,7 @@ export default function CalculatorForm({routing}) {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Mobile, setMobile] = useState("");
+  const [ErrorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     const GetUserData = async () => {
@@ -75,6 +76,40 @@ export default function CalculatorForm({routing}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+    let errorMessages = [];
+
+    // Check if the selected date time is valid
+    if (selectedDateTime === "Please Select DOB") {
+      errorMessages.push("Please Select DOB");
+    }
+    
+    // Check if the name is empty
+    if (Name === "") {
+      errorMessages.push("Please Enter Name");
+    }
+    // Check if the birth location is empty or null
+    if (selectedBirthLocation === "" || selectedBirthLocation === null) {
+      errorMessages.push("Please Select Place of Birth");
+    }
+    
+    console.log(Gender);
+    // Check if the gender is empty or null
+    if (Gender === "" || Gender === null) {
+      errorMessages.push("Please Choose your Gender");
+    }
+    
+    // Set the error messages
+    setErrorMessage(errorMessages);
+    
+    // If there are error messages, do not proceed further
+    if (errorMessages.length > 0) {
+      return;
+    }
+    
+
+
     if (selectedDateTime || selectedDateTime) {
         const convertDateTime = (dateTimeStr) => {
             const date = new Date(dateTimeStr);
@@ -110,9 +145,10 @@ export default function CalculatorForm({routing}) {
             const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
             if(astrologyData.status === true ){
                 TimeZone = astrologyData.timezone
+                console.log(astrologyData.timezone)
             }
         } catch (error) {}
-console.log(TimeZone);
+
 
         const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
 
@@ -137,7 +173,6 @@ console.log(TimeZone);
             birth_place_longitude: selectedBirthLocation.latitude,
             birth_place_latitude: selectedBirthLocation.longitude,
             tzone: TimeZone,
-
         }
 
         const datatoHitBasic = {
@@ -170,7 +205,27 @@ console.log(TimeZone);
   return (
     <>
       <form className="z-50 relative">
+        {ErrorMessage.length > 0 ?
+            <div className="rounded-md bg-red-50 p-4">
+                <div className="flex">
+                    {/* <div className="flex-shrink-0">
+                    <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
+                    </div> */}
+                    <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">There were {ErrorMessage.length} errors with your submission</h3>
+                    <div className="mt-2 text-sm text-red-700">
+                        <ul role="list" className="list-disc space-y-1 pl-5">
+                            {ErrorMessage.map((item, index)=>(
+                                <li key={index}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        : null}
         <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+
           {GenderType.map((item) => (
             <div key={item?.id} className="flex items-center">
               <input

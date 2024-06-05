@@ -33,7 +33,6 @@ export default function Kundli({ data }) {
           <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
           {data ? (
             <>
-
             {data.title ? <>
                 <Title titleData={data.title} />
             </>:<></>}
