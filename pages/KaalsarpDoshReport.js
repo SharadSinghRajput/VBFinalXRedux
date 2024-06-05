@@ -17,7 +17,6 @@ import Description from './pageAssets/Description';
 
 
 export default function KaalsarpDoshReport({ data }) {
-    console.log(data);
     const [HoroscopeChart, setHoroscopeChart] = useState("");
 
     useEffect(() => {
@@ -34,9 +33,11 @@ export default function KaalsarpDoshReport({ data }) {
                   lon: GetData.birth_place_longitude,
                   tzone: GetData.tzone,
               };
+              console.log(data);
               try {
                   const astrologyData = await fetchAstrologyData(data, "kalsarpa_details");
                   setHoroscopeChart(astrologyData);
+                  console.log(astrologyData);
               } catch (error) {
               }
             }
@@ -64,13 +65,13 @@ export default function KaalsarpDoshReport({ data }) {
 
             {HoroscopeChart ?
                 <>
-                    <div className="mt-5">
+                    {/* <div className="mt-5">
                         <p>{HoroscopeChart.report.report}</p>
-                    </div>
-                    <div className="mt-5">
+                    </div> */}
+                    {/* <div className="mt-5">
                         <h4 class="border-b border-b-orange-500 mb-4">Kaalsarp in one line</h4>
                         <p>{HoroscopeChart.report.report}</p>
-                    </div>
+                    </div> */}
                 </>
             : null}
             {/* <h1>Kaalsarp <span> Dosha</span></h1> */}

@@ -112,7 +112,7 @@ export default function CalculatorForm({routing}) {
                 TimeZone = astrologyData.timezone
             }
         } catch (error) {}
-
+console.log(TimeZone);
 
         const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
 
