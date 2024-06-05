@@ -1,6 +1,6 @@
-
+"use client"
 import React, { useEffect, useState } from 'react';
-import Title from './pageAssets/Title';
+import Title from './pageAssets/TitlewithBG';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 
@@ -9,14 +9,13 @@ import Holder from './pageAssets/Holder';
 
 
 
-
 export default function DefaultPage({data}) {
-  
+
   return (
     <>
     <MetaData data={data} />
-    <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 rounded-lg">
-        <div className="p-2 pt-2">
+    <div className="max-w-6xl mx-auto shadow-2xl bg-white mb-5 p-5 rounded-lg">
+        <div className="">
         {data ? (
             <>
             {data.extraComponentData ? data.extraComponentData.Holder1 ? <Holder data={data.extraComponentData.Holder1} /> : <></> :<></>}
@@ -25,6 +24,7 @@ export default function DefaultPage({data}) {
 
 
              {data.title ? <>
+
                 <Title titleData={data.title} />
             </>:<></>}
 
