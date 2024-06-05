@@ -576,7 +576,7 @@ export const MainMenu = [
                 { name: "Pre Marriage Counselling", url: `${MAIN_URL}marriage-astrology/pre-marriage-counseling.php`, },
                 { name: "Problems in Married Life", url: `${MAIN_URL}marriage-astrology/marriage-life-problems-reasons.php`, },
                 { name: "Post Marriage Counseling", url: `${MAIN_URL}marriage-astrology/post-marriage-counseling.php`, },
-                { name: "Divorce and Separation", url: `${MAIN_URL}marriage-astrology/divorce.php.php` , }
+                { name: "Divorce and Separation", url: `${MAIN_URL}marriage-astrology/divorce.php` , }
             ]
         },
         {
