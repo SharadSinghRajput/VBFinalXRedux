@@ -25,6 +25,8 @@ export default function Kundli({ data }) {
   const [NumeroFavTime, setNumeroFavTime] = useState("");
   const [NumeroPlaceVastu, setNumeroPlaceVastu] = useState("");
   const [NumeroFastsReport, setNumeroFastsReport] = useState("");
+  const [NumeroFavLord, setNumeroFavLord] = useState("");
+  const [NumeroFavMantra, setNumeroFavMantra] = useState("");
   console
 
   useEffect(() => {
@@ -45,9 +47,13 @@ export default function Kundli({ data }) {
                 const astrologyData = await fetchAstrologyData(data, "numero_fav_time");
                 const numero_place_vastu = await fetchAstrologyData(data, "numero_place_vastu");
                 const numero_fasts_report = await fetchAstrologyData(data, "numero_fasts_report");
+                const numero_fav_lord = await fetchAstrologyData(data, "numero_fav_lord");
+                const numero_fav_mantra = await fetchAstrologyData(data, "numero_fav_mantra");
                 setNumeroFavTime(astrologyData);
                 setNumeroPlaceVastu(numero_place_vastu);
-                setNumeroFastsReport(numero_place_vastu);
+                setNumeroFastsReport(numero_fasts_report);
+                setNumeroFavLord(numero_fav_lord);
+                setNumeroFavMantra(numero_fav_mantra);
             } catch (error) {
             }
           }
@@ -85,6 +91,18 @@ export default function Kundli({ data }) {
                 <div className="p-5 my-5 shadow-lg">
                     <p className="text-base font-bold mb-2">{NumeroFastsReport.title}</p>
                     <p className="text-base">{NumeroFastsReport.description}</p>
+                </div>
+            : null}
+            {NumeroFavLord ?
+                <div className="p-5 my-5 shadow-lg">
+                    <p className="text-base font-bold mb-2">{NumeroFavLord.title}</p>
+                    <p className="text-base">{NumeroFavLord.description}</p>
+                </div>
+            : null}
+            {NumeroFavMantra ?
+                <div className="p-5 my-5 shadow-lg">
+                    <p className="text-base font-bold mb-2">{NumeroFavMantra.title}</p>
+                    <p className="text-base">{NumeroFavMantra.description}</p>
                 </div>
             : null}
         </div>
