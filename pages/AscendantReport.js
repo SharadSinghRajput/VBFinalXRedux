@@ -23,6 +23,7 @@ import CalculatorForm from './pageAssets/CalculatorForm'
 export default function Kundli({ data }) {
   
   const [GemstoneSuggestion, setGemstoneSuggestion] = useState("");
+  console.log(GemstoneSuggestion);
 
   useEffect(() => {
       const fetchData = async () => {
@@ -39,7 +40,7 @@ export default function Kundli({ data }) {
                 tzone: GetData.tzone,
             };
             try {
-                const astrologyData = await fetchAstrologyData(data, "basic_gem_suggestion");
+                const astrologyData = await fetchAstrologyData(data, "general_ascendant_report");
                 setGemstoneSuggestion(astrologyData);
             } catch (error) {
             }
@@ -62,26 +63,11 @@ export default function Kundli({ data }) {
                 
             </>
             : null}
-            <div className="grid grid-cols-3 gap-5">
-              {GemstoneSuggestion ?
-                Object.entries(GemstoneSuggestion).map(([category, attributes]) => (
-                    <div key={category} >
-                      <table className="w-full rounded-lg overflow-hidden" >
-                        <tbody>
-                          <tr>
-                            <th className="p-2 bg-blue-900 text-white border-b border-b-white/50" colSpan={2}>Your {category} Stone</th>
-                          </tr>
-                          {Object.entries(attributes).map(([key, value]) => (
-                            <tr key={key}>
-                              <td className="text-sm bg-blue-800 p-2 text-white border-b capitalize border-b-white/50"> {key.includes('_') ? key.replace('_', ' ') : key}</td>
-                              <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  ))
-              : null}
+            <div className="">
+                <p className="font-bold text-base">What is Ascendant ?</p>
+                <p className="text-base">Ascendant is known to be the first house that portrays an individual’s physical manifestation. It also throws light on his childhood, health, character, nature, and various attributes of his or her life. It also provides an insight into the sense of knowing his or her weak points, likes, and dislikes, strength and weaknesses, et cetera. So, it is very helpful for an individual’s personality—how he or she behaves, what attitudes he or she adopts, et cetera.</p>
+                <p className="bg-orange-500 p-5 text-center my-4 text-white">{GemstoneSuggestion.asc_report?.ascendant}</p>
+                <p className="text-base">{GemstoneSuggestion.asc_report?.report}</p>
             </div>
         </div>
     </div>
