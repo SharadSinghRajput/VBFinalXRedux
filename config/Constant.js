@@ -561,7 +561,8 @@ export const MainMenu = [
                 sublinksL2 :[
                     { name : "Hanuman Jayanti", url : `${MAIN_URL}jayanti/hanuman-jayanti.php`,}
                 ]
-            }
+            },
+            { name: "Muhurata", url : `${MAIN_URL}shubh-muhurat.php`,}
         ]
     },
     { name: 'Life Problems', url: '#',

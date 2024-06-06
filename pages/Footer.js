@@ -27,14 +27,14 @@ const social = [
     { href: `${MAIN_URL}author.php`, text: "Author" }
   ];
   const AstrologyServices = [
-    { href: `${MAIN_URL}horoscope/daily-horoscope.php`, text: "Consultation" },
-    { href: `${MAIN_URL}kundli.php`, text: "Online Report" },
-    { href: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, text: "Voice Report" },
-    { href: `${MAIN_URL}today-panchang.php`, text: "Marriage Astrology" },
-    { href: `${MAIN_URL}calculator.php`, text: "Business Astrology" },
-    { href: `${MAIN_URL}astrology-news.php`, text: "Birth Time Rectification" },
-    { href: `${MAIN_URL}apps/karma-astro-app.php`, text: "Past Life Readings" },
-    { href: `${MAIN_URL}videos.php`, text: "Career Astrology" }
+    { href: `${MAIN_URL}services/consultation.php`, text: "Consultation" },
+    { href: `${MAIN_URL}services/online-reports.php`, text: "Online Report" },
+    { href: `${MAIN_URL}services/voice-report.php`, text: "Voice Report" },
+    { href: `${MAIN_URL}marriage-astrology.php`, text: "Marriage Astrology" },
+    { href: `${MAIN_URL}business-astrology.php`, text: "Business Astrology" },
+    { href: `${MAIN_URL}time-rectification.php`, text: "Birth Time Rectification" },
+    { href: `${MAIN_URL}life-predictions.php`, text: "Past Life Readings" },
+    { href: `${MAIN_URL}career-astrology.php`, text: "Career Astrology" }
   ];
   const contactInfo = [
     { text: "Our Office, M-22, Sector-66, Noida, Uttar Pradesh-201301" },

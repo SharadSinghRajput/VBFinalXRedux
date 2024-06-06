@@ -35,10 +35,9 @@ export default function Title(props) {
             />
         </div>
         <div className="flex gap-4">
-          
             <div className="">
                 {props.titleData ?
-                <h2 className="text-2xl font-bold text-center tracking-tight text-white">{props.titleData}</h2>
+                <h1 className="text-2xl font-bold text-center tracking-tight text-white">{props.titleData}</h1>
                 : null}
             </div>
         </div>
