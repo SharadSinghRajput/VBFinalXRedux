@@ -33,12 +33,15 @@ export default function CalculatorForm({routing}) {
   const [Email, setEmail] = useState("");
   const [Mobile, setMobile] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("")
+  const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
 
   useEffect(() => {
     const GetUserData = async () => {
-      const savedInputValue = getLocalStorageItem("UserInfoDataKey");
+      const savedInputValue = getLocalStorageItem("AutoFillFormDataKey");
       if (savedInputValue !== null) {
+        setGender(savedInputValue.gender);
         setName(savedInputValue.name);
+        setselectedDateTime(savedInputValue.dob);
         setSelectedBirthLocation({
           city_name: savedInputValue.birth_place,
           latitude: savedInputValue.birth_place_latitude,
@@ -48,16 +51,14 @@ export default function CalculatorForm({routing}) {
     };
     GetUserData();
   }, []);
+  
 
-  const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
 
-  const handleDateChange = (date) => {
-    setselectedDateTime(date);
-  };
+
 
   let inputProps = {
     placeholder: selectedDateTime,
-    class: "w-full bg-gray-100"
+    class: "w-full bg-gray-100 placeholder:text-gray-900"
   };
 
   function filterPeople(LocationData, SearchLocation) {
@@ -94,7 +95,6 @@ export default function CalculatorForm({routing}) {
       errorMessages.push("Please Select Place of Birth");
     }
     
-    console.log(Gender);
     // Check if the gender is empty or null
     if (Gender === "" || Gender === null) {
       errorMessages.push("Please Choose your Gender");
@@ -112,13 +112,22 @@ export default function CalculatorForm({routing}) {
 
     if (selectedDateTime || selectedDateTime) {
         const convertDateTime = (dateTimeStr) => {
-            const date = new Date(dateTimeStr);
-            const updatedDate = date.toISOString().split('T')[0];
-            const timeParts = date.toISOString().split('T')[1].split('.')[0];
-            return `${updatedDate} ${timeParts}`;
+          const date = new Date(dateTimeStr);
+          console.log("dateTimeStr", date);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          const hours = String(date.getHours()).padStart(2, '0');
+          const minutes = String(date.getMinutes()).padStart(2, '0');
+          const seconds = String(date.getSeconds()).padStart(2, '0');
+        
+          
+          const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+          return formattedDate;
+          
         };
 
-        const formattedDateTime = convertDateTime(selectedDateTime.toISOString())
+        const formattedDateTime = convertDateTime(selectedDateTime)
 
           function formatDateIn(date) {
             const year = date.getFullYear();
@@ -130,7 +139,6 @@ export default function CalculatorForm({routing}) {
           }
           
           const CurrentDate = formatDateIn(new Date());
-          console.log(formattedDateTime);
 
           const [DatePart] = formattedDateTime.split(" ");
           const dataForTimeZone = {
@@ -145,7 +153,6 @@ export default function CalculatorForm({routing}) {
             const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
             if(astrologyData.status === true ){
                 TimeZone = astrologyData.timezone
-                console.log(astrologyData.timezone)
             }
         } catch (error) {}
 
@@ -185,17 +192,25 @@ export default function CalculatorForm({routing}) {
           lon: AstroDataBack.birth_place_longitude,
           tzone: AstroDataBack.tzone,
         };
+        const DataAutoFill = {
+          gender: Gender,
+          name: Name,
+          birth_place: selectedBirthLocation.city_name,
+          birth_place_longitude: selectedBirthLocation.longitude,
+          birth_place_latitude: selectedBirthLocation.latitude,
+          dob: formattedDateTime,
+        };
+
         try {
           const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
           setLocalStorageItem("AstroDetailKey", AstroDetail);
         } catch (error) {}
 
         try {
-            // setLocalStorageItem("KundliFromDataKey", data);
-            // setLocalStorageItem("UserInfoDataKey", UserInfoData);
+            setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
             setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
             router.push(routing);
-        } catch (error) {
+        }catch (error) {
             console.log(error);
         }
     }
@@ -232,6 +247,7 @@ export default function CalculatorForm({routing}) {
                 id={item?.id}
                 name="gender"
                 type="radio"
+                checked={Gender === item?.title}
                 onChange={() => setGender(item?.title)}
                 className="h-4 w-4 border-gray-300 px-2 text-orange-500 focus:ring-orange-500"
               />
@@ -389,7 +405,8 @@ export default function CalculatorForm({routing}) {
             <div className="mt-2">
               <Datetime
                 inputProps={inputProps}
-                onChange={handleDateChange}
+                // onChange={handleDateChange}
+                onChange={(e)=> setselectedDateTime(e.toString())}
                 closeOnClickOutside={true}
                 className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
               />

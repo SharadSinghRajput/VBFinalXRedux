@@ -49,8 +49,7 @@ export default function Kundli({ data }) {
       }
       fetchData();
   },[])
-console.log(GemstoneSuggestion);
-
+  
   return (
     <>
       <div className="">
@@ -65,29 +64,27 @@ console.log(GemstoneSuggestion);
                 
             </>
             : null}
-
-                <div className="grid grid-cols-3 gap-5">
-                  {GemstoneSuggestion ?
-                    Object.entries(GemstoneSuggestion).map(([category, attributes]) => (
-                        <div key={category} >
-                          <table className="w-full rounded-lg overflow-hidden" >
-                            <tbody>
-                              <tr>
-                                <th className="p-2 bg-blue-900 text-white border-b border-b-white/50" colSpan={2}>Your {category} Stone</th>
-                              </tr>
-                              {Object.entries(attributes).map(([key, value]) => (
-                                <tr>
-                                 <td className="text-sm bg-blue-800 p-2 text-white border-b capitalize border-b-white/50"> {key.includes('_') ? key.replace('_', ' ') : key}</td>
-                                 <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value}</td>
-                               </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      ))
-                  : null}
-                </div>
-            {/* <h1>Kaalsarp <span> Dosha</span></h1> */}
+            <div className="grid grid-cols-3 gap-5">
+              {GemstoneSuggestion ?
+                Object.entries(GemstoneSuggestion).map(([category, attributes]) => (
+                    <div key={category} >
+                      <table className="w-full rounded-lg overflow-hidden" >
+                        <tbody>
+                          <tr>
+                            <th className="p-2 bg-blue-900 text-white border-b border-b-white/50" colSpan={2}>Your {category} Stone</th>
+                          </tr>
+                          {Object.entries(attributes).map(([key, value]) => (
+                            <tr key={key}>
+                              <td className="text-sm bg-blue-800 p-2 text-white border-b capitalize border-b-white/50"> {key.includes('_') ? key.replace('_', ' ') : key}</td>
+                              <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ))
+              : null}
+            </div>
         </div>
     </div>
     </>
