@@ -482,3 +482,6 @@ color: #323232;
 .Color3 {
   background: linear-gradient(25.41deg, #b67dff 22.21%, #adbfff 91.18%);
 }
+.main-report-div * {
+  color: #fff !important;
+}
