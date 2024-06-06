@@ -22,8 +22,9 @@ import CalculatorForm from './pageAssets/CalculatorForm'
 
 export default function Kundli({ data }) {
   
-  const [GemstoneSuggestion, setGemstoneSuggestion] = useState("");
-  console.log(GemstoneSuggestion);
+  const [SadhesatiCurrentStatus, setSadhesatiCurrentStatus] = useState("");
+  const [Remedies, setRemedies] = useState("");
+  
 
   useEffect(() => {
       const fetchData = async () => {
@@ -40,8 +41,10 @@ export default function Kundli({ data }) {
                 tzone: GetData.tzone,
             };
             try {
-                const astrologyData = await fetchAstrologyData(data, "general_ascendant_report");
-                setGemstoneSuggestion(astrologyData);
+                const astrologyData = await fetchAstrologyData(data, "sadhesati_current_status");
+                const sadhesati_remedies = await fetchAstrologyData(data, "sadhesati_remedies");
+                setSadhesatiCurrentStatus(astrologyData);
+                setRemedies(sadhesati_remedies);
             } catch (error) {
             }
           }
@@ -49,6 +52,8 @@ export default function Kundli({ data }) {
       fetchData();
   },[])
 
+
+  
   return (
     <>
       <div className="">
@@ -60,14 +65,31 @@ export default function Kundli({ data }) {
                     <Title titleData={data.title} />
                 </div>
                 </>:<></>}
+                {data.description ?
+                <Description descData={data.description} />
+                :<></>}
                 
             </>
             : null}
             <div className="">
-                <p className="font-bold text-base">What is Ascendant ?</p>
-                <p className="text-base">Ascendant is known to be the first house that portrays an individual’s physical manifestation. It also throws light on his childhood, health, character, nature, and various attributes of his or her life. It also provides an insight into the sense of knowing his or her weak points, likes, and dislikes, strength and weaknesses, et cetera. So, it is very helpful for an individual’s personality—how he or she behaves, what attitudes he or she adopts, et cetera.</p>
-                <p className="bg-orange-500 p-5 text-center my-4 text-white">Your Ascendant is {GemstoneSuggestion.asc_report?.ascendant}</p>
-                <p className="text-base">{GemstoneSuggestion.asc_report?.report}</p>
+                <h4 class="font-bold text-xl border-b-4 border-b-orange-500 mb-2">Status</h4>
+                {SadhesatiCurrentStatus ?
+                <>
+                    <p className="">{SadhesatiCurrentStatus.is_undergoing_sadhesati}</p>
+                    <p className="">Moon Sign : {SadhesatiCurrentStatus.moon_sign}</p>
+                    <p className="">Saturn Sign : {SadhesatiCurrentStatus.saturn_sign}</p>
+                </>
+                : null}
+                {Remedies ?
+                <>
+                    <h4 class="font-bold text-xl border-b-4 border-b-orange-500 mt-5 mb-2">Remedies for Sadesati</h4>
+                    <ul className="list-disc ml-5">
+                        {Remedies.remedies.map((item, index)=>(
+                        <li key={index} className="text-base my-1">{item}</li>
+                        ))}
+                    </ul>
+                </>
+                : null}
             </div>
         </div>
     </div>
