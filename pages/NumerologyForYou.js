@@ -22,7 +22,10 @@ import CalculatorForm from './pageAssets/CalculatorForm'
 
 export default function Kundli({ data }) {
   
-  const [GemstoneSuggestion, setGemstoneSuggestion] = useState("");
+  const [NumeroFavTime, setNumeroFavTime] = useState("");
+  const [NumeroPlaceVastu, setNumeroPlaceVastu] = useState("");
+  const [NumeroFastsReport, setNumeroFastsReport] = useState("");
+  console
 
   useEffect(() => {
       const fetchData = async () => {
@@ -39,8 +42,12 @@ export default function Kundli({ data }) {
                 tzone: GetData.tzone,
             };
             try {
-                const astrologyData = await fetchAstrologyData(data, "basic_gem_suggestion");
-                setGemstoneSuggestion(astrologyData);
+                const astrologyData = await fetchAstrologyData(data, "numero_fav_time");
+                const numero_place_vastu = await fetchAstrologyData(data, "numero_place_vastu");
+                const numero_fasts_report = await fetchAstrologyData(data, "numero_fasts_report");
+                setNumeroFavTime(astrologyData);
+                setNumeroPlaceVastu(numero_place_vastu);
+                setNumeroFastsReport(numero_place_vastu);
             } catch (error) {
             }
           }
@@ -62,27 +69,24 @@ export default function Kundli({ data }) {
                 
             </>
             : null}
-            <div className="grid grid-cols-3 gap-5">
-              {GemstoneSuggestion ?
-                Object.entries(GemstoneSuggestion).map(([category, attributes]) => (
-                    <div key={category} >
-                      <table className="w-full rounded-lg overflow-hidden" >
-                        <tbody>
-                          <tr>
-                            <th className="p-2 bg-blue-900 text-white border-b border-b-white/50" colSpan={2}>Your {category} Stone</th>
-                          </tr>
-                          {Object.entries(attributes).map(([key, value]) => (
-                            <tr key={key}>
-                              <td className="text-sm bg-blue-800 p-2 text-white border-b capitalize border-b-white/50"> {key.includes('_') ? key.replace('_', ' ') : key}</td>
-                              <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  ))
-              : null}
-            </div>
+            {NumeroFavTime ?
+                <div className="p-5 my-5 shadow-lg">
+                    <p className="text-base font-bold mb-2">{NumeroFavTime.title}</p>
+                    <p className="text-base">{NumeroFavTime.description}</p>
+                </div>
+            : null}
+            {NumeroPlaceVastu ?
+                <div className="p-5 my-5 shadow-lg">
+                    <p className="text-base font-bold mb-2">{NumeroPlaceVastu.title}</p>
+                    <p className="text-base">{NumeroPlaceVastu.description}</p>
+                </div>
+            : null}
+            {NumeroFastsReport ?
+                <div className="p-5 my-5 shadow-lg">
+                    <p className="text-base font-bold mb-2">{NumeroFastsReport.title}</p>
+                    <p className="text-base">{NumeroFastsReport.description}</p>
+                </div>
+            : null}
         </div>
     </div>
     </>
