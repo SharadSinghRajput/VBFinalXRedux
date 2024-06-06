@@ -16,16 +16,20 @@ export default function BlogList(props) {
   const [BlogList, setBlogList] = useState("");
   const [noData, setNoData] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [TotalPagedata, setTotalPagedata] = useState(10);
+  
   
   const fetchData = async (pageCount) => {
     setBlogList("")
     const datas = {
-      "apiKey": API_KEY,
-      "getTotalBlog": 10,
-      "blogFrom": pageCount ? currentPage : 0,
-      "domainSecreteCode": Domain_Secrete_Code
+      apiKey : API_KEY,
+      getTotalBlog : 10,
+      blogFrom : (pageCount > 0 ? pageCount - 1 : 0) * 10,
+      domainSecreteCode : Domain_Secrete_Code
     };
+    // console.log((pageCount > 0 ? pageCount - 1 : 0) * 10 || currentPage)
+    console.log(datas)
     const apiUrl = `${API_NEW_URL}blog-list-api.php`
     try { 
       const response = await fetch(apiUrl, {
@@ -39,6 +43,7 @@ export default function BlogList(props) {
       const data = await response.json();
       if(data.success === true){
         setBlogList(data.data)
+        console.log(data.data)
         setTotalRows(data.totalRows)
         setNoData(false);
       }else{
