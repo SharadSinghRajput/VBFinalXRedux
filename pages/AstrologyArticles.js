@@ -55,9 +55,9 @@ export default function ArticleDetails({data}) {
                     <Banner BannerData={data.blogBannerImage} AltName={data.title} />
                   </div>
                 </>:<></>}
-                    {data.recommendedArticle ? <>
+                    {data.nestedPages ? <>
                     <div className="flex flex-wrap gap-5 mb-5">
-                        {data.recommendedArticle.map((item, index) => (
+                        {data.nestedPages.map((item, index) => (
                             <button key={index} onClick={()=> router.push(item.path)} className="w-40 flex-col flex justify-center items-center shadow-lg p-2 rounded-lg">    
                             {item.featuredImage ?
                                 <img
@@ -80,8 +80,6 @@ export default function ArticleDetails({data}) {
                         ))}
                     </div>
                     </> : <></>}
-
-
 
                 {data.extraComponentData ? data.extraComponentData.Holder7 ? <Holder data={data.extraComponentData.Holder7} /> : <></> :<></>}
                 {data.extraComponentData ? data.extraComponentData.Holder8 ? <Holder data={data.extraComponentData.Holder8} /> : <></> :<></>}
