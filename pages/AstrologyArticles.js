@@ -58,7 +58,7 @@ export default function ArticleDetails({data}) {
                     {data.recommendedArticle ? <>
                     <div className="flex flex-wrap gap-5 mb-5">
                         {data.recommendedArticle.map((item, index) => (
-                            <button onClick={()=> router.push(item.path)} className="w-40 flex-col flex justify-center items-center shadow-lg p-2 rounded-lg">    
+                            <button key={index} onClick={()=> router.push(item.path)} className="w-40 flex-col flex justify-center items-center shadow-lg p-2 rounded-lg">    
                             {item.featuredImage ?
                                 <img
                                     src={item.featuredImage}
@@ -74,9 +74,6 @@ export default function ArticleDetails({data}) {
                                 className="w-16 h-16 object-cover rounded-full block"
                                 priority
                                 />
-                            // <div className="w-16 h-16 object-cover rounded-full block bg-orange-200">
-
-                            // </div>
                             }
                                 <h5 className="text-sm mt-2">{item.name}</h5>
                             </button>
