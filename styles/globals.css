@@ -485,3 +485,6 @@ color: #323232;
 .main-report-div * {
   color: #fff !important;
 }
+.inner-data-mb-5 * {
+  margin-bottom:10px;
+}
