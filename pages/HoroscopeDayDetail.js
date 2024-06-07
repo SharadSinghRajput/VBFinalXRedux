@@ -3,16 +3,15 @@ import Title from './pageAssets/TitlewithBG';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import { useRouter } from 'next/router';
+
 import {Horoscope} from '../config/Horoscope';
 import MetaData from './pageAssets/MetaData';
-
+import { MAIN_URL } from '../config/config';
 
 import Image from "next/image";
 
 export default function HomePage({data}) {
-    const router = useRouter();
-
-
+   const router = useRouter();
   const NavigateLink = [
     {
       "name": "Daily Horoscope",
@@ -31,6 +30,11 @@ export default function HomePage({data}) {
       "link": "https://www.vinaybajrangi.com/horoscope/yearly-horoscope.php"
     }
   ]
+ 
+  const handleClick = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${MAIN_URL}${url}`);
+  };
   
   return (
     <>
@@ -44,10 +48,13 @@ export default function HomePage({data}) {
             <h2 class="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
             <div class="flex flex-row flex-wrap gap-3 justify-center ">
               {Horoscope.map((person) => (
-                <button key={person.name} onClick={()=> router.push(person.Link)} >
-                    <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
-                    <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
-                </button>
+                <a key={person.name}
+                    href={`${MAIN_URL}${person.Link}`}
+                    onClick={(e) => handleClick(e, person.Link)}
+                >
+                  <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
+                  <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
+                </a>
               ))}
             </div>
           </div>

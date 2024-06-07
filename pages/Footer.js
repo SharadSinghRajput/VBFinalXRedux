@@ -47,9 +47,16 @@ const social = [
   
 export default function Example() {
   const router = useRouter();
+  const getCurrentYear = () => {
+    const date = new Date();
+    return date.getFullYear();
+  };
+
   return (
     <>
+
     <div className="bg-slate-100 py-10">
+
       <div className="container mx-auto">
         <div className="grid grid-cols-2  gap-10 md:grid-cols-4">
           <div>
@@ -112,7 +119,7 @@ export default function Example() {
             ))}
           </div>
           <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">
-            &copy; VinayBajrangi.com © 2024 Designed & Developed By BrandShow
+            &copy; VinayBajrangi.com {getCurrentYear()} Designed & Developed By BrandShow
           </p>
         </div>
       </div>

@@ -1,8 +1,8 @@
 "use client"; 
 import Image from "next/image";
-import {Colors} from "../config/Colors";
+// import {Colors} from "../config/Colors";
 import { useRouter } from "next/router";
-
+import { MAIN_URL } from '../config/config';
 export default function Questions() {
     const router = useRouter();
     const Questions= [
@@ -16,6 +16,12 @@ export default function Questions() {
         { text: "Manglik Dosha Calculator", imageUrl: "https://www.vinaybajrangi.com/asset_frontend/img/calculators/manglik-dosha-calculator.png", link: "calculator/manglik-dosha-calculator.php" },
         { text: "Moon Sign Calculator", imageUrl: "https://www.vinaybajrangi.com/asset_frontend/img/calculators/moon-sign.png", link: "calculator/moon-sign-calculator.php" }
     ]
+
+    const handleClick = (e, url) => {
+        e.preventDefault(); // Prevent the default anchor behavior
+        router.push(`${MAIN_URL}${url}`);
+    };
+
   return (
     <>
     <div className={`bg-[#091d5a]`}>
@@ -24,12 +30,14 @@ export default function Questions() {
             <ul className="flex flex-row flex-wrap gap-4 pt-4 pb-4 justify-center">
                 {Questions.map((item) => (
                 <li key={item.name} className="lg:w-[9%] md:w-[15%] w-[28%]">
-                    <button
-                    onClick={()=> router.push(item.link)}
-                        className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center">
+                    <a
+                        className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
+                        href={`${MAIN_URL}${item.link}`}
+                        onClick={(e) => handleClick(e, item.link)}
+                    >
                         <Image width={100} height={100} className="w-[100px] aspect-square rounded-[50px]" src={item.imageUrl} alt="" />
                         <span>{item.text}</span>
-                    </button>    
+                    </a>    
                 </li>
                 ))}
             </ul>

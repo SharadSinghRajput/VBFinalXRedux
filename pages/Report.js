@@ -18,11 +18,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, removeProduct } from '../redux/ProductReducer';
 import { toggleGetProduct } from '../redux/triggerSlice';
 import { toggleStartSession } from '../redux/sessionSlice';
+import MetaData from './pageAssets/MetaData';
 import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import TopRowonReport from './pageAssets/TopRowonReport';
 import Description from './pageAssets/Description';
 import MiniCart from './pageAssets/MiniCart'
+// import MetaData from './pageAssets/MetaData';
 import Holder from './pageAssets/Holder'
 import BreadCrumb from "./component/BreadCrumb"
 import PriceInfo from "./component/PriceInfo"
@@ -389,7 +391,7 @@ const DataExistMailList = (DataExistItem) => {
               {data.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
 
               <div className="mx-auto mt-5">
-                <div className="relative isolate overflow-hidden bg-[#ea580c] px-10 py-10 text-center shadow-2xl sm:rounded-3xl sm:px-10">
+                <div className="relative isolate overflow-hidden bg-[#ea580c] main-report-div px-10 py-10 text-center shadow-2xl sm:rounded-3xl sm:px-10">
                   <p className="mx-auto mt-6 text-lg text-left leading-8 text-white">
                   {data.description ? (<div className=''
                   dangerouslySetInnerHTML={{ __html: data.description }}

@@ -157,12 +157,12 @@ function convertTimestamp(timestamp) {
   return (
     <>
       <div className="bg-white p-5 pb-0 rounded-lg">
-        <div class="grid grid-cols-2 gap-2 md:grid-cols-2 ">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-2 ">
           <div>
-            {/* <button onClick={GetPanchang} class="text-lg font-semibold">
+            {/* <button onClick={GetPanchang} className="text-lg font-semibold">
               Aaj Ka <span>Panchang</span>
             </button> */}
-            <h3 class="text-lg font-semibold">
+            <h3 className="text-lg font-semibold">
               Aaj Ka <span>Panchang</span>
             </h3>
             <p className="text-sm">Noida, uttar Pradesh, India</p>
@@ -183,7 +183,7 @@ function convertTimestamp(timestamp) {
             <span className="bg-white px-2 text-xs">{PanchangD ? PanchangD.day : null}, {DatetoShow}</span>
           </div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-2 lg:grid-cols-5 mt-5 border-b-[1px] pb-4 border-b-orange-500">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-2 lg:grid-cols-5 mt-5 border-b-[1px] pb-4 border-b-orange-500">
             <div className="bg-orange-500 p-4 rounded-lg" >
               <Image
                 width={500}
@@ -226,7 +226,7 @@ function convertTimestamp(timestamp) {
               {PanchangD ? <p className="text-center text-sm font-bold text-white mt-2">{PanchangD.moonset}</p>: null}
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-2 md:grid-cols-2 py-2 bg-white p-4 border-[1px]  border-grey-100 drop-shadow-lg rounded-lg mt-4">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-2 py-2 bg-white p-4 border-[1px]  border-grey-100 drop-shadow-lg rounded-lg mt-4">
           <div className="flex divide-y divide-grey flex-col ">
             <div className="py-2">
               <h5 className="text-sm font-semibold">Month</h5>

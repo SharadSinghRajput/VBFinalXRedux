@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router';
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { MAIN_URL } from '../config/config';
 
 export default function HomePage() {
   const router = useRouter();
@@ -43,6 +44,10 @@ export default function HomePage() {
     { name: "Pisces", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/pisces.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/pices.png", Link: "horoscope/daily-horoscope/pisces.php"}
   ]
 
+  const handleClick = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${MAIN_URL}${url}`);
+  };
 
   
   return (
@@ -50,7 +55,7 @@ export default function HomePage() {
       <div className="max-w-7xl pt-4 pb-10 mx-auto">
         <div className="flex flex-col-reverse md:grid md:grid-cols-2 gap-10">
           <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg shadow-2xl">
-            <h2 className="text-xl text-blue-900 font-bold text-left mb-4"><b>Astrological Solutions</b> for all life’s problems</h2>
+            <h2 className="text-xl text-blue-900 font-bold text-left mb-4"><b>Astrological Solutions</b> for all life's problems</h2>
             <Swiper
               spaceBetween={10}
               slidesPerView={4}
@@ -83,7 +88,9 @@ export default function HomePage() {
                 <SwiperSlide key={index} className="">
                   <a
                     className="bg-orange-500 p-2 min-h-32 rounded-lg flex flex-col justify-center items-center"
-                    href={item.url}>
+                    href={`${MAIN_URL+item.url}`} 
+                    onClick={(e) => handleClick(e, item.url)}
+                  >
                     <Image
                       src={item.imgSrc}
                       width={60}
@@ -129,7 +136,9 @@ export default function HomePage() {
                 <SwiperSlide key={index}>
                   <a
                     className="bg-orange-500 p-2 min-h-32 rounded-lg flex flex-col justify-center items-center"
-                    href={item.url}>
+                    href={`${MAIN_URL+item.url}`} 
+                    onClick={(e) => handleClick(e, item.url)}
+                  >
                     <Image
                       src={item.imgSrc}
                       width={60}
@@ -158,10 +167,13 @@ export default function HomePage() {
             <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
             <div className="flex flex-row flex-wrap gap-3 justify-center ">
               {Horoscope.map((person) => (
-                <button  key={person.name} onClick={()=> router.push(person.Link)} >
+                <a  key={person.name}
+                  href={`${MAIN_URL+person.Link}`} 
+                  onClick={(e) => handleClick(e, person.Link)}
+                >
                     <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
                     <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
-                </button>
+                </a>
               ))}
             </div>
           </div>

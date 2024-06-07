@@ -52,7 +52,7 @@ export const MainMenu = [
     },
     { name: 'Astrology', url : '#',
         sublinks: [
-            { name: 'Today Panchang', url : `${MAIN_URL}kundli-doshas.php`, },
+            { name: 'Today Panchang', url : `${MAIN_URL}today-panchang.php`, },
             { name: 'Festivals', url : `${MAIN_URL}festivals.php`, },
             { 
                 name: "Planetary Transit",
@@ -577,7 +577,7 @@ export const MainMenu = [
                 { name: "Pre Marriage Counselling", url: `${MAIN_URL}marriage-astrology/pre-marriage-counseling.php`, },
                 { name: "Problems in Married Life", url: `${MAIN_URL}marriage-astrology/marriage-life-problems-reasons.php`, },
                 { name: "Post Marriage Counseling", url: `${MAIN_URL}marriage-astrology/post-marriage-counseling.php`, },
-                { name: "Divorce and Separation", url: `${MAIN_URL}marriage-astrology/divorce.php.php` , }
+                { name: "Divorce and Separation", url: `${MAIN_URL}marriage-astrology/divorce.php` , }
             ]
         },
         {
@@ -618,7 +618,7 @@ export const MainMenu = [
             sublinksL2: [
                 { name: "Astrological Solutions for Property Disputes in Horoscope", url: `${MAIN_URL}property/property-disputes.php`, },
                 { name: "Ancestral and Parental Property in your Birth Chart", url: `${MAIN_URL}property/ancestral-property.php`, },
-                { name: "Buying Selling Property per birth chart", url: `${MAIN_URL}property/buying-selling-property.php`, },
+                { name: "Buying Selling Property per birth chart", url: `${MAIN_URL}property.php`, },
                 { name: "Predictions for own House", url: `${MAIN_URL}property/property-yoga.php`, }
             ]
         },
@@ -627,7 +627,7 @@ export const MainMenu = [
             url: `${MAIN_URL}health-astrology.php`,
             sublinksL2: [
                 { name: "Timings of Disease in birth chart", url: `${MAIN_URL}health-astrology/planets-and-diseases-in-astrology.php`, },
-                { name: "Medical Astrology & Severe Health Issues", url: `${MAIN_URL}health-astrology/medical-astrology.php`, },
+                { name: "Medical Astrology & Severe Health Issues", url: `${MAIN_URL}health-astrology.php`, },
                 { name: "Drug Addiction and Alcoholism indications in the birth chart", url: `${MAIN_URL}health-astrology/drug-addiction.php`, },
                 { name: "Specific Diseases in birth chart", url: `${MAIN_URL}health-astrology/diseases-caused.php`, },
                 { name: "Sex Health, Desires and Habits", url: `${MAIN_URL}health-astrology/sexual-health.php`, },
