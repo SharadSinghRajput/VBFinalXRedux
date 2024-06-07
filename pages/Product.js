@@ -143,7 +143,6 @@ const DataExistMailList = (DataExistItem) => {
 
 
 
-
   const handleAddProduct = async (itemID, ItemPrice, bundleType) => {
     setProductAdding(itemID)
     const dataToAdd = {
@@ -332,7 +331,7 @@ const DataExistMailList = (DataExistItem) => {
                         </div>
                       </>:<>
                         {data.price[0].price ? <>
-                          <p className='text-2xl text-white font-bold max-w-max mb-2'>{data.price[0].icon} {data.price[0].price}</p>
+                          <p className='text-2xl text-black font-bold max-w-max mb-2'>{data.price[0].icon} {data.price[0].price}</p>
                         </>:<></>}
                       </>}
                     </>:<></>}
