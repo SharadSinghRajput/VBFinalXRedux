@@ -34,8 +34,8 @@ import PageRelatedBlog from "./PageRelatedBlog"
 
 
 
+
 export default function Report({data}) {
-  console.log(data)
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   

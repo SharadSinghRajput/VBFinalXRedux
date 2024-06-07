@@ -14,7 +14,7 @@ export default function Banner(props) {
           height={300}
           src={BannerData}
           alt={AltName || "Banner Image"}
-          className="w-full"
+          className="w-full rounded-lg"
           priority
         />
       ) : (
