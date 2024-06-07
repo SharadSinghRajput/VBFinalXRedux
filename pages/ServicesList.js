@@ -53,7 +53,7 @@ export default function DefaultPage({data}) {
                 <Title titleData={data.title} />
             </>:<></>}
 
-            <div className="grid grid-cols-4 gap-5 mb-5">
+            <div className="grid grid-cols-4 gap-5 mb-5 mt-5">
                 {Services.map((item, index) => (
                     <div className="" key={index}>
                         <button className='bg-orange-200' onClick={() => router.push(item.link)}>
