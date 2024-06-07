@@ -528,7 +528,8 @@ export const MainMenu = [
                 sublinksL2 :[
                     { name: "Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi.php`,
                         sublinksL3 : [
-                        { name: "Saphala Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi/saphala-ekadashi.php`, }
+                        { name: "Saphala Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi/saphala-ekadashi.php`, },
+                        { name: "Putrada Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi/putrada-ekadashi.php`, }
                         ]
                     },
                     { name: "Purnima 2024 Dates", url: `${MAIN_URL}vrat/purnima.php`,},
