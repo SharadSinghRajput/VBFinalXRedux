@@ -286,7 +286,7 @@ const DataExistMailList = (DataExistItem) => {
                     </div>
                     <div className="">
                       {data.title ?
-                        <h2 className="text-4xl font-bold text-center tracking-tight text-white">{data.title}</h2>
+                        <h1 className="text-4xl font-bold text-center tracking-tight text-white">{data.title}</h1>
                       : null}
                     </div>
                     <div>
