@@ -1,10 +1,14 @@
 "use client"; 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-// import BlogCard from "./BlogCard";
-// import PageDetailFetchAPI from '../config/PageDetailFetchAPI';
+
+import BlogCard from "./BlogCard";
+import PageDetailFetchAPI from '../config/PageDetailFetchAPI';
+import Title from './pageAssets/TitlewithBG';
+
+
+
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
-import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import { format } from 'date-fns';

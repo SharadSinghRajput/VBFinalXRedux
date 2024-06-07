@@ -36,7 +36,7 @@ export default function DefaultPage({data}) {
 
             {data.blogBannerImage ? <>
                 <div className="w-[100%] md:w-[100%] mb-5 mt-5">
-                <Banner BannerData={data.blogBannerImage} AltName={data.title} />
+                    <Banner BannerData={data.blogBannerImage} AltName={data.title} />
                 </div>
             </>:<></>}
 
