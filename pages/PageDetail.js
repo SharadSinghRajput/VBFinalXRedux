@@ -14,14 +14,21 @@ import Holder from './pageAssets/Holder';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'; 
 import {MAIN_URL} from '../config/config';
-import SwiperCore, { Autoplay } from 'swiper';
+import SwiperCore from 'swiper';
 
 
 export default function Example({data}) {
-  SwiperCore.use([Autoplay]);
-  const filteredBlogs = (data.recommendedBlog || [])
-    .filter(blog => blog.pageVideo)
-    .slice(0, 10);
+  const [filteredBlogs, setFilteredBlogs] = useState([]);
+  
+  useEffect(() => {
+    if (data && Array.isArray(data.recommendedBlog)) {
+      const filteredBlogsList = data.recommendedBlog
+        .filter(blog => blog.pageVideo)
+        .slice(0, 10);
+        
+      setFilteredBlogs(filteredBlogsList);
+    }
+  }, [data]);
 
   return (
     <>
@@ -75,8 +82,9 @@ export default function Example({data}) {
               {data?.extraComponentData ? data.extraComponentData.Holder8 ? <Holder data={data.extraComponentData.Holder8} /> : <></> :<></>}
               {data?.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
 
-
+            <div className='mt-5 mb-5 rounded-lg overflow-hidden'>
               {data?.pageVideo && <VideoFrame url={data.pageVideo} />}
+            </div>
               {data?.description && <Description descData={data.description} />}
 
 
@@ -93,17 +101,19 @@ export default function Example({data}) {
               {data?.extraComponentData ? data.extraComponentData.Holder20 ? <Holder data={data.extraComponentData.Holder20} /> : <></> :<></>}
 
               {filteredBlogs.length > 0 ? (
-                <div className='bg-gray-900 px-8 py-8 sm:py-8 rounded-lg'>
-                  <h5 className="text-center text-white text-lg font-bold">Related Videos</h5>
+                <div className='bg-orange-50 px-8 py-8 sm:py-8 rounded-lg mt-5'>
+                  <h5 className="text-center text-gray-800 text-lg font-bold mb-4">Related Videos</h5>
                   <div className='grid grid-cols-4 gap-4'>
                     {filteredBlogs.map(item => (
-                      <div key={item.pageID} className=''>
+                      <div key={item.pageID} className='bg-orange-200 rounded-lg overflow-hidden'>
                         {item.pageVideo && <VideoFrame url={item.pageVideo} />}
                         <a
-                          className="text-sm text-white gap text-center no-underline flex flex-col justify-center items-center"
+                          className="text-sm text-white text-center no-underline flex flex-col justify-center items-center"
                           href={MAIN_URL + item.path}
                         >
-                          <h6>{item.name}</h6>
+                          <div className='bg-orange-200 p-2 w-full h-full'>
+                                <h6 className='text-base text-left font-medium text-gray-800'>{item.name}</h6>
+                            </div>
                         </a>
                       </div>
                     ))}
