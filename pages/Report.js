@@ -31,7 +31,7 @@ import PriceInfo from "./component/PriceInfo"
 import PriceInfoforBundle from "./component/PriceInfoforBundle"
 import RelatedProduct from "./pageAssets/RelatedProduct"
 import PageRelatedBlog from "./PageRelatedBlog"
-import MetaData from './pageAssets/MetaData';
+
 
 
 
