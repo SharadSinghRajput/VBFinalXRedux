@@ -29,11 +29,11 @@ import PriceInfo from "./component/PriceInfo"
 import PriceInfoforBundle from "./component/PriceInfoforBundle"
 import RelatedProduct from "./pageAssets/RelatedProduct"
 import PageRelatedBlog from "./PageRelatedBlog"
+import MetaData from './pageAssets/MetaData';
 
 
 
 export default function Report({data}) {
-  console.log(data)
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   
@@ -215,6 +215,7 @@ const DataExistMailList = (DataExistItem) => {
 
   return (
     <>
+      <MetaData data={data} />
       {data?.breadcrumb && <BreadCrumb data={data.breadcrumb} />}
       <div className="max-w-6xl mx-auto rounded-lg">
       {ProductId}

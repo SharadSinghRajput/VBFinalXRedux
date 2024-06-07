@@ -10,8 +10,29 @@ import Description from './pageAssets/Description';
 import Tags from './pageAssets/Tags';
 import CommentForm from './pageAssets/commentForm';
 import MetaData from './pageAssets/MetaData';
+import {Horoscope} from '../config/Horoscope';
+import { useRouter } from 'next/router';
 
+const NavigateLink = [
+  {
+    "name": "Daily Horoscope",
+    "link": "https://www.vinaybajrangi.com/horoscope/daily-horoscope.php"
+  },
+  {
+    "name": "Weekly Horoscope",
+    "link": "https://www.vinaybajrangi.com/horoscope/weekly-horoscope.php"
+  },
+  {
+    "name": "Monthly Horoscope",
+    "link": "https://www.vinaybajrangi.com/horoscope/monthly-horoscope.php"
+  },
+  {
+    "name": "Yearly Horoscope",
+    "link": "https://www.vinaybajrangi.com/horoscope/yearly-horoscope.php"
+  }
+]
 export default function HoroscopePageData({data}) {
+  const router = useRouter();
 
   return (
     <>
@@ -30,9 +51,30 @@ export default function HoroscopePageData({data}) {
               </div>
             ) : (
               <>
+                <div class="grid grid-cols-4 mb-5">
+                  { NavigateLink.map((item, index)=> (
+                      <div className='col-span-1' key={index}>
+                          <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
+                            {item.name}
+                          </button>
+                      </div>
+                    ))}
+                </div>
                 {data.title ? <>
-                  <Title titleData={data.title} />
+                    <Title titleData={data.title} />
                 </>:<></>}
+                <div class="grid grid-cols-1 gap-10 mt-5">
+                    <div className={` p-2 md:p-4 rounded-lg bg-orange-500`}>
+                        <div class="grid grid-cols-3 gap-5 sm:grid-cols-6">
+                        {Horoscope.map((person) => (
+                            <button key={person.name} onClick={()=> router.push(person.Link)} className='w-full flex justify-center items-center flex-col aspect-square bg-white rounded-2xl p-4' >
+                                <Image width={70} height={70} className="aspect-square" src={person.imgSrc} alt="" />
+                                <h3 className="mt-4 text-center font-normal text-sm tracking-tight text-gray-900 leading-3">{person.name}</h3>
+                            </button>
+                        ))}
+                        </div>
+                    </div>
+                </div>
 
                 {data.blogBannerImage ? <>
                   <div className="w-[100%] md:w-[100%] mb-5 mt-5">
@@ -45,7 +87,6 @@ export default function HoroscopePageData({data}) {
                 :<></>}
               </> 
           )}
-          
         </div>
       </div>
     </>
