@@ -19,7 +19,8 @@ export default function BlogList({data}) {
     }
   return (
     <>
-      <div className='bg-white max-w-6xl mx-auto mt-5 mb-5 '>
+    <div class="pt-5">
+      <div className='bg-orange-50 max-w-6xl mx-auto mb-5 '>
         <nav className="flex" aria-label="Breadcrumb">
             <ol role="list" className="flex space-x-4 rounded-md bg-white px-6 shadow">
             <li className="flex">
@@ -55,6 +56,7 @@ export default function BlogList({data}) {
             </ol>
         </nav>
         </div>
+    </div>
     </>
   )
 }

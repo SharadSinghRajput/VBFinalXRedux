@@ -3,6 +3,6 @@ export default function Banner(props) {
   const descHTML = props.descData ? props.descData.replace(/\\r\\n/g, '<br/>') : '';
 
   return (
-    <div className={`mb-2 ml-2 mr-2 text-black text-justify ${props.extra ? props.extra : "text-sm"}`} dangerouslySetInnerHTML={{ __html: descHTML }} />
+    <div className={`mb-2 ml-2 mr-2 text-black inner-data-mb-5 text-justify ${props.extra ? props.extra : "text-sm"}`} dangerouslySetInnerHTML={{ __html: descHTML }} />
   );
 }

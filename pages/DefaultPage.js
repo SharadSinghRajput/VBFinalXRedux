@@ -4,6 +4,7 @@ import Title from './pageAssets/TitlewithBG';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 
+
 import MetaData from './pageAssets/MetaData';
 import Holder from './pageAssets/Holder';
 

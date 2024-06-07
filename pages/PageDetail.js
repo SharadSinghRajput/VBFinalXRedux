@@ -6,14 +6,23 @@ import PageDetailFetchAPI from '../config/PageDetailFetchAPI';
 import MetaData from './pageAssets/MetaData';
 import BreadCrumb from "./component/BreadCrumb"
 
-import Title from './pageAssets/Title';
+import Title from './pageAssets/TitlewithBG';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
+import VideoFrame from './pageAssets/VideoFrame';
 import Holder from './pageAssets/Holder';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'; 
+import {MAIN_URL} from '../config/config';
+import SwiperCore, { Autoplay } from 'swiper';
 
 
 export default function Example({data}) {
+  SwiperCore.use([Autoplay]);
+  const filteredBlogs = data.recommendedBlog
+    .filter(blog => blog.pageVideo)
+    .slice(0, 10);
+
   return (
     <>
       <MetaData data={data} />
@@ -67,6 +76,7 @@ export default function Example({data}) {
               {data?.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
 
 
+              {data?.pageVideo && <VideoFrame url={data.pageVideo} />}
               {data?.description && <Description descData={data.description} />}
 
 
@@ -81,6 +91,20 @@ export default function Example({data}) {
               {data?.extraComponentData ? data.extraComponentData.Holder18 ? <Holder data={data.extraComponentData.Holder18} /> : <></> :<></>}
               {data?.extraComponentData ? data.extraComponentData.Holder19 ? <Holder data={data.extraComponentData.Holder19} /> : <></> :<></>}
               {data?.extraComponentData ? data.extraComponentData.Holder20 ? <Holder data={data.extraComponentData.Holder20} /> : <></> :<></>}
+
+              <div className='grid grid-cols-4 gap-4 bg-gray-900 px-8 py-8 sm:py-8 rounded-lg '>
+                  {filteredBlogs.map((item, index) => (
+                    <div className=''>
+                      <a
+                        className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
+                        href={MAIN_URL+item.path}
+                      >
+                        {item.pageVideo && <VideoFrame url={item.pageVideo} />}
+                        <h6>{item.name}</h6>
+                      </a>
+                  </div>
+                  ))}
+              </div>
               {data?.extraComponentData ? data.extraComponentData.Holder21 ? <Holder data={data.extraComponentData.Holder21} /> : <></> :<></>}
               {data?.extraComponentData ? data.extraComponentData.Holder22 ? <Holder data={data.extraComponentData.Holder22} /> : <></> :<></>}
               {data?.extraComponentData ? data.extraComponentData.Holder23 ? <Holder data={data.extraComponentData.Holder23} /> : <></> :<></>}
