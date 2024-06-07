@@ -5,6 +5,7 @@ import {MAIN_URL} from '../config/config'
 // import { useRouter } from 'next/router';
 import { useRouter } from 'next/navigation'
 
+import Image from 'next/image'
 
 const social = [
   { name: 'Facebook', href: 'https://www.facebook.com/ptVinayBajrangi/', Icon: <Facebook width={15} height={15} /> },
@@ -14,42 +15,47 @@ const social = [
   { name: 'YouTube', href: 'https://www.youtube.com/@drvinaybajrangiji', Icon: <YouTube width={15} height={15} />},
 ]
 
-  const QuickLinks = [
-    { href: `${MAIN_URL}horoscope/daily-horoscope.php`, text: "Free Daily Horoscope" },
-    { href: `${MAIN_URL}kundli.php`, text: "Free Kundli" },
-    { href: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, text: "Kundli Matching" },
-    { href: `${MAIN_URL}today-panchang.php`, text: "Today Panchang" },
-    { href: `${MAIN_URL}calculator.php`, text: "Free Astrology Calculators" },
-    { href: `${MAIN_URL}astrology-news.php`, text: "Astrology News" },
-    { href: `${MAIN_URL}dr-vinay-bajrangi-will-be-in-mumbai.php`, text: "Upcoming Visits" },
-    { href: `${MAIN_URL}apps/karma-astro-app.php`, text: "Karma Astro Mobile App" },
-    { href: `${MAIN_URL}videos.php`, text: "Videos" },
-    { href: `${MAIN_URL}author.php`, text: "Author" }
-  ];
-  const AstrologyServices = [
-    { href: `${MAIN_URL}horoscope/daily-horoscope.php`, text: "Consultation" },
-    { href: `${MAIN_URL}kundli.php`, text: "Online Report" },
-    { href: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, text: "Voice Report" },
-    { href: `${MAIN_URL}today-panchang.php`, text: "Marriage Astrology" },
-    { href: `${MAIN_URL}calculator.php`, text: "Business Astrology" },
-    { href: `${MAIN_URL}astrology-news.php`, text: "Birth Time Rectification" },
-    { href: `${MAIN_URL}apps/karma-astro-app.php`, text: "Past Life Readings" },
-    { href: `${MAIN_URL}videos.php`, text: "Career Astrology" }
-  ];
-  const contactInfo = [
-    { text: "Our Office, M-22, Sector-66, Noida, Uttar Pradesh-201301" },
-    { href: "tel:+91-9278665588", text: "+91-9278665588" },
-    { href: "mailto:mail@vinaybajrangi.com", text: "mail@vinaybajrangi.com" },
-    { href: `${MAIN_URL}contact-us.php`, text: "Contact Us" },
-    { href: `${MAIN_URL}privacy-policy.php`, text: "Privacy Policy" },
-    { href: `${MAIN_URL}payment-terms-and-conditions.php`, text: "Payment Terms & Conditions" }
-  ];
+const QuickLinks = [
+  { href: `${MAIN_URL}horoscope/daily-horoscope.php`, text: "Free Daily Horoscope" },
+  { href: `${MAIN_URL}kundli.php`, text: "Free Kundli" },
+  { href: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, text: "Kundli Matching" },
+  { href: `${MAIN_URL}today-panchang.php`, text: "Today Panchang" },
+  { href: `${MAIN_URL}calculator.php`, text: "Free Astrology Calculators" },
+  { href: `${MAIN_URL}astrology-news.php`, text: "Astrology News" },
+  { href: `${MAIN_URL}dr-vinay-bajrangi-will-be-in-mumbai.php`, text: "Upcoming Visits" },
+  { href: `${MAIN_URL}apps/karma-astro-app.php`, text: "Karma Astro Mobile App" },
+  { href: `${MAIN_URL}videos.php`, text: "Videos" },
+  { href: `${MAIN_URL}author.php`, text: "Author" }
+];
+const AstrologyServices = [
+  { href: `${MAIN_URL}services/consultation.php`, text: "Consultation" },
+  { href: `${MAIN_URL}services/online-reports.php`, text: "Online Report" },
+  { href: `${MAIN_URL}services/voice-report.php`, text: "Voice Report" },
+  { href: `${MAIN_URL}marriage-astrology.php`, text: "Marriage Astrology" },
+  { href: `${MAIN_URL}business-astrology.php`, text: "Business Astrology" },
+  { href: `${MAIN_URL}time-rectification.php`, text: "Birth Time Rectification" },
+  { href: `${MAIN_URL}life-predictions.php`, text: "Past Life Readings" },
+  { href: `${MAIN_URL}career-astrology.php`, text: "Career Astrology" }
+];
+const contactInfo = [
+  { text: "Our Office, M-22, Sector-66, Noida, Uttar Pradesh-201301" },
+  { href: "tel:+91-9278665588", text: "+91-9278665588" },
+  { href: "mailto:mail@vinaybajrangi.com", text: "mail@vinaybajrangi.com" },
+  { href: `${MAIN_URL}contact-us.php`, text: "Contact Us" },
+  { href: `${MAIN_URL}privacy-policy.php`, text: "Privacy Policy" },
+  { href: `${MAIN_URL}payment-terms-and-conditions.php`, text: "Payment Terms & Conditions" }
+];
   
 export default function Example() {
   const router = useRouter();
   const getCurrentYear = () => {
     const date = new Date();
     return date.getFullYear();
+  };
+
+  const handleClickRouter = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${url}`);
   };
 
   return (
@@ -70,7 +76,10 @@ export default function Example() {
             <ul>
             {QuickLinks.map((link, index) => (
               <li key={index}>
-                <a onClick={() => router.push(link.href)} className="text-sm font-normal flex gap-2 items-center text-gray-600 cursor-pointer">
+                <a 
+                  href={`${link?.href}`}
+                  onClick={(e) => handleClickRouter(e, link?.href)}
+                  className="text-sm font-normal flex gap-2 items-center text-gray-600 cursor-pointer">
                   <RightArrow width={15} height={15} /> {link.text}
                 </a>
               </li>
@@ -82,7 +91,10 @@ export default function Example() {
             <ul>
               {AstrologyServices.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-sm font-normal flex gap-2 items-center text-gray-600"><RightArrow width={15} height={15} /> {link.text}</a>
+                  <a 
+                    href={`${link?.href}`}
+                    onClick={(e) => handleClickRouter(e, link?.href)}
+                    className="text-sm font-normal flex gap-2 items-center text-gray-600"><RightArrow width={15} height={15} /> {link.text}</a>
                 </li>
               ))}
             </ul>
@@ -93,13 +105,24 @@ export default function Example() {
                 {contactInfo.map((info, index) => (
                   <li key={index}>
                     {info.href ? (
-                      <a href={info.href} className="text-sm font-normal text-gray-600">{info.text}</a>
+                      <a
+                        href={`${info?.href}`}
+                        onClick={(e) => handleClickRouter(e, info?.href)}
+                        className="text-sm font-normal text-gray-600">{info.text}</a>
                     ) : (
                       <p className="text-sm font-normal text-gray-600">{info.text}</p>
                     )}
                   </li>
                 ))}
               </ul>
+              <div className="flex space-x-4 mt-4">
+                <a href="https://apps.apple.com/in/app/karmaastro-vinay-bajrangi/id1625624570" target="_blank" rel="noopener noreferrer">
+                  <Image src="/iso-icon.png" width={130} height={40} alt="ios-icon" aria-label="Click here to download the ios app" />
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.vinaybajrangi.app" target="_blank" rel="noopener noreferrer">
+                  <Image src="/android-icon.png" width={130} height={40} alt="android-icon" aria-label="Click here to download the android app" />
+                </a>
+              </div>
           </div>
         </div>
         <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 md:flex md:items-center md:justify-between lg:mt-24">
