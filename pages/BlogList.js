@@ -9,7 +9,6 @@ import DefImage from "./assets/images/default-image.png";
 import { Date } from "../config/SvgConst";
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 
-
 export default function BlogList(props) {
   const router = useRouter();
   const { type, language, slug } = props;
@@ -17,18 +16,18 @@ export default function BlogList(props) {
   const [noData, setNoData] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const [TotalPagedata, setTotalPagedata] = useState(10);
+  const [TotalPagedata, setTotalPagedata] = useState(12);
   
   
   const fetchData = async (pageCount) => {
     setBlogList("")
     const datas = {
       apiKey : API_KEY,
-      getTotalBlog : 10,
-      blogFrom : (pageCount > 0 ? pageCount - 1 : 0) * 10,
+      getTotalBlog : 12,
+      blogFrom : (pageCount > 0 ? pageCount - 1 : 0) * 12,
       domainSecreteCode : Domain_Secrete_Code
     };
-    // console.log((pageCount > 0 ? pageCount - 1 : 0) * 10 || currentPage)
+    // console.log((pageCount > 0 ? pageCount - 1 : 0) * 12 || currentPage)
     console.log(datas)
     const apiUrl = `${API_NEW_URL}blog-list-api.php`
     try { 
@@ -58,7 +57,7 @@ export default function BlogList(props) {
   }, [type, language, slug]);
     
   function handleNextPage() {
-    if (currentPage < Math.ceil(totalRows / 10)) {
+    if (currentPage < Math.ceil(totalRows / 12)) {
       fetchData(currentPage + 1);
       setCurrentPage(currentPage + 1);
     }
@@ -79,7 +78,7 @@ export default function BlogList(props) {
 
 
   function generatePageNumbers() {
-    const totalPages = Math.ceil(totalRows / 10);
+    const totalPages = Math.ceil(totalRows / 12);
     const pages = [];
     if (totalPages <= 7) {
       for (let i = 1; i <= totalPages; i++) {
@@ -112,7 +111,11 @@ export default function BlogList(props) {
   }
 
 
-  
+  const handleClickRouter = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${MAIN_URL}${url}`);
+  };
+
   return (
     <>
       {props.data ? <>
@@ -130,7 +133,10 @@ export default function BlogList(props) {
             <div>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4">
                 {BlogList.map((category, index) => (
-                  <a key={index} href={category.href} className="block h-full">
+                  <a key={index}
+                    href={`${MAIN_URL}${category?.path}`}
+                    onClick={(e) => handleClickRouter(e, category?.path)}
+                    className="block h-full">
                     <div className="shadow-md rounded-lg bg-white">
                       <div aria-hidden="true" className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
                         {category.bannerImage ? 
@@ -158,13 +164,14 @@ export default function BlogList(props) {
                         <p className="text-xs text-gray-800">{category.date}</p>
                       </div>
                       <div className="p-2 pt-3">
-                        <h3 className="text-sm mb-4 font-bold min-h-16 text-gray-900">{category.name}</h3>
+                        <h3 className="text-sm font-bold min-h-16 text-gray-900">{category.name}</h3>
                         <div className='mb-2 text-sm text-black text-justify'  dangerouslySetInnerHTML={{ __html: category.shortDesc && category.shortDesc.length > 250 ? category.shortDesc.slice(0, 250).replace(/\\r\\n/g, '<br/>') + "..." : category.shortDesc.replace(/\\r\\n/g, '<br/>') }} />
                         {/* <p className="text-sm mb-4 text-justify text-gray-800">{category.shortDesc && category.shortDesc.length > 180 ? category.shortDesc.slice(0, 150) + "..." : category.shortDesc}</p> */}
-                        <button 
-                        onClick={() => router.push(category.path)}
+                        <a 
+                          href={`${MAIN_URL}${category?.path}`}
+                         onClick={(e) => handleClickRouter(e, category.path)}
                         className="block w-full rounded-md bg-orange-500 px-3 py-2 text-center text-sm font-normal text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">
-                          Read More <span aria-hidden="true">&rarr;</span></button>
+                          Read More <span aria-hidden="true">&rarr;</span></a>
                       </div>
                     </div>
                   </a>
