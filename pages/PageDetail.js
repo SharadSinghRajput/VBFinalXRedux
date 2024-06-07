@@ -14,6 +14,7 @@ import Holder from './pageAssets/Holder';
 
 
 export default function Example({data}) {
+  
   return (
     <>
       <MetaData data={data} />
