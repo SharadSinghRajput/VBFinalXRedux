@@ -37,6 +37,7 @@ export default function HomePage({data}) {
   };
 
   const dayType = data.horoscopePeriod ? data?.horoscopePeriod + 'horoscope' : "daily-horoscope";
+  console.log("Day Type: " , data.horoscopePeriod);
   const horoscopes = Horoscope(dayType);
 
   return (
@@ -46,10 +47,10 @@ export default function HomePage({data}) {
         <div className='px-5 pt-5'>
           {data?.title && <Title titleData={data.title} />}
         </div>
-        <div class="grid grid-cols-1 gap-10 m-5">
+        <div className="grid grid-cols-1 gap-10 m-5">
           <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
-            <h2 class="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
-            <div class="flex flex-row flex-wrap gap-3 justify-center ">
+            <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
+            <div className="flex flex-row flex-wrap gap-3 justify-center ">
               {horoscopes.map((person) => (
                 <a
                   key={person.name}
@@ -71,7 +72,7 @@ export default function HomePage({data}) {
             </div>
           </div>
         </div>
-          <div class="grid grid-cols-4 m-5" >
+          <div className="grid grid-cols-4 m-5" >
             { NavigateLink.map((item, index)=> (
                 <div className='col-span-1' key={index}>
                     <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
