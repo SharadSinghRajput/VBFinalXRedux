@@ -45,17 +45,17 @@ export default function BlogCategoryList({data}) {
       const data = await response.json();
       if(data.success === true){
         setBlogList(data.data)
-        console.log(dataToAdd, "Data")
+        console.log(data.data)
         setTotalRows(data.totalRows)
         setNoData(false);
       }else{
         setNoData(true);
-        console.log(dataToAdd, "No Data")
       }
     }catch (error) {
       setNoData(true);
     }
   };
+
   useEffect(() => {
       fetchData();
   }, [type, language, slug, reportID]);
@@ -78,7 +78,6 @@ export default function BlogCategoryList({data}) {
     fetchData(pageNumber);
     setCurrentPage(pageNumber);
   }
-
 
 
   function generatePageNumbers() {
@@ -116,7 +115,7 @@ export default function BlogCategoryList({data}) {
 
 
   const handleClickRouter = (e, url) => {
-    e.preventDefault(); // Prevent the default anchor behavior
+    e.preventDefault();
     router.push(`${MAIN_URL}${url}`);
   };
 
@@ -147,7 +146,7 @@ export default function BlogCategoryList({data}) {
                           <Image
                             width={200}
                             height={100}
-                            src={"/"+category?.bannerImage}
+                            src={category.bannerImage}
                             alt={category?.name}
                             className="w-full aspect-auto"
                             priority
@@ -167,9 +166,9 @@ export default function BlogCategoryList({data}) {
                         <Date width={15} height={15} />
                         <p className="text-xs text-gray-800">{category?.date}</p>
                       </div>
-                      <div className="p-2 pt-3">
+                      <div className="p-2 pt-3 ">
                         <h3 className="text-sm font-bold min-h-16 text-gray-900">{category?.name}</h3>
-                        <div className='mb-2 text-sm text-black text-justify'  dangerouslySetInnerHTML={{ __html: category?.shortDesc && category?.shortDesc.length > 250 ? category?.shortDesc.slice(0, 250).replace(/\\r\\n/g, '<br/>') + "..." : category?.shortDesc.replace(/\\r\\n/g, '<br/>') }} />
+                        <div className='mb-2 text-sm text-black text-justify has-[span]:text-sm'  dangerouslySetInnerHTML={{ __html: category?.shortDesc && category?.shortDesc.length > 250 ? category?.shortDesc.slice(0, 250).replace(/\\r\\n/g, '<br/>') + "..." : category?.shortDesc.replace(/\\r\\n/g, '<br/>') }} />
                         {/* <p className="text-sm mb-4 text-justify text-gray-800">{category.shortDesc && category.shortDesc.length > 180 ? category.shortDesc.slice(0, 150) + "..." : category.shortDesc}</p> */}
                         <a 
                           href={`${MAIN_URL}${category?.path}`}
