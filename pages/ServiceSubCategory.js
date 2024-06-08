@@ -51,7 +51,7 @@ export default function DefaultPage({data}) {
                     <button className='bg-orange-100 p-2 rounded-lg flex flex-col gap-5'
                     key={index}
                     onClick={()=> router.push(item.path)} >
-                        <div className='w-full h-20 bg-gray-100'></div>
+                        <img src={item.featuredImage} alt={item.name} />
                         <p className='text-base font-semibold text-left'>{item.name}</p>
                         <p className='bg-orange-500 p-2 w-full rounded-lg text-sm text-white'>Read more</p>
                     </button>
