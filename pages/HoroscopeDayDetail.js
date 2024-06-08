@@ -36,8 +36,9 @@ export default function HomePage({data}) {
     router.push(`${MAIN_URL}${url}`);
   };
 
-  const dayType = data.horoscopePeriod ? data?.horoscopePeriod + 'horoscope' : "daily-horoscope";
-  console.log("Day Type: " , data.horoscopePeriod);
+  // const dayType = data?.zodiacPeriod ? `${data.zodiacPeriod}horoscope` : "daily-horoscope";
+  const dayType = data ? data.zodiacPeriod+ '-horoscope' || "daily-horoscope" : "daily-horoscope";
+  // console.log("Day Type: " , data.zodiacPeriod);
   const horoscopes = Horoscope(dayType);
 
   return (
@@ -54,8 +55,8 @@ export default function HomePage({data}) {
               {horoscopes.map((person) => (
                 <a
                   key={person.name}
-                  href={`${MAIN_URL}${person.link}`}
-                  onClick={(e) => handleClick(e, person.link)}
+                  href={`${MAIN_URL}${person.url}`}
+                  onClick={(e) => handleClick(e, person.url)}
                 >
                   <Image
                     width={50}

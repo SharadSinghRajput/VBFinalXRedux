@@ -22,7 +22,7 @@ import pastlifeReadings from "./assets/images/Solutions/pastlife-readings.png"
 import propertyAstrology from "./assets/images/Solutions/property-astrology.png"
 import vfc from "./assets/images/Solutions/vfc.png"
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
-import HoroscopeIcon from '../config/HoroscopeIcon';
+// import HoroscopeIcon from '../config/HoroscopeIcon';
 import QuestionsData from "./Questions"
 import { format } from 'date-fns';
 import fetchAstrologyData from '../config//getAstroAPI';
@@ -32,6 +32,7 @@ import MetaData from './pageAssets/MetaData';
 import Description from './pageAssets/Description';
 import {MAIN_URL} from '../config/config';
 import Holder from './pageAssets/Holder';
+import { Horoscope } from '../config/Horoscope';
 
 
 export default function DailyHoroscopeDetailed({data}) {
@@ -260,6 +261,11 @@ export default function DailyHoroscopeDetailed({data}) {
         newUrlPath = newUrlPath.substring(1);
     }
 
+    // const dayType = data.zodiacPeriod ? data?.zodiacPeriod + '-horoscope' : "daily-horoscope";
+    const dayType = data ? data.zodiacPeriod+ '-horoscope' || "daily-horoscope" : "daily-horoscope"
+    // console.log("Day Type: ", data.zodiacPeriod);
+    const horoscopes = Horoscope(dayType);
+    
   return (
     <>
     <MetaData data={data} />
@@ -277,7 +283,7 @@ export default function DailyHoroscopeDetailed({data}) {
                 <div className=''>
                     <p className="text-lg mb-2 text-center text-white font-bold">Free Daily / Weekly / Monthly Horoscope</p>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
-                        {HoroscopeIcon.map((item, index) => (
+                        {horoscopes.map((item) => (
                             <a  
                                 key={item.name}
                                 className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer"
@@ -285,7 +291,7 @@ export default function DailyHoroscopeDetailed({data}) {
                                 onClick={(e) => handleClickRouter(e, item?.url)}
                             >
                                 <div className="flex justify-center items-center bg-white rounded-full p-2">
-                                    <Image src={item?.imageUrl} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
+                                    <Image src={item?.imgSrc} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
                                 </div>
                                 <span className='text-sm'>{item?.name}</span>
                             </a>                

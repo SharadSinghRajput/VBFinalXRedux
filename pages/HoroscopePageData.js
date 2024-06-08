@@ -19,6 +19,7 @@ import { Horoscope } from '../config/Horoscope';
 import MetaData from './pageAssets/MetaData';
 import { useRouter } from 'next/router';
 import { MAIN_URL } from '../config/config';
+
 export default function HoroscopePageData({data}) {
   const router = useRouter();
   // const [response, setResponse] = useState("In Process");
@@ -44,9 +45,9 @@ export default function HoroscopePageData({data}) {
 
   
 
-  const CapitalizedZodiac = `${zodiacSign ?? ''}`.charAt(0).toUpperCase() + `${zodiacSign ?? ''}`.slice(1);
-  const CapitalizedZodiacPeriod = `${zodiacPeriod ?? ''}`.charAt(0).toUpperCase() + `${zodiacPeriod ?? ''}`.slice(1);
-  const CapitalizedZodiacType = `${horoscopeType ?? ''}`.charAt(0).toUpperCase() + `${horoscopeType ?? ''}`.slice(1);
+  const CapitalizedZodiac = `${zodiacSign ?? false}`.charAt(0).toUpperCase() + `${zodiacSign ?? false}`.slice(1);
+  const CapitalizedZodiacPeriod = `${zodiacPeriod ?? false}`.charAt(0).toUpperCase() + `${zodiacPeriod ?? false}`.slice(1);
+  const CapitalizedZodiacType = `${horoscopeType ?? false}`.charAt(0).toUpperCase() + `${horoscopeType ?? false}`.slice(1);
 
   
   const fetchCategoryWiseData = async (CapitalizedZodiac,zodiacPeriod,type,currentDate) => {
@@ -105,7 +106,7 @@ export default function HoroscopePageData({data}) {
       
       const formattedStartOfYear = formatDate(firstDayOfYear);
       const formattedEndOfYear = formatDate(lastDayOfYear);
-      z
+     
       TotalDays = `${formattedStartOfYear} to ${formattedEndOfYear}`;
       HitTheHoroscopeFunction(CapitalizedZodiac, zodiacPeriod, horoscopeType, currentDate);
       break;
@@ -122,8 +123,9 @@ export default function HoroscopePageData({data}) {
     router.push(`${MAIN_URL}${url}`);
   };
 
-  const dayType = data.horoscopePeriod ? data?.horoscopePeriod + 'horoscope' : "daily-horoscope";
-  console.log(dayType);
+  // const dayType = data?.zodiacPeriod ? `${data.zodiacPeriod}horoscope` : "daily-horoscope";
+  const dayType = data ? data.zodiacPeriod+ '-horoscope' || "daily-horoscope" : "daily-horoscope";
+  // console.log("Day Type: ", data.zodiacPeriod);
   const horoscopes = Horoscope(dayType);
 
   return (
@@ -154,8 +156,8 @@ export default function HoroscopePageData({data}) {
                       {horoscopes.map((person) => (
                         <a  
                             key={person.name} 
-                            href={`${MAIN_URL}${person.link}`}
-                            onClick={(e) => handleClick(e, person.link)}
+                            href={`${MAIN_URL}${person.url}`}
+                            onClick={(e) => handleClick(e, person.url)}
                         >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
                             <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
@@ -165,8 +167,9 @@ export default function HoroscopePageData({data}) {
                   </div>
                 </div>
                 {
-                  zodiacSign ? 
+                  zodiacSign && zodiacPeriod && horoscopeType ? 
                   <>
+                  {/* {console.log(zodiacSign, CapitalizedZodiacPeriod, CapitalizedZodiacType)} */}
                     <div className="flex min-h-full flex-col">
                     <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 mb-5">
                       <div className="block w-full sm:top-8 sm:w-44">
@@ -174,12 +177,12 @@ export default function HoroscopePageData({data}) {
                               <div className="flex justify-center items-center aries-pR1">
                                   <div className="aries-pR"> 
                                       <div className="flex justify-center items-center bg-white rounded-full p-5 w-20 h-20">
-                                      <Image
-                                          src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
-                                          alt={`${zodiacSign} Icon`}
-                                          width={50}
-                                          height={50}
-                                      />
+                                        <Image
+                                            src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
+                                            alt={`${zodiacSign} Icon`}
+                                            width={50}
+                                            height={50}
+                                        />
                                       </div>
                                       <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> {zodiacSign} </h5>
                                   </div>
@@ -192,7 +195,7 @@ export default function HoroscopePageData({data}) {
                                   <h2 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedZodiacPeriod} {CapitalizedZodiacType} Horoscope ({TotalDays})</h2>
                               </div>
                               <div className="max-h-72 overflow-y-scroll scrollbar-red px-5 mt-2">
-                                  <p className="text-justify text-sm pb-2 text-white">
+                                  <div className="text-justify text-sm pb-2 text-white">
                                       {horoscopeData === "In Process" ? (
                                           <div className="text-center">
                                               <div role="status">
@@ -206,7 +209,7 @@ export default function HoroscopePageData({data}) {
                                           ) : (
                                           horoscopeData
                                       )}
-                                  </p>
+                                  </div>
                               </div>
                               <a
                                   href="#"
@@ -223,10 +226,12 @@ export default function HoroscopePageData({data}) {
                   </div>
                   </>
 
-                  : 
+                  :
+
                   <>
                   
                   </>
+                  
                 }
                 
 
