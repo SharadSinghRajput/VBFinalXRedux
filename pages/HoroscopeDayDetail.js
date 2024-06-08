@@ -36,7 +36,7 @@ export default function HomePage({data}) {
     router.push(`${MAIN_URL}${url}`);
   };
 
-  const dayType = "daily-horoscope";
+  const dayType = data.horoscopePeriod ? data?.horoscopePeriod + 'horoscope' : "daily-horoscope";
   const horoscopes = Horoscope(dayType);
 
   return (

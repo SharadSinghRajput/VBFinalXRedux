@@ -15,6 +15,7 @@ import { format } from 'date-fns';
 // import Tags from './pageAssets/Tags';
 // import CommentForm from './pageAssets/commentForm';
 import HoroscopeFetchAPI from '../config/horoscopeFetchAPI';
+import { Horoscope } from '../config/Horoscope';
 import MetaData from './pageAssets/MetaData';
 import { useRouter } from 'next/router';
 import { MAIN_URL } from '../config/config';
@@ -22,21 +23,7 @@ export default function HoroscopePageData({data}) {
   const router = useRouter();
   // const [response, setResponse] = useState("In Process");
   const [horoscopeData, setHoroscopeData] = useState("In Process");
-  const Horoscope = [
-    { name: "Aries", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/aries.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Aries.png", Link: "horoscope/daily-horoscope/aries.php" },
-    { name: "Taurus", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/taurus.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Tauras.png", Link: "horoscope/daily-horoscope/taurus.php"},
-    { name: "Gemini", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/gemini.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Gemini.png", Link: "horoscope/daily-horoscope/gemini.php"},
-    { name: "Cancer", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/cancer.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Cancer.png", Link: "horoscope/daily-horoscope/cancer.php"},
-    { name: "Leo", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/leo.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Leo.png", Link: "horoscope/daily-horoscope/leo.php"},
-    { name: "Virgo", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/virgo.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Virgo.png", Link: "horoscope/daily-horoscope/virgo.php"},
-    { name: "Libra", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/libra.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Libra.png", Link:"horoscope/daily-horoscope/libra.php"},
-    { name: "Scorpio", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/scorpio.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Scorpio.png", Link: "horoscope/daily-horoscope/scorpio.php"},
-    { name: "Sagittarius", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/sagittarius.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Sagittarius.png", Link:"horoscope/daily-horoscope/sagittarius.php"},
-    { name: "Capricorn", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/capricorn.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Capricorn.png", Link: "horoscope/daily-horoscope/capricorn.php"},
-    { name: "Aquarius", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/aquarius.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Aquarius.png", Link: "horoscope/daily-horoscope/aquarius.php"},
-    { name: "Pisces", url: "https://www.vinaybajrangi.com/horoscope/daily-horoscope/pisces.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/pices.png", Link: "horoscope/daily-horoscope/pisces.php"}
-  ];
-
+  
   function formatDate(date) {
       return format(date, "do MMM yyyy");
   }
@@ -118,7 +105,7 @@ export default function HoroscopePageData({data}) {
       
       const formattedStartOfYear = formatDate(firstDayOfYear);
       const formattedEndOfYear = formatDate(lastDayOfYear);
-      
+      z
       TotalDays = `${formattedStartOfYear} to ${formattedEndOfYear}`;
       HitTheHoroscopeFunction(CapitalizedZodiac, zodiacPeriod, horoscopeType, currentDate);
       break;
@@ -134,6 +121,10 @@ export default function HoroscopePageData({data}) {
     e.preventDefault(); // Prevent the default anchor behavior
     router.push(`${MAIN_URL}${url}`);
   };
+
+  const dayType = data.horoscopePeriod ? data?.horoscopePeriod + 'horoscope' : "daily-horoscope";
+  console.log(dayType);
+  const horoscopes = Horoscope(dayType);
 
   return (
     <>
@@ -160,11 +151,11 @@ export default function HoroscopePageData({data}) {
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
-                      {Horoscope.map((person) => (
+                      {horoscopes.map((person) => (
                         <a  
                             key={person.name} 
-                            href={`${MAIN_URL}${person.Link}`}
-                            onClick={(e) => handleClick(e, person.Link)}
+                            href={`${MAIN_URL}${person.link}`}
+                            onClick={(e) => handleClick(e, person.link)}
                         >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
                             <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
@@ -253,10 +244,10 @@ export default function HoroscopePageData({data}) {
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
-                      {Horoscope.map((person) => (
+                      {horoscopes.map((person) => (
                         <a key={person.name} 
-                          href={`${MAIN_URL}${person.Link}`}
-                          onClick={(e) => handleClick(e, person.Link)}
+                          href={`${MAIN_URL}${person.link}`}
+                          onClick={(e) => handleClick(e, person.link)}
                         >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
                             <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
