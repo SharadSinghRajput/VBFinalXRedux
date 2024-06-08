@@ -318,7 +318,7 @@ const DataExistMailList = (DataExistItem) => {
 
                 <div className='w-[420px] gap-5 p-5 md:pt-0'>
                   <div className='z-10'>
-                    <h2 className="text-2xl mb-2 font-normal tracking-tight text-[#091d5a]">{data.subCategory}</h2>
+                    {/* <h2 className="text-2xl mb-2 font-normal tracking-tight text-[#091d5a]">{data.subCategory}</h2> */}
                     {data.price[0] ? <>
                       {data.price[0].dealPrice ? <>
                         <p className='text-2xl font-bold max-w-max mb-2'>{data.price[0].icon} {data.price[0].dealPrice}</p>
