@@ -1,6 +1,7 @@
 "use client"; 
 import { PaperClipIcon, ArrowRightCircleIcon, ArrowRightIcon } from '@heroicons/react/20/solid'
 import { useRouter } from "next/router";
+
 export default function Questions() {
     const router = useRouter();
     const Questions= [
@@ -15,7 +16,8 @@ export default function Questions() {
         { title: "Find Saturn’s Secrets and how they affect you", url: "services/online-report/know-about-saturn-secrets.php" },
         { title: "Get Most accurate result on Manglik Dosh", url: "services/online-report/mangal-dosha-calculator.php" },
         { title: "Assess status and personality of your Future Life Partner", url: "services/online-report/future-life-partner.php" },
-        ]
+    ]
+
   return (
     <>
         <dd className="text-sm text-gray-900 bg-white">
@@ -30,9 +32,9 @@ export default function Questions() {
                         </div>
                         <div className="ml-4 flex-shrink-0">
                             <button
-                            onClick={() => router.push(item.url)}
+                                onClick={() => router.push(item.url)}
                                 type="button"
-                                className="rounded text-xs bg-orange-500 px-2 py-1 text-xs font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                className="rounded text-xs bg-orange-500 px-2 py-1 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             >
                                 Read more
                             </button>
