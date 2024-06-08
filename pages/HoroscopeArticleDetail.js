@@ -124,7 +124,7 @@ export default function HoroscopePageData({data}) {
   };
 
   // const dayType = data?.zodiacPeriod ? `${data.zodiacPeriod}` : "2024";
-  const dayType = data ? data.zodiacPeriod || "2024" : "2024";
+  const dayType = data && data.zodiacPeriod ? data.zodiacPeriod : "2024";
   // console.log("Day Type: ", data.zodiacPeriod);
   const horoscopes = HoroscopeArticle(dayType);
   

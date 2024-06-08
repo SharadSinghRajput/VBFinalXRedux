@@ -262,7 +262,7 @@ export default function DailyHoroscopeDetailed({data}) {
     }
 
     // const dayType = data.zodiacPeriod ? data?.zodiacPeriod + '-horoscope' : "daily-horoscope";
-    const dayType = data ? data.zodiacPeriod+ '-horoscope' || "daily-horoscope" : "daily-horoscope"
+    const dayType = data && data.zodiacPeriod ? data.zodiacPeriod+ '-horoscope' : "daily-horoscope";
     // console.log("Day Type: ", data.zodiacPeriod);
     const horoscopes = Horoscope(dayType);
     
