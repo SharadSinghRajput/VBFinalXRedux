@@ -16,6 +16,11 @@ const nextConfig = {
         destination: '/health-astrology.php',
         permanent: true,
       },
+      {
+        source: '/foreign-travel.php',
+        destination: '/foreign-settlement.php',
+        permanent: true,
+      },
     ];
   },
 };
