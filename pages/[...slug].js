@@ -13,6 +13,7 @@ import Home from "./Home"
 import AllSideBar from "./AllSideBar"
 import Menu from "./Menu"
 import Footer from "./Footer"
+import FooterHindi from "./FooterHindi"
 import PopularReports from "./PopularReports"
 
 
@@ -153,7 +154,13 @@ export default function DynamicPage() {
         <MiniCart Design={ShowMiniCartStyle}  />
         <AllSideBar />
         <LanguageSelector data={DataComponentWise} />
-        <Footer />
+        {DataComponentWise.bilingualData ? (
+            DataComponentWise.bilingualData.Hindi[0].currentPage === true ? (
+              <FooterHindi data={DataComponentWise} />
+            ) : <Footer data={DataComponentWise} />
+          ) : (
+            <Footer data={DataComponentWise} />
+          )}
       </Page>
       )
     }
@@ -166,7 +173,13 @@ export default function DynamicPage() {
           <DefaultPage data={DefaultData} />
           <AllSideBar />
           <LanguageSelector data={DefaultData} />
-          <Footer />
+          {DefaultData.bilingualData ? (
+            DefaultData.bilingualData.Hindi[0].currentPage === true ? (
+              <FooterHindi data={DefaultData} />
+            ) : <Footer data={DefaultData} />
+          ) : (
+            <Footer data={DefaultData} />
+          )}
         </Page>
       );
     }

@@ -47,7 +47,6 @@ function classNames(...classes) {
 export default function ContMenuBankComp({data}) {
   const router = useRouter();
   const [LanguageBank, setLanguageBank] = useState(data?.bilingualData);
-  console.log("Menu", LanguageBank)
   const startSessionTrigger = useSelector(state => state.session.startSessionTrigger);
   const [SessionAction, setSessionAction] = useState(false)
   const [ContMenuBank, setContMenuBank] = useState(false)
@@ -71,8 +70,12 @@ export default function ContMenuBankComp({data}) {
 
   
   useEffect(()=>{
-    if(LanguageBank?.Hindi[0].currentPage === true){
-      setContMenuBank(MainMenuHindi)
+    if(LanguageBank){
+      if(LanguageBank.Hindi){
+        if(LanguageBank.Hindi[0].currentPage){
+          setContMenuBank(MainMenuHindi)
+        }
+      }
       }else{
         setContMenuBank(MainMenu)
     }
