@@ -151,16 +151,18 @@ export default function DynamicPage() {
         <Menu />
         <PopularReports />
         <PageComponent data={DataComponentWise} />
-        <MiniCart Design={ShowMiniCartStyle}  />
+        <MiniCart Design={ShowMiniCartStyle} />
         <AllSideBar />
         <LanguageSelector data={DataComponentWise} />
-        {DataComponentWise.bilingualData ? (
-            DataComponentWise.bilingualData.Hindi[0].currentPage === true ? (
-              <FooterHindi data={DataComponentWise} />
-            ) : <Footer data={DataComponentWise} />
+        {DataComponentWise && DataComponentWise.bilingualData && DataComponentWise.bilingualData.Hindi && DataComponentWise.bilingualData.Hindi.length > 0 ? (
+          DataComponentWise.bilingualData.Hindi[0].currentPage === true ? (
+            <FooterHindi data={DataComponentWise} />
           ) : (
             <Footer data={DataComponentWise} />
-          )}
+          )
+        ) : (
+          <Footer data={DataComponentWise} />
+        )}
       </Page>
       )
     }
@@ -173,14 +175,17 @@ export default function DynamicPage() {
           <DefaultPage data={DefaultData} />
           <AllSideBar />
           <LanguageSelector data={DefaultData} />
-          {DefaultData.bilingualData ? (
+          {DefaultData && DefaultData.bilingualData && DefaultData.bilingualData.Hindi && DefaultData.bilingualData.Hindi.length > 0 ? (
             DefaultData.bilingualData.Hindi[0].currentPage === true ? (
               <FooterHindi data={DefaultData} />
-            ) : <Footer data={DefaultData} />
+            ) : (
+              <Footer data={DefaultData} />
+            )
           ) : (
             <Footer data={DefaultData} />
           )}
         </Page>
+
       );
     }
  
