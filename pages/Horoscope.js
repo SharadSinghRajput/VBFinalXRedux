@@ -33,6 +33,9 @@ const NavigateLink = [
 ]
 export default function HoroscopePageData({data}) {
   const router = useRouter();
+  const dayType = data && data.zodiacPeriod ? data.zodiacPeriod + '-horoscope' : "daily-horoscope";
+  // console.log("Day Type: " , data.zodiacPeriod);
+  const horoscopes = Horoscope(dayType);
 
   return (
     <>
@@ -66,7 +69,7 @@ export default function HoroscopePageData({data}) {
                 <div className="grid grid-cols-1 gap-10 mt-5">
                     <div className={` p-2 md:p-4 rounded-lg bg-orange-500`}>
                         <div className="grid grid-cols-3 gap-5 sm:grid-cols-6">
-                        {Horoscope.map((person) => (
+                        {horoscopes.map((person) => (
                             <button key={person.name} onClick={()=> router.push(person.Link)} className='w-full flex justify-center items-center flex-col aspect-square bg-white rounded-2xl p-4' >
                                 <Image width={70} height={70} className="aspect-square" src={person.imgSrc} alt="" />
                                 <h3 className="mt-4 text-center font-normal text-sm tracking-tight text-gray-900 leading-3">{person.name}</h3>
