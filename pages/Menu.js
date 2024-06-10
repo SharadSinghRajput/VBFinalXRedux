@@ -97,7 +97,7 @@ export default function MainMenuComp() {
               <div className="relative z-10 flex items-center lg:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                  <span className="absolute -inset-0.5" />
+                  <span className="absolute-inset-0.5" />
                   <span className="sr-only">Open menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -107,18 +107,16 @@ export default function MainMenuComp() {
                 </Disclosure.Button>
               </div>
               <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
-                {/* <div className='flex flex-row'>
-                  <div>
-                    <span className='text-orange-500 text-sm font-bold -mt-10'>{products.length}</span>
-                  </div>
-                <button
-                  onClick={()=> router.push("cart")}
-                  type="button"
-                  className="relative flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500
-                  focus:outline-none focus:ring-2 focus:ring-offset-2">
-                  <Cart width={20} height={20} />
-                </button>
-                </div> */}
+                <div className='flex flex-row'>
+                  <button
+                    onClick={()=> router.push("cart")}
+                    type="button"
+                    className="relative flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500
+                    focus:outline-none focus:ring-2 focus:ring-offset-2">
+                    <Cart width={20} height={20} />
+                  </button>
+                </div>
+
 
                 <button
                   type="button"
