@@ -32,7 +32,7 @@ export default function DynamicPage() {
   const [PageComponent, setPageComponent] = useState(null);
   const [DataComponentWise, setDataComponentWise] = useState("")
   const [ShowMiniCartStyle, setShowMiniCartStyle] = useState(false)
-  
+  console.log(DataComponentWise);
   
   useEffect(() => {
     
@@ -152,7 +152,7 @@ export default function DynamicPage() {
         <PageComponent data={DataComponentWise} />
         <MiniCart Design={ShowMiniCartStyle}  />
         <AllSideBar />
-        <LanguageSelector data={DataComponentWise} />
+        <LanguageSelector />
         <Footer />
       </Page>
       )
@@ -165,7 +165,7 @@ export default function DynamicPage() {
           <PopularReports />
           <DefaultPage data={DefaultData} />
           <AllSideBar />
-          <LanguageSelector data={DefaultData} />
+          <LanguageSelector />
           <Footer />
         </Page>
       );
