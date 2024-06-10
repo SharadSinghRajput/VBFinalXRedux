@@ -7,7 +7,8 @@ import { Disclosure, Menu, Transition, Popover } from '@headlessui/react'
 import { getLocalStorageItem, setLocalStorageItem } from '../config/localStorage';
 import { MagnifyingGlassIcon, ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon,} from '@heroicons/react/24/outline'
-import {MainMenu} from '../config/Constant'
+import { MainMenu } from '../config/Constant'
+import { MainMenuHindi } from '../config/ConstantHindi'
 import Logo from "./assets/images/logo.png"
 import { Cart, User } from '../config/SvgConst';
 import { useSelector, useDispatch } from 'react-redux';
@@ -43,11 +44,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function MainMenuComp() {
+export default function ContMenuBankComp({data}) {
   const router = useRouter();
+  const [LanguageBank, setLanguageBank] = useState(data?.bilingualData);
+  console.log("Menu", LanguageBank)
   const startSessionTrigger = useSelector(state => state.session.startSessionTrigger);
-  
   const [SessionAction, setSessionAction] = useState(false)
+  const [ContMenuBank, setContMenuBank] = useState(false)
+  
   
   const GetSession = async () => {
     const SessionToken = getLocalStorageItem('tokenKey');
@@ -64,6 +68,16 @@ export default function MainMenuComp() {
       GetSession()
     }
   },[startSessionTrigger])
+
+  
+  useEffect(()=>{
+    if(LanguageBank?.Hindi[0].currentPage === true){
+      setContMenuBank(MainMenuHindi)
+      }else{
+        setContMenuBank(MainMenu)
+    }
+    
+  },[MainMenuHindi, MainMenu, LanguageBank])
   
   
   return (
@@ -209,7 +223,8 @@ export default function MainMenuComp() {
               </div>
             </div>
             <nav className="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
-                {MainMenu.map((item, index) =>(
+              {ContMenuBank ? <>
+                {ContMenuBank.map((item, index) =>(
                     <Popover className="relative" key={index}>
                         {item.sublinks ? <>
                             <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
@@ -334,13 +349,15 @@ export default function MainMenuComp() {
                         </>}
                     </Popover>
                 ))}
+                </>: <></>}
             </nav>
           </div>
           
 
           <Disclosure.Panel as="nav" className="lg:hidden" aria-label="Global">
             <div className="space-y-1 px-2 pb-3 pt-2">
-            {MainMenu.map((item, index) =>(
+            {ContMenuBank ? <>
+            {ContMenuBank.map((item, index) =>(
                     <Popover className="relative" key={index}>
                         {item.sublinks ? <>
                             <Popover.Button className="text-xs flex items-center justify-between w-[100%] gap-x-1  font-medium leading-6 text-orange-800">
@@ -458,6 +475,7 @@ export default function MainMenuComp() {
                         </>}
                     </Popover>
                 ))}
+                </>: <></>}
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">

@@ -32,7 +32,7 @@ export default function DynamicPage() {
   const [PageComponent, setPageComponent] = useState(null);
   const [DataComponentWise, setDataComponentWise] = useState("")
   const [ShowMiniCartStyle, setShowMiniCartStyle] = useState(false)
-  
+  console.log(DataComponentWise);
   
   useEffect(() => {
     
@@ -147,7 +147,7 @@ export default function DynamicPage() {
   else if(PageComponent){
     return (
       <Page>
-        <Menu />
+        <Menu data={DataComponentWise} />
         <PopularReports />
         <PageComponent data={DataComponentWise} />
         <MiniCart Design={ShowMiniCartStyle}  />
@@ -161,7 +161,7 @@ export default function DynamicPage() {
     else if(CompNotAvail === true){
       return (
         <Page>
-          <Menu />
+          <Menu data={DefaultData} />
           <PopularReports />
           <DefaultPage data={DefaultData} />
           <AllSideBar />
