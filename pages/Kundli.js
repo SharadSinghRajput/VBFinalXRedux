@@ -14,28 +14,13 @@ import Description from "./pageAssets/Description";
 import KundliForm from "./pageAssets/KundliForm";
 import MetaData from "./pageAssets/MetaData";
 import Title from "./pageAssets/Title";
+import Questions from "./Questions"
 
 const ServicesNew = [
-  {
-    name: "Consultation",
-    ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/consultation.png",
-    Link: "https://www.vinaybajrangi.com/services/consultation.php",
-  },
-  {
-    name: "Online Report",
-    ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/online-report.png",
-    Link: "https://www.vinaybajrangi.com/services/consultation.php",
-  },
-  {
-    name: "Voice Report",
-    ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/voice-report.png",
-    Link: "https://www.vinaybajrangi.com/services/consultation.php",
-  },
-  {
-    name: "Life Readings",
-    ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/life-readings.png",
-    Link: "https://www.vinaybajrangi.com/services/consultation.php",
-  },
+  { name : "Consultation", ImgUrl: "/asset_frontend/img/consultation.png",  Link: "services/consultation.php" },
+  { name : "Online Report", ImgUrl: "/asset_frontend/img/online-report.png",  Link: "services/online-reports.php"},
+  { name : "Voice Report", ImgUrl: "/asset_frontend/img/voice-report.png",  Link: "services/voice-report.php"},
+  { name : "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png",  Link: "services/life-readings.php"}
 ];
 
 export default function DailyHoroscope({ data }) {
@@ -96,21 +81,22 @@ export default function DailyHoroscope({ data }) {
                   </div>
                 ))}
               </div>
-              <div className="bg-white mt-3 flex items-center justify-evenly rounded-lg p-2">
-                <Image
-                  width={40}
-                  height={40}
-                  className="w-10"
-                  src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png"
-                  alt="newsicon.png"
-                />
-                <h3 className="text-lg font-bold">Astrology News and Articles</h3>
-              </div>
+              <button onClick={()=>router.push('astrology-news.php')} className="bg-white w-full mt-3 flex items-center justify-evenly rounded-lg p-2">
+                  <Image width={40} height={40} className="w-10" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
+                  <h3 className="text-sm font-bold">Astrology News and Articles</h3>
+              </button>
               <div>
-                <div>
-                  <Image src={questionimg} width={80} className='w-[80px] p-3 aspect-square rounded-lg' />
-                  <Image src={moonsignm} width={80} className="w-[80px] p-3 aspect-square rounded-lg" alt={moonsignm} />
-                </div>
+                <button
+                // onClick={()=> router.push('/calculator/moon-sign-calculator.php')}
+                  className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
+                  <Image src={questionimg} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
+                  <p className="text-sm font-semibold">Ask a question</p>
+                  
+                </button>
+                <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
+                  <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
+                  <p className="text-sm font-semibold">Know your moon sign</p>
+                </button>
               </div>
             </div>
           </div>
@@ -163,25 +149,29 @@ export default function DailyHoroscope({ data }) {
           </div>
         </div>
       </div>
+      <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 rounded-lg mt-5">
+        <div><Questions /></div>
+      </div>
       <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 rounded-lg">
         <div className="p-2 pt-2">
           {data ? (
             <>
-              {data.title ? (
+              {/* {data.title ? (
                 <>
                   <Title titleData={data.title} />
                 </>
               ) : (
                 <></>
-              )}
+              )} */}
 
               {data.blogBannerImage && (
                 <div className="w-[100%] md:w-[100%] mb-5 mt-5">
                   <Banner BannerData={data.blogBannerImage} AltName={data.title} />
                 </div>
               )}
-
-              {data.description ? <Description descData={data.description} /> : <></>}
+              <div className="mt-5">
+                {data.description ? <Description descData={data.description} /> : <></>}
+              </div>
             </>
           ) : (
             <>

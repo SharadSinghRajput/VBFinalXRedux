@@ -23,10 +23,10 @@ function classNames(...classes) {
 }
 
 const ServicesNew = [
-    { name : "Consultation", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/consultation.png", Link: "https://www.vinaybajrangi.com/services/consultation.php" },
-    { name : "Online Report", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/online-report.png", Link: "https://www.vinaybajrangi.com/services/consultation.php"},
-    { name : "Voice Report", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/voice-report.png", Link: "https://www.vinaybajrangi.com/services/consultation.php"},
-    { name : "Life Readings", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/life-readings.png", Link: "https://www.vinaybajrangi.com/services/consultation.php"}
+    { name : "Consultation", ImgUrl: "/asset_frontend/img/consultation.png",  Link: "services/consultation.php" },
+  { name : "Online Report", ImgUrl: "/asset_frontend/img/online-report.png",  Link: "services/online-reports.php"},
+  { name : "Voice Report", ImgUrl: "/asset_frontend/img/voice-report.png",  Link: "services/voice-report.php"},
+  { name : "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png",  Link: "services/life-readings.php"}
   ]
   const tabs = [
       { name: 'Kundali',  submenu: [
@@ -44,26 +44,26 @@ const ServicesNew = [
 
       { name: 'Horoscope Dasha', submenu: [
           { name: "Vimshottari Dasha", link: "vimshottari-dasha.php"},
-          { name: "Yogini Dasha", link: "vimshottari-dasha.php"},
+          { name: "Yogini Dasha", link: "yogini-dasha.php"},
           { name: "Char Dasha", link: "char-dasha.php"}
       ]},
       {name: 'Horoscope Dosha', submenu: [
-          { name: "Kaalsarp Dosha",},
-          { name: "Manglik Dosha",},
-          { name: "Pitra Dosha",},
-          { name: "Sadesati Cycle",}
+          { name: "Kaalsarp Dosha", link: "calculator/kaalsarp-dosh-calculator.php"},
+          { name: "Manglik Dosha", },
+          { name: "Pitra Dosha", },
+          { name: "Sadesati Cycle", link: "calculator/sadesati-calculator.php"}
       ]},
       { name: 'Remedies', submenu: [
-          { name: "Gemstone Suggestion", },
-          { name: "Rudraksha Suggestion",}
+          { name: "Gemstone Suggestion", link: "calculator/gemstone-calculator.php"},
+          { name: "Rudraksha Suggestion", link: "calculator/rudraksha-calculator.php"}
       ]},
       { name: 'Prediction Reports', submenu: [
-          { name: "Ascendant Report", },
-          { name: "Kundli Predictions",  }
+          { name: "Ascendant Report", link: "calculator/ascendant-calculator.php"},
+          { name: "Kundli Predictions", link: "kundli-predictions.php" }
       ]},
       { name: 'Numerology', submenu: [
-          { name: "Favorable Points", },
-          { name: "Numerology Prediction",  }
+          { name: "Favorable Points", link: "favorable-points.php"},
+          { name: "Numerology Prediction", link: "calculator/numerology-calculator.php" }
       ]},
   ]
 
@@ -282,17 +282,17 @@ export default function Kundli() {
                         <div className="grid gap-3 grid-cols-2 md:grid-cols-4">
                             {ServicesNew.map((item) => (
                             <div key={item.name} className="bg-orange-500 rounded-md py-3 min-h-15">
-                                <a className="text-xs text-white flex-col text-center flex justify-center items-center no-underline" href="{item.Link}">
+                                <button onClick={()=>router.push(item.Link)} className="text-xs text-white w-full flex-col text-center flex justify-center items-center no-underline">
                                     <Image width={40} height={40} className="w-[40px] md:w-[50px] lg:w-[75px] aspect-square object-contain" src={item.ImgUrl} alt={item.name} />
                                     <span className="text-xs text-white">{item.name}</span>
-                                </a>
+                                </button>
                             </div>
                             ))}
                         </div>
-                        <div className="bg-white mt-3 flex items-center justify-evenly rounded-lg p-2">
+                        <button onClick={()=>router.push('astrology-news.php')} className="bg-white w-full mt-3 flex items-center justify-evenly rounded-lg p-2">
                             <Image width={40} height={40} className="w-10" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
                             <h3 className="text-lg font-bold">Astrology News and Articles</h3>
-                        </div>
+                        </button>
                         <div></div>
                     </div>
                 </div>

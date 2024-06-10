@@ -1388,7 +1388,7 @@ const DataExistMailList = (DataExistItem) => {
             
             {data.pageRelatedProduct ?<>
               <div className="bg-whitemx-auto">
-                <div className="border-b border-gray-200 bg-white px-0 py-5 pb-3 ">
+                <div className="border-b border-gray-200 px-0 py-5 pb-3 ">
                   <h3 className="text-xl font-semibold leading-6 text-gray-900">Related Product</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 py-5 pt-0">
@@ -1439,7 +1439,7 @@ const DataExistMailList = (DataExistItem) => {
 
             {data.pageRelatedBlog ? <>
               <div className="bg-whitemx-auto">
-                <div className="border-b border-gray-200 bg-white px-0 py-5 pb-3 ">
+                <div className="border-b border-gray-200 px-0 py-5 pb-3 ">
                   <h3 className="text-xl font-semibold leading-6 text-gray-900">Related Blogs</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 py-5">
@@ -1450,7 +1450,7 @@ const DataExistMailList = (DataExistItem) => {
 
             {data.pageRelatedArticle ? <>
               <div className="bg-whitemx-auto">
-                <div className="border-b border-gray-200 bg-white px-0 py-5 pb-3 ">
+                <div className="border-b border-gray-200  px-0 py-5 pb-3 ">
                   <h3 className="text-xl font-semibold leading-6 text-gray-900">Related Articles</h3>
                 </div>
                 <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 py-5">
