@@ -11,6 +11,9 @@ import MiniCart from './pageAssets/MiniCart'
 import LanguageSelector from './pageAssets/languageSelector'
 import Home from "./Home"
 import AllSideBar from "./AllSideBar"
+import Menu from "./Menu"
+import Footer from "./Footer"
+import PopularReports from "./PopularReports"
 
 
 
@@ -123,7 +126,9 @@ export default function DynamicPage() {
   if (apiNotRes === true) {
     return (
       <Page>
+        <Menu />
         <SomethingWentWrong />
+        <Footer />
       </Page>
     );
   }
@@ -131,7 +136,10 @@ export default function DynamicPage() {
   else if(UrlNotAvail === true){
     return (
       <Page>
+        <Menu />
+        <PopularReports />
         <PageNotFound />
+        <Footer />
       </Page>
     );
   }
@@ -139,10 +147,13 @@ export default function DynamicPage() {
   else if(PageComponent){
     return (
       <Page>
+        <Menu />
+        <PopularReports />
         <PageComponent data={DataComponentWise} />
         <MiniCart Design={ShowMiniCartStyle}  />
         <AllSideBar />
         <LanguageSelector data={DataComponentWise} />
+        <Footer />
       </Page>
       )
     }
@@ -150,9 +161,12 @@ export default function DynamicPage() {
     else if(CompNotAvail === true){
       return (
         <Page>
+          <Menu />
+          <PopularReports />
           <DefaultPage data={DefaultData} />
           <AllSideBar />
           <LanguageSelector data={DefaultData} />
+          <Footer />
         </Page>
       );
     }

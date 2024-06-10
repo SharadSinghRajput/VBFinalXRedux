@@ -12,6 +12,9 @@ import KundliForm from "./pageAssets/KundliForm";
 import { useRouter } from "next/router";
 import LongSticky from "./LongSticky"
 import Head from 'next/head';
+import Menu from "./Menu"
+import Footer from "./Footer"
+import PopularReports from "./PopularReports"
 
 
 export default function HomePage() {
@@ -19,11 +22,14 @@ export default function HomePage() {
   
   return (
     <>
+
       <Head>
         <title>Dr. Vinay Bajrangi - Best Online Astrologer in India, Delhi NCR </title>
         <meta name="description" content="Dr. Vinay Bajrangi- a Vedic astrologer for all human problems and solutions-Famous for Marriage, career, business, past life readings and child astrology."  />
         <meta name="keywords" content="Vinay Bajrangi, Marriage Astrology, Business Astrology, Career Astrology, Property Astrology, Health Astrology, Astrology Yoga, Astrology Houses, Astrology Remedies, Astrology Dasha, Children Astrology, Astrology Secrets, Astrology Services, Vedic astrologer, Astrology for court cases, Birth time rectification & Horoscope, Best Astrologer Near Me, Good Astrologer in India, Best Jyotish Near Me" />
       </Head>
+      <Menu />
+      <PopularReports />
       <MainScreen />
       <Banner />
       <div className="bg-[#fef4e8]">
@@ -45,6 +51,7 @@ export default function HomePage() {
       <Services />
       <Banner2 />
       <LongSticky />
+      <Footer />
     </>
   )
 }

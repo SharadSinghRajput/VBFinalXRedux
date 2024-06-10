@@ -10,10 +10,7 @@ import Footer from "./Footer"
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <Menu />
-      <PopularReports />
       <Component {...pageProps} />
-      <Footer />
     </Provider>
   );
 }
