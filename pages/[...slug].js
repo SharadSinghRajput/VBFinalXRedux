@@ -66,7 +66,6 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          console.log(responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){
@@ -139,10 +138,10 @@ export default function DynamicPage() {
   else if(PageComponent){
     return (
       <Page>
-          <PageComponent data={DataComponentWise} />
-          <MiniCart Design={ShowMiniCartStyle}  />
-          <AllSideBar />
-          {/* <LanguageSelector data={DataComponentWise.bilingualData} /> */}
+        <PageComponent data={DataComponentWise} />
+        <MiniCart Design={ShowMiniCartStyle}  />
+        <AllSideBar />
+        <LanguageSelector data={DataComponentWise} />
       </Page>
       )
     }
@@ -152,7 +151,7 @@ export default function DynamicPage() {
         <Page>
           <DefaultPage data={DefaultData} />
           <AllSideBar />
-          {/* <LanguageSelector data={DefaultData.bilingualData} /> */}
+          <LanguageSelector data={DefaultData} />
         </Page>
       );
     }
