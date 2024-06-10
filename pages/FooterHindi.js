@@ -1,7 +1,7 @@
 
 "use client"; 
 import { RightArrow, Facebook,Instagram, Twitter, Linkedin, YouTube } from "../config/SvgConst";
-import {MAIN_URL} from '../config/config'
+import {MAIN_URL_HINDI} from '../config/config'
 // import { useRouter } from 'next/router';
 import { useRouter } from 'next/navigation'
 
@@ -16,34 +16,34 @@ const social = [
 ]
 
 const QuickLinks = [
-  { href: `${MAIN_URL}horoscope/daily-horoscope.php`, text: "नि: शुल्क दैनिक राशिफल" },
-  { href: `${MAIN_URL}kundli.php`, text: "नि: शुल्क कुंडली" },
-  { href: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, text: "नि शुल्क कुंडली मिलान" },
-  { href: `${MAIN_URL}today-panchang.php`, text: "आज का पंचांग " },
-  { href: `${MAIN_URL}calculator.php`, text: "नि: शुल्क ज्योतिष कैलकुलेटर" },
-  { href: `${MAIN_URL}astrology-news.php`, text: "ज्योतिष समाचार" },
-  { href: `${MAIN_URL}dr-vinay-bajrangi-will-be-in-mumbai.php`, text: "आगामी दौरे " },
-  { href: `${MAIN_URL}apps/karma-astro-app.php`, text: "कर्मा एस्ट्रो मोबाइल ऐप " },
-  { href: `${MAIN_URL}videos.php`, text: " वीडियो" },
-  { href: `${MAIN_URL}author.php`, text: "Author" }
+  { href: `${MAIN_URL_HINDI}horoscope/daily-horoscope.php`, text: "नि: शुल्क दैनिक राशिफल" },
+  { href: `${MAIN_URL_HINDI}kundli.php`, text: "नि: शुल्क कुंडली" },
+  { href: `${MAIN_URL_HINDI}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, text: "नि शुल्क कुंडली मिलान" },
+  { href: `${MAIN_URL_HINDI}today-panchang.php`, text: "आज का पंचांग " },
+  { href: `${MAIN_URL_HINDI}calculator.php`, text: "नि: शुल्क ज्योतिष कैलकुलेटर" },
+  { href: `${MAIN_URL_HINDI}astrology-news.php`, text: "ज्योतिष समाचार" },
+  { href: `${MAIN_URL_HINDI}dr-vinay-bajrangi-will-be-in-mumbai.php`, text: "आगामी दौरे " },
+  { href: `${MAIN_URL_HINDI}apps/karma-astro-app.php`, text: "कर्मा एस्ट्रो मोबाइल ऐप " },
+  { href: `${MAIN_URL_HINDI}videos.php`, text: " वीडियो" },
+  { href: `${MAIN_URL_HINDI}author.php`, text: "Author" }
 ];
 const AstrologyServices = [
-  { href: `${MAIN_URL}services/consultation.php`, text: "परामर्श " },
-  { href: `${MAIN_URL}services/online-reports.php`, text: "ऑनलाइन रिपोर्ट" },
-  { href: `${MAIN_URL}services/voice-report.php`, text: "विवाह ज्योतिष " },
-  { href: `${MAIN_URL}marriage-astrology.php`, text: "विवाह ज्योतिष" },
-  { href: `${MAIN_URL}business-astrology.php`, text: "व्यापार/व्यवसाय ज्योतिष" },
-  { href: `${MAIN_URL}time-rectification.php`, text: "जन्म समय सुधार" },
-  { href: `${MAIN_URL}life-predictions.php`, text: "पूर्व जन्म गणना" },
-  { href: `${MAIN_URL}career-astrology.php`, text: "करियर ज्योतिष" }
+  { href: `${MAIN_URL_HINDI}services/consultation.php`, text: "परामर्श " },
+  { href: `${MAIN_URL_HINDI}services/online-reports.php`, text: "ऑनलाइन रिपोर्ट" },
+  { href: `${MAIN_URL_HINDI}services/voice-report.php`, text: "विवाह ज्योतिष " },
+  { href: `${MAIN_URL_HINDI}marriage-astrology.php`, text: "विवाह ज्योतिष" },
+  { href: `${MAIN_URL_HINDI}business-astrology.php`, text: "व्यापार/व्यवसाय ज्योतिष" },
+  { href: `${MAIN_URL_HINDI}time-rectification.php`, text: "जन्म समय सुधार" },
+  { href: `${MAIN_URL_HINDI}life-predictions.php`, text: "पूर्व जन्म गणना" },
+  { href: `${MAIN_URL_HINDI}career-astrology.php`, text: "करियर ज्योतिष" }
 ];
 const contactInfo = [
   { text: "हमारा कार्यालय, एम-22, सैक्टर - 66, नोएडा, उत्तर प्रदेश-201301" },
   { href: "tel:+91-9278665588", text: "+91-9278665588" },
   { href: "mailto:mail@vinaybajrangi.com", text: "mail@vinaybajrangi.com" },
-  { href: `${MAIN_URL}contact-us.php`, text: "कैसे संपर्क करें" },
-  { href: `${MAIN_URL}privacy-policy.php`, text: "गोपनीयता नीति" },
-  { href: `${MAIN_URL}payment-terms-and-conditions.php`, text: "भुगतान नियम और शर्तें" }
+  { href: `${MAIN_URL_HINDI}contact-us.php`, text: "कैसे संपर्क करें" },
+  { href: `${MAIN_URL_HINDI}privacy-policy.php`, text: "गोपनीयता नीति" },
+  { href: `${MAIN_URL_HINDI}payment-terms-and-conditions.php`, text: "भुगतान नियम और शर्तें" }
 ];
   
 export default function Example() {
@@ -68,7 +68,7 @@ export default function Example() {
           <div>
             <div>
               <h3 className="text-lg font-semibold leading-6 text-gray-900 mb-6 "> ड़ॉ विनय बजरंगी के विषय में </h3>
-              <p className="text-justify text-sm font-normal text-gray-600">किसी को भी सिर्फ नाम के आधार पर ज्योतिषी नहीं माना जा सकता। हर व्यक्ति को जानना चाहिए कि एक अच्छे ज्योतिषी का चुनाव कैसे करें। सबसे अच्छा ज्योतिषी वही होता है जो केवल कर्म सिद्धांत पर रसम रिवाज और उपायों से अधिक विश्वास करता हो। <span><a href={`${MAIN_URL}about-us.php`} className="text-base leading-6 text-blue-600 hover:text-rose-600">अधिक पढ़ें...</a></span></p>
+              <p className="text-justify text-sm font-normal text-gray-600">किसी को भी सिर्फ नाम के आधार पर ज्योतिषी नहीं माना जा सकता। हर व्यक्ति को जानना चाहिए कि एक अच्छे ज्योतिषी का चुनाव कैसे करें। सबसे अच्छा ज्योतिषी वही होता है जो केवल कर्म सिद्धांत पर रसम रिवाज और उपायों से अधिक विश्वास करता हो। <span><a href={`${MAIN_URL_HINDI}about-us.php`} className="text-base leading-6 text-blue-600 hover:text-rose-600">अधिक पढ़ें...</a></span></p>
             </div>
           </div>
           <div>

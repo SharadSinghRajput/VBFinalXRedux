@@ -7,6 +7,8 @@ export default function LanguageSelector({ data }) {
     const [LanguageBank, setLanguageBank] = useState(data?.bilingualData);
     const [ShowOption, setShowOption] = useState(false);
 
+    if (!LanguageBank) return null;
+
     return (
         <div className="fixed top-14 right-0 z-50 bg-white flex flex-col items-end">
             <button className="bg-orange-500 text-white w-10 h-10 flex justify-center items-center rounded-l-lg" onClick={() => setShowOption(!ShowOption)}>
