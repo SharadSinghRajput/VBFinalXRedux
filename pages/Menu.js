@@ -69,18 +69,14 @@ export default function ContMenuBankComp({data}) {
   },[startSessionTrigger])
 
   
-  useEffect(()=>{
-    if(LanguageBank){
-      if(LanguageBank.Hindi){
-        if(LanguageBank.Hindi[0].currentPage){
-          setContMenuBank(MainMenuHindi)
-        }
-      }
-      }else{
-        setContMenuBank(MainMenu)
+  useEffect(() => {
+    if (LanguageBank?.Hindi?.[0]?.currentPage) {
+      setContMenuBank(MainMenuHindi);
+    } else {
+      setContMenuBank(MainMenu);
     }
-    
-  },[MainMenuHindi, MainMenu, LanguageBank])
+  }, [MainMenuHindi, MainMenu, LanguageBank]);
+  
   
   
   return (
@@ -124,7 +120,7 @@ export default function ContMenuBankComp({data}) {
                 </Disclosure.Button>
               </div>
               <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
-                <div className='flex flex-row'>
+                {/* <div className='flex flex-row'>
                   <button
                     onClick={()=> router.push("cart")}
                     type="button"
@@ -132,7 +128,7 @@ export default function ContMenuBankComp({data}) {
                     focus:outline-none focus:ring-2 focus:ring-offset-2">
                     <Cart width={20} height={20} />
                   </button>
-                </div>
+                </div> */}
 
 
                 <button

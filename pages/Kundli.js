@@ -108,8 +108,8 @@ export default function DailyHoroscope({ data }) {
               </div>
               <div>
                 <div>
-                  {/* <Image src={questionimg} width={80} className='w-[80px] p-3 aspect-square rounded-lg' /> */}
-                  <Image src={questionimg} width={80} className="" alt={questionimg} />
+                  <Image src={questionimg} width={80} className='w-[80px] p-3 aspect-square rounded-lg' />
+                  <Image src={moonsignm} width={80} className="w-[80px] p-3 aspect-square rounded-lg" alt={moonsignm} />
                 </div>
               </div>
             </div>
@@ -143,8 +143,6 @@ export default function DailyHoroscope({ data }) {
               }}
               autoplay={{ delay: 3000 }}
               loop={true}
-              // onSlideChange={() => console.log('slide change')}
-              // onSwiper={(swiper) => console.log(swiper)}
             >
               {lifesProblems.map((item, index) => (
                 <SwiperSlide key={index}>
@@ -211,20 +209,7 @@ export default function DailyHoroscope({ data }) {
           )}
         </div>
       </div>
-      {/* <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mt-5 mb-5 rounded-lg">
-          <div className="container py-4 mx-auto">
-            <p className='text-sm font-normal'>To read your fate I need your Kundli or astrology birth chart. Kundali can be made through Kundli software. I am providing you here on this page a free Janam kundali calculator. Before presenting your Janam Kundli to any astrologer kindly create your kundli as per date of birth through the Kundli calculator.</p>
-            <p className='text-lg font-bold '>What is a Birth Chart / Kundli?</p>
-            <p className='text-sm font-normal'>The Kundli created here through the kundli calculator presented on this page is the exact representation of the positions of the planets in the sky at the time of your birth. This Vedic horoscope is the tool provided by Lord Bharma through which your complete life can be read and corrected.</p>
-            <p className='text-sm font-normal'>These planets because of their specific positioning in a sign and constellation impart peculiar characteristics to you. The positioning of the planets forms the basis of the Vedic Kundali in which the various Yogas in natal chart, Maha Yogas and periods find their place. This positioning is a matter of Kundli analysis or analysis of the astrology birth chart as it dictates you to lead the life in a specific way.</p>
-            <p className='text-lg font-bold'>The Best Online Kundli / Kundli Software?</p>
-            <p className='text-sm font-normal'>You can create your Kundli through many Kundli making software available on the internet but since a perfect natal chart leads to perfect kundli predictions, it is important to know which Kundli calculator gives the Vedic kundali without flaws. Through my website you can create a free kundli online. This online Kundli is by far the most accurate Vedic horoscope. If you get a reading done by an expert astrologer though this Vedic Kundali then the Kundli predictions are bound to be accurate. This kundali making software is an outcome of my collective efforts with top programmers of the country.</p>
-            <p className='text-lg font-bold'>What does my Kundli tell me?</p>
-            <p className='text-sm font-normal'>Your kundali tells you what you did in your previous life(s). This online Kundli can further tell the effect of the karmas of the previous birth on the present birth. If Kundli analysis is done by an expert he/she can reveal the quality of the present life, the modes through which it can be made better, finish the karmic loads of the previous births and to predict Life Reading by Astrology. You, therefore, create your kundli as per date of birth, and leave the rest on to an expert astrologer who could lessen your karmic loads and freshen up your present life.</p>
-            <p className='text-lg font-bold'>How does Horoscope reading help me?</p>
-            <p className='text-sm font-normal'>A Janam Kundli is your stored karmas' of the previous birth(s) that will pave the way, good or bad, of this birth. The Free janam Kundli that you have created is the essential document for making predictions about your studies, career, business, marriage, married life, children, property, health, and wealth. With the help of this free Kundli and the advice of an able Astrologer, you can know all important information related to your future and strive to make it better and effective. Referring to my kundli that you had from the natal chart maker, your Astrologer could suggest significant ways to overcome many upcoming troubles. Your online-Kundali can give an insight into your personality and other aspects such as nature, behavior, character, business astrology, career, traits, relationships, IQ, EQ, and health.</p>
-          </div>
-        </div> */}
+    
     </div>
   );
 }
