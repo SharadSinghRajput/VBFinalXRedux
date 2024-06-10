@@ -4,7 +4,7 @@ import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import { useRouter } from 'next/router';
 
-import {Horoscope} from '../config/Horoscope';
+import { Horoscope } from '../config/Horoscope';
 import MetaData from './pageAssets/MetaData';
 import { MAIN_URL } from '../config/config';
 
@@ -15,19 +15,19 @@ export default function HomePage({data}) {
   const NavigateLink = [
     {
       "name": "Daily Horoscope",
-      "link": "https://www.vinaybajrangi.com/horoscope/daily-horoscope.php"
+      "link": `${MAIN_URL}horoscope/daily-horoscope.php`
     },
     {
       "name": "Weekly Horoscope",
-      "link": "https://www.vinaybajrangi.com/horoscope/weekly-horoscope.php"
+      "link": `${MAIN_URL}horoscope/weekly-horoscope.php`
     },
     {
       "name": "Monthly Horoscope",
-      "link": "https://www.vinaybajrangi.com/horoscope/monthly-horoscope.php"
+      "link": `${MAIN_URL}horoscope/monthly-horoscope.php`
     },
     {
       "name": "Yearly Horoscope",
-      "link": "https://www.vinaybajrangi.com/horoscope/yearly-horoscope.php"
+      "link": `${MAIN_URL}horoscope/yearly-horoscope.php`
     }
   ]
  
@@ -35,31 +35,45 @@ export default function HomePage({data}) {
     e.preventDefault(); // Prevent the default anchor behavior
     router.push(`${MAIN_URL}${url}`);
   };
-  
+
+  // const dayType = data?.zodiacPeriod ? `${data.zodiacPeriod}horoscope` : "daily-horoscope";
+  const dayType = data && data.zodiacPeriod ? data.zodiacPeriod + '-horoscope' : "daily-horoscope";
+  // console.log("Day Type: " , data.zodiacPeriod);
+  const horoscopes = Horoscope(dayType);
+
   return (
     <>
       <MetaData data={data} />
-      <div className='bg-white max-w-6xl mx-auto mt-5'>
-        <div className='px-5'>
+      <div className='bg-white max-w-6xl mx-auto'>
+        <div className='px-5 pt-5'>
           {data?.title && <Title titleData={data.title} />}
         </div>
-        <div class="grid grid-cols-1 gap-10 m-5">
+        <div className="grid grid-cols-1 gap-10 m-5">
           <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
-            <h2 class="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
-            <div class="flex flex-row flex-wrap gap-3 justify-center ">
-              {Horoscope.map((person) => (
-                <a key={person.name}
-                    href={`${MAIN_URL}${person.Link}`}
-                    onClick={(e) => handleClick(e, person.Link)}
+            <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
+            <div className="flex flex-row flex-wrap gap-3 justify-center ">
+              {horoscopes.map((person) => (
+                <a
+                  key={person.name}
+                  href={`${MAIN_URL}${person.url}`}
+                  onClick={(e) => handleClick(e, person.url)}
                 >
-                  <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
-                  <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
+                  <Image
+                    width={50}
+                    height={50}
+                    className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2"
+                    src={person.imgSrc}
+                    alt={person.name}
+                  />
+                  <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">
+                    {person.name}
+                  </h3>
                 </a>
               ))}
             </div>
           </div>
         </div>
-          <div class="grid grid-cols-4 m-5" >
+          <div className="grid grid-cols-4 m-5" >
             { NavigateLink.map((item, index)=> (
                 <div className='col-span-1' key={index}>
                     <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>

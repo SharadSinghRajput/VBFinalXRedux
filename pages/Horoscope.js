@@ -51,7 +51,7 @@ export default function HoroscopePageData({data}) {
               </div>
             ) : (
               <>
-                <div class="grid grid-cols-4 mb-5">
+                <div className="grid grid-cols-4 mb-5">
                   { NavigateLink.map((item, index)=> (
                       <div className='col-span-1' key={index}>
                           <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
@@ -63,9 +63,9 @@ export default function HoroscopePageData({data}) {
                 {data.title ? <>
                     <Title titleData={data.title} />
                 </>:<></>}
-                <div class="grid grid-cols-1 gap-10 mt-5">
+                <div className="grid grid-cols-1 gap-10 mt-5">
                     <div className={` p-2 md:p-4 rounded-lg bg-orange-500`}>
-                        <div class="grid grid-cols-3 gap-5 sm:grid-cols-6">
+                        <div className="grid grid-cols-3 gap-5 sm:grid-cols-6">
                         {Horoscope.map((person) => (
                             <button key={person.name} onClick={()=> router.push(person.Link)} className='w-full flex justify-center items-center flex-col aspect-square bg-white rounded-2xl p-4' >
                                 <Image width={70} height={70} className="aspect-square" src={person.imgSrc} alt="" />

@@ -522,11 +522,20 @@ export const MainMenu = [
                 sublinksL2 :[
                     { name: "Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi.php`,
                         sublinksL3 : [
-                        { name: "Saphala Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi/saphala-ekadashi.php`, }
+                        { name: "Saphala Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi/saphala-ekadashi.php`, },
+                        { name: "Putrada Ekadashi 2024", url: `${MAIN_URL}vrat/ekadashi/putrada-ekadashi.php`, }
                         ]
                     },
-                    { name: "Purnima 2024 Dates", url: `${MAIN_URL}vrat/purnima.php`,},
-                    { name: "Amavasya Vrat Date", url: `${MAIN_URL}vrat/amavasya.php`,},
+                    { name: "Purnima 2024 Dates", url: `${MAIN_URL}vrat/purnima.php`,
+                        sublinksL3 : [
+                        { name: "Paush Prunima 2024", url: `${MAIN_URL}vrat/purnima/paush-purnima.php`, }
+                        ]
+                    },
+                    { name: "Amavasya Vrat Date", url: `${MAIN_URL}vrat/amavasya.php`,
+                        sublinksL3 : [
+                        { name: "Paush Amavasya", url: `${MAIN_URL}vrat/amavasya/pausha-amavasya.php`, }
+                        ]
+                    },
                     { name: "Pradosh 2024 Dates", url: `${MAIN_URL}vrat/pradosh.php`,},
                     { name: "Weekly Fast", url: `${MAIN_URL}vrat/weekly-fast.php`, }
                 ]
@@ -631,7 +640,7 @@ export const MainMenu = [
         { name: "Loan and Debt", url: `${MAIN_URL}loan-and-debts.php`, },
         { name: "Betting and Gambling", url: `${MAIN_URL}astrology-for-betting.php`, },
         {
-            name: "Foreign Settlement", url: `${MAIN_URL}foreign-travel.php`,
+            name: "Foreign Settlement", url: `${MAIN_URL}foreign-settlement.php`,
             sublinksL2: [
                 { name: "Deportation and Immigration issues", url: `${MAIN_URL}foreign-travel/deportation-issues.php` , }
             ]
