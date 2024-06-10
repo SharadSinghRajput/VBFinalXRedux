@@ -640,7 +640,7 @@ export const MainMenu = [
         { name: "Loan and Debt", url: `${MAIN_URL}loan-and-debts.php`, },
         { name: "Betting and Gambling", url: `${MAIN_URL}astrology-for-betting.php`, },
         {
-            name: "Foreign Settlement", url: `${MAIN_URL}foreign-travel.php`,
+            name: "Foreign Settlement", url: `${MAIN_URL}foreign-settlement.php`,
             sublinksL2: [
                 { name: "Deportation and Immigration issues", url: `${MAIN_URL}foreign-travel/deportation-issues.php` , }
             ]
