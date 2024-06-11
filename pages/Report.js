@@ -35,6 +35,7 @@ import PageRelatedBlog from "./PageRelatedBlog"
 
 
 
+
 export default function Report({data}) {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
@@ -1369,7 +1370,10 @@ const DataExistMailList = (DataExistItem) => {
                             </span>
                           </Disclosure.Button>
                           <Disclosure.Panel className="mt-2 pr-12">
-                            <p className="text-base leading-7 font-light text-white">{faq.faqAns}</p>
+                            {/* <p className="text-base leading-7 font-light text-white">{faq.faqAns}</p> */}
+                            {faq.faqAns ? (<div className='text-base leading-7 font-light text-white'
+                              dangerouslySetInnerHTML={{ __html: faq.faqAns }}
+                            />) : (<></>)}
                           </Disclosure.Panel>
                         </>
                       )}
