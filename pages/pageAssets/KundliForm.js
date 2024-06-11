@@ -388,7 +388,7 @@ const handleClick = (e, url) => {
           type="button"
           onClick={handleSubmit}
           className="w-[100%] inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#091d5a] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">
-          Submit
+          { language === "Hindi" ? ( <>सबमिट करें</> ) : ( <>Submit</> ) }
         </button>
       </form>
     </>
