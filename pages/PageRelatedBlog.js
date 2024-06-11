@@ -2,6 +2,7 @@ import { Date } from "../config/SvgConst";
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import placeholderImage from "./assets/images/default-image.png";
+import {MAIN_URL} from '../config/config'
 
 
 export default function Example({ Data }) {
@@ -13,7 +14,7 @@ export default function Example({ Data }) {
     <>
     {Data ? <>
       {Data.map((category, index) => (
-        <a key={index} href={category.path} className="block">
+        <a key={index} href={MAIN_URL + category.path} className="block">
           <div className="shadow-md rounded-lg bg-white">
             <div aria-hidden="true" className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
             {category.featuredImg ? <>
@@ -43,7 +44,7 @@ export default function Example({ Data }) {
                 />
               <p className="text-sm mb-4 text-justify text-gray-800">{}</p>
               <button
-              onClick={() => router.push(category.path)}
+              // onClick={() => router.push(category.path)}
               className="block w-full rounded-md bg-orange-500 px-3 py-2 text-center text-sm font-normal text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Read More <span aria-hidden="true">&rarr;</span></button>
             </div>
           </div>
