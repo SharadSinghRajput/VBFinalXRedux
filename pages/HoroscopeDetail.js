@@ -223,10 +223,10 @@ export default function DailyHoroscopeDetailed({data}) {
       }
 
     const Services = [
-        { name : "Consultation", ImgUrl: "/asset_frontend/img/consultation.png", Link: `${MAIN_URL}services/consultation.php` },
-        { name : "Online Report", ImgUrl: "/asset_frontend/img/online-report.png", Link: `${MAIN_URL}services/consultation.php`},
-        { name : "Voice Report", ImgUrl: "/asset_frontend/img/voice-report.png", Link: `${MAIN_URL}services/consultation.php`},
-        { name : "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png", Link: `${MAIN_URL}services/consultation.php`}
+        { name : "Consultation", ImgUrl: "/asset_frontend/img/consultation.png", Link: "services/consultation.php" },
+        { name : "Online Report", ImgUrl: "/asset_frontend/img/online-report.png", Link: "services/online-reports.php"},
+        { name : "Voice Report", ImgUrl: "/asset_frontend/img/voice-report.png", Link: "services/voice-report.php"},
+        { name : "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png", Link: "services/life-readings.php"}
     ];
 
     const Questions= [
