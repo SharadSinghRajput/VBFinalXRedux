@@ -46,10 +46,10 @@ function classNames(...classes) {
 
 export default function ContMenuBankComp({data}) {
   const router = useRouter();
-  const [LanguageBank, setLanguageBank] = useState(data?.language);
+  const LanguageBank = data?.language;
   const startSessionTrigger = useSelector(state => state.session.startSessionTrigger);
   const [SessionAction, setSessionAction] = useState(false)
-  const [ContMenuBank, setContMenuBank] = useState(false)
+  const [ContMenuBank, setContMenuBank] = useState(MainMenu)
   
   
   const GetSession = async () => {
@@ -73,8 +73,6 @@ export default function ContMenuBankComp({data}) {
   useEffect(() => {
     if (LanguageBank === "Hindi") {
       setContMenuBank(MainMenuHindi);
-    } else {
-      setContMenuBank(MainMenu);
     }
   }, [MainMenuHindi, MainMenu, LanguageBank]);
     
