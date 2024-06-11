@@ -51,6 +51,9 @@ export default function Questions() {
     
     <>
     <div className='drop-shadow-2xl bg-white p-5 rounded-xl'>
+        <h3 className="text-xl font-bold">
+        Know your <span className="text-orange-500">Moon Sign</span>
+        </h3>
         <CalculatorForm routing={"/calculator/moon-sign-calculator-result.php"} />
     </div>
     </>
