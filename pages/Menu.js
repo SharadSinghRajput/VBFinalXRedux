@@ -46,7 +46,7 @@ function classNames(...classes) {
 
 export default function ContMenuBankComp({data}) {
   const router = useRouter();
-  const [LanguageBank, setLanguageBank] = useState(data?.bilingualData);
+  const [LanguageBank, setLanguageBank] = useState(data?.language);
   const startSessionTrigger = useSelector(state => state.session.startSessionTrigger);
   const [SessionAction, setSessionAction] = useState(false)
   const [ContMenuBank, setContMenuBank] = useState(false)
@@ -68,19 +68,20 @@ export default function ContMenuBankComp({data}) {
     }
   },[startSessionTrigger])
 
+  // console.log("Language: ", LanguageBank);
   
   useEffect(() => {
-    if (LanguageBank?.Hindi?.[0]?.currentPage) {
+    if (LanguageBank === "Hindi") {
       setContMenuBank(MainMenuHindi);
     } else {
       setContMenuBank(MainMenu);
     }
   }, [MainMenuHindi, MainMenu, LanguageBank]);
-  
-  
-  
-  return (
-    <Disclosure as="header" className="bg-white shadow">
+    
+    
+    
+    return (
+      <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">

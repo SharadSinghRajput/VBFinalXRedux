@@ -148,7 +148,7 @@ export default function DynamicPage() {
   else if(PageComponent){
     return (
       <Page>
-        <Menu />
+        <Menu data={DataComponentWise} />
         <PopularReports />
         <PageComponent data={DataComponentWise} />
         <MiniCart Design={ShowMiniCartStyle} />
@@ -170,7 +170,7 @@ export default function DynamicPage() {
     else if(CompNotAvail === true){
       return (
         <Page>
-          <Menu />
+          <Menu data={DefaultData} />
           <PopularReports />
           <DefaultPage data={DefaultData} />
           <AllSideBar />
