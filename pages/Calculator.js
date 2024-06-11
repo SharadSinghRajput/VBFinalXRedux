@@ -103,13 +103,15 @@ export default function Calculater({ data }) {
             </div>
             
           </div>
-          {data?.title && <Title titleData={data.title} />}
+          {/* {data?.title && <Title titleData={data.title} />} */}
             {data?.blogBannerImage && (
             <div className="w-full md:w-full mb-5 mt-5">
                 <Banner BannerData={data.blogBannerImage} />
             </div>
             )}
-            {data?.description && <Description descData={data.description} />}
+            <div className="mt-5">
+              {data?.description && <Description descData={data.description} />}
+            </div>
         </div>
       ) : (
         <></>
