@@ -154,8 +154,8 @@ export default function DynamicPage() {
         <MiniCart Design={ShowMiniCartStyle} />
         <AllSideBar />
         <LanguageSelector data={DataComponentWise} />
-        {DataComponentWise && DataComponentWise.bilingualData && DataComponentWise.bilingualData.Hindi && DataComponentWise.bilingualData.Hindi.length > 0 ? (
-          DataComponentWise.bilingualData.Hindi[0].currentPage === true ? (
+        {DataComponentWise ? (
+          DataComponentWise.language === "Hindi" ? (
             <FooterHindi data={DataComponentWise} />
           ) : (
             <Footer data={DataComponentWise} />
@@ -175,8 +175,8 @@ export default function DynamicPage() {
           <DefaultPage data={DefaultData} />
           <AllSideBar />
           <LanguageSelector data={DefaultData} />
-          {DefaultData && DefaultData.bilingualData && DefaultData.bilingualData.Hindi && DefaultData.bilingualData.Hindi.length > 0 ? (
-            DefaultData.bilingualData.Hindi[0].currentPage === true ? (
+          {DefaultData ? (
+            DefaultData.language === "Hindi" ? (
               <FooterHindi data={DefaultData} />
             ) : (
               <Footer data={DefaultData} />

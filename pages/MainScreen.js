@@ -10,24 +10,24 @@ import { MAIN_URL } from '../config/config';
 export default function HomePage() {
   const router = useRouter();
   const people = [
-      { name: "Marriage Astrology", url: "https://www.vinaybajrangi.com/marriage-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/file-icons_ring.png" },
-      { name: "Property Astrology",   url: "https://www.vinaybajrangi.com/property.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/property-astrology.png" },
-      { name: "Business Astrology",   url: "https://www.vinaybajrangi.com/business-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ba.png" },
-      { name: "Court / legal Issues",   url: "https://www.vinaybajrangi.com/court-cases.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/court-legal-Issues.png" },
-      { name: "Career Astrology",   url: "https://www.vinaybajrangi.com/career-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/career-astrology.png" },
-      { name: "Health Astrology",   url: "https://www.vinaybajrangi.com/health-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ha.png" },
-      { name: "Loan and Debt",   url: "https://www.vinaybajrangi.com/loan-and-debts.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/loan-debt.png" },
-      { name: "Children Astrology",   url: "https://www.vinaybajrangi.com/children-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/children-astrology.png" }
+      { name: "Marriage Astrology", url: "marriage-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/file-icons_ring.png" },
+      { name: "Property Astrology",   url: "property.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/property-astrology.png" },
+      { name: "Business Astrology",   url: "business-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ba.png" },
+      { name: "Court / legal Issues",   url: "court-cases.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/court-legal-Issues.png" },
+      { name: "Career Astrology",   url: "career-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/career-astrology.png" },
+      { name: "Health Astrology",   url: "health-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/ha.png" },
+      { name: "Loan and Debt",   url: "loan-and-debts.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/loan-debt.png" },
+      { name: "Children Astrology",   url: "children-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/children-astrology.png" }
   ]
   const  peopleSec = [
-      { name: "Betting & Gambling", url: "https://www.vinaybajrangi.com/astrology-for-betting.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/icons.png" },
-      { name: "All about Vastu", url: "https://www.vinaybajrangi.com/vastu.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/allabout-vastu.png" },
-      { name: "Foreign Settlement", url: "https://www.vinaybajrangi.com/foreign-travel.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/foreign-settlement.png" },
-      { name: "Vastu for commercial", url: "https://www.vinaybajrangi.com/vastu-for-commercial.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/vfc.png" },
-      { name: "Past life Readings", url: "https://www.vinaybajrangi.com/life-predictions.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/pastlife-readings.png" },
-      { name: "Share market Astrology", url: "https://www.vinaybajrangi.com/share-market-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/birth-time-correction.png" },
-      { name: "Birth time Correction", url: "https://www.vinaybajrangi.com/time-rectification.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/btc.png" },
-      { name: "Your Astro Secrets", url: "https://www.vinaybajrangi.com/astrological-reports.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/btc.png" }
+      { name: "Betting & Gambling", url: "astrology-for-betting.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/icons.png" },
+      { name: "All about Vastu", url: "vastu.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/allabout-vastu.png" },
+      { name: "Foreign Settlement", url: "foreign-travel.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/foreign-settlement.png" },
+      { name: "Vastu for commercial", url: "vastu-for-commercial.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/vfc.png" },
+      { name: "Past life Readings", url: "life-predictions.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/pastlife-readings.png" },
+      { name: "Share market Astrology", url: "share-market-astrology.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/birth-time-correction.png" },
+      { name: "Birth time Correction", url: "time-rectification.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/btc.png" },
+      { name: "Your Astro Secrets", url: "astrological-reports.php", imgSrc: "https://www.vinaybajrangi.com/asset_frontend/img/life-icons/btc.png" }
   ]
   const Horoscope = [
     { name: "Aries", url: "horoscope/daily-horoscope/aries.php", imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Aries.png", Link: "horoscope/daily-horoscope/aries.php" },

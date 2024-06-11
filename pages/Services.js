@@ -1,19 +1,27 @@
 "use client"; 
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { MAIN_URL } from '../config/config';
+import { useEffect, useState } from "react";
+import { MAIN_URL,MAIN_URL_HINDI } from '../config/config';
 
-export default function Questions() {
+export default function Questions({language = "English"}) {
     const router = useRouter();
+    const [mainURL, setMainURL] = useState(MAIN_URL);
     const Services = [
-        { name : "Consultation", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/consultation.png", Link: "services/consultation.php" },
-        { name : "Online Report", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/online-report.png", Link: "services/online-reports.php"},
-        { name : "Voice Report", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/voice-report.png", Link: "services/voice-report.php"},
-        { name : "Life Readings", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/life-readings.png", Link: "services/life-readings.php"}
+        {nameHindi: "परामर्श", name : "Consultation", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/consultation.png", Link: "services/consultation.php" },
+        {nameHindi: "ऑनलाइन रिपोर्ट",  name : "Online Report", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/online-report.png", Link: "services/online-reports.php"},
+        {nameHindi: "ध्वनि रिपोर्ट",  name : "Voice Report", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/voice-report.png", Link: "services/voice-report.php"},
+        {nameHindi: "जीवन वाचन",  name : "Life Readings", ImgUrl: "https://www.vinaybajrangi.com/asset_frontend/img/life-readings.png", Link: "services/life-readings.php"}
     ]
+    useEffect(() => {
+        if(language=== "Hindi"){
+          setMainURL(MAIN_URL_HINDI)
+        }
+    }, [MAIN_URL_HINDI, language]);
+
     const handleClick = (e, url) => {
         e.preventDefault(); // Prevent the default anchor behavior
-        router.push(`${MAIN_URL}${url}`);
+        router.push(`${mainURL}${url}`);
     };
   return (
     <>
@@ -22,11 +30,11 @@ export default function Questions() {
             {Services.map((item) => (
                 <li key={item.name} className="bg-orange-500 rounded-md lg:w-[23.8%] w-[47%] py-3 min-h-15">
                     <a className="text-xs text-white flex-col text-center flex justify-center items-center no-underline w-full h-full"
-                        href={`${MAIN_URL}${item.Link}`}
+                        href={`${mainURL}${item.Link}`}
                         onClick={(e) => handleClick(e, item.Link)}
                     >
                     <Image width={40} height={40} className="w-[40px] md:w-[50px] lg:w-[75px] aspect-square object-contain" src={item.ImgUrl} alt="" />
-                        <span className="text-xs text-white">{item.name}</span>
+                        <span className="text-xs text-white">{ language=== "Hindi" ? item.nameHindi : item.name }</span>
                     </a>
                 </li>
             ))}

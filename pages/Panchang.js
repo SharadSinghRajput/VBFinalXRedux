@@ -1,38 +1,21 @@
+("use client");
 import { useEffect, useState } from "react";
 import { ArrowRightCircleIcon, ArrowRightIcon, PaperClipIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import getUserLocation from "../config/GetLocation";
 import fetchAstrologyData from "../config/getAstroAPI";
 import { formatDate } from '../config/formatDatetoAstrologyAPI';
+import { useRouter } from "next/router";
+import { MAIN_URL,MAIN_URL_HINDI } from '../config/config';
+import { setLocalStorageItem } from "../config/localStorage";
 
-("use client");
 
-export default function Questions() {
-  const Panchang = [
-    {
-      name: "panchang1",
-      img_url: "https://www.vinaybajrangi.com/asset_frontend/img/icon-new/panchang1.png",
-      time: "5:51:43",
-    },
-    {
-      name: "panchang2",
-      img_url: "https://www.vinaybajrangi.com/asset_frontend/img/icon-new/panchang2.png",
-      time: "18:48:5",
-    },
-    {
-      name: "panchang3",
-      img_url: "https://www.vinaybajrangi.com/asset_frontend/img/icon-new/panchang3.png",
-      time: "14:0:0",
-    },
-    {
-      name: "panchang4",
-      img_url: "https://www.vinaybajrangi.com/asset_frontend/img/icon-new/panchang4.png",
-      time: "2:57:40",
-    },
-  ];
+export default function Questions({language = "English"}) { 
+  const router = useRouter();
 
   const [PanchangD, setPanchang] = useState("");
   const [DatetoShow, setDatetoShow] = useState("");
+  const [mainURL, setMainURL] = useState(MAIN_URL);
 
   const GetPanchang = async () => {
     let Latitude;
@@ -132,7 +115,10 @@ export default function Questions() {
 
 useEffect(() => {
     GetPanchang();
-}, []);
+    if(language=== "Hindi"){
+      setMainURL(MAIN_URL_HINDI)
+    }
+}, [MAIN_URL_HINDI, language]);
 
 
 function convertTimestamp(timestamp) {
@@ -152,27 +138,63 @@ function convertTimestamp(timestamp) {
 
 
 
-
+const handleClick = (e, url) => {
+  e.preventDefault(); // Prevent the default anchor behavior
+  router.push(`${mainURL}${url}`);
+};
 
   return (
     <>
-      <div className="bg-white p-5 pb-0 rounded-lg">
+      <div className="bg-white p-5 pb-5 rounded-lg">
         <div className="grid grid-cols-2 gap-2 md:grid-cols-2 ">
           <div>
             {/* <button onClick={GetPanchang} className="text-lg font-semibold">
               Aaj Ka <span>Panchang</span>
             </button> */}
-            <h3 className="text-lg font-semibold">
-              Aaj Ka <span>Panchang</span>
-            </h3>
-            <p className="text-sm">Noida, uttar Pradesh, India</p>
+            {
+              language=== "Hindi" ?
+              (
+                <>
+                  <h3 className="text-lg font-semibold">
+                    आज का <span>पंचांग</span>
+                  </h3>
+                  <p className="text-sm">नोएडा, उत्तर प्रदेश, भारत</p>
+                </>
+              ) 
+              :
+              (
+                <>
+                  <h3 className="text-lg font-semibold">
+                    Aaj Ka <span>Panchang</span>
+                  </h3>
+                  <p className="text-sm">Noida, uttar Pradesh, India</p>
+                </>
+              )
+            }
+            
           </div>
           <div className="flex justify-end items-start">
-            <button
+            <a
               type="button"
-              className="rounded text-xs bg-orange-500 px-2 py-2 text-xs font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-              Detailed Panchang
-            </button>
+              className="rounded text-xs bg-orange-500 px-2 py-2 text-xs font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              href={`${mainURL}`}
+              onClick={(e) => handleClick(e, "#")}
+            >
+                {
+                  language=== "Hindi" ?
+                  (
+                    <>
+                      विस्तृत पंचांग
+                    </>
+                  ) 
+                  :
+                  (
+                    <>
+                      Detailed Panchang
+                    </>
+                  )
+                }
+            </a>
           </div>
         </div>
         <div className="relative mt-3">
@@ -229,19 +251,21 @@ function convertTimestamp(timestamp) {
         <div className="grid grid-cols-2 gap-2 md:grid-cols-2 py-2 bg-white p-4 border-[1px]  border-grey-100 drop-shadow-lg rounded-lg mt-4">
           <div className="flex divide-y divide-grey flex-col ">
             <div className="py-2">
-              <h5 className="text-sm font-semibold">Month</h5>
+              <h5 className="text-sm font-semibold">{language=== "Hindi" ? ( <> महीना </> ) : ( <>Month</>)}</h5>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Amanta: </b> 
+                <b className="font-medium"> 
+                  { language=== "Hindi" ? ( <> अमांता: </> ) : ( <> Amanta: </> ) }  
+                </b> 
                 {PanchangD.hindu_maah ? PanchangD.hindu_maah.amanta : null}
               </p>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Purnimanta: </b>
+                <b className="font-medium">{language=== "Hindi" ? ( <> पूर्णिमांत</> ) : ( <>Purnimanta</>)}: </b>
                 {PanchangD.hindu_maah ? PanchangD.hindu_maah.purnimanta : null}
               </p>
             </div>
             <div className="py-2">
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Tithi: </b> 
+                <b className="font-medium">{language=== "Hindi" ? ( <> तिथि </> ) : ( <>Tithi</>)}: </b> 
                 {PanchangD ?
                     PanchangD.tithi ?
                         PanchangD.tithi.details ?
@@ -251,7 +275,7 @@ function convertTimestamp(timestamp) {
                 : null}
               </p>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Till: </b> 
+                <b className="font-medium">{language=== "Hindi" ? ( <> तक </> ) : ( <>Till</>)}: </b> 
                 {PanchangD ?
                     PanchangD.tithi ?
                         convertTimestamp(PanchangD.tithi.end_time_ms)
@@ -261,7 +285,7 @@ function convertTimestamp(timestamp) {
             </div>
             <div className="py-2">
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Yog: </b>
+                <b className="font-medium">{language=== "Hindi" ? ( <> योग </> ) : ( <>Yog</>)}: </b>
                 {PanchangD ?
                     PanchangD.yog ?
                         PanchangD.yog.details ?
@@ -282,19 +306,19 @@ function convertTimestamp(timestamp) {
           </div>
           <div className="flex divide-y divide-grey flex-col ">
             <div className="py-2">
-              <h5 className="text-sm font-semibold">Samvat</h5>
+              <h5 className="text-sm font-semibold">{language=== "Hindi" ? ( <> Samvat </> ) : ( <>Samvat</>)}</h5>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Vikram: </b> 
+                <b className="font-medium">{language=== "Hindi" ? ( <> विक्रम </> ) : ( <>Vikram</>)}: </b> 
                 {PanchangD ? PanchangD.vikram_samvat + " " + PanchangD.vkram_samvat_name : null}
               </p>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Shaka: </b> 
+                <b className="font-medium">{language=== "Hindi" ? ( <> शाका </> ) : ( <>Shaka</>)}: </b> 
                 {PanchangD ? PanchangD.shaka_samvat + " " + PanchangD.shaka_samvat_name : null}
               </p>
             </div>
             <div className="py-2">
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Nakshatra: </b>
+                <b className="font-medium">{language=== "Hindi" ? ( <> नक्षत्र</> ) : ( <>Nakshatra</>)}: </b>
                 {PanchangD ?
                     PanchangD.nakshatra ?
                         PanchangD.nakshatra.details ?
@@ -304,7 +328,7 @@ function convertTimestamp(timestamp) {
                 : null}
               </p>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Till: </b>
+                <b className="font-medium">{language=== "Hindi" ? ( <> तक</> ) : ( <>Till</>)}: </b>
                 {PanchangD ?
                     PanchangD.nakshatra ?
                         convertTimestamp(PanchangD.nakshatra.end_time_ms)
@@ -314,7 +338,7 @@ function convertTimestamp(timestamp) {
             </div>
             <div className="py-2">
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Karan: </b>
+                <b className="font-medium">{language=== "Hindi" ? ( <> करण</> ) : ( <>Karan</>)}: </b>
                 {PanchangD ?
                     PanchangD.karan ?
                         PanchangD.karan.details ?
@@ -324,7 +348,7 @@ function convertTimestamp(timestamp) {
                 : null}
               </p>
               <p className="text-sm font-bold text-gray-800">
-                <b className="font-medium">Purnimanta: </b>
+                <b className="font-medium">{language=== "Hindi" ? ( <> पूर्णिमांत</> ) : ( <>Purnimanta</>)}: </b>
                 {PanchangD ?
                     PanchangD.karan ?
                         convertTimestamp(PanchangD.karan.end_time_ms)

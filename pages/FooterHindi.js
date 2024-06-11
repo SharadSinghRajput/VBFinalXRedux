@@ -25,7 +25,7 @@ const QuickLinks = [
   { href: `${MAIN_URL_HINDI}dr-vinay-bajrangi-will-be-in-mumbai.php`, text: "आगामी दौरे " },
   { href: `${MAIN_URL_HINDI}apps/karma-astro-app.php`, text: "कर्मा एस्ट्रो मोबाइल ऐप " },
   { href: `${MAIN_URL_HINDI}videos.php`, text: " वीडियो" },
-  { href: `${MAIN_URL_HINDI}author.php`, text: "Author" }
+  // { href: `${MAIN_URL_HINDI}author.php`, text: "Author" }
 ];
 const AstrologyServices = [
   { href: `${MAIN_URL_HINDI}services/consultation.php`, text: "परामर्श " },
