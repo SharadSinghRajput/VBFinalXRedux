@@ -23,7 +23,7 @@ export default function Questions({language = "English"}) {
         if(language=== "Hindi"){
           setMainURL(MAIN_URL_HINDI)
         }
-    }, [MAIN_URL_HINDI, language]);
+    }, [language]);
 
     const handleClick = (e, url) => {
         e.preventDefault(); // Prevent the default anchor behavior
