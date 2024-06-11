@@ -319,8 +319,10 @@ const DataExistMailList = (DataExistItem) => {
                 </div>
 
                 <div className='w-[420px] gap-5 p-5 md:pt-0'>
-                  <div className='z-10'>
-                    {/* <h2 className="text-2xl mb-2 font-normal tracking-tight text-[#091d5a]">{data.subCategory}</h2> */}
+                  {data.extraComponentData ? data.extraComponentData.Holder34 ? <Holder data={data.extraComponentData.Holder34} /> : <></> :<></>}
+                  {data.extraComponentData ? data.extraComponentData.Holder35 ? <Holder data={data.extraComponentData.Holder35} /> : <></> :<></>}
+                  
+                  {/* <div className='z-10'>
                     {data.price[0] ? <>
                       {data.price[0].dealPrice ? <>
                         <p className='text-2xl font-bold max-w-max mb-2'>{data.price[0].icon} {data.price[0].dealPrice}</p>
@@ -337,8 +339,10 @@ const DataExistMailList = (DataExistItem) => {
                         </>:<></>}
                       </>}
                     </>:<></>}
-                  </div>
+                  </div> */}
                   <div className='flex gap-5 z-0'>
+
+                    
                   {/* <button
                     type="button"
                     onClick={()=> setOpen(true)}
@@ -347,6 +351,9 @@ const DataExistMailList = (DataExistItem) => {
                     focus-visible:outline-orange-600">
                     Generate short report
                   </button> */}
+
+
+
                   {SessionAction?
                     <>
                       {data.price && Array.isArray(data.price) && data.price.length > 0 ? (
@@ -357,7 +364,7 @@ const DataExistMailList = (DataExistItem) => {
                             onClick={()=> router.push("cart")}
                             className="bg-[#091d5a] z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
                             hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                            focus-visible:outline-orange-600">
+                            focus-visible:outline-orange-600 mt-2">
                             Added to Cart
                           </button>
                           </>:<>
@@ -366,7 +373,7 @@ const DataExistMailList = (DataExistItem) => {
                               onClick={() => handleAddProduct(data.reportID, data.price[0] ? data.price[0].dealPrice ? data.price[0].dealPrice : data.price[0].price : "", "Single Product")}
                               className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
                               hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                              focus-visible:outline-orange-600">
+                              focus-visible:outline-orange-600 mt-2">
                                 {ProductAdding === data.reportID ? "Please wait...": "Book Consultancy"}
                             </button>
                           </>}
@@ -1385,8 +1392,6 @@ const DataExistMailList = (DataExistItem) => {
               {data.extraComponentData ? data.extraComponentData.Holder31 ? <Holder data={data.extraComponentData.Holder31} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder32 ? <Holder data={data.extraComponentData.Holder32} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder33 ? <Holder data={data.extraComponentData.Holder33} /> : <></> :<></>}
-              {data.extraComponentData ? data.extraComponentData.Holder34 ? <Holder data={data.extraComponentData.Holder34} /> : <></> :<></>}
-              {data.extraComponentData ? data.extraComponentData.Holder35 ? <Holder data={data.extraComponentData.Holder35} /> : <></> :<></>}
             </>:<></>}
 
             
