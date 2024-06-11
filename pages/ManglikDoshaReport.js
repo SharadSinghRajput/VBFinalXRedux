@@ -16,8 +16,10 @@ import Description from './pageAssets/Description';
 
 
 
+
 export default function KaalsarpDoshReport({ data }) {
-    const [PitraDosha, setPitraDosha] = useState("");
+    const router = useRouter();
+    const [Manglik, setManglik] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,8 +36,8 @@ export default function KaalsarpDoshReport({ data }) {
                   tzone: GetData.tzone,
               };
               try {
-                  const astrologyData = await fetchAstrologyData(data, "pitra_dosha_report");
-                  setPitraDosha(astrologyData);
+                  const astrologyData = await fetchAstrologyData(data, "manglik");
+                  setManglik(astrologyData);
                   console.log(astrologyData);
               } catch (error) {
               }
@@ -58,50 +60,49 @@ export default function KaalsarpDoshReport({ data }) {
                 </div>
                 </>:<></>}
                 
-                {/* {data.description ?
+                {data.description ?
                     <div className="mt-5">
                         <Description extra="text-base" descData={data.description} />
                     </div>
-                :<></>} */}
+                :<></>}
             </>
             : null}
-
-            {PitraDosha ?
+            <div className="mt-5">
+                <div className="bg-orange-100 p-2 pb-4">
+                    <p>Mangal Dosha doesn't always cause problems; sometimes, it can be a mere eye-wash. To gain clarity on your Mangal Dosha.</p>
+                    <button onClick={()=> router.push("/services/online-reports/mangal-dosha-calculator.php")} className="font-bold text-blue-500">Click here to know more.</button>
+                </div>
+            </div>
+            {Manglik ?
                 <>
                 <div className="mt-5">
-                    <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">What is Pitri Dosha</h4>
+                    <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Manglik Report</h4>
                     <div className="bg-orange-100 p-2 pb-4">
-                        <p>{PitraDosha.what_is_pitri_dosha}</p>
+                        <p>{Manglik.manglik_report}</p>
                     </div>
                 </div>
-                <div className="mt-5">
-                    <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Conclusion</h4>
-                    <div className="bg-orange-100 p-2 pb-4">
-                        <p>{PitraDosha.conclusion}</p>
-                    </div>
-                </div>
-                {PitraDosha.remedies ?
-                    <div className="mt-5">
-                        <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Remedies</h4>
-                        <div className="bg-orange-100 p-2 pb-4">
-                            <ul className="list-disc ml-5">
-                                {PitraDosha.remedies.map((item, index)=>(
-                                <li key={index} className="text-base my-1">{item}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                : null}
-                {PitraDosha.effects ?
-                    <div className="mt-5">
-                        <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Effects</h4>
-                        <div className="bg-orange-100 p-2 pb-4">
-                            <ul className="list-disc ml-5">
-                                {PitraDosha.effects.map((item, index)=>(
-                                <li key={index} className="text-base my-1">{item}</li>
-                                ))}
-                            </ul>
-                        </div>
+                {Manglik.manglik_present_rule ?
+                    <div className="mt-5 grid gap-5 grid-cols-2">
+                        {Manglik.manglik_present_rule.based_on_aspect ?
+                            <div>
+                                <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Manglik Report</h4>
+                                <ul className="list-disc ml-5">
+                                    {Manglik.manglik_present_rule.based_on_aspect.map((item, index)=>(
+                                    <li key={index} className="text-base my-1">{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        : null}
+                        {Manglik.manglik_present_rule.based_on_house ?
+                            <div>
+                                <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Manglik Report</h4>
+                                <ul className="list-disc ml-5">
+                                    {Manglik.manglik_present_rule.based_on_house.map((item, index)=>(
+                                    <li key={index} className="text-base my-1">{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        : null}
                     </div>
                 : null}
                 </>

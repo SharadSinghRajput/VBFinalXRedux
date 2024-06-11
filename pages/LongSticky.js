@@ -78,11 +78,11 @@ export default function Questions() {
             <div className='flex '>
                 <div className="flex gap-[2px] w-full">
                     <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Services</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Ask a <br /> Free question? </button>
+                    <button onClick={()=> router.push('/services.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Ask a <br /> Free question? </button>
                     <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Free Kundli</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Free Horoscope <br /> Matching</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Know your<br />Moon sign</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Today's<br />Panchang</button>
+                    <button onClick={()=> router.push('/kundli.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Free Horoscope <br /> Matching</button>
+                    <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Know your<br />Moon sign</button>
+                    <button onClick={()=> router.push('/today-panchang.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Today's<br />Panchang</button>
                 </div>
             </div>
         </div>
