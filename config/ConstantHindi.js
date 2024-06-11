@@ -1,6 +1,6 @@
-import {MAIN_URL_HINDI} from '../config/config'
+import {MAIN_URL_HINDI, MAIN_URL} from '../config/config'
 export const MainMenuHindi = [
-    { name: 'मुख्य पृष्ठ', url : `${MAIN_URL_HINDI}hindi`},
+    { name: 'मुख्य पृष्ठ', url : `${MAIN_URL_HINDI}`},
     { name: 'राशिफल', url : '#', 
         sublinks: [
             { name: 'राशिफल', url : `${MAIN_URL_HINDI}horoscope/horoscope.php`,  },
@@ -523,7 +523,7 @@ export const MainMenuHindi = [
     },
     { name: 'जीवन समस्या', url: '#',
     sublinks: [
-        {name: "विवाह ज्योतिष", url: `${MAIN_URL_HINDI}marriage-astrology.php` ,
+        {name: "विवाह ज्योतिष", url: `${MAIN_URL}marriage-astrology-in-hindi` ,
             sublinksL2: [
                 { name: "कैसा होगा आपका जीवनसाथी", url: `${MAIN_URL_HINDI}marriage-astrology/know-about-life-partner.php` },
                 { name: "प्रेम विवाह", url: `${MAIN_URL_HINDI}marriage-astrology/love-marriage.php` },
@@ -679,7 +679,7 @@ export const MainMenuHindi = [
             { name: "कर्मा एस्ट्रो मोबाइल ऐप", url: `${MAIN_URL_HINDI}apps/karma-astro-app.php`, },
         ]
     },
-    { name: "ब्लॉग ", url: `${MAIN_URL_HINDI}blog/`, },
+    { name: "ब्लॉग ", url: `${MAIN_URL}blog/`, },
   ];
 
   export const PopularReportsContent = [
