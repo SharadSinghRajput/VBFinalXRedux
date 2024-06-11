@@ -4,6 +4,7 @@ import Image from "next/image";
 import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
+import {API_KEY, Domain_Secrete_Code, API_NEW_URL, MAIN_URL} from '../config/config'
 
 const Calculator = [
   {
@@ -66,7 +67,10 @@ const Calculator = [
 export default function Calculater({ data }) {
   const router = useRouter();
   
-
+  const handleClickRouter = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${MAIN_URL}${url}`);
+  };
   return (
     <>
       {data ? (
@@ -76,8 +80,9 @@ export default function Calculater({ data }) {
             <div className="flex-1">
               <div role="list" className="flex gap-2 flex-wrap">
                   {Calculator.map((item, index) => (
-                      <button type="button" key={index}
-                      onClick={()=> router.push(item.link)}
+                      <a  key={index}
+                      href={`${MAIN_URL}${item.link}`}
+                      onClick={(e) => handleClickRouter(e, item.link)}
                         className="w-[48%] md:w-52 aspect-square relative group overflow-hidden rounded-xl shadow-md shadow-orange-300/50">
                           <div className="absolute p-5 inset-0 bg-orange-500 text-center flex items-center justify-center text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               <p className="text-xs text-center font-medium text-white">{item.backData}</p>
@@ -92,7 +97,7 @@ export default function Calculater({ data }) {
                               />
                               <h3 className="mt-2 text-base text-center text-gray-900">{item.name}</h3>
                           </div>
-                      </button>
+                      </a>
                   ))}
               </div>
             </div>
