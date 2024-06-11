@@ -11,18 +11,19 @@ import { LocationData } from "../../config/location";
 import fetchAstrologyData from '../../config/getAstroAPI';
 import { formatDate } from '../../config/formatDatetoAstrologyAPI';
 import { COMPILER_NAMES } from "next/dist/shared/lib/constants";
-
+import { MAIN_URL, MAIN_URL_HINDI } from '../../config/config';
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Banner(props) {
+export default function KundliForm({language = "English"}) {
     const router = useRouter();
-  const { BannerData, AltName } = props;
+    const [mainURL, setMainURL] = useState(MAIN_URL);
+  // const { BannerData, AltName } = props;
 
   const GenderType = [
-    { id: "RepMale", title: "Male" },
-    { id: "RepFemale", title: "Female" },
+    { id: "RepMale1", title: "Male", titleHindi: "पुरुष" },
+    { id: "RepFemale2", title: "Female", titleHindi: "महिला" },
   ];
 
   
@@ -32,6 +33,8 @@ export default function Banner(props) {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Mobile, setMobile] = useState("");
+  const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
+
   useEffect(() => {
     const GetUserData = async () => {
       const savedInputValue = getLocalStorageItem("UserInfoDataKey");
@@ -47,9 +50,20 @@ export default function Banner(props) {
       }
     };
     GetUserData();
-  }, []);
+    if(language=== "Hindi"){
+      setMainURL(MAIN_URL_HINDI)
+      setselectedDateTime("जन्म तिथि");
+    }
+  }, [language]);
 
-  const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
+  
+
+const handleClick = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${mainURL}${url}`);
+};
+
+  
 
   const handleDateChange = (date) => {
     setselectedDateTime(date);
@@ -196,7 +210,8 @@ export default function Banner(props) {
       <form className="z-50 relative">
         <div></div>
         <h3 className="text-xl font-bold">
-          Free <span className="text-orange-500">Kundli</span>
+        { language === "Hindi" ? ( <> निःशुल्क <span className="text-orange-500">कुंडली</span></> ) : ( <> Free <span className="text-orange-500">Kundli</span> </> ) }
+          
         </h3>
         <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
           {GenderType.map((item) => (
@@ -211,7 +226,7 @@ export default function Banner(props) {
               <label
                 htmlFor={item?.id}
                 className="ml-3 block text-sm font-medium leading-6 text-gray-900">
-                {item?.title}
+                { language === "Hindi" ? ( item?.titleHindi ) : ( item?.title ) }
               </label>
             </div>
           ))}
@@ -220,7 +235,7 @@ export default function Banner(props) {
           <label
             htmlFor="name"
             className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
-            Name
+            { language === "Hindi" ? ( <>नाम</> ) : ( <>Name</> ) }
           </label>
           <input
             type="text"
@@ -234,7 +249,7 @@ export default function Banner(props) {
         </div>
         <Combobox as="div" value={selectedBirthLocation} onChange={setSelectedBirthLocation}>
           <Combobox.Label className="block text-sm font-medium leading-6 mt-5 text-gray-900">
-            Birth location
+            { language === "Hindi" ? ( <>जन्म स्थान</> ) : ( <>Birth location</> ) }
           </Combobox.Label>
           <div className="relative mt-2">
             <Combobox.Input
@@ -357,7 +372,7 @@ export default function Banner(props) {
             <label
               htmlFor="first-name"
               className="block text-sm font-medium leading-6 text-gray-900">
-              Date of Birth
+              { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
             </label>
             <div className="mt-2">
               <Datetime

@@ -13,18 +13,20 @@ import Datetime from "react-datetime";
 import fetchAstrologyData from '../config/getAstroAPI';
 import { formatDate } from '../config/formatDatetoAstrologyAPI';
 import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage";
-
-
+import { MAIN_URL, MAIN_URL_HINDI } from '../config/config';
+import { useRouter } from 'next/router';
 const notificationMethods = [
-    { Name: 'Male' },
-    { Name: 'Female' },
+    { Name: 'Male',NameHindi: "पुरुष" },
+    { Name: 'Female',NameHindi: "महिला"  },
   ]
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
-export default function HoroscopeMatching() {   
+export default function HoroscopeMatching({language = "English"}) {   
+    const router = useRouter();
+    const [mainURL, setMainURL] = useState(MAIN_URL);
 
     function filterPeople(LocationData, SearchLocation) {
         return LocationData.filter((person) => {
@@ -85,8 +87,17 @@ export default function HoroscopeMatching() {
           }
         };
         GetUserData();
-      }, []);
+        if(language=== "Hindi"){
+            setMainURL(MAIN_URL_HINDI)
+            setMaleDob("जन्म तिथि")
+            setFemaleDob("जन्म तिथि")
+        }
+      }, [language]);
       
+      const handleClick = (e, url) => {
+        e.preventDefault(); // Prevent the default anchor behavior
+        router.push(`${mainURL}${url}`);
+    };
     
 
 
@@ -192,13 +203,15 @@ export default function HoroscopeMatching() {
     <>
     <div className='drop-shadow-2xl bg-white p-5 rounded-xl'>
         <form>
-            <h3 className='text-xl font-bold'>Free <span className='text-orange-500'> Horoscope Matching</span></h3>
+            <h3 className='text-xl font-bold'>
+            { language === "Hindi" ? ( <> निःशुल्क <span className='text-orange-500'>कुंडली मिलान</span></> ) : ( <> Free <span className='text-orange-500'> Horoscope Matching</span> </> ) }
+            </h3>
             <div className='flex'>
                 {notificationMethods.map((item, index)=>(
                     <button key={index}
                     type='button'
                     onClick={()=> setTabActive(item.Name)}
-                    className={`${TabActive === item.Name ? "bg-orange-100 text-gray-900 border-b-4 border-b-orange-500" : "bg-white border border-b-0 text-gray-800"} px-4 py-2 text-base`}>{item.Name}</button>
+                    className={`${TabActive === item.Name ? "bg-orange-100 text-gray-900 border-b-4 border-b-orange-500" : "bg-white border border-b-0 text-gray-800"} px-4 py-2 text-base`}>{ language === "Hindi" ? ( item.NameHindi ) : ( item.Name ) }</button>
                 ))}
             </div>
             <div className='bg-orange-100 p-4 rounded-b-lg rounded-e-lg'>
@@ -209,7 +222,7 @@ export default function HoroscopeMatching() {
                                 htmlFor="name"
                                 className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
                             >
-                                Name
+                                { language === "Hindi" ? ( <>नाम</> ) : ( <>Name</> ) }
                             </label>
                             <input
                                 type="text"
@@ -223,7 +236,7 @@ export default function HoroscopeMatching() {
                         </div>
                         <Combobox as="div" value={selectedBirthLocation} onChange={setSelectedBirthLocation}>
                             <Combobox.Label className="block text-sm font-medium leading-6 mt-5 text-gray-900">
-                                Birth location
+                            { language === "Hindi" ? ( <>जन्म स्थान</> ) : ( <>Birth location</> ) }
                             </Combobox.Label>
                             <div className="relative mt-2">
                                 <Combobox.Input
@@ -345,7 +358,7 @@ export default function HoroscopeMatching() {
                                 <label
                                 htmlFor="first-name"
                                 className="block text-sm font-medium leading-6 text-gray-900">
-                                Date of Birth
+                                { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
                                 </label>
                                 <div className="mt-2">
                                 <Datetime
@@ -366,7 +379,7 @@ export default function HoroscopeMatching() {
                                 htmlFor="name"
                                 className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900"
                             >
-                                Name
+                                { language === "Hindi" ? ( <>नाम</> ) : ( <>Name</> ) }
                             </label>
                             <input
                                 type="text"
@@ -380,7 +393,7 @@ export default function HoroscopeMatching() {
                         </div>
                         <Combobox as="div" value={FBirthLocation} onChange={setFBirthLocation}>
                             <Combobox.Label className="block text-sm font-medium leading-6 mt-5 text-gray-900">
-                                Birth location
+                            { language === "Hindi" ? ( <>जन्म स्थान</> ) : ( <>Birth location</> ) }
                             </Combobox.Label>
                             <div className="relative mt-2">
                                 <Combobox.Input
@@ -502,7 +515,7 @@ export default function HoroscopeMatching() {
                                 <label
                                 htmlFor="first-name"
                                 className="block text-sm font-medium leading-6 text-gray-900">
-                                Date of Birth
+                                { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
                                 </label>
                                 <div className="mt-2">
                                 <Datetime
@@ -519,7 +532,7 @@ export default function HoroscopeMatching() {
                     </div>
                 </>}
             </div>
-            <button type="button" onClick={Match} className="w-[100%] mt-5 inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#091d5a] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">Match</button>
+            <button type="button" onClick={Match} className="w-[100%] mt-5 inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#091d5a] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">{ language === "Hindi" ? ( <>आगे बढ़े</> ) : ( <>Match</> ) }</button>
         </form>
         <div>
     </div>

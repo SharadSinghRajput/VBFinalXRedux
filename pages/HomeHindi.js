@@ -65,9 +65,9 @@ export default function HomePage({data}) {
       <VedicAstrologyCalculators language={data?.language} />
       <div className="max-w-7xl pt-10 pb-10  mx-auto">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          <div><MoonSign /></div>
-          <div className="drop-shadow-2xl bg-white p-5 rounded-xl"><KundliForm /></div>
-          <div><HoroscopeMatching /></div>
+          <div><MoonSign language={data?.language}  /></div>
+          <div className="drop-shadow-2xl bg-white p-5 rounded-xl"><KundliForm language={data?.language}  /></div>
+          <div><HoroscopeMatching language={data?.language} /></div>
         </div>
       </div>
       <Services language={data?.language} />
