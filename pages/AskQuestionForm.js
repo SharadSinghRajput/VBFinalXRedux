@@ -18,255 +18,193 @@ function classNames(...classes) {
 
 export default function AskQueForm({data}) {
     const router = useRouter();
-  
+    const GenderType = [
+        { id: "RepMale2", title: "Male", titleHindi: "" },
+        { id: "RepFemale2", title: "Female", titleHindi: ""  },
+      ];
+    
+      
+      const [SearchLocation, setSearchLocation] = useState("");
+      const [selectedBirthLocation, setSelectedBirthLocation] = useState(null);
+      const [Gender, setGender] = useState("Male");
+      const [Name, setName] = useState("");
+      const [Email, setEmail] = useState("");
+      const [Mobile, setMobile] = useState("");
+      const [Question, setQuestion] = useState("");
+      const [ErrorMessage, setErrorMessage] = useState("")
+      const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
 
-  const GenderType = [
-    { id: "RepMale2", title: "Male", titleHindi: "" },
-    { id: "RepFemale2", title: "Female", titleHindi: ""  },
-  ];
-
-  
-  const [SearchLocation, setSearchLocation] = useState("");
-  const [selectedBirthLocation, setSelectedBirthLocation] = useState(null);
-  const [Gender, setGender] = useState("Male");
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Mobile, setMobile] = useState("");
-  const [Question, setQuestion] = useState("");
-  const [ErrorMessage, setErrorMessage] = useState("")
-  const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
-
-  useEffect(() => {
-    const GetUserData = async () => {
-      const savedInputValue = getLocalStorageItem("AutoFillFormDataKey");
-      if (savedInputValue !== null) {
-        setGender(savedInputValue.gender);
-        setName(savedInputValue.name);
-        setselectedDateTime(savedInputValue.dob);
-        setSelectedBirthLocation({
-          city_name: savedInputValue.birth_place,
-          latitude: savedInputValue.birth_place_latitude,
-          longitude: savedInputValue.birth_place_longitude,
+      function filterPeople(LocationData, SearchLocation) {
+        return LocationData.filter((person) => {
+          if (
+            SearchLocation.length > 3 &&
+            person.city_name.toLowerCase().includes(SearchLocation.toLowerCase())
+          ) {
+            return person;
+          } else {
+            return false;
+          }
         });
       }
-    };
-    GetUserData();
-  }, []);
-  
+      const filteredPeople = filterPeople(LocationData, SearchLocation);
 
+      let inputProps = {
+        placeholder: selectedDateTime,
+        class: "w-full bg-gray-100 placeholder:text-gray-900"
+      };
 
-
-
-  let inputProps = {
-    placeholder: selectedDateTime,
-    class: "w-full bg-gray-100 placeholder:text-gray-900"
-  };
-
-  function filterPeople(LocationData, SearchLocation) {
-    return LocationData.filter((person) => {
-      if (
-        SearchLocation.length > 3 &&
-        person.city_name.toLowerCase().includes(SearchLocation.toLowerCase())
-      ) {
-        return person;
-      } else {
-        return false;
-      }
-    });
-  }
-  const filteredPeople = filterPeople(LocationData, SearchLocation);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-    let errorMessages = [];
-
-    // Check if the selected date time is valid
-    if (selectedDateTime === "Please Select DOB") {
-      errorMessages.push("Please Select DOB");
-    }
+      const handleSubmit = async (e) => {
+        e.preventDefault();
     
-    // Check if the name is empty
-    if (Name === "") {
-      errorMessages.push("Please Enter Name");
-    }
-    // Check if the birth location is empty or null
-    if (selectedBirthLocation === "" || selectedBirthLocation === null) {
-      errorMessages.push("Please Select Place of Birth");
-    }
     
-    // Check if the gender is empty or null
-    if (Gender === "" || Gender === null) {
-      errorMessages.push("Please Choose your Gender");
-    }
+        let errorMessages = [];
     
-    // Set the error messages
-    setErrorMessage(errorMessages);
-    
-    // If there are error messages, do not proceed further
-    if (errorMessages.length > 0) {
-      return;
-    }
-    
-
-
-    if (selectedDateTime || selectedDateTime) {
-        const convertDateTime = (dateTimeStr) => {
-          const date = new Date(dateTimeStr);
-          console.log("dateTimeStr", date);
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0');
-          const day = String(date.getDate()).padStart(2, '0');
-          const hours = String(date.getHours()).padStart(2, '0');
-          const minutes = String(date.getMinutes()).padStart(2, '0');
-          const seconds = String(date.getSeconds()).padStart(2, '0');
+        // Check if the selected date time is valid
+        if (selectedDateTime === "Please Select DOB") {
+          errorMessages.push("Please Select DOB");
+        }
         
-          const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-          return formattedDate;
-          
-        };
-
-        const formattedDateTime = convertDateTime(selectedDateTime)
-
-          function formatDateIn(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            return `${month}-${day}-${year} ${hours}:${minutes}`;
-          }
-          
-          const CurrentDate = formatDateIn(new Date());
-
-          const [DatePart] = formattedDateTime.split(" ");
-          const dataForTimeZone = {
-              latitude:  selectedBirthLocation.latitude,
-              longitude: selectedBirthLocation.longitude,
-              date: DatePart,
-          };
+        // Check if the name is empty
+        if (Name === "") {
+          errorMessages.push("Please Enter Name");
+        }
+        // Check if the birth location is empty or null
+        if (selectedBirthLocation === "" || selectedBirthLocation === null) {
+          errorMessages.push("Please Select Place of Birth");
+        }
         
-
-        let TimeZone;
-        try {
-            const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-            if(astrologyData.status === true ){
-                TimeZone = astrologyData.timezone
+        // Check if the gender is empty or null
+        if (Gender === "" || Gender === null) {
+          errorMessages.push("Please Choose your Gender");
+        }
+        
+        // Set the error messages
+        setErrorMessage(errorMessages);
+        
+        // If there are error messages, do not proceed further
+        if (errorMessages.length > 0) {
+          return;
+        }
+        
+    
+    
+        if (selectedDateTime || selectedDateTime) {
+            const convertDateTime = (dateTimeStr) => {
+              const date = new Date(dateTimeStr);
+              console.log("dateTimeStr", date);
+              const year = date.getFullYear();
+              const month = String(date.getMonth() + 1).padStart(2, '0');
+              const day = String(date.getDate()).padStart(2, '0');
+              const hours = String(date.getHours()).padStart(2, '0');
+              const minutes = String(date.getMinutes()).padStart(2, '0');
+              const seconds = String(date.getSeconds()).padStart(2, '0');
+            
+              const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+              return formattedDate;
+              
+            };
+    
+            const formattedDateTime = convertDateTime(selectedDateTime)
+    
+              function formatDateIn(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                return `${month}-${day}-${year} ${hours}:${minutes}`;
+              }
+              
+              const CurrentDate = formatDateIn(new Date());
+    
+              const [DatePart] = formattedDateTime.split(" ");
+              const dataForTimeZone = {
+                  latitude:  selectedBirthLocation.latitude,
+                  longitude: selectedBirthLocation.longitude,
+                  date: DatePart,
+              };
+            
+    
+            let TimeZone;
+            try {
+                const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
+                if(astrologyData.status === true ){
+                    TimeZone = astrologyData.timezone
+                }
+            } catch (error) {}
+    
+    
+            const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
+    
+            const data = {
+                apiKey: API_KEY,
+                dob: formattedDateTime,
+                birth_place_longitude: selectedBirthLocation.latitude,
+                birth_place_latitude: selectedBirthLocation.longitude,
+                cdate: CurrentDate,
+            };
+        
+            const UserInfoData = {
+                name: Name,
+                dob: formattedDateTime,
+                birth_place_longitude: selectedBirthLocation.latitude,
+                birth_place_latitude: selectedBirthLocation.longitude,
+            };
+    
+            const UserData = JSON.stringify(data);
+            const AstroDataBack = {
+                dobData: DateFormateforAstrologyAPI,
+                birth_place_longitude: selectedBirthLocation.latitude,
+                birth_place_latitude: selectedBirthLocation.longitude,
+                tzone: TimeZone,
             }
-        } catch (error) {}
-
-
-        const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
-
-        const data = {
-            apiKey: API_KEY,
-            dob: formattedDateTime,
-            birth_place_longitude: selectedBirthLocation.latitude,
-            birth_place_latitude: selectedBirthLocation.longitude,
-            cdate: CurrentDate,
-        };
     
-        const UserInfoData = {
-            name: Name,
-            dob: formattedDateTime,
-            birth_place_longitude: selectedBirthLocation.latitude,
-            birth_place_latitude: selectedBirthLocation.longitude,
-        };
-
-        const UserData = JSON.stringify(data);
-        const AstroDataBack = {
-            dobData: DateFormateforAstrologyAPI,
-            birth_place_longitude: selectedBirthLocation.latitude,
-            birth_place_latitude: selectedBirthLocation.longitude,
-            tzone: TimeZone,
+            const datatoHitBasic = {
+              day: AstroDataBack.dobData.day,
+              month: AstroDataBack.dobData.month,
+              year: AstroDataBack.dobData.year,
+              hour: AstroDataBack.dobData.hour,
+              min: AstroDataBack.dobData.min,
+              lat: AstroDataBack.birth_place_latitude,
+              lon: AstroDataBack.birth_place_longitude,
+              tzone: AstroDataBack.tzone,
+            };
+            const DataAutoFill = {
+              gender: Gender,
+              name: Name,
+              birth_place: selectedBirthLocation.city_name,
+              birth_place_longitude: selectedBirthLocation.longitude,
+              birth_place_latitude: selectedBirthLocation.latitude,
+              dob: formattedDateTime,
+            };
+    
+            try {
+              const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
+              setLocalStorageItem("AstroDetailKey", AstroDetail);
+            } catch (error) {}
+    
+            try {
+                setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
+                setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
+                router.push(routing);
+            }catch (error) {
+                console.log(error);
+            }
         }
-
-        const datatoHitBasic = {
-          day: AstroDataBack.dobData.day,
-          month: AstroDataBack.dobData.month,
-          year: AstroDataBack.dobData.year,
-          hour: AstroDataBack.dobData.hour,
-          min: AstroDataBack.dobData.min,
-          lat: AstroDataBack.birth_place_latitude,
-          lon: AstroDataBack.birth_place_longitude,
-          tzone: AstroDataBack.tzone,
-        };
-        const DataAutoFill = {
-          gender: Gender,
-          name: Name,
-          birth_place: selectedBirthLocation.city_name,
-          birth_place_longitude: selectedBirthLocation.longitude,
-          birth_place_latitude: selectedBirthLocation.latitude,
-          dob: formattedDateTime,
-        };
-
-        try {
-          const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
-          setLocalStorageItem("AstroDetailKey", AstroDetail);
-        } catch (error) {}
-
-        try {
-            setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
-            setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
-            router.push(routing);
-        }catch (error) {
-            console.log(error);
-        }
-    }
-
-  };
-
+    
+      };
   return (
     <>
     <div className="pt-5">
         <div className={`bg-white mx-auto max-w-6xl mx-auto shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
-            {data.title ? <>
+            {data?.title ? <>
                 <h1 className='text-lg font-bold mb-5'>
-                    {data.title}
+                    {data?.title}
                 </h1>
             </>:<></>}
             <div className="flex flex-col">
             <form className="z-50 relative">
-                {ErrorMessage.length > 0 ?
-                    <div className="rounded-md bg-red-50 p-4">
-                        <div className="flex">
-                            {/* <div className="flex-shrink-0">
-                            <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
-                            </div> */}
-                            <div className="ml-3">
-                            <h3 className="text-sm font-medium text-red-800">There were {ErrorMessage.length} errors with your submission</h3>
-                            <div className="mt-2 text-sm text-red-700">
-                                <ul role="list" className="list-disc space-y-1 pl-5">
-                                    {ErrorMessage.map((item, index)=>(
-                                        <li key={index}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                : null}
-                <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
-
-                {GenderType.map((item) => (
-                    <div key={item?.id} className="flex items-center">
-                    <input
-                        id={item?.id}
-                        name="gender"
-                        type="radio"
-                        checked={Gender === item?.title}
-                        onChange={() => setGender(item?.title)}
-                        className="h-4 w-4 border-gray-300 px-2 text-orange-500 focus:ring-orange-500"
-                    />
-                    <label
-                        htmlFor={item?.id}
-                        className="ml-3 block text-sm font-medium leading-6 text-gray-900">
-                        {item?.title}
-                    </label>
-                    </div>
-                ))}
-                </div>
+                
                 <div className="relative mt-7">
                 <label
                     htmlFor="name"
@@ -278,7 +216,7 @@ export default function AskQueForm({data}) {
                     name="name"
                     id="name"
                     value={Name}
-                    onChange={(value) => setName(value.target.value)}
+                    
                     className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Enter Your Name"
                 />
@@ -294,7 +232,7 @@ export default function AskQueForm({data}) {
                     name="mobile"
                     id="mobile"
                     value={Mobile}
-                    onChange={(value) => setName(value.target.value)}
+                    
                     className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Enter Your Mobile"
                 />
@@ -310,7 +248,7 @@ export default function AskQueForm({data}) {
                     name="Email"
                     id="Email"
                     value={Email}
-                    onChange={(value) => setName(value.target.value)}
+                    
                     className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Enter Your Email"
                 />
@@ -447,7 +385,6 @@ export default function AskQueForm({data}) {
                     <Datetime
                         inputProps={inputProps}
                         // onChange={handleDateChange}
-                        onChange={(e)=> setselectedDateTime(e.toString())}
                         closeOnClickOutside={true}
                         className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                     />
@@ -465,7 +402,7 @@ export default function AskQueForm({data}) {
                     name="Question"
                     id="Question"
                     value={Question}
-                    onChange={(value) => setName(value.target.value)}
+                    
                     className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Enter Your Question"
                 />

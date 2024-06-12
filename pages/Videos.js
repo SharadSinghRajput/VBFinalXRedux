@@ -122,7 +122,7 @@ export default function Videos({data}) {
                   <div className='grid grid-cols-4 gap-4'>
                     {Video.map(item => (
                       <div key={item.pageID} className='bg-orange-200 rounded-lg overflow-hidden'>
-                        {item.pageVideo && <VideoFrame url={item.pageVideo} />}
+                        {item?.pageVideo && <VideoFrame url={item?.pageVideo} />}
                         <a
                           className="text-sm text-white text-center no-underline flex flex-col justify-center items-center"
                           href={MAIN_URL + item.path}
