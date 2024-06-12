@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Title from './pageAssets/TitlewithBG';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
+import {API_KEY, Domain_Secrete_Code, API_NEW_URL, MAIN_URL} from '../config/config'
 
 
 import MetaData from './pageAssets/MetaData';
@@ -15,6 +16,11 @@ import { useRouter } from 'next/router';
 export default function DefaultPage({data}) {
     const router = useRouter();
 
+
+    const handleClickRouter = (e, url) => {
+        e.preventDefault(); // Prevent the default anchor behavior
+        router.push(`${MAIN_URL}${url}`);
+      };
   return (
     <>
     <MetaData data={data} />
@@ -48,13 +54,14 @@ export default function DefaultPage({data}) {
             {data.nestedPages ?
             <div className='grid grid-cols-4 gap-4 mt-5'>
                 {data.nestedPages.map((item, index)=>(
-                    <button className='bg-orange-100 p-2 rounded-lg flex flex-col gap-5'
+                    <a className='bg-orange-100 p-2 rounded-lg flex flex-col gap-5'
                     key={index}
-                    onClick={()=> router.push(item.path)} >
+                    href={`${MAIN_URL}${item.path}`}
+                    onClick={(e) => handleClickRouter(e, item.path)}>
                         <img src={item.featuredImage} alt={item.name} />
                         <p className='text-base font-semibold text-left'>{item.name}</p>
                         <p className='bg-orange-500 p-2 w-full rounded-lg text-sm text-white'>Read more</p>
-                    </button>
+                    </a>
                 ))}
             </div>
             : null}
@@ -66,7 +73,9 @@ export default function DefaultPage({data}) {
 
 
             {data.description ?
+            <div className='mt-5'>
                 <Description descData={data.description} />
+            </div>
             :<></>}
 
 

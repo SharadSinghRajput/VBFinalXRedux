@@ -156,11 +156,11 @@ export default function HoroscopePageData({data}) {
                       {horoscopes.map((person) => (
                         <a  
                             key={person.name} 
-                            href={`${MAIN_URL}${person.url}`}
-                            onClick={(e) => handleClick(e, person.url)}
+                            href={`${MAIN_URL}${data.language=== "Hindi" ? person.hindiLink :person.link}`}
+                            onClick={(e) => handleClick(e, data.language=== "Hindi" ? person.hindiLink :person.link)}
                         >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
-                            <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
+                            <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{data.language=== "Hindi" ? person.nameHindi : person.name}</h3>
                         </a>
                       ))}
                     </div>

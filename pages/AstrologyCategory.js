@@ -92,7 +92,9 @@ export default function ArticleDetails({data}) {
                 {data.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
 
                 {data.description ?
+                <div className="mt-5">
                   <Description descData={data.description} />
+                </div>
                 :<></>}
 
                 {data.extraComponentData ? data.extraComponentData.Holder10 ? <Holder data={data.extraComponentData.Holder10} /> : <></> :<></>}

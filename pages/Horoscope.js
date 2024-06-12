@@ -12,29 +12,48 @@ import CommentForm from './pageAssets/commentForm';
 import MetaData from './pageAssets/MetaData';
 import {Horoscope} from '../config/Horoscope';
 import { useRouter } from 'next/router';
+import { MAIN_URL, MAIN_URL_HINDI } from '../config/config';
 
 const NavigateLink = [
   {
     "name": "Daily Horoscope",
-    "link": "https://www.vinaybajrangi.com/horoscope/daily-horoscope.php"
+    "link": "/horoscope/daily-horoscope.php"
   },
   {
     "name": "Weekly Horoscope",
-    "link": "https://www.vinaybajrangi.com/horoscope/weekly-horoscope.php"
+    "link": "/horoscope/weekly-horoscope.php"
   },
   {
     "name": "Monthly Horoscope",
-    "link": "https://www.vinaybajrangi.com/horoscope/monthly-horoscope.php"
+    "link": "/horoscope/monthly-horoscope.php"
   },
   {
     "name": "Yearly Horoscope",
-    "link": "https://www.vinaybajrangi.com/horoscope/yearly-horoscope.php"
+    "link": "/horoscope/yearly-horoscope.php"
+  }
+]
+const NavigateLinkHindi = [
+  {
+    "name": " दैनिक राशिफल ",
+    "link": "/hindi/horoscope/daily-horoscope.php"
+  },
+  {
+    "name": " साप्ताहिक राशिफल ",
+    "link": "/hindi/horoscope/weekly-horoscope.php "
+  },
+  {
+    "name": " मासिक राशिफल ",
+    "link": "/hindi/horoscope/monthly-horoscope.php"
+  },
+  {
+    "name": " वार्षिक राशिफल ",
+    "link": "/hindi/horoscope/yearly-horoscope.php"
   }
 ]
 export default function HoroscopePageData({data}) {
   const router = useRouter();
   const dayType = data && data.zodiacPeriod ? data.zodiacPeriod + '-horoscope' : "daily-horoscope";
-  // console.log("Day Type: " , data.zodiacPeriod);
+  
   const horoscopes = Horoscope(dayType);
 
   return (
@@ -54,15 +73,38 @@ export default function HoroscopePageData({data}) {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-4 mb-5">
-                  { NavigateLink.map((item, index)=> (
-                      <div className='col-span-1' key={index}>
-                          <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
-                            {item.name}
-                          </button>
-                      </div>
-                    ))}
-                </div>
+                {
+                  data.language=== "Hindi" ?
+                  (
+                    <>
+                       <div className="grid grid-cols-4 mb-5">
+                          { NavigateLinkHindi.map((item, index)=> (
+                              <div className='col-span-1' key={index}>
+                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
+                                    {item.name}
+                                  </button>
+                              </div>
+                            ))}
+                        </div>
+                    </>
+                  ) 
+                  :
+                  (
+                    <>
+                      <div className="grid grid-cols-4 mb-5">
+                          { NavigateLink.map((item, index)=> (
+                              <div className='col-span-1' key={index}>
+                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
+                                    {item.name}
+                                  </button>
+                              </div>
+                            ))}
+                        </div>
+                    </>
+                  )
+                }
+               
+
                 {data.title ? <>
                     <Title titleData={data.title} />
                 </>:<></>}
@@ -70,9 +112,9 @@ export default function HoroscopePageData({data}) {
                     <div className={` p-2 md:p-4 rounded-lg bg-orange-500`}>
                         <div className="grid grid-cols-3 gap-5 sm:grid-cols-6">
                         {horoscopes.map((person) => (
-                            <button key={person.name} onClick={()=> router.push(person.Link)} className='w-full flex justify-center items-center flex-col aspect-square bg-white rounded-2xl p-4' >
+                            <button key={person.name} onClick={()=> router.push(data.language=== "Hindi" ? person.hindiLink : person.link)} className='w-full flex justify-center items-center flex-col aspect-square bg-white rounded-2xl p-4' >
                                 <Image width={70} height={70} className="aspect-square" src={person.imgSrc} alt="" />
-                                <h3 className="mt-4 text-center font-normal text-sm tracking-tight text-gray-900 leading-3">{person.name}</h3>
+                                <h3 className="mt-4 text-center font-normal text-sm tracking-tight text-gray-900 leading-3">{data.language=== "Hindi" ? person.nameHindi : person.name}</h3>
                             </button>
                         ))}
                         </div>

@@ -310,13 +310,21 @@ const DataExistMailList = (DataExistItem) => {
 
             <div className='bg-white p-5 shadow-lg rounded-2xl overflow-hidden'>
               <div className='flex flex-col md:flex-row'>
-                <div className='flex-1 rounded-lg overflow-hidden'>
+                <div className='w-[420px] rounded-lg overflow-hidden'>
                   {data.bannerImage ? <>
-                    <Banner BannerData={data.bannerImage}/>
+                    {/* <Banner BannerData={data.bannerImage}/> */}
+                    <Image
+                      width={400}
+                      height={400}
+                      src={data.bannerImage}
+                      alt={ "Banner Image"}
+                      className="aspect-square rounded-lg"
+                      priority
+                    />
                   </>:<></>}
                 </div>
 
-                <div className='w-[420px] gap-5 p-5 md:pt-0'>
+                <div className='flex-1 rounded-lg overflow-hidden ' >
                   <div className='z-10'>
                     {/* <h2 className="text-2xl mb-2 font-normal tracking-tight text-[#091d5a]">{data.subCategory}</h2> */}
                     {data.price[0] ? <>
