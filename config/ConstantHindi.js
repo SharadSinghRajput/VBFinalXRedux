@@ -682,7 +682,7 @@ export const MainMenuHindi = [
     { name: "ब्लॉग ", url: `${MAIN_URL}blog/`, },
   ];
 
-  export const PopularReportsContent = [
+  export const PopularReportsContentHindi = [
       {
         title: "जानिए, क्या आप मांगलिक है या नहीं?",
         link: `${MAIN_URL_HINDI}services/online-report/mangal-dosha-calculator.php`,

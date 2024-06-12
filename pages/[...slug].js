@@ -149,7 +149,11 @@ export default function DynamicPage() {
     return (
       <Page>
         <Menu data={DataComponentWise} />
-        <PopularReports />
+        {DataComponentWise?.language ? (
+            <PopularReports language={DataComponentWise?.language} />
+          ) : (
+            <PopularReports />
+          )}
         <PageComponent data={DataComponentWise} />
         <MiniCart Design={ShowMiniCartStyle} />
         <AllSideBar />
