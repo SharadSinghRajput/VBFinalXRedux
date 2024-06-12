@@ -570,7 +570,7 @@ export const MainMenu = [
     },
     { name: 'Life Problems', url: '#',
     sublinks: [
-        {name: "Marriage Astrology", url: `${MAIN_URL}marriage-astrology.php` ,
+        {name: "Marriage Astrology", url: `${MAIN_URL}marriage-astrology` ,
             sublinksL2: [
                 { name: "Future Life Partner Prediction", url: `${MAIN_URL}marriage-astrology/life-partners-predictions.php`, },
                 { name: "Love Marriage", url: `${MAIN_URL}marriage-astrology/love-marriage.php`, },

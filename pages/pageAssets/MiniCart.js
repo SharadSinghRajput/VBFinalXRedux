@@ -19,7 +19,7 @@ export default function MiniCart({Design}) {
   const getProductTrigger = useSelector(state => state.trigger.getProductTrigger);
   const dispatch = useDispatch()
   
-
+console.log(getProductTrigger)
   
   const [SessionAction, setSessionAction] = useState(false)
 
@@ -77,6 +77,7 @@ export default function MiniCart({Design}) {
             if(data.data && Array.isArray(data.data)){
               data.data.map((item)=>{
                 dispatch(addProduct(item));
+                console.log("adding");
               })
             }else{
               dispatch(addProduct(data.data));
