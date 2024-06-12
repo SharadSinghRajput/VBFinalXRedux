@@ -72,7 +72,7 @@ export default function HomePage({data}) {
       </div>
       <Services language={data?.language} />
       <Banner2 language={data?.language} />
-      <LongSticky />
+      <LongSticky language={data?.language} />
     </>
   )
 }
