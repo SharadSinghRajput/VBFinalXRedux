@@ -48,7 +48,9 @@ export default function DefaultPage({data}) {
 
 
             {data.description ?
+            <div className='mt-5'>
                 <Description descData={data.description} />
+            </div>
             :<></>}
 
 

@@ -24,7 +24,7 @@ const notificationMethods = [
     return classes.filter(Boolean).join(" ");
   }
 
-export default function HoroscopeMatching({language = "English"}) {   
+export default function HoroscopeMatching({language = "English", routing}) {   
     const router = useRouter();
     const [mainURL, setMainURL] = useState(MAIN_URL);
 
@@ -87,10 +87,8 @@ export default function HoroscopeMatching({language = "English"}) {
           }
         };
         GetUserData();
-        if(language=== "Hindi"){
+        if(language === "Hindi"){
             setMainURL(MAIN_URL_HINDI)
-            setMaleDob("जन्म तिथि")
-            setFemaleDob("जन्म तिथि")
         }
       }, [language]);
       
@@ -175,7 +173,7 @@ export default function HoroscopeMatching({language = "English"}) {
 
         const DateFormateforAstrologyAPIMale = formatDate(MaleFormattedDOB);
         const DateFormateforAstrologyAPIFemale = formatDate(FemaleFormattedDOB);
-
+console.log(DateFormateforAstrologyAPIMale)
         const HMMale = {
             name: MaleName,
             birth_place: {city_name: selectedBirthLocation.city_name, latitude: selectedBirthLocation.latitude, longitude: selectedBirthLocation.longitude},
@@ -187,10 +185,31 @@ export default function HoroscopeMatching({language = "English"}) {
             dob: FemaleFormattedDOB,
           };
 
+
+          const data = {
+            m_day: DateFormateforAstrologyAPIMale.day,
+            m_month: DateFormateforAstrologyAPIMale.month,
+            m_year: DateFormateforAstrologyAPIMale.year,
+            m_hour: DateFormateforAstrologyAPIMale.hour,
+            m_min: DateFormateforAstrologyAPIMale.min,
+            m_lat: selectedBirthLocation.latitude,
+            m_lon: selectedBirthLocation.longitude,
+            m_tzone: MaleTimeZone,
+            f_day: DateFormateforAstrologyAPIFemale.day,
+            f_month: DateFormateforAstrologyAPIFemale.month,
+            f_year: DateFormateforAstrologyAPIFemale.year,
+            f_hour: DateFormateforAstrologyAPIFemale.hour,
+            f_min: DateFormateforAstrologyAPIFemale.min,
+            f_lat: FBirthLocation.latitude,
+            f_lon:  FBirthLocation.longitude,
+            f_tzone: FemaleTimeZone,
+          };
+
         try {
             setLocalStorageItem("HMMaleKey", HMMale);
             setLocalStorageItem("HMFemaleKey", HMFemale);
-            
+            setLocalStorageItem("toHitKundliMAPIKey", data);
+            router.push(routing);
         }catch (error) {}
 
         
