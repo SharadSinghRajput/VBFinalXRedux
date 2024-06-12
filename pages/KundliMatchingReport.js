@@ -21,6 +21,9 @@ export default function KaalsarpDoshReport({ data }) {
   const [BothData, setBothData] = useState("");
   const [Chart, setChart] = useState("");
   const [FemaleChart, setFemaleChart] = useState("");
+  const [MatchPercentage, setMatchPercentage] = useState("");
+
+
 console.log(AshtakootPoints)
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +48,9 @@ console.log(AshtakootPoints)
        fetchChart("D1", GetData)
         try {
           const AshtakootPoints = await fetchAstrologyData(GetData, "match_ashtakoot_points");
+          const match_percentage = await fetchAstrologyData(GetData, "match_percentage");
           setAshtakootPoints(AshtakootPoints);
+          setMatchPercentage(match_percentage);
         } catch (error) {}
       }
     };
@@ -134,6 +139,7 @@ console.log(AshtakootPoints)
           <h1 className="p-4 bg-blue-500 text-white uppercase font-bold text-xl">
             Matching Report
           </h1>
+
           <div className="shadow-lg p-5">
             <p className="text-base text-gray-800">
               {Male.name} width {Female.name}
@@ -153,92 +159,105 @@ console.log(AshtakootPoints)
               </p>
             ) : null}
           </div>
-          <div className="mt-5">
-            <table className="rounded-lg overflow-hidden">
-              <tbody>
-                <tr>
-                  <th className="p-2 bg-blue-900 text-white border-b border-b-white/50" height="33" colspan="3">
-                    <h2>Birth Details</h2>
-                  </th>
-                </tr>
-                <tr>
-                  <th className="p-2 bg-blue-900 text-white border-b border-b-white/50">Male</th>
-                  <th className="p-2 bg-blue-900 text-white border-b border-b-white/50">Birth Details</th>
-                  <th className="p-2 bg-blue-900 text-white border-b border-b-white/50">Female</th>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>{Male.name}</td>
-                  <td className={TDStyle}>Full Name</td>
-                  <td className={TDStyle}>{Female.name}</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>{Male.dob ? formatDatetoShow(Male.dob) : null}</td>
-                  <td className={TDStyle}>Date of Birth</td>
-                  <td className={TDStyle}>{Female.dob ? formatDatetoShow(Female.dob) : null}</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>{formatTime(Male.dob)}</td>
-                  <td className={TDStyle}>Birth Time</td>
-                  <td className={TDStyle}>{formatTime(Female.dob)}</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>{Male.birth_place ? Male.birth_place.city_name : null}</td>
-                  <td className={TDStyle}>Birth Place</td>
-                  <td className={TDStyle}>{Female.birth_place ? Female.birth_place.city_name : null}</td>
-                </tr>
-                <tr>
-                    <td className={TDStyle}>{Male.birth_place ? Male.birth_place.latitude : null}</td>
-                  <td className={TDStyle}>Latitude</td>
-                  <td className={TDStyle}>{Female.birth_place ? Female.birth_place.latitude : null}</td>
-                </tr>
-                <tr>
-                <td className={TDStyle}>{Male.birth_place ? Male.birth_place.longitude : null}</td>
-                  <td className={TDStyle}>Longitude</td>
-                  <td className={TDStyle}>{Female.birth_place ? Female.birth_place.longitude : null}</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>{BothData ? BothData.m_tzone : null}</td>
-                  <td className={TDStyle}>Timezone</td>
-                  <td className={TDStyle}>{BothData ? BothData.f_tzone : null}</td>
-                </tr>
+          <div className="grid grid-cols-2">
+            <div className="mt-5">
+              <table className="rounded-lg overflow-hidden">
+                <tbody>
+                  <tr>
+                    <th className="p-2 bg-blue-900 text-white border-b border-b-white/50" height="33" colspan="3">
+                      <h2>Birth Details</h2>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="p-2 bg-blue-900 text-white border-b border-b-white/50">Male</th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-b-white/50">Birth Details</th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-b-white/50">Female</th>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>{Male.name}</td>
+                    <td className={TDStyle}>Full Name</td>
+                    <td className={TDStyle}>{Female.name}</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>{Male.dob ? formatDatetoShow(Male.dob) : null}</td>
+                    <td className={TDStyle}>Date of Birth</td>
+                    <td className={TDStyle}>{Female.dob ? formatDatetoShow(Female.dob) : null}</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>{formatTime(Male.dob)}</td>
+                    <td className={TDStyle}>Birth Time</td>
+                    <td className={TDStyle}>{formatTime(Female.dob)}</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>{Male.birth_place ? Male.birth_place.city_name : null}</td>
+                    <td className={TDStyle}>Birth Place</td>
+                    <td className={TDStyle}>{Female.birth_place ? Female.birth_place.city_name : null}</td>
+                  </tr>
+                  <tr>
+                      <td className={TDStyle}>{Male.birth_place ? Male.birth_place.latitude : null}</td>
+                    <td className={TDStyle}>Latitude</td>
+                    <td className={TDStyle}>{Female.birth_place ? Female.birth_place.latitude : null}</td>
+                  </tr>
+                  <tr>
+                  <td className={TDStyle}>{Male.birth_place ? Male.birth_place.longitude : null}</td>
+                    <td className={TDStyle}>Longitude</td>
+                    <td className={TDStyle}>{Female.birth_place ? Female.birth_place.longitude : null}</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>{BothData ? BothData.m_tzone : null}</td>
+                    <td className={TDStyle}>Timezone</td>
+                    <td className={TDStyle}>{BothData ? BothData.f_tzone : null}</td>
+                  </tr>
 
-                {/* <tr>
-                  <td className={TDStyle}>7:3:2</td>
-                  <td className={TDStyle}>Sunrise</td>
-                  <td className={TDStyle}>5:36:16</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>18:6:33</td>
-                  <td className={TDStyle}>Sunset</td>
-                  <td className={TDStyle}>19:17:46</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>23.844659528138</td>
-                  <td className={TDStyle}>Ayanamsha</td>
-                  <td className={TDStyle}>23.848055991986</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>Vipra</td>
-                  <td className={TDStyle}>Varna</td>
-                  <td className={TDStyle}>Shoodra</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>Keetak</td>
-                  <td className={TDStyle}>Vashya</td>
-                  <td className={TDStyle}>Maanav</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>Mrig</td>
-                  <td className={TDStyle}>Yoni</td>
-                  <td className={TDStyle}>Ashwa</td>
-                </tr>
-                <tr>
-                  <td className={TDStyle}>Rakshasa</td>
-                  <td className={TDStyle}>Gan</td>
-                  <td className={TDStyle}>Rakshasa</td>
-                </tr> */}
-              </tbody>
-            </table>
+                  {/* <tr>
+                    <td className={TDStyle}>7:3:2</td>
+                    <td className={TDStyle}>Sunrise</td>
+                    <td className={TDStyle}>5:36:16</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>18:6:33</td>
+                    <td className={TDStyle}>Sunset</td>
+                    <td className={TDStyle}>19:17:46</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>23.844659528138</td>
+                    <td className={TDStyle}>Ayanamsha</td>
+                    <td className={TDStyle}>23.848055991986</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>Vipra</td>
+                    <td className={TDStyle}>Varna</td>
+                    <td className={TDStyle}>Shoodra</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>Keetak</td>
+                    <td className={TDStyle}>Vashya</td>
+                    <td className={TDStyle}>Maanav</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>Mrig</td>
+                    <td className={TDStyle}>Yoni</td>
+                    <td className={TDStyle}>Ashwa</td>
+                  </tr>
+                  <tr>
+                    <td className={TDStyle}>Rakshasa</td>
+                    <td className={TDStyle}>Gan</td>
+                    <td className={TDStyle}>Rakshasa</td>
+                  </tr> */}
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <div className="mt-5">
+                  <div>
+                    <p className="font-bold uppercase mb-2">Ashtakoota Percentage</p>
+                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
+                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.ashtakoota_percentage}%] h-full `}></div>
+                      <p className="absolute r-0">{MatchPercentage.ashtakoota_percentage}%</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
           </div>
           <div className="mt-5">
             <button onClick={()=> fetchChart("D1", undefined)} className="p-2 px-4 bg-blue-500 text-white">Birth(Lagna) Chart</button>
@@ -262,38 +281,38 @@ console.log(AshtakootPoints)
             </div>
           <div className="mt-5">
           {AshtakootPoints ? (
-  <div>
-    <table className="w-full rounded-lg overflow-hidden">
-      <tbody>
-        <tr>
-          <th className="p-2 bg-blue-900 text-white border-b border-white/50"></th>
-          <th className="p-2 bg-blue-900 text-white border-b border-white/50">Description</th>
-          <th className="p-2 bg-blue-900 text-white border-b border-white/50">Male Attribute</th>
-          <th className="p-2 bg-blue-900 text-white border-b border-white/50">Female Attribute</th>
-          <th className="p-2 bg-blue-900 text-white border-b border-white/50">Received Points</th>
-          <th className="p-2 bg-blue-900 text-white border-b border-white/50">Total Points</th>
-        </tr>
-        {Object.entries(AshtakootPoints).map(([key, value]) => ((
-             <tr key={key}>
-             <td className="text-sm bg-blue-700 p-2 text-white border-b capitalize border-b-white/50">{key}</td>
-             {key === "conclusion" ? (
-               <td colSpan={5} className="text-sm bg-blue-700 p-2 text-white border-b capitalize border-b-white/50">{value.report}</td>
-             ) : (
-               <>
-                 <td className="text-sm bg-blue-700 p-2 text-white border-b capitalize border-b-white/50">{value.description}</td>
-                 <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.male_koot_attribute}</td>
-                 <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.female_koot_attribute}</td>
-                 <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.received_points}</td>
-                 <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.total_points}</td>
-               </>
-             )}
-           </tr>
-          )
-        ))}
-      </tbody>
-    </table>
-  </div>
-) : null}
+            <div>
+              <table className="w-full rounded-lg overflow-hidden">
+                <tbody>
+                  <tr>
+                    <th className="p-2 bg-blue-900 text-white border-b border-white/50"></th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-white/50">Description</th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-white/50">Male Attribute</th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-white/50">Female Attribute</th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-white/50">Received Points</th>
+                    <th className="p-2 bg-blue-900 text-white border-b border-white/50">Total Points</th>
+                  </tr>
+                  {Object.entries(AshtakootPoints).map(([key, value]) => ((
+                      <tr key={key}>
+                      <td className="text-sm bg-blue-700 p-2 text-white border-b capitalize border-b-white/50">{key}</td>
+                      {key === "conclusion" ? (
+                        <td colSpan={5} className="text-sm bg-blue-700 p-2 text-white border-b capitalize border-b-white/50">{value.report}</td>
+                      ) : (
+                        <>
+                          <td className="text-sm bg-blue-700 p-2 text-white border-b capitalize border-b-white/50">{value.description}</td>
+                          <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.male_koot_attribute}</td>
+                          <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.female_koot_attribute}</td>
+                          <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.received_points}</td>
+                          <td className="text-sm bg-blue-700 p-2 text-white border-b border-b-white/50">{value.total_points}</td>
+                        </>
+                      )}
+                    </tr>
+                    )
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            ) : null}
             </div>
           </div>
         </div>

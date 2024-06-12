@@ -26,7 +26,7 @@ export default function Cart() {
     const [ProductRemoved, setProductRemoved] = useState("")
     const [ProductAdding, setProductAdding] = useState(false)
     const [cartId, setcartId] = useState("")
-    
+    console.log("products", products);
     useEffect(() => {
         if (products && products.length > 0) {
             setcartId(products[0].cartId);
@@ -125,18 +125,29 @@ export default function Cart() {
           const data = await response.json();
           if(data.success === true){
             setProductRemoving(false)
-            setProductRemoved(prevState => [...prevState, dataToAdd.removeProduct]);
+            // setProductRemoved(prevState => [...prevState, dataToAdd.removeProduct]);
+            dispatch(removeProduct(reportID));
           }
           if(data.data){
-            if(data.data.length > 0){
-              data.data.map((item)=>{
-                dispatch(addProduct(item));
-                dispatch(toggleGetProduct());
-              })
+            console.log("Data", data.data)
+            if(data.data && Array.isArray(data.data)){
+                data.data.map((item)=>{
+                    dispatch(addProduct(item));
+                    dispatch(toggleGetProduct());
+                })
             }else{
-              dispatch(addProduct(data.data));
-              dispatch(toggleGetProduct());
+                dispatch(addProduct(data.data));
+                dispatch(toggleGetProduct());
             }
+
+            // if(data.data.length > 0){
+            //     data.data.map((item)=>{
+            //         dispatch(addProduct(item));
+            //   })
+            // }else{
+            //   dispatch(addProduct(data.data));
+            //   dispatch(toggleGetProduct());
+            // }
             }
             setProductRemoving(false)
         } catch (error) {
@@ -323,11 +334,6 @@ export default function Cart() {
                                     </>:<></>}
                                 </li>
                             :null
-
-
-
-
-                            
                         ))}
                     </ul>
                 </section>
