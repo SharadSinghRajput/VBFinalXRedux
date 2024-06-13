@@ -110,10 +110,10 @@ export default function Questions({language = "English"}) {
             </div>
             <div className='flex '>
                 <div className="flex gap-[2px] w-full">
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>सेवाएं</> : <>Services</>}</button>
-                    <button onClick={()=> router.push('/services.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त में<br/>उत्तर पाएं</> : <>Ask a <br/>Free question?</>}</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त कुंडली</> : <>Free Kundli</>}</button>
-                    <button onClick={()=> router.push('/kundli.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त <br /> राशिफल</> : <>Free Horoscope <br /> Matching</>}</button>
+                    <button onClick={()=> router.push('/services.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>सेवाएं</> : <>Services</>}</button>
+                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त में<br/>उत्तर पाएं</> : <>Ask a <br/>Free question?</>}</button>
+                    <button onClick={()=> router.push('/kundli.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त कुंडली</> : <>Free Kundli</>}</button>
+                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त <br /> राशिफल</> : <>Free Horoscope <br /> Matching</>}</button>
                     <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>अपनी चंद्र<br />राशि जानें</> : <>Know your<br />Moon sign</>}</button>
                     <button onClick={()=> router.push('/today-panchang.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>आज का<br />पंचांग</> : <>Today's<br />Panchang</>}</button>
                 </div>

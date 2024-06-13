@@ -33,7 +33,7 @@ export default function DynamicPage() {
   const [PageComponent, setPageComponent] = useState(null);
   const [DataComponentWise, setDataComponentWise] = useState("")
   const [ShowMiniCartStyle, setShowMiniCartStyle] = useState(false)
-  console.log(DataComponentWise);
+  console.log("ShowMiniCartStyle", ShowMiniCartStyle);
   
   useEffect(() => {
     
@@ -42,6 +42,7 @@ export default function DynamicPage() {
       const lastValOfURL = slug[slug.length - 1];
       const modifiedSlug = AllSlug.substring(1);
       setShowMiniCartStyle(lastValOfURL);
+      console.log(lastValOfURL);
       // if(lastValOfURL === "cart" || lastValOfURL === "place-order"){
       // }
       // const lastValOfURL = slug[slug.length - 1];
@@ -70,7 +71,6 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
-          console.log(responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){
@@ -155,8 +155,9 @@ export default function DynamicPage() {
             <PopularReports />
           )}
         <PageComponent data={DataComponentWise} />
-        <MiniCart Design={ShowMiniCartStyle} />
-        <AllSideBar />
+        {ShowMiniCartStyle !== "hindi" ?
+          <> <MiniCart Design={ShowMiniCartStyle} /> <AllSideBar /> </>
+        : <></>}
         <LanguageSelector data={DataComponentWise} />
         {DataComponentWise ? (
           DataComponentWise.language === "Hindi" ? (
