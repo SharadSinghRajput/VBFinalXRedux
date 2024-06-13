@@ -22,9 +22,11 @@ export default function KaalsarpDoshReport({ data }) {
   const [Chart, setChart] = useState("");
   const [FemaleChart, setFemaleChart] = useState("");
   const [MatchPercentage, setMatchPercentage] = useState("");
+  const [MaleAstro, setMaleAstro] = useState("");
+  const [FemaleAstro, setFemaleAstro] = useState("");
+  const [ActiveChartBtn, setActiveChartBtn] = useState("");
 
-
-console.log(AshtakootPoints)
+console.log(AshtakootPoints);
   useEffect(() => {
     const fetchData = async () => {
       const MaleData = getLocalStorageItem("HMMaleKey");
@@ -45,10 +47,25 @@ console.log(AshtakootPoints)
             lon: GetData.m_lon,
             tzone: GetData.m_tzone,
        }
+       const FD = {
+          day: GetData.f_day,
+          month: GetData.f_month,
+          year: GetData.f_year,
+          hour: GetData.f_hour,
+          min: GetData.f_min,
+          lat: GetData.f_lat,
+          lon: GetData.f_lon,
+          tzone: GetData.f_tzone,
+       }
        fetchChart("D1", GetData)
         try {
           const AshtakootPoints = await fetchAstrologyData(GetData, "match_ashtakoot_points");
           const match_percentage = await fetchAstrologyData(GetData, "match_percentage");
+          const Male_astro_details = await fetchAstrologyData(MD, "astro_details");
+          const Female_astro_details = await fetchAstrologyData(FD, "astro_details");
+
+          setFemaleAstro(Female_astro_details);
+          setMaleAstro(Male_astro_details);
           setAshtakootPoints(AshtakootPoints);
           setMatchPercentage(match_percentage);
         } catch (error) {}
@@ -59,7 +76,7 @@ console.log(AshtakootPoints)
 
 
   const fetchChart = async (ChartID, Data) => {
-
+    setActiveChartBtn(ChartID)
     const MD = {
         day: BothData.m_day !== undefined ? BothData.m_day : Data.m_day,
         month: BothData.m_month !== undefined ? BothData.m_month : Data.m_month,
@@ -136,30 +153,45 @@ console.log(AshtakootPoints)
     <>
       <div className="">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
-          <h1 className="p-4 bg-blue-500 text-white uppercase font-bold text-xl">
-            Matching Report
-          </h1>
-
-          <div className="shadow-lg p-5">
-            <p className="text-base text-gray-800">
-              {Male.name} width {Female.name}
-            </p>
-            {Male.dob ? (
-              <p className="text-base text-gray-800">
-                {formatDate(Male.dob)}
-                {", "}
-                {Male.birth_place ? Male.birth_place.city_name : null}
-              </p>
-            ) : null}
-            {Female.dob ? (
-              <p className="text-base text-gray-800">
-                {formatDate(Female.dob)}
-                {", "}
-                {Female.birth_place ? Female.birth_place.city_name : null}
-              </p>
-            ) : null}
+          <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+            <div className="h-full shadow-lg bg-white">
+              <h1 className="p-4 bg-blue-500 text-white uppercase font-bold text-xl"> Matching Report</h1>
+              <div className="p-5">
+                <p className="text-base text-gray-800">
+                  {Male.name} width {Female.name}
+                </p>
+                {Male.dob ? (
+                  <p className="text-base text-gray-800">
+                    {formatDate(Male.dob)}
+                    {", "}
+                    {Male.birth_place ? Male.birth_place.city_name : null}
+                  </p>
+                ) : null}
+                {Female.dob ? (
+                  <p className="text-base text-gray-800">
+                    {formatDate(Female.dob)}
+                    {", "}
+                    {Female.birth_place ? Female.birth_place.city_name : null}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+            <div className="h-full shadow-lg bg-white">
+              <h1 className="p-4 bg-blue-500 text-white uppercase font-bold text-xl"> Match SUMMARY</h1>
+              <div className="p-5">
+                <p className="text-base text-gray-800"> Male Nakshatra : {MaleAstro.Naksahtra} </p>
+                <p className="text-base text-gray-800"> Female Nakshatra : {FemaleAstro.Naksahtra}</p>
+                {AshtakootPoints ?
+                  <p className="text-lg font-bold text-gray-800"> Matching Point: 
+                  <span className="bg-orange-500 p-1 px-2 text-white">
+                    {AshtakootPoints.total ? AshtakootPoints.total.received_points : null}/{AshtakootPoints.total ? AshtakootPoints.total.total_points : null}
+                  </span>
+                  </p>
+                : null }
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="mt-5">
               <table className="rounded-lg overflow-hidden">
                 <tbody>
@@ -248,23 +280,53 @@ console.log(AshtakootPoints)
               </table>
             </div>
             <div>
-              <div className="mt-5">
+              <div className="mt-5 flex flex-col gap-5">
+                {MatchPercentage.ashtakoota_percentage ?
                   <div>
                     <p className="font-bold uppercase mb-2">Ashtakoota Percentage</p>
                     <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
                       <div className={`absolute bg-orange-500 w-[${MatchPercentage.ashtakoota_percentage}%] h-full `}></div>
-                      <p className="absolute r-0">{MatchPercentage.ashtakoota_percentage}%</p>
+                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.ashtakoota_percentage}%</p>
                     </div>
                   </div>
+                : null}
+                {MatchPercentage.manglik_match_percentage ?
+                  <div>
+                    <p className="font-bold uppercase mb-2">Manglik Match Percentage</p>
+                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
+                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.manglik_match_percentage}%] h-full `}></div>
+                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.manglik_match_percentage}%</p>
+                    </div>
+                  </div>
+                : null}
+                {MatchPercentage.rajju_match_percentage ?
+                  <div>
+                    <p className="font-bold uppercase mb-2">Rajju Match Percentage</p>
+                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
+                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.rajju_match_percentage}%] h-full `}></div>
+                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.rajju_match_percentage}%</p>
+                    </div>
+                  </div>
+                : null}
+                {MatchPercentage.match_percentage ?
+                  <div>
+                    <p className="font-bold uppercase mb-2">Match Percentage</p>
+                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
+                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.match_percentage}%] h-full `}></div>
+                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.match_percentage}%</p>
+                    </div>
+                  </div>
+                : null}
+                
               </div>
             </div>
           </div>
           <div className="mt-5">
-            <button onClick={()=> fetchChart("D1", undefined)} className="p-2 px-4 bg-blue-500 text-white">Birth(Lagna) Chart</button>
-            <button onClick={()=> fetchChart("MOON", undefined)} className="p-2 px-4 bg-blue-500 text-white">Moon Chart</button>
-            <button onClick={()=> fetchChart("D9", undefined)} className="p-2 px-4 bg-blue-500 text-white">Navmansha Chart</button>
+            <button onClick={()=> fetchChart("D1", undefined)} className={`${ActiveChartBtn === "D1" ? "bg-blue-800" : "bg-blue-500"} p-2 px-4 text-white`}>Birth(Lagna) Chart</button>
+            <button onClick={()=> fetchChart("MOON", undefined)} className={`${ActiveChartBtn === "MOON" ? "bg-blue-800" : "bg-blue-500"} p-2 px-4 text-white`}>Moon Chart</button>
+            <button onClick={()=> fetchChart("D9", undefined)} className={`${ActiveChartBtn === "D9" ? "bg-blue-800" : "bg-blue-500"} p-2 px-4 text-white`}>Navmansha Chart</button>
             <div className="mt-5">
-                <div className="flex justify-start items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {Chart.svg ? <>
                     <div>
                         <p>{Male.name}</p>
@@ -281,8 +343,10 @@ console.log(AshtakootPoints)
             </div>
           <div className="mt-5">
           {AshtakootPoints ? (
-            <div>
-              <table className="w-full rounded-lg overflow-hidden">
+             <div className="mt-8 flow-root">
+             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+               <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <table className="min-w-full divide-y divide-gray-300">
                 <tbody>
                   <tr>
                     <th className="p-2 bg-blue-900 text-white border-b border-white/50"></th>
@@ -311,6 +375,8 @@ console.log(AshtakootPoints)
                   ))}
                 </tbody>
               </table>
+            </div>
+            </div>
             </div>
             ) : null}
             </div>
