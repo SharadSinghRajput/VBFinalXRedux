@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import {lifesProblems} from "../config/json/lifesProblems"
 import {VedicAstrologyCalculators} from "../config/json/VedicAstrologyCalculators"
 
-
+import { MAIN_URL,MAIN_URL_HINDI } from '../config/config';
 
 
 
@@ -81,12 +81,12 @@ const ServicesNew = [
       { id: 'RepFemale', title: 'Female' },
   ]
   
-export default function Kundli() {
+export default function Kundli({data}) {
     const router = useRouter();
     const [tabActive, settabActive] = useState('Kundali');
     const [KundaliReport, setKundaliReport] = useState('');
     const [UserInfo, setUserInfo] = useState('');
-
+    const [mainURL, setMainURL] = useState(MAIN_URL);
 
     const handleSubmit = async () => {
         const savedInputValueNew = getLocalStorageItem('KundliFromDataKey');
@@ -125,7 +125,10 @@ export default function Kundli() {
 
       useEffect(()=>{
           GetUserData()
-      },[])
+          if(data?.language=== "Hindi"){
+            setMainURL(MAIN_URL_HINDI)
+          }
+      },[data?.language])
 
 
       function formatDateString(inputDateStr) {
@@ -144,6 +147,11 @@ export default function Kundli() {
         hours = hours ? hours : 12; 
         return day + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month] + ' ' + year + ', ' + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
     }
+
+    const handleClick = (e, url) => {
+        e.preventDefault(); // Prevent the default anchor behavior
+        router.push(`${mainURL}${url}`);
+    };
   
   return (
     <div className="">
@@ -327,7 +335,11 @@ export default function Kundli() {
                     {KundliCalculation.map((item, index) => (
                         <SwiperSlide key={index}>   
                             <div className="w-full mx-auto mb-5 shadow-lg border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
-                                <a href="#" className="block flex gap-4 min-h-16 flex-row justify-start items-center">
+                                <a 
+                                    href={`${mainURL}${item.link}`}
+                                    onClick={(e) => handleClick(e, item.link)}
+                                    className="block flex gap-4 min-h-16 flex-row justify-start items-center"
+                                >
                                     <Image width={40} height={40} src={item.image} alt={item.name} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' />
                                     <h5 className="text-orange-600 text-sm text-left font-bold">{item.name}</h5>
                                 </a>
@@ -341,7 +353,11 @@ export default function Kundli() {
                 <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5'>
                     {KundliDosha.map((item, index) => (
                         <div key={index} className="w-full mx-auto shadow-xl border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
-                            <a href="#" className="block flex gap-4 min-h-16 flex-row justify-start items-center">
+                            <a 
+                                href={`${mainURL}${item.link}`}
+                                onClick={(e) => handleClick(e, item.link)}
+                                className="block flex gap-4 min-h-16 flex-row justify-start items-center"
+                            >
                                 <Image width={50} height={50} src={item.image} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' alt={item.name} />
                                 <h5 className="text-orange-600 text-sm text-left font-bold">{item.name}</h5>
                             </a>
@@ -383,7 +399,11 @@ export default function Kundli() {
                             >
                             {lifesProblems.map((item, index) => (
                                 <SwiperSlide key={index}>
-                                    <a className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center" href={item.url}>
+                                    <a 
+                                        className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
+                                        href={`${mainURL}${item.url}`}
+                                        onClick={(e) => handleClick(e, item.url)}
+                                    >
                                     <Image src={item.img} width={80} height={50} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-lg' alt={item.name} />
                                         <span>{item.name}</span>
                                     </a>    
@@ -403,17 +423,21 @@ export default function Kundli() {
                             <dl className="-my-3 divide-y divide-orange-100 px-6 py-4 text-sm leading-6">
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Rudraksha for your Kundli</dt>
-                                    <dd className="text-emerald-500 font-semibold ">
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"calculator/rudraksha-suggestion.php"}`}
+                                        onClick={(e) => handleClick(e, "calculator/rudraksha-suggestion.php")}
+                                    >
                                         Read more
-                                    </dd>
+                                    </a>
                                 </div>
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Which gemstones you can wear? </dt>                                    
-                                    <dd className="flex items-start gap-x-2">
-                                        <dd className="text-emerald-500 text-sm font-semibold ">
-                                            Read More
-                                        </dd>
-                                    </dd>
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"calculator/gemstone-suggestion.php"}`}
+                                        onClick={(e) => handleClick(e, "calculator/gemstone-suggestion.php")}
+                                    >
+                                        Read more
+                                    </a>
                                 </div>
                             </dl>
                         </li>
@@ -424,25 +448,31 @@ export default function Kundli() {
                             <dl className="-my-3 divide-y divide-orange-100 px-6 py-4 text-sm leading-6">
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Your kundli based daily prediction</dt>
-                                    <dd className="text-emerald-500 font-semibold ">
+                                    <a
+                                        className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"daily-personalised-forecast.php"}`}
+                                        onClick={(e) => handleClick(e, "daily-personalised-forecast.php")}
+                                    >
                                         Read more
-                                    </dd>
+                                    </a>
                                 </div>
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Your Biorhythms for today  </dt>                                    
-                                    <dd className="flex items-start gap-x-2">
-                                        <dd className="text-emerald-500 font-semibold ">
-                                            Read More
-                                        </dd>
-                                    </dd>
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"biorhythm.php"}`}
+                                        onClick={(e) => handleClick(e, "biorhythm.php")}
+                                    >
+                                        Read more
+                                    </a>
                                 </div>
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Get your ascendant report</dt>
-                                    <dd className="flex items-start gap-x-2">
-                                        <dd className="text-emerald-500 font-semibold ">
-                                            Read More
-                                        </dd>
-                                    </dd>
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"calculator/ascendant-report.php"}`}
+                                        onClick={(e) => handleClick(e, "calculator/ascendant-report.php")}
+                                    >
+                                        Read more
+                                    </a>
                                 </div>
                             </dl>
                         </li>
@@ -453,26 +483,30 @@ export default function Kundli() {
                             <dl className="-my-3 divide-y divide-orange-100 px-6 py-4 text-sm leading-6">
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Read your kundli predictions here </dt>
-                                    
-                                    <dd className="text-emerald-500 font-semibold ">
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"kundli-predictions.php"}`}
+                                        onClick={(e) => handleClick(e, "kundli-predictions.php")}
+                                    >
                                         Read more
-                                    </dd>
+                                    </a>
                                 </div>
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Numerology analysis for you</dt>                                    
-                                    <dd className="flex items-start gap-x-2">
-                                        <dd className="text-emerald-500 font-semibold ">
-                                            Read More
-                                        </dd>
-                                    </dd>
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"calculator/numerology-calculator.php"}`}
+                                        onClick={(e) => handleClick(e, "calculator/numerology-calculator.php")}
+                                    >
+                                        Read more
+                                    </a>
                                 </div>
                                 <div className="flex justify-between gap-x-4 py-3">
                                     <dt className="text-gray-500">Numerology Favorable Points</dt>
-                                    <dd className="flex items-start gap-x-2">
-                                        <dd className="text-emerald-500 font-semibold ">
-                                            Read More
-                                        </dd>
-                                    </dd>
+                                    <a className="text-emerald-500 font-semibold" 
+                                        href={`${mainURL}${"favorable-points.php"}`}
+                                        onClick={(e) => handleClick(e, "favorable-points.php")}
+                                    >
+                                        Read more
+                                    </a>
                                 </div>
                             </dl>
                         </li>
@@ -485,7 +519,11 @@ export default function Kundli() {
                     <ul className="flex flex-row flex-wrap gap-4 pt-4 pb-4 justify-center">
                         {VedicAstrologyCalculators.map((item) => (
                         <li key={item.name} className="lg:w-[9%] md:w-[15%] w-[28%]">
-                            <a className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center" href={item.url}>
+                            <a 
+                                className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
+                                href={`${mainURL}${item.link}`}
+                                onClick={(e) => handleClick(e, item.link)}
+                            >
                                 <Image width={100} height={50} className="w-[100px] aspect-square rounded-[50px]" src={item.imageUrl} alt={item.name} />
                                 <span>{item.text}</span>
                             </a>    
