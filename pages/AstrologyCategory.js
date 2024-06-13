@@ -15,6 +15,7 @@ import BreadCrumb from "./component/BreadCrumb";
 import Holder from './pageAssets/Holder';
 import { useRouter } from 'next/router';
 import placeholderImage from "./assets/images/default-image.png";
+import { MAIN_URL, MAIN_URL_HINDI } from '../config/config';
 
 export default function ArticleDetails({data}) {
     const router = useRouter();
@@ -59,10 +60,10 @@ export default function ArticleDetails({data}) {
                   </div>
                 </>:<></>}
                     {data.nestedPages ? <>
-                    <div className="flex flex-wrap gap-5 mb-5">
+                    <div className="flex flex-wrap gap-5 mb-5 mt-5">
                         {data.nestedPages.map((item, index) => (
                             <a key={index} 
-                              href={`${item?.path}`}
+                              href={MAIN_URL + item?.path}
                               onClick={(e) => handleClickRouter(e, item?.path)}
                               className="w-40 flex-col flex justify-center items-center shadow-lg p-2 rounded-lg">    
                             {item.featuredImage ?

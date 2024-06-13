@@ -33,7 +33,7 @@ export default function DynamicPage() {
   const [PageComponent, setPageComponent] = useState(null);
   const [DataComponentWise, setDataComponentWise] = useState("")
   const [ShowMiniCartStyle, setShowMiniCartStyle] = useState(false)
-  console.log("ShowMiniCartStyle", ShowMiniCartStyle);
+  
   
   useEffect(() => {
     
@@ -71,6 +71,7 @@ export default function DynamicPage() {
             body: JSON.stringify(data)
           });
           const responseData = await response.json();
+          console.log(responseData);
           if (responseData.success === true) {
             if (responseData.data) {
               if(responseData.data[0].componentToShow){
