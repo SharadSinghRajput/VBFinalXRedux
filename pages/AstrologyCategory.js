@@ -66,23 +66,23 @@ export default function ArticleDetails({data}) {
                               href={MAIN_URL + item?.path}
                               onClick={(e) => handleClickRouter(e, item?.path)}
                               className="w-40 flex-col flex justify-center items-center shadow-lg p-2 rounded-lg">    
-                            {item.featuredImage ?
+                              {item.featuredImage ?
                                 <img
                                     src={item.featuredImage}
                                     alt=""
                                     title=""
                                     class="w-16 h-16 object-cover rounded-full block" />
-                            :
-                            <Image
-                                src={placeholderImage}
-                                alt="Placeholder Image"
-                                width={64}
-                                height={64}
-                                className="w-16 h-16 object-cover rounded-full block"
-                                priority
-                                />
-                            }
-                                <h5 className="text-sm mt-2">{item.name}</h5>
+                              :
+                              <Image
+                                  src={placeholderImage}
+                                  alt="Placeholder Image"
+                                  width={64}
+                                  height={64}
+                                  className="w-16 h-16 object-cover rounded-full block"
+                                  priority
+                                  />
+                              }
+                                <h5 className="text-sm mt-2 text-center">{item.name}</h5>
                             </a>
                         ))}
                     </div>
