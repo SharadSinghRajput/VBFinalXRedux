@@ -15,7 +15,7 @@ import {lifesProblems} from "../config/json/lifesProblems"
 import {VedicAstrologyCalculators} from "../config/json/VedicAstrologyCalculators"
 import moonsignm from "./assets/images/moonsign.png";
 import questionimg from "./assets/images/question.png";
-import {MAIN_URL} from '../config/config'
+
 
 import { MAIN_URL,MAIN_URL_HINDI } from '../config/config';
 
