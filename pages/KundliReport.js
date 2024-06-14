@@ -13,6 +13,9 @@ import { RightArrow, User, Date } from '../config/SvgConst';
 import { useRouter } from 'next/router';
 import {lifesProblems} from "../config/json/lifesProblems"
 import {VedicAstrologyCalculators} from "../config/json/VedicAstrologyCalculators"
+import moonsignm from "./assets/images/moonsign.png";
+import questionimg from "./assets/images/question.png";
+import {MAIN_URL} from '../config/config'
 
 import { MAIN_URL,MAIN_URL_HINDI } from '../config/config';
 
@@ -148,10 +151,11 @@ export default function Kundli({data}) {
         return day + ' ' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month] + ' ' + year + ', ' + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
     }
 
-    const handleClick = (e, url) => {
-        e.preventDefault(); // Prevent the default anchor behavior
-        router.push(`${mainURL}${url}`);
-    };
+  const handleClickRouter = (e, url) => {
+    e.preventDefault();
+    router.push(`${MAIN_URL}${url}`);
+  };
+
   
   return (
     <div className="">
@@ -297,11 +301,21 @@ export default function Kundli({data}) {
                             </div>
                             ))}
                         </div>
-                        <button onClick={()=>router.push('astrology-news.php')} className="bg-white w-full mt-3 flex items-center justify-evenly rounded-lg p-2">
-                            <Image width={40} height={40} className="w-10" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
-                            <h3 className="text-lg font-bold">Astrology News and Articles</h3>
-                        </button>
-                        <div></div>
+                        <div className='grid grid-cols-1 md:grid-cols-4 gap-5 mt-5'>
+                            <button  onClick={()=>router.push('astrology-news.php')} className="p-2 bg-white rounded-lg flex gap-5 items-center w-full justify-center md:col-span-2">
+                                <Image width={30} height={30} className="w-6" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
+                                <h3 className="text-lg font-bold">Astrology News and Articles</h3>
+                            </button>
+                            <button
+                                className="p-2 bg-white rounded-lg flex items-center w-full justify-start">
+                                <Image src={questionimg} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
+                                <p className="text-sm font-semibold">Ask a question</p>
+                            </button>
+                                <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="p-2 bg-white rounded-lg flex items-center w-full justify-start">
+                                <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
+                                <p className="text-sm font-semibold">Know your moon sign</p>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -335,11 +349,10 @@ export default function Kundli({data}) {
                     {KundliCalculation.map((item, index) => (
                         <SwiperSlide key={index}>   
                             <div className="w-full mx-auto mb-5 shadow-lg border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
-                                <a 
-                                    href={`${mainURL}${item.link}`}
-                                    onClick={(e) => handleClick(e, item.link)}
-                                    className="block flex gap-4 min-h-16 flex-row justify-start items-center"
-                                >
+                                <a
+                                    href={`${MAIN_URL}${item.link}`}
+                                    onClick={(e) => handleClickRouter(e, item.link)}
+                                    className="gap-4 min-h-16 flex flex-row justify-start items-center">
                                     <Image width={40} height={40} src={item.image} alt={item.name} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' />
                                     <h5 className="text-orange-600 text-sm text-left font-bold">{item.name}</h5>
                                 </a>
@@ -354,10 +367,9 @@ export default function Kundli({data}) {
                     {KundliDosha.map((item, index) => (
                         <div key={index} className="w-full mx-auto shadow-xl border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
                             <a 
-                                href={`${mainURL}${item.link}`}
-                                onClick={(e) => handleClick(e, item.link)}
-                                className="block flex gap-4 min-h-16 flex-row justify-start items-center"
-                            >
+                            href={`${MAIN_URL}${item.link}`}
+                            onClick={(e) => handleClickRouter(e, item.link)}
+                             className="block flex gap-4 min-h-16 flex-row justify-start items-center">
                                 <Image width={50} height={50} src={item.image} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' alt={item.name} />
                                 <h5 className="text-orange-600 text-sm text-left font-bold">{item.name}</h5>
                             </a>
