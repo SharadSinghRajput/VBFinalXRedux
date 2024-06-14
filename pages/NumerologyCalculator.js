@@ -34,7 +34,7 @@ export default function Kundli({ data }) {
                 <Image src={GlobImg} width={100} height={100} />
               </div>
               <div className="p-10 bg-gray-100">
-                <CalculatorForm routing={"/calculator/numerology-calculator.php"} />
+                <CalculatorForm routing={"/calculator/numerology-report.php"} />
               </div>
             </div>
 

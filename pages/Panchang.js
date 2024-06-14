@@ -173,7 +173,7 @@ const handleClick = (e, url) => {
             <a
               type="button"
               className="rounded text-xs bg-orange-500 px-2 py-2 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              href={`${mainURL}`}
+              href={`/today-panchang.php`}
               onClick={(e) => handleClick(e, "#")}
             >
                 {

@@ -412,9 +412,6 @@ export default function Cart() {
               return;
             }
             
-          
-
-
         console.log("DataforForm", DataforForm)
         const apiUrl = `${API_NEW_URL}order-api.php`
         try { 

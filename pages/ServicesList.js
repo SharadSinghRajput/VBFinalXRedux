@@ -8,34 +8,46 @@ import Description from './pageAssets/Description';
 import MetaData from './pageAssets/MetaData';
 import Holder from './pageAssets/Holder';
 import { useRouter } from 'next/router';
+import { MAIN_URL, MAIN_URL_HINDI} from "../config/config";
 
 const Services = [
     {
       name : "CONSULTATION",
+      nameHindi : "परामर्श",
       link : "services/consultation.php",
-      image_url : "upload/category_img/12_Consultation MAIN.webp"
+      linkHindi : "hindi/services/consultation.php",
+      image_url : "upload/category_img/12_Consultation MAIN.webp",
+      image_urlHindi : "upload/category_img/12_Consultation.webp"
     },
     {
       name : "ONLINE REPORT",
+      nameHindi : "ऑनलाइन रिपोर्ट",
       link : "services/online-reports.php",
-      image_url : "upload/category_img/1_OLR main.webp"
+      linkHindi : "hindi/services/online-reports.php",
+      image_url : "upload/category_img/1_OLR main.webp",
+      image_urlHindi : "upload/category_img/1_online report.webp"
     },
     {
       name : "VOICE REPORT",
+      nameHindi : "औडियो रिपोर्ट",
       link : "services/voice-report.php",
-      image_url : "upload/category_img/14_VR MAIN.webp"
+      linkHindi : "hindi/services/voice-report.php",
+      image_url : "upload/category_img/14_VR MAIN.webp",
+      image_urlHindi : "upload/category_img/14_voice report.webp"
     },
     {
       name : "LIFE READINGS",
+      nameHindi : "जीवन का विश्लेषण",
       link : "services/life-readings.php",
-      image_url : "upload/category_img/17_lifr readings.webp"
+      linkHindi : "hindi/services/life-readings.php",
+      image_url : "upload/category_img/17_lifr readings.webp",
+      image_urlHindi : "upload/category_img/17_life readings.webp"
     }
   ]
 
 
 export default function DefaultPage({data}) {
     const router = useRouter();
-
   return (
     <>
     <MetaData data={data} />
@@ -53,13 +65,23 @@ export default function DefaultPage({data}) {
                 <Title titleData={data.title} />
             </>:<></>}
 
-            <div className="grid grid-cols-4 gap-5 mb-5 mt-5">
+            <div className='grid grid-cols-2  md:grid-cols-4   gap-4 mt-5'>
                 {Services.map((item, index) => (
                     <div className="" key={index}>
-                        <button className='bg-orange-200' onClick={() => router.push(item.link)}>
-                            <img src={item.image_url}  />
-                            <h4 className="text-base font-bold px-2 py-4">{item.name}</h4>
-                        </button>
+                        {data?.language === "Hindi" ?
+                        <>
+                            <button className='bg-orange-200' onClick={() => router.push(item.linkHindi)}>
+                                <img src={MAIN_URL + item.image_urlHindi}  />
+                                <h4 className="text-base font-bold px-2 py-4">{item.nameHindi}</h4>
+                            </button>
+                        </> :
+                        <>
+                            <button className='bg-orange-200' onClick={() => router.push(item.link)}>
+                                <img src={MAIN_URL + item.image_url}  />
+                                <h4 className="text-base font-bold px-2 py-4">{item.name}</h4>
+                            </button>
+                        </>
+                        }
                     </div>
                 ))}
             </div>
@@ -82,7 +104,9 @@ export default function DefaultPage({data}) {
 
 
             {data.description ?
+            <div className='mt-5'>
                 <Description descData={data.description} />
+            </div>
             :<></>}
 
 

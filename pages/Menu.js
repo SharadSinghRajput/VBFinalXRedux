@@ -13,13 +13,13 @@ import Logo from "./assets/images/logo.png"
 import { Cart, User } from '../config/SvgConst';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchBox from './Search'
+import { MAIN_URL, MAIN_URL_HINDI} from "../config/config";
 
 
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
-  imageUrl:
-  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
   { name: 'Home', href: '#', current: true },
@@ -86,9 +86,9 @@ export default function ContMenuBankComp({data}) {
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">
             <div className="relative flex h-16 justify-between z-50">
               <div className="relative z-10 flex px-2 lg:px-0">
-                <div className="flex flex-shrink-0 items-center">
+                <button onClick={()=> router.push(MAIN_URL)} className="flex flex-shrink-0 items-center">
                     <Image src={Logo} alt="Logo" className="h-12 w-auto" />
-                </div>
+                </button>
               </div>
               <div className="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
                 <div className="w-full sm:max-w-xs">
