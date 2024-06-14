@@ -33,6 +33,8 @@ export default function Questions({language = "English"}) {
 
     Latitude = parseFloat(location.Latitude);
     Longitude = parseFloat(location.Longitude);
+    console.log(Latitude);
+    console.log(Longitude);
 
     if (Latitude && Longitude) {
         function formatDateIn(date) {
@@ -47,6 +49,7 @@ export default function Questions({language = "English"}) {
         const CurrentDate = formatDateIn(new Date());
         const [DatePart] = CurrentDate.split(" ");
         const DateFormateforAstrologyAPI = formatDate(CurrentDate);
+        console.log(DateFormateforAstrologyAPI);
 
         const dataForTimeZone = {
             latitude: Latitude,
@@ -102,6 +105,7 @@ export default function Questions({language = "English"}) {
 
         try {
             const basicPanchang = await fetchAstrologyData(data, "advanced_panchang");
+            console.log(basicPanchang);
             setPanchang(basicPanchang);
         } catch (error) {
             console.error(error);
@@ -114,7 +118,7 @@ useEffect(() => {
     if(language=== "Hindi"){
       setMainURL(MAIN_URL_HINDI)
     }
-}, [MAIN_URL_HINDI, language]);
+}, [language]);
 
 
 function convertTimestamp(timestamp) {
