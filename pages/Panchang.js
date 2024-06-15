@@ -12,7 +12,6 @@ import { setLocalStorageItem } from "../config/localStorage";
 
 export default function Questions({language = "English"}) { 
   const router = useRouter();
-
   const [PanchangD, setPanchang] = useState("");
   const [DatetoShow, setDatetoShow] = useState("");
   const [mainURL, setMainURL] = useState(MAIN_URL);
@@ -20,7 +19,6 @@ export default function Questions({language = "English"}) {
   const GetPanchang = async () => {
     let Latitude;
     let Longitude;
-
     const getUserLocationPromise = () => {
         return new Promise((resolve) => {
             getUserLocation(function (location) {
@@ -124,7 +122,6 @@ useEffect(() => {
 function convertTimestamp(timestamp) {
     // Convert milliseconds to seconds
     let date = new Date(parseInt(timestamp));
-    
     // Format the date to a string
     let formattedDate = date.getFullYear() + '-' +
     ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
@@ -139,7 +136,7 @@ function convertTimestamp(timestamp) {
 
 
 const handleClick = (e, url) => {
-  e.preventDefault(); // Prevent the default anchor behavior
+  e.preventDefault(); 
   router.push(`${mainURL}${url}`);
 };
 
@@ -174,27 +171,21 @@ const handleClick = (e, url) => {
             
           </div>
           <div className="flex justify-end items-start">
-            <a
-              type="button"
-              className="rounded text-xs bg-orange-500 px-2 py-2 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              href={`/today-panchang.php`}
-              onClick={(e) => handleClick(e, "#")}
-            >
-                {
-                  language=== "Hindi" ?
-                  (
-                    <>
-                      विस्तृत पंचांग
-                    </>
-                  ) 
-                  :
-                  (
-                    <>
-                      Detailed Panchang
-                    </>
-                  )
-                }
-            </a>
+            {language=== "Hindi" ?<>
+              <a
+                type="button"
+                className="rounded text-xs bg-orange-500 px-2 py-2 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                href={`${mainURL}today-panchang.php`}
+                onClick={(e) => handleClick(e, `today-panchang.php`)}
+              > विस्तृत पंचांग</a>
+            </>: <>
+              <a
+                type="button"
+                className="rounded text-xs bg-orange-500 px-2 py-2 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                href={`${mainURL}today-panchang.php`}
+                onClick={(e) => handleClick(e, `today-panchang.php`)}
+              > Detailed Panchang </a>
+            </>}
           </div>
         </div>
         <div className="relative mt-3">

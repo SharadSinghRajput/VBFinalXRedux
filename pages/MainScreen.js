@@ -52,7 +52,7 @@ export default function HomePage() {
   
   return (
     <>
-      <div className="max-w-7xl pt-4 pb-10 mx-auto">
+      <div className="max-w-7xl pt-4 pb-10 mx-auto z-0">
         <div className="flex flex-col-reverse md:grid md:grid-cols-2 gap-10">
           <div className="bg-[url('https://www.vinaybajrangi.com/asset_frontend/img/aspBG.png')] p-4 rounded-lg shadow-2xl">
             <h2 className="text-xl text-blue-900 font-bold text-left mb-4"><b>Astrological Solutions</b> for all life's problems</h2>
@@ -135,7 +135,7 @@ export default function HomePage() {
               {peopleSec.map((item, index) => (
                 <SwiperSlide key={index}>
                   <a
-                    className="bg-orange-500 p-2 min-h-32 rounded-lg flex flex-col justify-center items-center"
+                    className="bg-orange-500 p-2 min-h-32 rounded-lg flex flex-col justify-center items-center z-0"
                     href={`${MAIN_URL+item.url}`} 
                     onClick={(e) => handleClick(e, item.url)}
                   >
@@ -163,7 +163,7 @@ export default function HomePage() {
               ))}
             </ul> */}
           </div>
-          <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
+          <div className={`bg-orange-500 p-2 md:p-4 rounded-lg z-0`}>
             <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
             <div className="flex flex-row flex-wrap gap-3 justify-center ">
               {Horoscope.map((person) => (

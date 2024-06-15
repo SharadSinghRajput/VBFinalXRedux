@@ -20,7 +20,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function AskQueForm({ data }) {
+export default function AskQueForm({ data, role }) {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [SearchLocation, setSearchLocation] = useState("");
@@ -298,17 +298,21 @@ console.log("CartReturnData", CartReturnData)
     <>
       <div className="pt-5">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
-          {data?.title ? (
+          {role !== "popup" ?
             <>
-              <h1 className="text-lg font-bold mb-5">{data?.title}</h1>
+              {data?.title ? (
+                <>
+                  <h1 className="text-lg font-bold mb-5">{data?.title}</h1>
+                </>
+              ) : (
+                <></>
+              )}
             </>
-          ) : (
-            <></>
-          )}
+          : null}
           <div className="flex flex-col relative rounded-lg overflow-hidden">
             {HideFormShowPayment ? (
               <>
-                <div className="mt-8 flow-root rounded-lg shadow-lg m-5 p-5">
+                <div className="mt-0 flow-root rounded-lg shadow-lg m-5 p-5">
                   <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                       <table className="min-w-full divide-y divide-gray-300">
@@ -413,7 +417,7 @@ console.log("CartReturnData", CartReturnData)
                     Loding ? "p-5" : ""
                   } pt-0`}>
                   {ErrorMessage.length > 0 ? (
-                    <div className="rounded-md bg-red-50 p-4">
+                    <div className="rounded-md bg-red-50 p-4 mb-10">
                       <div className="flex w-full">
                         <div className="flex-shrink-0">
                           <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
@@ -437,7 +441,7 @@ console.log("CartReturnData", CartReturnData)
                       </div>
                     </div>
                   ) : null}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="relative col-span-2">
                       <label
                         htmlFor="name"

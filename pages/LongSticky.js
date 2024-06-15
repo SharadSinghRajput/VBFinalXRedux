@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { RightArrow, Facebook,Instagram, Twitter, Linkedin, YouTube, Call, Mail  } from "../config/SvgConst";
 import Link from "next/link";
 import { MAIN_URL,MAIN_URL_HINDI } from '../config/config';
+import AskQuestion from './AskQuestionForm'
 
 export default function Questions({language = "English"}) {
     const router = useRouter();
@@ -12,7 +13,8 @@ export default function Questions({language = "English"}) {
     const [OverLayShow, setOverLayShow] = useState(false);
     const [ButtonShow, setButtonShow] = useState(false);
     const [mainURL, setMainURL] = useState(MAIN_URL);
-
+    const [ShowPop, setShowPop] = useState(false);
+console.log(ShowPop);
     const HandleStickButton = () => {
         setHideReport(!HideReport)
         setOverLayShow(!OverLayShow);
@@ -58,7 +60,7 @@ export default function Questions({language = "English"}) {
     {OverLayShow ? 
     <div className='fixed w-screen h-screen bg-black/20 backdrop-blur-sm left-0 top-0 z-[1]'></div>
     :null}
-    <div class={`z-[2] transition-all ease-in duration-200 fixed bg-white lg:h-24 left-[50%] translate-x-[-50%] shadow-2xl rounded-xl overflow-hidden ${HideReport ? "w-0" : "max-w-7xl w-full"} ${OverLayShow ? "bottom-32" : "bottom-5"}`}>
+    <div class={`z-[10] transition-all ease-in duration-200 fixed bg-white lg:h-24 left-[50%] translate-x-[-50%] shadow-2xl rounded-xl overflow-hidden ${HideReport ? "w-0" : "max-w-7xl w-full"} ${OverLayShow ? "bottom-32" : "bottom-5"}`}>
         <div className="w-full flex h-full justify-between gap-1 flex-col lg:flex-row">
             <div className="flex gap-5 flex-1 justify-center items-center h-full pl-5">
                 <div className="flex-1">
@@ -101,7 +103,7 @@ export default function Questions({language = "English"}) {
                         </Link>
                     </div>
                 </div>
-                <button className="flex gap-4 bg-green-500 p-2 justify-center items-center text-white h-full flex-1">
+                <button onClick={()=> setShowPop(true)} className="flex gap-4 bg-green-500 p-2 justify-center items-center text-white h-full flex-1">
                     <p className="text-white">
                         {language=== "Hindi" ? <>क्लिक करें <br />और तुरंत रिपोर्ट पाएं</> : <>Click to Get<br />Instant Report</>}
                     </p>
@@ -130,9 +132,14 @@ export default function Questions({language = "English"}) {
 
         </div>
     </div>
-    {/* <div className='fixed bg-orange-400 left-0 top-0 w-full'>
-
-    </div> */}
+    {ShowPop ? 
+    <div className='fixed left-0 top-0 w-full h-full bg-blue-900/20 backdrop-blur-md z-20'>
+        <button onClick={()=> setShowPop(false)} className='absolute left-0 top-0 w-full h-full z-[10]'></button>
+        <div className='max-w-xl relative m-auto z-20'>
+            <AskQuestion role={"popup"} />
+        </div>
+    </div>
+    : null}
     </>
   )
 }
