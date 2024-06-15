@@ -166,7 +166,7 @@ export default function Cart() {
           user_id: UnderId,
           page_id: item.reportID,
           quantity: 1,
-          price: item.price[0].price
+          price: item.price[0].price,
         }
     
         const apiUrl = `${API_NEW_URL}cart-api.php`;
@@ -179,6 +179,7 @@ export default function Cart() {
             body: JSON.stringify(dataToAdd),
           });
           const dataAdd = await response.json();
+          console.log(dataAdd);
           if(dataAdd.success === true){
             setProductId(true)
             setProductAdding(false)

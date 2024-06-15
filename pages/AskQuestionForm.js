@@ -36,9 +36,13 @@ export default function AskQueForm({ data }) {
   const [HideFormShowPayment, setHideFormShowPayment] = useState(false);
   const [UnderId, setUnderId] = useState(false);
   const dispatch = useDispatch();
-
+  
+  const [GenratedData, setGenratedData] = useState("");
+  const [CartReturnData, setCartReturnData] = useState("");
+  const [PaymentSuccess, setPaymentSuccess] = useState(false);
   const [SessionAction, setSessionAction] = useState(false);
-
+console.log("GenratedData", GenratedData)
+console.log("CartReturnData", CartReturnData)
   function filterPeople(LocationData, SearchLocation) {
     return LocationData.filter((person) => {
       if (
@@ -76,7 +80,6 @@ export default function AskQueForm({ data }) {
     const UserDetails = getLocalStorageItem("UserDataKey");
     if (UserDetails !== null) {
       setUnderId(UserDetails.id);
-      console.log(UserDetails.id);
     }
   };
 
@@ -87,7 +90,6 @@ export default function AskQueForm({ data }) {
   useEffect(() => {
     const GetUserData = async () => {
       const savedInputValue = getLocalStorageItem("AutoFill_ASKQ_Form");
-      console.log(savedInputValue);
       if (savedInputValue !== null) {
         setName(savedInputValue.name);
         setEmail(savedInputValue.email);
@@ -166,6 +168,7 @@ export default function AskQueForm({ data }) {
       page_id: data.reportID,
       quantity: 1,
       price: data.price[0].price,
+      miniCart : true
     };
 
     setLocalStorageItem("AutoFill_ASKQ_Form", dataStore);
@@ -179,11 +182,12 @@ export default function AskQueForm({ data }) {
         body: JSON.stringify(dataToAdd),
       });
       const dataAdd = await response.json();
+      if(dataAdd.success === true){
+        setCartReturnData(dataAdd.data)
+      }
 
     } catch (error) {}
-
     const apiUrl = `https://www.aapkikismat.com/ask-que-api.php`;
-    
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -194,6 +198,7 @@ export default function AskQueForm({ data }) {
       });
       const data = await response.json();
       if (data.success === true) {
+        setGenratedData(data)
         setLoding(false);
         setHideFormShowPayment(true);
       } else {
@@ -206,11 +211,12 @@ export default function AskQueForm({ data }) {
   };
 
   const PlaceOrder = async () => {
+
     const DataforForm = {
       apiKey: API_KEY,
       domainSecreteCode: Domain_Secrete_Code,
       userId: UnderId,
-      cartId: cartId,
+      cartId: CartReturnData[0].cartId,
       mobileNumer: Mobile,
       emailId: Email,
       personName: Name,
@@ -221,13 +227,6 @@ export default function AskQueForm({ data }) {
       country: "",
     };
 
-    setErrorMessage(errorMessages);
-    if (errorMessages.length > 0) {
-      setPaymentLoder(false);
-      return;
-    }
-
-    console.log("DataforForm", DataforForm);
     const apiUrl = `${API_NEW_URL}order-api.php`;
     try {
       const response = await fetch(apiUrl, {
@@ -239,17 +238,10 @@ export default function AskQueForm({ data }) {
       });
       const data = await response.json();
       if (data.success === true) {
-        setPaymentLoder(false);
         openPayModal();
-        setLocalStorageItem("OrderDetailsKey", data.data);
-      } else if (data.message === "Order Already Created") {
-        openPayModal();
-        setPaymentLoder(false);
-        setLocalStorageItem("OrderDetailsKey", data.data);
-      } else {
+      }else {
         Alert("Something went wrong please try again");
       }
-      console.log(data);
     } catch (error) {}
   };
 
@@ -261,9 +253,12 @@ export default function AskQueForm({ data }) {
       "One should know how to judge a good astrologer than going by the name. The best astrologer is the one who believes more in Astrology based on the Karmic theory than only following rituals and remedies...",
     image: "https://www.vinaybajrangi.com/asset_frontend/img/logo.png",
     handler: function (response) {
-      console.log(response);
+      if(response.razorpay_payment_id){
+        setPaymentSuccess(true)
+      }
       // setLocalStorageItem('Pay_IDKey', response.razorpay_payment_id)
       // router.replace('/cart/place-order/order-details');
+      console.log(response);
     },
     prefill: {
       name: Name,
@@ -281,7 +276,6 @@ export default function AskQueForm({ data }) {
       const rzp1 = new window.Razorpay(options);
       rzp1.open();
     } else {
-      console.log("Razorpay script not loaded");
     }
   };
 
@@ -290,7 +284,6 @@ export default function AskQueForm({ data }) {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     script.onload = () => {
-      console.log("Razorpay script loaded successfully");
     };
     script.onerror = () => {
       console.log("Error loading Razorpay script");
@@ -329,7 +322,8 @@ export default function AskQueForm({ data }) {
                             <th
                               scope="col"
                               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                              Price
+                                {PaymentSuccess ? "Answer" : "Price"}
+                              
                             </th>
                           </tr>
                         </thead>
@@ -338,34 +332,53 @@ export default function AskQueForm({ data }) {
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                               {Question}
                             </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              {data ? (
-                                data.price[0] ? (
-                                  <>
-                                    {data.price[0].icon}
-                                    {data.price[0].price}
-                                  </>
+                            {PaymentSuccess ?
+                            <>
+                              <td className="whitespace-nowrap px-3 py-4 text-lg font-bold text-gray-900">
+                                {GenratedData.data}
+                              </td>
+                            </>
+                          : <>
+                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                {data ? (
+                                  data.price[0] ? (
+                                    <>
+                                      {data.price[0].icon}
+                                      {data.price[0].price}
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )
                                 ) : (
                                   <></>
-                                )
-                              ) : (
-                                <></>
-                              )}
-                            </td>
+                                )}
+                              </td>
+                          </>}
                           </tr>
+                          
                         </tbody>
                       </table>
                       <div className="gap-5 flex justify-end mt-5">
-                        <button
-                          onClick={handleCancle}
-                          className="bg-red-600 p-2 px-4 text-white rounded-md">
-                          Cancel
-                        </button>
-                        <button
-                          className="bg-blue-600 p-2 px-4 text-white rounded-md"
-                          onClick={openPayModal()}>
-                          Make Payment
-                        </button>
+                        {PaymentSuccess ?
+                        <>
+                          <button
+                            className="bg-blue-600 p-2 px-4 text-white rounded-md"
+                            onClick={()=> window.location.reload()}>
+                            Ask another question
+                          </button>
+                        </>
+                        : <>
+                          <button
+                            onClick={handleCancle}
+                            className="bg-red-600 p-2 px-4 text-white rounded-md">
+                            Cancel
+                          </button>
+                          <button
+                            className="bg-blue-600 p-2 px-4 text-white rounded-md"
+                            onClick={openPayModal}>
+                            Make Payment
+                          </button>
+                        </>}
                       </div>
                     </div>
                   </div>
