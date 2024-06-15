@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
+import { useDispatch, useSelector } from "react-redux";
 import { Combobox } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { InformationCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { COMPILER_NAMES } from "next/dist/shared/lib/constants";
 import { useRouter } from "next/router";
-import { API_KEY, Domain_Secrete_Code } from "../config/config";
+import { API_KEY, API_NEW_URL, Domain_Secrete_Code } from "../config/config";
 import { formatDate } from "../config/formatDatetoAstrologyAPI";
 import fetchAstrologyData from "../config/getAstroAPI";
 import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage";
 import { LocationData } from "../config/location";
+import { toggleStartSession } from "../redux/sessionSlice";
+import LoginForm from "./LoginForm";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -19,6 +22,7 @@ function classNames(...classes) {
 
 export default function AskQueForm({ data }) {
   const router = useRouter();
+  const [openModal, setOpenModal] = useState(false);
   const [SearchLocation, setSearchLocation] = useState("");
   const [selectedBirthLocation, setSelectedBirthLocation] = useState(null);
   const [Gender, setGender] = useState("Male");
@@ -30,6 +34,10 @@ export default function AskQueForm({ data }) {
   const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
   const [Loding, setLoding] = useState(false);
   const [HideFormShowPayment, setHideFormShowPayment] = useState(false);
+  const [UnderId, setUnderId] = useState(false);
+  const dispatch = useDispatch();
+
+  const [SessionAction, setSessionAction] = useState(false);
 
   function filterPeople(LocationData, SearchLocation) {
     return LocationData.filter((person) => {
@@ -51,6 +59,31 @@ export default function AskQueForm({ data }) {
     class: "w-full bg-gray-100 placeholder:text-gray-900",
   };
 
+  const GetSession = async () => {
+    const SessionToken = getLocalStorageItem("tokenKey");
+    if (SessionToken !== null) {
+      setSessionAction(true);
+    } else {
+      setOpenModal(true);
+    }
+  };
+
+  useEffect(() => {
+    GetSession();
+  }, []);
+
+  const GetUserDetails = async () => {
+    const UserDetails = getLocalStorageItem("UserDataKey");
+    if (UserDetails !== null) {
+      setUnderId(UserDetails.id);
+      console.log(UserDetails.id);
+    }
+  };
+
+  useEffect(() => {
+    GetUserDetails();
+  }, []);
+
   useEffect(() => {
     const GetUserData = async () => {
       const savedInputValue = getLocalStorageItem("AutoFill_ASKQ_Form");
@@ -69,16 +102,19 @@ export default function AskQueForm({ data }) {
 
   const handleCancle = async (e) => {
     e.preventDefault();
-    setHideFormShowPayment(false)
+    setHideFormShowPayment(false);
+  };
 
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoding(true);
     let errorMessages = [];
-    if (selectedDateTime === "Please Select DOB" || selectedDateTime === "") errorMessages.push("Please select your date of birth.");
+    if (selectedDateTime === "Please Select DOB" || selectedDateTime === "")
+      errorMessages.push("Please select your date of birth.");
     if (Name === "") errorMessages.push("Could you please enter your name?");
-    if (selectedBirthLocation === "" || selectedBirthLocation === null) errorMessages.push("Please choose your place of birth.");
+    if (selectedBirthLocation === "" || selectedBirthLocation === null)
+      errorMessages.push("Please choose your place of birth.");
     if (Mobile === "") errorMessages.push("Can you enter your phone number?");
     if (Email === "") errorMessages.push("Please provide your email address.");
     if (Question === "") errorMessages.push("What question do you have?");
@@ -122,8 +158,32 @@ export default function AskQueForm({ data }) {
       dob: convertDateTime(selectedDateTime),
       question: Question,
     };
+
+    const dataToAdd = {
+      apiKey: API_KEY,
+      domainSecreteCode: Domain_Secrete_Code,
+      user_id: UnderId,
+      page_id: data.reportID,
+      quantity: 1,
+      price: data.price[0].price,
+    };
+
     setLocalStorageItem("AutoFill_ASKQ_Form", dataStore);
+    const apiUrlCart = `${API_NEW_URL}cart-api.php`;
+    try {
+      const response = await fetch(apiUrlCart, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToAdd),
+      });
+      const dataAdd = await response.json();
+
+    } catch (error) {}
+
     const apiUrl = `https://www.aapkikismat.com/ask-que-api.php`;
+    
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -145,54 +205,101 @@ export default function AskQueForm({ data }) {
     }
   };
 
+  const PlaceOrder = async () => {
+    const DataforForm = {
+      apiKey: API_KEY,
+      domainSecreteCode: Domain_Secrete_Code,
+      userId: UnderId,
+      cartId: cartId,
+      mobileNumer: Mobile,
+      emailId: Email,
+      personName: Name,
+      address: "",
+      state: "",
+      city: City,
+      pincode: "",
+      country: "",
+    };
+
+    setErrorMessage(errorMessages);
+    if (errorMessages.length > 0) {
+      setPaymentLoder(false);
+      return;
+    }
+
+    console.log("DataforForm", DataforForm);
+    const apiUrl = `${API_NEW_URL}order-api.php`;
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(DataforForm),
+      });
+      const data = await response.json();
+      if (data.success === true) {
+        setPaymentLoder(false);
+        openPayModal();
+        setLocalStorageItem("OrderDetailsKey", data.data);
+      } else if (data.message === "Order Already Created") {
+        openPayModal();
+        setPaymentLoder(false);
+        setLocalStorageItem("OrderDetailsKey", data.data);
+      } else {
+        Alert("Something went wrong please try again");
+      }
+      console.log(data);
+    } catch (error) {}
+  };
+
   const options = {
     key: "rzp_test_bJShg4py6mnQe0",
-    amount: data?.price[0]?.price*100,
+    amount: data?.price[0]?.price * 100,
     name: "Vinay Bajrangi",
-    description: "One should know how to judge a good astrologer than going by the name. The best astrologer is the one who believes more in Astrology based on the Karmic theory than only following rituals and remedies...",
+    description:
+      "One should know how to judge a good astrologer than going by the name. The best astrologer is the one who believes more in Astrology based on the Karmic theory than only following rituals and remedies...",
     image: "https://www.vinaybajrangi.com/asset_frontend/img/logo.png",
-    handler: function(response) {
-        console.log(response);
-        // setLocalStorageItem('Pay_IDKey', response.razorpay_payment_id)
-        // router.replace('/cart/place-order/order-details');
+    handler: function (response) {
+      console.log(response);
+      // setLocalStorageItem('Pay_IDKey', response.razorpay_payment_id)
+      // router.replace('/cart/place-order/order-details');
     },
     prefill: {
-        name: Name,
-        contact: Mobile,
-        email: Email
+      name: Name,
+      contact: Mobile,
+      email: Email,
     },
     theme: {
-        color: "#ea580c",
-        hide_topbar: false
-    }
-};
+      color: "#ea580c",
+      hide_topbar: false,
+    },
+  };
 
-
-const openPayModal = () => {
+  const openPayModal = () => {
     if (window.Razorpay) {
-        const rzp1 = new window.Razorpay(options);
-        rzp1.open();
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
     } else {
-        console.log("Razorpay script not loaded");
+      console.log("Razorpay script not loaded");
     }
-};
+  };
 
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        script.async = true;
-        script.onload = () => {
-            console.log("Razorpay script loaded successfully");
-        };
-        script.onerror = () => {
-            console.log("Error loading Razorpay script");
-        };
-        document.body.appendChild(script);
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.onload = () => {
+      console.log("Razorpay script loaded successfully");
+    };
+    script.onerror = () => {
+      console.log("Error loading Razorpay script");
+    };
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <>
@@ -205,10 +312,6 @@ const openPayModal = () => {
           ) : (
             <></>
           )}
-            <button
-                            className="bg-blue-600 p-2 px-4 text-white rounded-md"
-                            onClick={openPayModal}
-                            >Make Payment</button>
           <div className="flex flex-col relative rounded-lg overflow-hidden">
             {HideFormShowPayment ? (
               <>
@@ -218,37 +321,51 @@ const openPayModal = () => {
                       <table className="min-w-full divide-y divide-gray-300">
                         <thead>
                           <tr>
-                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                                Question
+                            <th
+                              scope="col"
+                              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                              Question
                             </th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            <th
+                              scope="col"
+                              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                               Price
                             </th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                            <tr >
-                              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                          <tr>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                               {Question}
-                              </td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {data ?
-                                    data.price[0] ?<>
-                                        {data.price[0].icon} {data.price[0].price}
-                                    </>: <></>
-                                : <></>}
-                              </td>
-                            </tr>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              {data ? (
+                                data.price[0] ? (
+                                  <>
+                                    {data.price[0].icon}
+                                    {data.price[0].price}
+                                  </>
+                                ) : (
+                                  <></>
+                                )
+                              ) : (
+                                <></>
+                              )}
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                       <div className="gap-5 flex justify-end mt-5">
                         <button
-                            onClick={handleCancle}
-                            className="bg-red-600 p-2 px-4 text-white rounded-md">Cancel</button>
+                          onClick={handleCancle}
+                          className="bg-red-600 p-2 px-4 text-white rounded-md">
+                          Cancel
+                        </button>
                         <button
-                            className="bg-blue-600 p-2 px-4 text-white rounded-md"
-                            onClick={openPayModal()}
-                            >Make Payment</button>
+                          className="bg-blue-600 p-2 px-4 text-white rounded-md"
+                          onClick={openPayModal()}>
+                          Make Payment
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -547,6 +664,27 @@ const openPayModal = () => {
             </div>
           </div>
         </div>
+        {openModal ? (
+          <>
+            <div className="flex flex-col justify-center items-center z-30 backdrop-blur-md bg-white/20 fixed left-0 top-0 w-full h-full">
+              <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 w-96">
+                <LoginForm />
+              </div>
+              <button
+                onClick={() => {
+                  setOpenModal(false),
+                    GetSession(),
+                    GetUserDetails(),
+                    dispatch(toggleStartSession());
+                }}
+                className="-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent">
+                Close
+              </button>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

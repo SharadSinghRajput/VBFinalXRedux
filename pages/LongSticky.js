@@ -110,16 +110,29 @@ export default function Questions({language = "English"}) {
             </div>
             <div className='flex '>
                 <div className="flex gap-[2px] w-full">
-                    <button onClick={()=> router.push('/services.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>सेवाएं</> : <>Services</>}</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त में<br/>उत्तर पाएं</> : <>Ask a <br/>Free question?</>}</button>
-                    <button onClick={()=> router.push('/kundli.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त कुंडली</> : <>Free Kundli</>}</button>
-                    <button className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>मुफ्त <br /> राशिफल</> : <>Free Horoscope <br /> Matching</>}</button>
-                    <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>अपनी चंद्र<br />राशि जानें</> : <>Know your<br />Moon sign</>}</button>
-                    <button onClick={()=> router.push('/today-panchang.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">{language=== "Hindi" ? <>आज का<br />पंचांग</> : <>Today's<br />Panchang</>}</button>
+                    {language=== "Hindi" ? <>
+                        <button onClick={()=> router.push('/hindi/services.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">सेवाएं</button>
+                        <button onClick={()=> router.push('/hindi/ask-question/get-an-instant-answer.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">मुफ्त में<br/>उत्तर पाएं</button>
+                        <button onClick={()=> router.push('/hindi/kundli.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">मुफ्त कुंडली</button>
+                        <button onClick={()=> router.push('/hindi/marriage-astrology/kundli-matching-for-marriage.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">मुफ्त <br /> राशिफल मिलान</button>
+                        <button onClick={()=> router.push('/hindi/calculator/moon-sign-calculator.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">अपनी चंद्र<br />राशि जानें</button>
+                        <button onClick={()=> router.push('/hindi/today-panchang.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">आज का<br />पंचांग</button>
+                    </>:<>
+                        <button onClick={()=> router.push('/services.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Services</button>
+                        <button onClick={()=> router.push('/ask-question/get-an-instant-answer.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Ask a <br/>Free question?</button>
+                        <button onClick={()=> router.push('/kundli.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Free Kundli</button>
+                        <button onClick={()=> router.push('/marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Free Horoscope <br /> Matching</button>
+                        <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Know your<br />Moon sign</button>
+                        <button onClick={()=> router.push('/today-panchang.php')} className="bg-green-500 text-sm text-white h-full flex p-2 justify-center items-center lg:min-w-28 w-full">Today's<br />Panchang</button>
+                    </>}
                 </div>
             </div>
+
         </div>
     </div>
+    {/* <div className='fixed bg-orange-400 left-0 top-0 w-full'>
+
+    </div> */}
     </>
   )
 }

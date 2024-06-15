@@ -125,7 +125,7 @@ export default function HoroscopePageData({data}) {
 
   // const dayType = data?.zodiacPeriod ? `${data.zodiacPeriod}horoscope` : "daily-horoscope";
   const dayType = data && data.zodiacPeriod ? data.zodiacPeriod+ '-horoscope' : "daily-horoscope";
-  // console.log("Day Type: ", data.zodiacPeriod);
+  
   const horoscopes = Horoscope(dayType);
 
   return (
@@ -245,17 +245,18 @@ export default function HoroscopePageData({data}) {
                   <Description descData={data.description} />
                 :<></>}
 
-                <div className="grid grid-cols-1 gap-10">
+                <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
                       {horoscopes.map((person) => (
-                        <a key={person.name} 
-                          href={`${MAIN_URL}${person.link}`}
-                          onClick={(e) => handleClick(e, person.link)}
+                        <a  
+                            key={person.name} 
+                            href={`${MAIN_URL}${data.language=== "Hindi" ? person.hindiLink :person.link}`}
+                            onClick={(e) => handleClick(e, data.language=== "Hindi" ? person.hindiLink :person.link)}
                         >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
-                            <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{person.name}</h3>
+                            <h3 className="mt-2 text-xs text-white text-base text-center font-normal leading-7 tracking-tight text-gray-900 leading-3">{data.language=== "Hindi" ? person.nameHindi : person.name}</h3>
                         </a>
                       ))}
                     </div>

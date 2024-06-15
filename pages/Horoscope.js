@@ -73,36 +73,7 @@ export default function HoroscopePageData({data}) {
               </div>
             ) : (
               <>
-                {
-                  data.language=== "Hindi" ?
-                  (
-                    <>
-                       <div className="grid grid-cols-4 mb-5">
-                          { NavigateLinkHindi.map((item, index)=> (
-                              <div className='col-span-1' key={index}>
-                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
-                                    {item.name}
-                                  </button>
-                              </div>
-                            ))}
-                        </div>
-                    </>
-                  ) 
-                  :
-                  (
-                    <>
-                      <div className="grid grid-cols-4 mb-5">
-                          { NavigateLink.map((item, index)=> (
-                              <div className='col-span-1' key={index}>
-                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
-                                    {item.name}
-                                  </button>
-                              </div>
-                            ))}
-                        </div>
-                    </>
-                  )
-                }
+                
                
 
                 {data.title ? <>
@@ -120,6 +91,37 @@ export default function HoroscopePageData({data}) {
                         </div>
                     </div>
                 </div>
+
+                {
+                  data.language=== "Hindi" ?
+                  (
+                    <>
+                       <div className="grid grid-cols-4 mb-5 mt-5">
+                          { NavigateLinkHindi.map((item, index)=> (
+                              <div className='col-span-1' key={index}>
+                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
+                                    {item.name}
+                                  </button>
+                              </div>
+                            ))}
+                        </div>
+                    </>
+                  ) 
+                  :
+                  (
+                    <>
+                      <div className="grid grid-cols-4 mb-5 mt-5">
+                          { NavigateLink.map((item, index)=> (
+                              <div className='col-span-1' key={index}>
+                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
+                                    {item.name}
+                                  </button>
+                              </div>
+                            ))}
+                        </div>
+                    </>
+                  )
+                }
 
                 {data.blogBannerImage ? <>
                   <div className="w-[100%] md:w-[100%] mb-5 mt-5">
