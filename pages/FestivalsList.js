@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Title from './pageAssets/TitlewithBG';
+import {MAIN_URL} from '../config/config'
 
 export default function Kundli({ data }) {
     const router = useRouter();
@@ -17,7 +18,7 @@ export default function Kundli({ data }) {
                         <div className="mx-auto">
                             <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-5">
                                 {nestedData.map((post, index) => (
-                                    <a key={index} href={post.path} className="block mx-auto max-w-7xl shadow-lg border border-orange-100 rounded-lg overflow-hidden">
+                                    <a key={index} href={MAIN_URL + post.path} className="block mx-auto max-w-7xl shadow-lg border border-orange-100 rounded-lg overflow-hidden">
                                         <div className="inner-div mx-auto max-w-2xl lg:max-w-4xl">
                                             <div className="inner-div space-y-20 lg:space-y-20">
                                                 <article className="inner-div relative grid grid-cols-2 gap-4">
