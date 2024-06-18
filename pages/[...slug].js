@@ -42,7 +42,6 @@ export default function DynamicPage() {
       const lastValOfURL = slug[slug.length - 1];
       const modifiedSlug = AllSlug.substring(1);
       setShowMiniCartStyle(lastValOfURL);
-      console.log(lastValOfURL);
       // if(lastValOfURL === "cart" || lastValOfURL === "place-order"){
       // }
       // const lastValOfURL = slug[slug.length - 1];

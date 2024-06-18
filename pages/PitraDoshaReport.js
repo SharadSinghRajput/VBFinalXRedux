@@ -12,6 +12,7 @@ import HoroscopeFetchAPI from "../config/horoscopeFetchAPI";
 import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage";
 import Title from './pageAssets/TitlewithBG';
 import Description from './pageAssets/Description';
+import MetaData from './pageAssets/MetaData';
 
 
 
@@ -36,7 +37,6 @@ export default function KaalsarpDoshReport({ data }) {
               try {
                   const astrologyData = await fetchAstrologyData(data, "pitra_dosha_report");
                   setPitraDosha(astrologyData);
-                  console.log(astrologyData);
               } catch (error) {
               }
             }
@@ -48,6 +48,7 @@ export default function KaalsarpDoshReport({ data }) {
 
   return (
     <>
+    {data ? <MetaData data={data} /> : null}
     <div className="">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             {data ?

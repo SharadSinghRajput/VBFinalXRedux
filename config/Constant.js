@@ -733,23 +733,12 @@ export const MainMenu = [
 
   export const PopularReportsContent = [
       {
-        title: "Get most accurate result on Manglik Dosh",
+        title: "Get most accurate result on Manglik Dosh ",
         link: `${MAIN_URL}services/online-report/mangal-dosha-calculator.php`,
-      },
-      {
-        title: "Get report on Status and Personality of Your Future Life Partner",
+        
+    },
+    {
+        title: "Will You Qualify in UPSC Exam in 2024? ",
         link: `${MAIN_URL}services/online-report/future-life-partner.php`,
       },
-      {
-        title: "Get Report on Reasons for Delay in Finding Your Perfect Match",
-        link: `${MAIN_URL}services/online-report/delay-in-marriage-astrological-reasons.php`,
-      },
-      {
-        title: "Will You Qualify in UPSC Exam in 2024?",
-        link: `${MAIN_URL}services/online-report/will-i-be-successful-in-upsc-exam.php`,
-      },
-      {
-        title: "Get Report on Saturns Secrets and How They Affect You.",
-        link: `${MAIN_URL}services/online-report/know-about-saturn-secrets.php`,
-      }
     ]

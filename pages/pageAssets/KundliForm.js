@@ -37,22 +37,34 @@ export default function KundliForm({language = "English"}) {
 
   useEffect(() => {
     const GetUserData = async () => {
-      const savedInputValue = getLocalStorageItem("UserInfoDataKey");
+      const savedInputValue = getLocalStorageItem("AutoFillFormDataKey");
       if (savedInputValue !== null) {
+        setGender(savedInputValue.gender);
+        console.log("savedInputValue", savedInputValue);
+
         setName(savedInputValue.name);
-        // setSelectedDate(savedInputValue.dob);
-        // setSelectedTime(savedInputValue.dob);
+        setselectedDateTime(savedInputValue.dob);
         setSelectedBirthLocation({
           city_name: savedInputValue.birth_place,
           latitude: savedInputValue.birth_place_latitude,
           longitude: savedInputValue.birth_place_longitude,
         });
+
+
+        // setName(savedInputValue.name);
+        // setSelectedDate(savedInputValue.dob);
+        // setSelectedTime(savedInputValue.dob);
+        // setSelectedBirthLocation({
+        //   city_name: savedInputValue.birth_place,
+        //   latitude: savedInputValue.birth_place_latitude,
+        //   longitude: savedInputValue.birth_place_longitude,
+        // });
       }
     };
     GetUserData();
     if(language=== "Hindi"){
       setMainURL(MAIN_URL_HINDI)
-      setselectedDateTime("जन्म तिथि");
+      // setselectedDateTime("जन्म तिथि");
     }
   }, [language]);
 
@@ -93,28 +105,8 @@ const handleClick = (e, url) => {
     if (selectedDateTime || selectedDateTime) {
       if (!selectedDateTime) console.log("date not entered");
       if (!selectedDateTime) console.log("time not entered");
-    
 
-    //   function convertDateTime(dateTimeStr) {
-    //     const date = new Date(dateTimeStr);
-      
-    //     const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
-    //     const day = String(date.getUTCDate()).padStart(2, '0');
-    //     const year = String(date.getUTCFullYear()).slice(2); 
-    //     const hours = String(date.getUTCHours()).padStart(2, '0');
-    //     const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-    //     const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-    //     const formattedDate = `${month}-${day}-${year}`;
-    //     const formattedTime = `${hours}:${minutes}:${seconds}`;
-    //     const result = `${formattedDate} ${formattedTime}`;
-      
-    //     return result;
-    //   }
         const convertDateTime = (dateTimeStr) => {
-            // const date = new Date(dateTimeStr);
-            // const updatedDate = date.toISOString().split('T')[0];
-            // const timeParts = date.toISOString().split('T')[1].split('.')[0];
-            // return `${updatedDate} ${timeParts}`;
             const date = new Date(dateTimeStr);
             const year = date.getFullYear();
             const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -127,7 +119,7 @@ const handleClick = (e, url) => {
             return formattedDate;
         };
 
-        const formattedDateTime = convertDateTime(selectedDateTime.toISOString())
+        const formattedDateTime = convertDateTime(selectedDateTime)
 
           function formatDateIn(date) {
             const year = date.getFullYear();
@@ -193,6 +185,16 @@ const handleClick = (e, url) => {
           lon: AstroDataBack.birth_place_longitude,
           tzone: AstroDataBack.tzone,
         };
+
+        const DataAutoFill = {
+          gender: Gender,
+          name: Name,
+          birth_place: selectedBirthLocation.city_name,
+          birth_place_longitude: selectedBirthLocation.longitude,
+          birth_place_latitude: selectedBirthLocation.latitude,
+          dob: formattedDateTime,
+        };
+
         try {
           const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
           setLocalStorageItem("AstroDetailKey", AstroDetail);
@@ -201,7 +203,8 @@ const handleClick = (e, url) => {
 
         try {
             setLocalStorageItem("KundliFromDataKey", data);
-            setLocalStorageItem("UserInfoDataKey", UserInfoData);
+            // setLocalStorageItem("UserInfoDataKey", UserInfoData);
+            setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
             setLocalStorageItem("AstroAPIHitDataKey", AstroDataBack);
             router.push("/kundli-report.php");
         } catch (error) {
@@ -229,6 +232,7 @@ const handleClick = (e, url) => {
                 id={item?.id}
                 name="gender"
                 type="radio"
+                checked={Gender === item?.title}
                 onChange={() => setGender(item?.title)}
                 className="h-4 w-4 border-gray-300 px-2 text-orange-500 focus:ring-orange-500"
               />

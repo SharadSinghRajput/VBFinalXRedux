@@ -5,6 +5,7 @@ import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import {API_KEY, Domain_Secrete_Code, API_NEW_URL, MAIN_URL} from '../config/config'
+import MetaData from './pageAssets/MetaData';
 
 const Calculator = [
   {
@@ -74,6 +75,8 @@ export default function Calculater({ data }) {
   return (
     <>
       {data ? (
+        <>
+        <MetaData data={data} />
         <div className="bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg">
           <div>
             <h1 className="text-lg font-bold text-white p-2 bg-orange-500 rounded-lg mb-5 text-center">Free Astrology Calculators</h1>
@@ -113,6 +116,7 @@ export default function Calculater({ data }) {
               {data?.description && <Description descData={data.description} />}
             </div>
         </div>
+        </>
       ) : (
         <></>
       )}

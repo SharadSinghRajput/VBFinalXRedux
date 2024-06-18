@@ -689,7 +689,7 @@ export const MainMenuHindi = [
         link: `${MAIN_URL_HINDI}services/online-report/mangal-dosha-calculator.php`,
       },
       {
-        title: "भावी जीवन साथी की सामाजिक स्थिति व व्यक्तित्व को जानें",
-        link: `${MAIN_URL_HINDI}services/online-report/future-life-partner.php`,
+        title: "क्या आप 2024 में यूपीएससी परीक्षा क्रैक कर पाएंगे?",
+        link: `${MAIN_URL_HINDI}services/online-report/will-i-be-successful-in-upsc-exam.php`,
       },
     ]

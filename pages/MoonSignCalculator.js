@@ -16,6 +16,7 @@ import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import GlobImg from './assets/images/calculator/glob.png';
 import CalculatorForm from './pageAssets/CalculatorForm'
+import MetaData from './pageAssets/MetaData';
 
 
 
@@ -29,13 +30,15 @@ export default function Kundli({ data }) {
   return (
     <>
       {data ? (
+        <>
+        {data ? <MetaData data={data} /> : null}
         <div className="">
           <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
           {data ? (
             <>
-            {data.title ? <>
+            {/* {data.title ? <>
                 <Title titleData={data.title} />
-            </>:<></>}
+            </>:<></>} */}
 
             <div className="grid grid-cols-2 mb-10">
               <div className="bg-bgForm p-5 flex justify-center items-center flex-col gap-6">
@@ -73,6 +76,7 @@ export default function Kundli({ data }) {
         )}
           </div>
         </div>
+        </>
       ) : (
         <></>
       )}

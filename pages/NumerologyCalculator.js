@@ -15,11 +15,14 @@ import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import GlobImg from './assets/images/calculator/glob.png';
 import CalculatorForm from './pageAssets/CalculatorForm'
+import MetaData from './pageAssets/MetaData';
 
 export default function Kundli({ data }) {
   return (
     <>
       {data ? (
+        <>
+        <MetaData data={data} />
         <div className="">
           <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
           {data ? (
@@ -64,6 +67,7 @@ export default function Kundli({ data }) {
         )}
           </div>
         </div>
+        </>
       ) : (
         <></>
       )}

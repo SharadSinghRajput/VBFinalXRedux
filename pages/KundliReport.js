@@ -120,7 +120,7 @@ export default function Kundli({data}) {
       },[])
 
     const GetUserData = async () => {
-        const savedInputValue = getLocalStorageItem('UserInfoDataKey');
+        const savedInputValue = getLocalStorageItem('AutoFillFormDataKey');
         if(savedInputValue !== null) {
            setUserInfo(savedInputValue);
         }

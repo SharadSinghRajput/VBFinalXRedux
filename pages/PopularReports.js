@@ -66,7 +66,9 @@ export default function PopularReports({ language = "English" }) {
             </div>
             <marquee className='bg-orange-500 flex-1 gap-5 h-10 flex justify-center items-center' ref={marqueeRef} behavior="scroll" direction="left" id="marquee1" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
               {showConstant?.map((item, index) => (
-                <a key={index} className='text-sm text-white ml-5' target='_blank' href={item.link} title={item.title}>{item.title}</a>
+                <a key={index} className='text-sm text-white ml-5' target='_blank' href={item.link} title={item.title}>
+                  <span className="bg-yellow-300 py-1 px-2 mr-2 inline-block -rotate-12 text-gray-700">New</span>
+                {item.title}</a>
               ))}
             </marquee>
             <div className='bg-orange-600 w-10 h-10 flex justify-center items-center'>

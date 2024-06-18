@@ -36,6 +36,7 @@ import { Horoscope } from '../config/Horoscope';
 
 
 export default function DailyHoroscopeDetailed({data}) {
+
     useEffect(() => {
         if(!data)return
     }, [])
@@ -62,6 +63,7 @@ export default function DailyHoroscopeDetailed({data}) {
     function formatDate(date) {
         return format(date, "do MMM yyyy");
     }
+
     let changeDate = formattedDate;
     // const [changeDate, setChangeDate] = useState(formattedDate);
     const CapitalizedZodiac = `${zodiacSign ?? ''}`.charAt(0).toUpperCase() + `${zodiacSign ?? ''}`.slice(1);
@@ -94,37 +96,35 @@ export default function DailyHoroscopeDetailed({data}) {
         changeDate = TotalDays;
         HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
         break;
+
         case 'weekly':
         const firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
         const lastDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 7);
-
         const formattedStartOfWeek = formatDate(firstDayOfWeek);
         const formattedEndOfWeek = formatDate(lastDayOfWeek);
-
         TotalDays = `${formattedStartOfWeek} to ${formattedEndOfWeek}`;
         changeDate = TotalDays;
         HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
         break;
+
         case 'monthly':   
         const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
         const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-        
         const formattedStartOfMonth = formatDate(firstDayOfMonth);
         const formattedEndOfMonth = formatDate(lastDayOfMonth);
-        
         TotalDays = `${formattedStartOfMonth} to ${formattedEndOfMonth}`;
         HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
         break;
+
         case 'yearly':
         const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
         const lastDayOfYear = new Date(today.getFullYear(), 11, 31);
-        
         const formattedStartOfYear = formatDate(firstDayOfYear);
         const formattedEndOfYear = formatDate(lastDayOfYear);
-        
         TotalDays = `${formattedStartOfYear} to ${formattedEndOfYear}`;
         HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
         break;
+
         default:
             const formattedDates = format(today, "do MMM yyyy");
             TotalDays = formattedDates;
@@ -153,11 +153,9 @@ export default function DailyHoroscopeDetailed({data}) {
                 if (data !== null) {
                 setHoroscopeData(data);
                 } else {
-                // Handle error or show a message if needed
                 }
             } catch (error) {
                 console.error("Error fetching horoscope data:", error);
-                // Handle error if needed
             }
         };
 
@@ -204,7 +202,6 @@ export default function DailyHoroscopeDetailed({data}) {
         setActiveButtonDay(day);
         changeDate = TotalDays;
         setHoroscopeData("In Process");
-        //console.log(TotalDays);
         router.push(`/horoscope/${day}-horoscope/${zodiacSign}.php`);
     };
 
@@ -478,7 +475,10 @@ export default function DailyHoroscopeDetailed({data}) {
                         </div>
                     ))}
                 </div>
-                <div className='bg-white mt-5 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                <button
+                    href={`${MAIN_URL}astrology-news.php`}
+                    onClick={(e) => handleClickRouter(e, "astrology-news.php")}
+                    className='bg-white mt-5 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
                     <Image 
                         width={40} 
                         height={40} 
@@ -487,7 +487,7 @@ export default function DailyHoroscopeDetailed({data}) {
                         alt="Astrology News and Articles"
                     />
                     <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
-                </div> 
+                </button> 
             </div>
         </div>
        
