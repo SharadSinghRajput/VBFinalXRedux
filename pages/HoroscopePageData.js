@@ -24,7 +24,6 @@ export default function HoroscopePageData({data}) {
   const router = useRouter();
   // const [response, setResponse] = useState("In Process");
   const [horoscopeData, setHoroscopeData] = useState("In Process");
-  
   function formatDate(date) {
       return format(date, "do MMM yyyy");
   }
@@ -67,6 +66,7 @@ export default function HoroscopePageData({data}) {
     };
     
   const HitTheHoroscopeFunction = async (CapitalizedZodiac, zodiacPeriod, type, currentDate) => {
+    
       const data = await fetchCategoryWiseData(CapitalizedZodiac, zodiacPeriod, type, currentDate);
       setHoroscopeData(data);
   };
@@ -76,13 +76,14 @@ export default function HoroscopePageData({data}) {
       today.setDate(today.getDate() + 1); // Increment by 1 day for tomorrow
       const formattedData = format(today, "do MMM yyyy");
       TotalDays = formattedData;
+      console.log("this will hit")
       changeDate = TotalDays;
       HitTheHoroscopeFunction(CapitalizedZodiac, zodiacPeriod, horoscopeType, currentDate);
       break;
       case 'weekly':
       const firstDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
       const lastDayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 7);
-
+      console.log("this will hit")
       const formattedStartOfWeek = formatDate(firstDayOfWeek);
       const formattedEndOfWeek = formatDate(lastDayOfWeek);
 
@@ -93,7 +94,7 @@ export default function HoroscopePageData({data}) {
       case 'monthly':   
       const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
       const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-      
+      console.log("this will hit")
       const formattedStartOfMonth = formatDate(firstDayOfMonth);
       const formattedEndOfMonth = formatDate(lastDayOfMonth);
       
@@ -103,7 +104,7 @@ export default function HoroscopePageData({data}) {
       case 'yearly':
       const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
       const lastDayOfYear = new Date(today.getFullYear(), 11, 31);
-      
+      console.log("this will hit")
       const formattedStartOfYear = formatDate(firstDayOfYear);
       const formattedEndOfYear = formatDate(lastDayOfYear);
      
@@ -114,6 +115,7 @@ export default function HoroscopePageData({data}) {
       const formattedDates = format(today, "do MMM yyyy");
       TotalDays = formattedDates;
       changeDate = TotalDays;
+      console.log("this will hit")
       HitTheHoroscopeFunction(CapitalizedZodiac, zodiacPeriod, horoscopeType, currentDate);
   }
   // console.log("Horoscope Data: ",TotalDays);

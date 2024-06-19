@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { MAIN_URL, MAIN_URL_HINDI } from '../config/config';
 
 export default function PopularReports({ language = "English" }) {
-  console.log(language, "Data");
   const marqueeRef = useRef(null);
   const [hideReport, setHideReport] = useState(false);
   const router = useRouter();

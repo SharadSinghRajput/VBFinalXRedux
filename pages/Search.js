@@ -11,7 +11,6 @@ export default function SearchComp({lang}) {
   const [OpenFullSearch, setOpenFullSearch] = useState(false);
   const [SearchedData, setSearchedData] = useState("");
   const [SearchLoding, setSearchLoding] = useState(false);
-console.log(lang);
   const Search = async (SerchText) => {
     setSearchLoding("searching")
     const dataHit = {

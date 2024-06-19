@@ -393,16 +393,30 @@ export default function DailyHoroscopeDetailed({data}) {
                                 horoscopeData
                             )}
                         </div>
-                    </div>
+                    </div>      
+                    {pageLanguage === "Hindi" ?
+                        <a
+                            className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                            href={`${MAIN_URL}hindi/ask-question/get-an-instant-answer.php`}
+                            onClick={(e) => handleClickRouter(e, `/hindi/ask-question/get-an-instant-answer.php`)}
+                        >
+                            <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                            <span>
+                            अब तुरंत पाएं “हां” या “ना” में अपने भविष्य से जुड़े सवालों के जवाब
+                                {/* Unlock the secrets of {currentDay} and get your instant answer in Yes or No. */}
+                            </span>
+                        </a>
+                    :
                     <a
-                        href="#"
                         className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                        href={`${MAIN_URL}ask-question/get-an-instant-answer.php`}
+                        onClick={(e) => handleClickRouter(e, `/ask-question/get-an-instant-answer.php`)}
                         >
                         <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
                         <span>
                             Unlock the secrets of {currentDay} and get your instant answer in Yes or No.
                         </span>
-                    </a>
+                    </a>}
                     
                     
                     
@@ -435,8 +449,70 @@ export default function DailyHoroscopeDetailed({data}) {
                             
                         </div>
                     </div>
+                    {pageLanguage === "Hindi" ?
                     <a
-                        href="#"
+                        href={`${MAIN_URL}${
+                            changeText === "love"
+                                ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
+                                : changeText === "finance"
+                                ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
+                                : changeText === "career"
+                                ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
+                                : changeText === "health"
+                                ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
+                                : ""
+                        }`}
+                        onClick={(e) => handleClickRouter(e, `${
+                            changeText === "love"
+                                ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
+                                : changeText === "finance"
+                                ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
+                                : changeText === "career"
+                                ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
+                                : changeText === "health"
+                                ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
+                                : ""
+                        }`)}
+                        className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                        >
+                        <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                        <span>
+                            {
+                                changeText === "love"
+                                ? "अब तुरंत पाएं “हां” या “ना” में अपनी लव लाइफ़ से जुड़े सवालों के जवाब।"
+                                : changeText === "finance"
+                                ? "अब तुरंत पाएं “हां” या “ना” में अपनी फाइनेंस लाइफ से जुड़े सवालों के जवाब। "
+                                : changeText === "career"
+                                ? " अब तुरंत पाएं “हां” या “ना” में अपनी करियर लाइफ से जुड़े सवालों के जवाब।"
+                                : changeText === "health"
+                                ? " अब तुरंत पाएं “हां” या “ना” में अपनी हेल्थ लाइफ से जुड़े सवालों के जवाब।"
+                                : ""}
+                        </span>
+                    </a>
+                    :
+                    <a
+                        href={`${MAIN_URL}${
+                            changeText === "love"
+                                ? "ask-question/get-instant-answer-on-love-matters.php"
+                                : changeText === "finance"
+                                ? "ask-question/get-instant-answer-on-finance-matters.php"
+                                : changeText === "career"
+                                ? "ask-question/get-instant-answer-on-career-matters.php"
+                                : changeText === "health"
+                                ? "ask-question/get-instant-answer-on-health-matters.php"
+                                : ""
+                        }`}
+                        onClick={(e) => handleClickRouter(e, `${
+                            changeText === "love"
+                                ? "ask-question/get-instant-answer-on-love-matters.php"
+                                : changeText === "finance"
+                                ? "ask-question/get-instant-answer-on-finance-matters.php"
+                                : changeText === "career"
+                                ? "ask-question/get-instant-answer-on-career-matters.php"
+                                : changeText === "health"
+                                ? "ask-question/get-instant-answer-on-health-matters.php"
+                                : ""
+                        }`)}
                         className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
                         >
                         <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
@@ -444,6 +520,7 @@ export default function DailyHoroscopeDetailed({data}) {
                             Get Instant Answer on {changeText} Matters in 'Yes' or 'No'
                         </span>
                     </a>
+                    }
                    
                     
                 </div>
