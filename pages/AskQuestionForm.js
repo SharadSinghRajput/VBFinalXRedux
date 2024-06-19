@@ -41,8 +41,7 @@ export default function AskQueForm({ data, role }) {
   const [CartReturnData, setCartReturnData] = useState("");
   const [PaymentSuccess, setPaymentSuccess] = useState(false);
   const [SessionAction, setSessionAction] = useState(false);
-console.log("GenratedData", GenratedData)
-console.log("CartReturnData", CartReturnData)
+
   function filterPeople(LocationData, SearchLocation) {
     return LocationData.filter((person) => {
       if (
@@ -211,7 +210,6 @@ console.log("CartReturnData", CartReturnData)
   };
 
   const PlaceOrder = async () => {
-
     const DataforForm = {
       apiKey: API_KEY,
       domainSecreteCode: Domain_Secrete_Code,
@@ -222,7 +220,7 @@ console.log("CartReturnData", CartReturnData)
       personName: Name,
       address: "",
       state: "",
-      city: City,
+      city: "",
       pincode: "",
       country: "",
     };
@@ -379,7 +377,7 @@ console.log("CartReturnData", CartReturnData)
                           </button>
                           <button
                             className="bg-blue-600 p-2 px-4 text-white rounded-md"
-                            onClick={openPayModal}>
+                            onClick={PlaceOrder}>
                             Make Payment
                           </button>
                         </>}

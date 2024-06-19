@@ -203,6 +203,10 @@ export default function DailyHoroscopeDetailed({data}) {
         changeDate = TotalDays;
         setHoroscopeData("In Process");
         router.push(`/horoscope/${day}-horoscope/${zodiacSign}.php`);
+        // if(pageLanguage === "Hindi"){
+        //     router.push(`hindi/horoscope/${day}-horoscope/${zodiacSign}.php`);
+        // }else{
+        // }
     };
 
     async function fetchHoroscopeData() {
@@ -214,7 +218,6 @@ export default function DailyHoroscopeDetailed({data}) {
             return false;
           }
         } catch (error) {
-          //console.error("Error fetching horoscope data:", error);
           return null; // Return null or handle the error as needed
         }
       }
@@ -278,19 +281,21 @@ export default function DailyHoroscopeDetailed({data}) {
         <div className="bg-orange-500 p-6 sm:p-0">
             <div className="container py-6 mx-auto">
                 <div className=''>
-                    <p className="text-lg mb-2 text-center text-white font-bold">Free Daily / Weekly / Monthly Horoscope</p>
+                    <p className="text-lg mb-2 text-center text-white font-bold">
+                        {pageLanguage === "Hindi" ? "निःशुल्क दैनिक/साप्ताहिक/मासिक राशिफल": "Free Daily / Weekly / Monthly Horoscope"}
+                        </p>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
                         {horoscopes.map((item) => (
                             <a  
                                 key={item.name}
                                 className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer"
-                                href={`${MAIN_URL}${item?.url}`}
-                                onClick={(e) => handleClickRouter(e, item?.url)}
+                                href={`${MAIN_URL}${pageLanguage === "Hindi" ? item?.hindiLink : item?.link}`}
+                                onClick={(e) => handleClickRouter(e, pageLanguage === "Hindi" ? item?.hindiLink : item?.link)}
                             >
                                 <div className="flex justify-center items-center bg-white rounded-full p-2">
                                     <Image src={item?.imgSrc} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
                                 </div>
-                                <span className='text-sm'>{item?.name}</span>
+                                <span className='text-sm'>{pageLanguage === "Hindi" ? item?.nameHindi : item?.name}</span>
                             </a>                
                         ))}
                     </div>
@@ -321,27 +326,27 @@ export default function DailyHoroscopeDetailed({data}) {
 
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('daily')} className={`w-full p-2 rounded-lg ${buttonStyleDay('today')}`}>
-                        <h5 className="text-center font-bold text-sm"> Your Daily </h5>
+                        <h5 className="text-center font-bold text-sm">{pageLanguage === "Hindi" ? " आपका दैनिक" : "Your Daily"}</h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('tomorrow')} className={`w-full p-2 rounded-lg ${buttonStyleDay('tomorrow')}`}>
-                        <h5 className="text-center font-bold text-sm"> Your Tomorrow </h5>
+                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका आने वाला कल" : "Your Tomorrow"}</h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('weekly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('weekly')}`}>
-                        <h5 className="text-center font-bold text-sm"> Your Weekly </h5>
+                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? " आपका साप्ताहिक " : "Your Weekly"} </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('monthly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('monthly')}`}>
-                        <h5 className="text-center font-bold text-sm"> Your Monthly </h5>
+                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका मासिक " : "Your Monthly"} </h5>
                     </button>
                 </div>
                 <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
                     <button onClick={() => handleClick('yearly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('yearly')}`}> 
-                        <h5 className="text-center font-bold text-sm"> Your Yearly </h5>
+                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका वार्षिक " : "Your Yearly"} </h5>
                     </button>
                 </div>
 

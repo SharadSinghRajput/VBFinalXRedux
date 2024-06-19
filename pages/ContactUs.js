@@ -14,8 +14,10 @@ import { API_KEY, Domain_Secrete_Code } from "../config/config";
 import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage";
 import { useRouter } from 'next/router';
 
-export default function FaqSection() {
+export default function FaqSection({data}) {
     const router = useRouter();
+    console.log(data)
+  const lang = data?.language
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Mobile, setMobile] = useState("");
@@ -39,10 +41,35 @@ export default function FaqSection() {
     setLoding(true);
 
     let errorMessages = [];
-    if (Name === "") errorMessages.push("Could you please enter your name?");
-    if (Mobile === "") errorMessages.push("Can you enter your phone number?");
-    if (Email === "") errorMessages.push("Please provide your email address.");
-    if (Message === "") errorMessages.push("What question do you have?");
+    if (Name === ""){
+      if(lang === "Hindi"){
+        errorMessages.push("कृपया अपना नाम दर्ज करें।");
+      }else{
+        errorMessages.push("Could you please enter your name?");
+      }
+    }
+      
+    if (Mobile === ""){
+      if(lang === "Hindi"){
+        errorMessages.push("क्या आप अपना फोन नंबर दर्ज कर सकते हैं?");
+      }else{
+        errorMessages.push("Can you enter your phone number?");
+      }
+    }
+    if (Email === ""){
+      if(lang === "Hindi"){
+        errorMessages.push("कृपया अपना ईमेल पता प्रदान करें।");
+      }else{
+        errorMessages.push("Please provide your email address.");
+      }
+    }
+    if (Message === ""){
+      if(lang === "Hindi"){
+        errorMessages.push("आपका क्या प्रश्न है??");
+      }else{
+        errorMessages.push("What question do you have?");
+      }
+    }
 
     setErrorMessage(errorMessages);
     if (errorMessages.length > 0) {
@@ -70,11 +97,26 @@ export default function FaqSection() {
         body: JSON.stringify(requestData),
       });
       const data = await response.json();
-      console.log(data);
+      console.log("sdfcvxioknm", data);
       if (data.success === true) {
         setLoding(false);
-        alert("Thank you for your message! We'll get back to you shortly.") 
-        router.push("/contact-us.php")
+        if(lang === "Hindi"){
+          alert("धन्यवाद आपके संदेश के लिए! हम शीघ्र ही आपसे संपर्क करेंगे।") 
+        }else{
+          alert("Thank you for your message! We'll get back to you shortly.") 
+        }
+        if(lang === "Hindi"){
+          router.push("/hindi/contact-us.php")
+        }else{
+          router.push("/contact-us.php")
+        }
+      }else if(data.message === "Similar Data already exists"){
+        if(lang === "Hindi"){
+          alert("इसी तरह का संदेश पहले से मौजूद है. कृपया नया डेटा दर्ज करें.")
+        }else{
+           alert("Similar message already exists. Please enter new data.")
+        }
+
       }else{
         setLoding(false);
       }
@@ -103,7 +145,7 @@ export default function FaqSection() {
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold tracking-tight text-black">Contact Us</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-black">{lang === "Hindi" ? "संपर्क करें" : "Contact Us"}</h2>
               <dl className="mt-10 space-y-4 text-base leading-7 text-gray-300">
                 <div className="flex gap-x-4">
                   <dt className="flex-none">
@@ -160,7 +202,9 @@ export default function FaqSection() {
                   </div>
                   <div className="ml-3 flex-1">
                     <h3 className="text-sm font-medium text-red-800">
-                      There were {ErrorMessage.length} errors with your submission
+                      {lang == "Hindi" ?<>आपकी सबमिशन में {ErrorMessage.length} त्रुटियाँ थीं।</>:<>There were {ErrorMessage.length} errors with your submission</>}
+                      
+                      
                     </h3>
                     <div className="mt-2 text-sm text-red-700">
                       <ul role="list" className="list-disc space-y-1 grid grid-cols-1 ml-5">
@@ -181,13 +225,13 @@ export default function FaqSection() {
                   <label
                     htmlFor="first-name"
                     className="block text-sm font-semibold leading-6 text-black">
-                    Name
+                      {lang === "Hindi" ? "आपका नाम": "Name"}
+                    
                   </label>
                   <div className="mt-2.5">
                     <input
                       type="text"
                       name="first-name"
-                      placeholder="Enter Name"
                       id="first-name"
                       value={Name}
                       onChange={(e) => setName(e.target.value)}
@@ -200,13 +244,12 @@ export default function FaqSection() {
                   <label
                     htmlFor="email"
                     className="block text-sm font-semibold leading-6 text-black">
-                    Email
+                    {lang === "Hindi" ? "आपका ईमेल": "Email"}
                   </label>
                   <div className="mt-2.5">
                     <input
                       type="email"
                       name="email"
-                      placeholder="Enter Email"
                       id="email"
                       value={Email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -219,13 +262,13 @@ export default function FaqSection() {
                   <label
                     htmlFor="phone-number"
                     className="block text-sm font-semibold leading-6 text-black">
-                    Phone number
+                      {lang === "Hindi" ? "आपका नंबर": "Phone number"}
+                    
                   </label>
                   <div className="mt-2.5">
                     <input
                       type="tel"
                       name="phone-number"
-                      placeholder="Enter Number"
                       id="phone-number"
                       autoComplete="tel"
                       value={Mobile}
@@ -238,12 +281,11 @@ export default function FaqSection() {
                   <label
                     htmlFor="message"
                     className="block text-sm font-semibold leading-6 text-black">
-                    Message
+                    {lang === "Hindi" ? "यहाँ अपना वर्णन करें...": "Message"}
                   </label>
                   <div className="mt-2.5">
                     <textarea
                       name="message"
-                      placeholder="Type Message..."
                       id="message"
                       rows={4}
                       value={Message}
@@ -288,8 +330,8 @@ export default function FaqSection() {
       <div className="bg-orange-50 py-8 container">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
           <div className="mx-auto max-w-4xl  divide-y divide-gray-900/10">
-            <h2 className="text-2xl font-bold  leading-10 tracking-tight text-gray-900 w-2/4">
-              Frequently asked questions
+            <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900 w-2/4">
+              {lang === "Hindi" ? "अक्सर पूछे जाने वाले प्रश्नों" : "Frequently asked questions"}
             </h2>
             <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
               {Faqs.map((faq, index) => (
@@ -298,7 +340,11 @@ export default function FaqSection() {
                     <>
                       <dt>
                         <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                          {lang === "Hindi" ?
+                          <span className="text-base font-semibold leading-7 ">{faq.HindiQuestion}</span>
+                          :
                           <span className="text-base font-semibold leading-7 ">{faq.question}</span>
+                          }
                           <span className="ml-6 flex h-7 items-center ">
                             {open ? (
                               <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
@@ -309,7 +355,11 @@ export default function FaqSection() {
                         </Disclosure.Button>
                       </dt>
                       <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                        {lang === "Hindi" ?
+                        <p className="text-base leading-7 text-gray-600">{faq.HindiAnswer}</p>
+                        :
                         <p className="text-base leading-7 text-gray-600">{faq.answer}</p>
+                        }
                       </Disclosure.Panel>
                     </>
                   )}
