@@ -46,7 +46,11 @@ export default function Kundli({ data }) {
                 <Image src={GlobImg} width={100} height={100} />
               </div>
               <div className="p-10 bg-gray-100">
+                {data.language === "Hindi" ?
+                <CalculatorForm routing={"/hindi/calculator/moon-sign-calculator-result.php"} />
+                :
                 <CalculatorForm routing={"/calculator/moon-sign-calculator-result.php"} />
+                }
               </div>
             </div>
 

@@ -15,19 +15,26 @@ import KundliForm from "./pageAssets/KundliForm";
 import MetaData from "./pageAssets/MetaData";
 import Title from "./pageAssets/Title";
 import Questions from "./Questions"
+import {API_NEW_URL, MAIN_URL} from '../config/config'
 
 const ServicesNew = [
-  { name : "Consultation", ImgUrl: "/asset_frontend/img/consultation.png",  Link: "services/consultation.php" },
-  { name : "Online Report", ImgUrl: "/asset_frontend/img/online-report.png",  Link: "services/online-reports.php"},
-  { name : "Voice Report", ImgUrl: "/asset_frontend/img/voice-report.png",  Link: "services/voice-report.php"},
-  { name : "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png",  Link: "services/life-readings.php"}
+  { name: "Consultation", hindiName: "परामर्श", ImgUrl: "/asset_frontend/img/consultation.png", Link: "/services/consultation.php", hindiLink: "/hindi/services/consultation.php" },
+  { name: "Online Report", hindiName: "ऑनलाइन रिपोर्ट", ImgUrl: "/asset_frontend/img/online-report.png", Link: "/services/online-reports.php", hindiLink: "/hindi/services/online-reports.php" },
+  { name: "Voice Report", hindiName: "ध्वनि रिपोर्ट", ImgUrl: "/asset_frontend/img/voice-report.png", Link: "/services/voice-report.php", hindiLink: "/hindi/services/voice-report.php" },
+  { name: "Life Readings", hindiName: "जीवन वाचन", ImgUrl: "/asset_frontend/img/life-readings.png", Link: "/services/life-readings.php", hindiLink: "/hindi/services/life-readings.php" }
 ];
 
 export default function DailyHoroscope({ data }) {
   const router = useRouter();
-
+  const lang = data?.language
   const src = "https://www.youtube.com/watch?v=GDjFJZ7-k8M";
   const videoId = src.split("v=")[1];
+
+  const handleClickRouter = (e, url) => {
+    e.preventDefault();
+    router.push(`${MAIN_URL}${url}`);
+  };
+
 
   return (
     <div className="">
@@ -35,22 +42,20 @@ export default function DailyHoroscope({ data }) {
         <div className="container py-4 mx-auto">
           <div className="my-5 mb-14 pb-5 border-b-white/50 border-b-[0.5px]">
             <p className="text-lg font-light text-white">
-              To read your fate I need your Kundli or astrology birth chart. Kundali can be made
-              through Kundli software. I am providing you here on this page a free Janam kundali
-              calculator. Before presenting your Janam Kundli to any astrologer kindly create your
-              kundli as per date of birth through the Kundli calculator.
-            </p>
+
+              {lang === "Hindi" ? "आपका भाग्य जानने के लिए मुझे आपकी कुंडली या जन्म कुंडली की आवश्यकता है। कुंडली सॉफ्टवेयर के माध्यम से कुंडली बनाई जा सकती है। मैं आपको यहां इस पृष्ठ पर एक निःशुल्क जन्म कुंडली कैलकुलेटर प्रदान कर रहा हूं। किसी भी ज्योतिषी के पास अपनी जन्म कुंडली प्रस्तुत करने से पहले कृपया कुंडली कैलकुलेटर के माध्यम से जन्मतिथि के अनुसार अपनी कुंडली बनाएं।" : "To read your fate I need your Kundli or astrology birth chart. Kundali can be made through Kundli software. I am providing you here on this page a free Janam kundali calculator. Before presenting your Janam Kundli to any astrologer kindly create your kundli as per date of birth through the Kundli  calculator."}</p>
           </div>
 
           <div className="mb-5 flex flex-col xl:flex-row  gap-8">
             <div className="flex flex-col md:flex-row max-w-5xl w-full gap-8">
               <div className="w-full md:max-w-[400px] rounded-lg bg-white p-5">
-                <KundliForm />
+                <KundliForm language = {lang} />
               </div>
               <div className="flex-1">
                 <h4 className="text-center text-white text-xl font-bold mb-2">
                   {" "}
-                  Free Online Kundli/ Janam Kundli/ Kundli Software{" "}
+                  {lang === "Hindi" ? "निःशुल्क ऑनलाइन कुंडली/जन्म कुंडली/कुंडली सॉफ्टवेयर" : "Free Online Kundli/ Janam Kundli/ Kundli Software"}
+                  {" "}
                 </h4>
                 <div className="rounded-lg overflow-hidden">
                   <iframe
@@ -68,41 +73,47 @@ export default function DailyHoroscope({ data }) {
                   <div key={item.name} className="bg-orange-500 rounded-md py-3 min-h-15">
                     <a
                       className="text-xs text-white flex-col text-center flex justify-center items-center no-underline"
-                      href={item?.Link}>
+                      href={lang === "Hindi" ? item.hindiLink : item.Link}>
                       <Image
                         width={40}
                         height={40}
                         className="w-[40px] md:w-[50px] lg:w-[75px] aspect-square object-contain"
-                        src={item?.ImgUrl}
-                        alt={item?.name}
+                        src={item.ImgUrl}
+                        alt={lang === "Hindi" ? item.hindiName : item.name}
                       />
-                      <span className="text-xs text-white">{item?.name}</span>
+                      <span className="text-xs text-white">
+                        {lang === "Hindi" ? item.hindiName : item.name}
+                      </span>
                     </a>
                   </div>
                 ))}
               </div>
-              <button onClick={()=>router.push('astrology-news.php')} className="bg-white w-full mt-3 flex items-center justify-evenly rounded-lg p-2">
-                  <Image width={40} height={40} className="w-10" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
-                  <h3 className="text-sm font-bold">Astrology News and Articles</h3>
+              <button onClick={() => router.push('astrology-news.php')} className="bg-white w-full mt-3 flex items-center justify-evenly rounded-lg p-2">
+                <Image width={40} height={40} className="w-10" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
+                <h3 className="text-sm font-bold">{lang === "Hindi" ? "ज्योतिष समाचार एवं आलेख" : "Astrology News and Articles"}</h3>
               </button>
               <div>
-                <button
-                // onClick={()=> router.push('/calculator/moon-sign-calculator.php')}
+                <a
+                  href={`${lang === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
+                  onClick={(e) => handleClickRouter(e, `${lang === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}
                   className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
                   <Image src={questionimg} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
-                  <p className="text-sm font-semibold">Ask a question</p>
+                  <p className="text-sm font-semibold">{lang === "Hindi" ? "प्रश्न पूछें" : "Ask a question"}</p>
+                </a>
+                <a
+                  href={`${lang === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
+                  onClick={(e) => handleClickRouter(e, `${lang === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
                   
-                </button>
-                <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
+                  className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
                   <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
-                  <p className="text-sm font-semibold">Know your moon sign</p>
-                </button>
+                  <p className="text-sm font-semibold">{lang === "Hindi" ? "अपनी चंद्र राशि जानें" : "Know your moon sign"}</p>
+                </a>
               </div>
             </div>
           </div>
           <div className="border-t-white/50 pt-5 border-t-[0.5px]">
             <p className="text-lg text-center mb-5 text-white font-bold">
-              Astrological Solutions for all life’s problems
+              {lang === "Hindi" ? "जीवन की सभी समस्याओं का ज्योतिषीय समाधान" : "Astrological Solutions for all life’s problems"}
             </p>
             <Swiper
               spaceBetween={50}
@@ -134,14 +145,15 @@ export default function DailyHoroscope({ data }) {
                 <SwiperSlide key={index}>
                   <a
                     className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
-                    href={item?.url}>
+                    href={lang === "Hindi" ? item.hindiUrl : item.url}
+                  >
                     <Image
-                      src={item?.img}
+                      src={item.img}
                       width={80}
-                      alt={item?.name}
+                      alt={lang === "Hindi" ? item.hindiName : item.name}
                       className="w-[80px] p-3 bg-orange-500 aspect-square rounded-lg"
                     />
-                    <span>{item?.name}</span>
+                    <span>{lang === "Hindi" ? item.hindiName : item.name}</span>
                   </a>
                 </SwiperSlide>
               ))}
@@ -150,7 +162,7 @@ export default function DailyHoroscope({ data }) {
         </div>
       </div>
       <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 rounded-lg mt-5">
-        <div><Questions /></div>
+        <div><Questions language = {lang} /></div>
       </div>
       <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 rounded-lg">
         <div className="p-2 pt-2">
@@ -199,7 +211,7 @@ export default function DailyHoroscope({ data }) {
           )}
         </div>
       </div>
-    
+
     </div>
   );
 }

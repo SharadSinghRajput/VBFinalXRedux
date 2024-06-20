@@ -631,7 +631,7 @@ export default function DailyHoroscopeDetailed({data}) {
         ) : null}
    
         <div className="max-w-6xl w-full mx-auto shadow-2xl bg-white p-5 mt-5 rounded-lg">
-            <QuestionsData />
+            <QuestionsData language = {pageLanguage} />
         </div>
         <div className="max-w-6xl mx-auto shadow-2xl bg-white p-5 mb-5 mt-5 rounded-lg">
             <div className="p-2 pt-2">
