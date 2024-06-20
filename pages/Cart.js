@@ -1,7 +1,7 @@
 
 "use client"; 
 import Image from 'next/image';
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import { getLocalStorageItem, setLocalStorageItem } from '../config/localStorage';
 import {API_KEY, API_NEW_URL, Domain_Secrete_Code} from '../config/config'
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,9 +16,18 @@ import { toggleGetProduct } from '../redux/triggerSlice';
 export default function Cart() {
     const router = useRouter();
     
-    const products = useSelector(state => state.adProduct.products);
-    const dispatch = useDispatch()
+    const [products, setProducts] = useState([]);
+    const productBank = useSelector(state => state.adProduct.products);
+  
+    const fetchProducts = useCallback(() => {
+      setProducts(productBank);
+    }, [productBank]);
+  
+    useEffect(() => {
+        fetchProducts()
+    }, [productBank]);
 
+    const dispatch = useDispatch()
     const [productId, setProductId] = useState([])
     const [SessionAction, setSessionAction] = useState(false)
     const [UnderId, setUnderId] = useState(false)
@@ -26,7 +35,7 @@ export default function Cart() {
     const [ProductRemoved, setProductRemoved] = useState("")
     const [ProductAdding, setProductAdding] = useState(false)
     const [cartId, setcartId] = useState("")
-    console.log("products", products);
+    
     useEffect(() => {
         if (products && products.length > 0) {
             setcartId(products[0].cartId);
@@ -56,8 +65,10 @@ export default function Cart() {
 
 
     useEffect(() => {
-        const updatedProductIds = products.map(item=> item.productId)
-        setProductId(updatedProductIds)
+        if(products){
+            const updatedProductIds = products.map(item=> item.productId)
+            setProductId(updatedProductIds)
+        }
     }, [products]);
     
     const DataExist = (DataExistItem) => {
@@ -127,27 +138,18 @@ export default function Cart() {
             setProductRemoving(false)
             // setProductRemoved(prevState => [...prevState, dataToAdd.removeProduct]);
             dispatch(removeProduct(reportID));
+            fetchProducts()
           }
           if(data.data){
-            console.log("Data", data.data)
-            if(data.data && Array.isArray(data.data)){
-                data.data.map((item)=>{
-                    dispatch(addProduct(item));
+                if(data.data && Array.isArray(data.data)){
+                    data.data.map((item)=>{
+                        dispatch(addProduct(item));
+                        dispatch(toggleGetProduct());
+                    })
+                }else{
+                    dispatch(addProduct(data.data));
                     dispatch(toggleGetProduct());
-                })
-            }else{
-                dispatch(addProduct(data.data));
-                dispatch(toggleGetProduct());
-            }
-
-            // if(data.data.length > 0){
-            //     data.data.map((item)=>{
-            //         dispatch(addProduct(item));
-            //   })
-            // }else{
-            //   dispatch(addProduct(data.data));
-            //   dispatch(toggleGetProduct());
-            // }
+                }
             }
             setProductRemoving(false)
         } catch (error) {

@@ -31,6 +31,7 @@ import PriceInfo from "./component/PriceInfo"
 import PriceInfoforBundle from "./component/PriceInfoforBundle"
 import RelatedProduct from "./pageAssets/RelatedProduct"
 import PageRelatedBlog from "./PageRelatedBlog"
+import Services from "./Services"
 
 
 
@@ -220,6 +221,10 @@ const DataExistMailList = (DataExistItem) => {
     <>
       <MetaData data={data} />
       {data?.breadcrumb && <BreadCrumb data={data.breadcrumb} />}
+      <div className='sticky top-0 z-50 bg-white'>
+        <Services location={"report"} />
+        
+      </div>
       <div className="max-w-6xl mx-auto rounded-lg">
       {ProductId}
         {data ?
