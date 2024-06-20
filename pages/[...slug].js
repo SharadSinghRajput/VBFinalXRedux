@@ -60,7 +60,7 @@ export default function DynamicPage() {
           "path": decodeURIComponent(modifiedSlug),
         }
         
-        const apiUrl = "https://www.aapkikismat.com/report-detail-tppm-path-api-test.php";
+        const apiUrl = `${API_NEW_URL}report-detail-tppm-path-api-test.php`;
         try {
           const response = await fetch(apiUrl, {
             method: "POST",
