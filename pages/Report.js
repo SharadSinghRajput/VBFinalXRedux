@@ -99,11 +99,13 @@ const DataExistMailList = (DataExistItem) => {
 
 
   useEffect(() => {
-    products.map((item)=>{
-      if(item.productId === data.reportID){
-        setWhichButton(true)
-      }
-    })
+    if(data){
+      products.map((item)=>{
+        if(item.productId === data.reportID){
+          setWhichButton(true)
+        }
+      })
+    }
   }, [products]);
 
 
@@ -193,12 +195,14 @@ const DataExistMailList = (DataExistItem) => {
   const [secondHalfData, setsecondHalfData] = useState("")
 
   useEffect(()=>{
-    if(data.questionAnswerData.length > 4 ){
-      const midpoint = Math.ceil(data.questionAnswerData.length / 2);
-      setfirstHalfData(data.questionAnswerData.slice(0, midpoint))
-      setsecondHalfData(data.questionAnswerData.slice(midpoint, data.questionAnswerData.length -1))
-    } else{
-      setfirstHalfData(data.questionAnswerData)
+    if(data){
+      if(data.questionAnswerData.length > 4 ){
+        const midpoint = Math.ceil(data.questionAnswerData.length / 2);
+        setfirstHalfData(data.questionAnswerData.slice(0, midpoint))
+        setsecondHalfData(data.questionAnswerData.slice(midpoint, data.questionAnswerData.length -1))
+      } else{
+        setfirstHalfData(data.questionAnswerData)
+      }
     }
   },[])
 
@@ -1474,7 +1478,46 @@ const DataExistMailList = (DataExistItem) => {
 
           </div>
         </div>
-        :<></>}
+        :<>
+        <div className='w-full bg-white p-5 flex flex-col gap-5'>
+            <div role="status" class="max-w-sm animate-pulse w-full">
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div role="status" class="max-w-sm animate-pulse w-full">
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div role="status" class="max-w-sm animate-pulse w-full">
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div role="status" class="max-w-sm animate-pulse w-full">
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        </>}
         <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
           <div className="fixed inset-0" />
