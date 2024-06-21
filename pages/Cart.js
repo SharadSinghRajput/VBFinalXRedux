@@ -16,16 +16,7 @@ import { toggleGetProduct } from '../redux/triggerSlice';
 export default function Cart() {
     const router = useRouter();
     
-    const [products, setProducts] = useState([]);
-    const productBank = useSelector(state => state.adProduct.products);
-  
-    const fetchProducts = useCallback(() => {
-      setProducts(productBank);
-    }, [productBank]);
-  
-    useEffect(() => {
-        fetchProducts()
-    }, [productBank]);
+    const products = useSelector(state => state.adProduct.products);
 
     const dispatch = useDispatch()
     const [productId, setProductId] = useState([])
@@ -35,6 +26,7 @@ export default function Cart() {
     const [ProductRemoved, setProductRemoved] = useState("")
     const [ProductAdding, setProductAdding] = useState(false)
     const [cartId, setcartId] = useState("")
+    console.log(products);
     
     useEffect(() => {
         if (products && products.length > 0) {
@@ -113,50 +105,49 @@ export default function Cart() {
         }
     }, [products]);
 
-    
     const handleRemoveProduct = async (reportID) => {
-        setProductRemoving(reportID)
+        setProductRemoving(reportID);
         const dataToAdd = {
-          apiKey: API_KEY, 
-          domainSecreteCode: Domain_Secrete_Code,
-          user_id: UnderId,
-          removeProduct: reportID,
-        }
+            apiKey: API_KEY,
+            domainSecreteCode: Domain_Secrete_Code,
+            user_id: UnderId,
+            removeProduct: reportID,
+        };
     
         const apiUrl = `${API_NEW_URL}cart-api.php`;
         try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataToAdd),
-          });
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToAdd),
+            });
     
-          const data = await response.json();
-          if(data.success === true){
-            setProductRemoving(false)
-            // setProductRemoved(prevState => [...prevState, dataToAdd.removeProduct]);
-            dispatch(removeProduct(reportID));
-            fetchProducts()
-          }
-          if(data.data){
-                if(data.data && Array.isArray(data.data)){
-                    data.data.map((item)=>{
+            const data = await response.json();
+            if (data.success === true) {
+                setProductRemoving(false);
+                dispatch(removeProduct(reportID));
+                console.log("Product removed:", reportID);
+            }
+            if (data.data) {
+                console.log("Cart Page", data.data);
+                if (data.data && Array.isArray(data.data)) {
+                    data.data.forEach(item => {
                         dispatch(addProduct(item));
                         dispatch(toggleGetProduct());
-                    })
-                }else{
+                    });
+                } else {
                     dispatch(addProduct(data.data));
                     dispatch(toggleGetProduct());
                 }
             }
-            setProductRemoving(false)
+            setProductRemoving(false);
         } catch (error) {
-            setProductRemoving(false)
+            setProductRemoving(false);
         }
-      };
-
+    };
+    
 
 
 
@@ -181,7 +172,6 @@ export default function Cart() {
             body: JSON.stringify(dataToAdd),
           });
           const dataAdd = await response.json();
-          console.log(dataAdd);
           if(dataAdd.success === true){
             setProductId(true)
             setProductAdding(false)

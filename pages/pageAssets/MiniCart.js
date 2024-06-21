@@ -19,7 +19,7 @@ export default function MiniCart({Design}) {
   const getProductTrigger = useSelector(state => state.trigger.getProductTrigger);
   const dispatch = useDispatch()
   
-
+console.log(getProductTrigger);
   
   const [SessionAction, setSessionAction] = useState(false)
 
@@ -73,11 +73,11 @@ export default function MiniCart({Design}) {
           });
     
           const data = await response.json();
+          // console.log("Mini Cart", data)
           if(data.success === true){
             if(data.data && Array.isArray(data.data)){
               data.data.map((item)=>{
                 dispatch(addProduct(item));
-                
               })
             }else{
               dispatch(addProduct(data.data));

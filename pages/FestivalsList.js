@@ -12,7 +12,7 @@ export default function Kundli({ data }) {
         <>
             {data ? (
                 <div className="pt-5">
-                    <div className={`bg-white mx-auto max-w-6xl mx-auto shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
+                    <div className={`bg-white max-w-6xl mx-auto shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
                         {data.title ? <Title titleData={data.title} /> : null}
 
                         <div className="mx-auto">
@@ -54,7 +54,48 @@ export default function Kundli({ data }) {
                         ) : null}
                     </div>
                 </div>
-            ) : null}
+            ) :(
+                <>
+                <div className='w-full bg-white p-5 flex flex-col gap-5 max-w-6xl mx-auto'>
+                    <div role="status" class="max-w-sm animate-pulse w-full">
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div role="status" class="max-w-sm animate-pulse w-full">
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div role="status" class="max-w-sm animate-pulse w-full">
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div role="status" class="max-w-sm animate-pulse w-full">
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                </>
+            )}
         </>
     )
 }
