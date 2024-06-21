@@ -88,18 +88,6 @@ export default function DynamicPage() {
           } else {
             setApiNotRes(true);
           }
-
-          // if (responseData.success === true) {
-          //   if (responseData.data) {
-          //     setUrdData(responseData.data);
-          //   } else {
-          //     setUrlNotAvail(true);
-          //   }
-          // } else {
-          //   setApiNotRes(true);
-          // }
-
-          
         } catch (error) {
           setApiNotRes(true);
         }
