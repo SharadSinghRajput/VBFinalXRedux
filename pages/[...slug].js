@@ -195,7 +195,9 @@ export default function DynamicPage() {
         {ShowMiniCartStyle !== "hindi" ?
           <> <MiniCart Design={ShowMiniCartStyle} /> <AllSideBar /> </>
         : <></>}
+        {DataComponentWise ?
         <LanguageSelector data={DataComponentWise} />
+        : null}
         {DataComponentWise ? (
           DataComponentWise.language === "Hindi" ? (
             <FooterHindi data={DataComponentWise} />
