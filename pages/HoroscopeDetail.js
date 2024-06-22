@@ -85,6 +85,7 @@ export default function DailyHoroscopeDetailed({data}) {
     
     const HitTheHoroscopeFunction = async (CapitalizedZodiac, currentDay, type, currentDate) => {
         const data = await fetchCategoryWiseData(CapitalizedZodiac, currentDay, type, currentDate);
+        console.log(data);
         setHoroscopeData(data);
     };    
     

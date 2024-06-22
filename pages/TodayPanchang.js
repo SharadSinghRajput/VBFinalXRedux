@@ -210,9 +210,9 @@ export default function DefaultPage({ data }) {
                     </div>
                   </div>
                   <div className="flex">
-                    <button onClick={()=> chatGPTAnswer(PanchangD.nakshatra.details.nak_name)} className={`px-5 py-1 ${LangButton === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button>
-                    <button onClick={()=> setLangButton("Hindi")} className={`px-5 py-1 ${LangButton === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button>
-                        <button onClick={()=> setLangButton("English")} className={`px-5 py-1 ${LangButton === "English" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"}`} >English</button> 
+                    {/* <button onClick={()=> chatGPTAnswer(PanchangD.nakshatra.details.nak_name)} className={`px-5 py-1 ${LangButton === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button> */}
+                    {/* <button onClick={()=> setLangButton("Hindi")} className={`px-5 py-1 ${LangButton === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button>
+                        <button onClick={()=> setLangButton("English")} className={`px-5 py-1 ${LangButton === "English" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"}`} >English</button>  */}
                   </div>
                 </div>
                 {!Loding ? <>
