@@ -15,6 +15,7 @@ import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage
 import { LocationData } from "../config/location";
 import { toggleStartSession } from "../redux/sessionSlice";
 import LoginForm from "./LoginForm";
+import MetaData from './pageAssets/MetaData';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -305,6 +306,7 @@ export default function AskQueForm({ data, role }) {
 
   return (
     <>
+      {data ? <MetaData data={data} />  : ""}
       <div className="pt-5">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
           {role !== "popup" ?
