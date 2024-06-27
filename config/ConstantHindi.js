@@ -5,6 +5,7 @@ export const MainMenuHindi = [
         sublinks: [
             { name: 'राशिफल', url : `${MAIN_URL_HINDI}horoscope/horoscope.php`,  },
             { name: 'दैनिक भविष्यफल', url : `${MAIN_URL_HINDI}horoscope/daily-horoscope.php`,},
+            { name: 'कल का राशिफल', url : `${MAIN_URL}kal-ka-rashiphal/kal-ka-rashiphal`,},
             { name: 'साप्ताहिक राशिफल', url : `${MAIN_URL_HINDI}horoscope/weekly-horoscope.php`,},
             { name: 'मासिक राशिफल', url : `${MAIN_URL_HINDI}horoscope/monthly-horoscope.php`,},
             { name: 'वार्षिक राशिफल', url : `${MAIN_URL_HINDI}horoscope/yearly-horoscope.php`,},
