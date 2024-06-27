@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import Title from './pageAssets/TitlewithBG';
 import {MAIN_URL} from '../config/config'
 import MetaData from './pageAssets/MetaData';
+import Banner from './pageAssets/Banner';
 
 export default function Kundli({ data }) {
     const router = useRouter();
-
+console.log(data)
     const nestedData = data ? Object.values(data.nestedPages) : [];
 
     return (
@@ -14,10 +15,10 @@ export default function Kundli({ data }) {
             {data ? <MetaData data={data} />  : ""}
             {data ? (
                 <div className="pt-5">
-                    <div className={`bg-white mx-auto max-w-6xl mx-auto shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
+                    <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
                         {data.title ? <Title titleData={data.title} /> : null}
 
-                        <div className="mx-auto">
+                        {/* <div className="mx-auto">
                             <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-5">
                                 {nestedData.map((post, index) => (
                                     <a key={index} href={MAIN_URL+post.path} className="block mx-auto max-w-7xl shadow-lg border border-orange-100 rounded-lg overflow-hidden">
@@ -47,7 +48,12 @@ export default function Kundli({ data }) {
                                     </a>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
+                        {data.blogBannerImage ? <>
+                            <div className="max-w-sm mb-5 mt-5">
+                                <Banner BannerData={data.blogBannerImage} AltName={data.title} />
+                            </div>
+                        </>:<></>}
 
                         {data.description ? (
                             <div className="mt-5 mb-5 flow-root">

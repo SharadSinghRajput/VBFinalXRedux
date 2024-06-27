@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Title from './pageAssets/TitlewithBG';
 import {MAIN_URL} from '../config/config'
+import MetaData from './pageAssets/MetaData';
 
 export default function Kundli({ data }) {
     const router = useRouter();
@@ -10,6 +11,7 @@ export default function Kundli({ data }) {
 
     return (
         <>
+            {data ? <MetaData data={data} />  : ""}
             {data ? (
                 <div className="pt-5">
                     <div className={`bg-white max-w-6xl mx-auto shadow-2xl p-5 pt-5 mb-5 rounded-lg`}>
