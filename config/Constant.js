@@ -5,6 +5,7 @@ export const MainMenu = [
         sublinks: [
             { name: 'Horoscope', url : `${MAIN_URL}horoscope/horoscope.php`,  },
             { name: 'Daily Horoscope', url : `${MAIN_URL}horoscope/daily-horoscope.php`,},
+            { name: 'Tomorrow Horoscope', url : `${MAIN_URL}horoscope/tomorrow-horoscope.php`,},
             { name: 'Weekly Horoscope', url : `${MAIN_URL}horoscope/weekly-horoscope.php`,},
             { name: 'Monthly Horoscope', url : `${MAIN_URL}horoscope/monthly-horoscope.php`,},
             { name: 'Yearly Horoscope', url : `${MAIN_URL}horoscope/yearly-horoscope.php`,},
