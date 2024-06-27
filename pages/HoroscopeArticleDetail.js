@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import BlogCard from "./BlogCard";
 import PageDetailFetchAPI from '../config/PageDetailFetchAPI';
 import Title from './pageAssets/TitlewithBG';
+import HoroscopeFourButton from './HoroscopeFourButton';
 
 
 
@@ -235,7 +236,7 @@ export default function HoroscopePageData({data}) {
                   
                 }
                 
-
+                <HoroscopeFourButton lang={data.language} />
                 {data.blogBannerImage ? <>
                   <div className="w-[100%] md:w-[100%] mb-5 mt-5">
                     <Banner BannerData={data.blogBannerImage} />

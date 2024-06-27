@@ -22,7 +22,7 @@ export default function DefaultPage({ data }) {
   const [mainURL, setMainURL] = useState(MAIN_URL);
   const [selectedDateTime, setselectedDateTime] = useState(new Date());
   const [LangButton, setLangButton] = useState(data?.language);
-  const lang = data?.language
+  const [lang, setLang]= useState(data?.language);
   const [Loding, setLoding] = useState(false);
 
   let inputProps = {
@@ -211,8 +211,8 @@ export default function DefaultPage({ data }) {
                   </div>
                   <div className="flex">
                     {/* <button onClick={()=> chatGPTAnswer(PanchangD.nakshatra.details.nak_name)} className={`px-5 py-1 ${LangButton === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button> */}
-                    {/* <button onClick={()=> setLangButton("Hindi")} className={`px-5 py-1 ${LangButton === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button>
-                        <button onClick={()=> setLangButton("English")} className={`px-5 py-1 ${LangButton === "English" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"}`} >English</button>  */}
+                    <button onClick={()=> setLang("Hindi")} className={`px-5 py-1 ${lang === "Hindi" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"} `}>हिंदी</button>
+                    <button onClick={()=> setLang("English")} className={`px-5 py-1 ${lang === "English" ? "bg-blue-800 text-white" : "bg-blue-200 text-gray-700"}`} >English</button> 
                   </div>
                 </div>
                 {!Loding ? <>
