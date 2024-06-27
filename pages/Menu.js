@@ -254,7 +254,7 @@ export default function ContMenuBankComp({data}) {
                                                                     {item.sublinksL3 ? <>
 
                                                                       <div className='flex justify-between'>
-                                                                          <a  href={item.url} className='text-left text-xs'>{item.name}</a>
+                                                                          <a href={item.url} className='text-left text-xs'>{item.name}</a>
                                                                           <Popover.Button className="text-xs inline-flex items-center gap-x-1 font-medium leading-6 text-orange-800">
                                                                               <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                                                                           </Popover.Button>
@@ -338,7 +338,6 @@ export default function ContMenuBankComp({data}) {
             </nav>
           </div>
           
-
           <Disclosure.Panel as="nav" className="lg:hidden" aria-label="Global">
             <div className="space-y-1 px-2 pb-3 pt-2">
             {ContMenuBank ? <>
@@ -364,10 +363,12 @@ export default function ContMenuBankComp({data}) {
                                         {item.sublinks.map((item, index) => (    
                                             <Popover className="relative" key={index}>
                                                 {item.sublinksL2 ? <>
-                                                    <Popover.Button className="text-xs flex items-center justify-between w-[100%] gap-x-1 font-medium leading-6 text-orange-800">
-                                                        <span>{item.name}</span>
-                                                        <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                    </Popover.Button>
+                                                    <div className='flex justify-between'>
+                                                      <a href={item.url} className='text-left text-xs flex-1'>{item.name}</a>
+                                                      <Popover.Button className="text-xs flex w-10 items-center justify-between gap-x-1 font-medium leading-6 text-orange-800">
+                                                          <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                                      </Popover.Button>
+                                                    </div>
 
                                                     <Transition
                                                         as={Fragment}
@@ -383,10 +384,12 @@ export default function ContMenuBankComp({data}) {
                                                             {item.sublinksL2.map((item, index) => (    
                                                                 <Popover className="relative" key={index}>
                                                                     {item.sublinksL3 ? <>
-                                                                        <Popover.Button className="text-xs flex items-center justify-between w-[100%] gap-x-1 font-medium leading-6 text-orange-800">
-                                                                            <span>{item.name}</span>
-                                                                            <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                                        </Popover.Button>
+                                                                        <div className='flex justify-between'>
+                                                                          <a href={item.url} className='text-left flex-1 text-xs'>{item.name}</a>
+                                                                          <Popover.Button className="text-xs flex items-center justify-between w-10 gap-x-1 font-medium leading-6 text-orange-800">
+                                                                              <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                                                          </Popover.Button>
+                                                                        </div>
 
                                                                         <Transition
                                                                             as={Fragment}
@@ -402,10 +405,12 @@ export default function ContMenuBankComp({data}) {
                                                                                 {item.sublinksL3.map((item, index) => (    
                                                                                     <Popover className="relative" key={index}>
                                                                                         {item.sublinksL3 ? <>
-                                                                                            <Popover.Button className="text-xs inline-flex justify-between items-center gap-x-1 font-medium leading-6 text-orange-800">
-                                                                                                <span>{item.name}</span>
-                                                                                                <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-                                                                                            </Popover.Button>
+                                                                                            <div className='flex justify-between'>
+                                                                                              <a href={item.url} className='text-left flex-1 text-xs'>{item.name}</a>
+                                                                                              <Popover.Button className="text-xs inline-flex w-10 justify-between items-center gap-x-1 font-medium leading-6 text-orange-800">
+                                                                                                  <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                                                                              </Popover.Button>
+                                                                                            </div>
 
                                                                                             <Transition
                                                                                                 as={Fragment}
@@ -464,33 +469,42 @@ export default function ContMenuBankComp({data}) {
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
-                <div className="flex-shrink-0">
-                  <Image width={20} height={20} className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">{user.name}</div>
-                  <div className="text-sm font-medium text-gray-500">{user.email}</div>
-                </div>
-                <button
-                  type="button"
-                  className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                  >
-                    {item.name}
-                  </Disclosure.Button>
-                ))}
+              {SessionAction ?
+                      <>
+                        <button
+                          onClick={()=>{
+                            router.push("dashboard")
+                            GetSession()
+                          }}
+                          className={'bg-gray-100 block px-4 py-2 text-sm text-gray-700 w-full'}
+                        >
+                          Dashboard
+                        </button>
+                        <button
+                          onClick={()=>{
+                            localStorage.removeItem("tokenKey")
+                            router.push("/")
+                            GetSession()
+                          }}
+                          className={'bg-gray-100 block px-4 py-2 text-sm text-gray-700 w-full'}
+                        >
+                          Sign out
+                        </button>
+                        
+                      </>
+                      :
+                      <>
+                        {userNavigation.map((item, index) => (
+                          <button
+                          key={index}
+                            onClick={()=> router.push(item.href)}
+                            className={'bg-gray-100 block px-4 py-2 text-sm text-gray-700 w-full'}
+                          >
+                            {item.name}
+                          </button>
+                        ))}
+                      </>
+                      }
               </div>
             </div>
           </Disclosure.Panel>

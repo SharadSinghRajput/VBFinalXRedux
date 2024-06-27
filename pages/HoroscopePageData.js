@@ -11,6 +11,7 @@ import Title from './pageAssets/TitlewithBG';
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
+import HoroscopeFourButton from './HoroscopeFourButton';
 import { format } from 'date-fns';
 // import Tags from './pageAssets/Tags';
 // import CommentForm from './pageAssets/commentForm';
@@ -19,6 +20,7 @@ import { Horoscope } from '../config/Horoscope';
 import MetaData from './pageAssets/MetaData';
 import { useRouter } from 'next/router';
 import { MAIN_URL } from '../config/config';
+
 
 export default function HoroscopePageData({data}) {
   const router = useRouter();
@@ -235,6 +237,8 @@ export default function HoroscopePageData({data}) {
                   </>
                   
                 }
+
+                <HoroscopeFourButton lang={data.language} />
                 
 
                 {data.blogBannerImage ? <>

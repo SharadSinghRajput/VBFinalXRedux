@@ -13,43 +13,9 @@ import MetaData from './pageAssets/MetaData';
 import {Horoscope} from '../config/Horoscope';
 import { useRouter } from 'next/router';
 import { MAIN_URL, MAIN_URL_HINDI } from '../config/config';
+import HoroscopeFourButton from './HoroscopeFourButton';
 
-const NavigateLink = [
-  {
-    "name": "Daily Horoscope",
-    "link": "/horoscope/daily-horoscope.php"
-  },
-  {
-    "name": "Weekly Horoscope",
-    "link": "/horoscope/weekly-horoscope.php"
-  },
-  {
-    "name": "Monthly Horoscope",
-    "link": "/horoscope/monthly-horoscope.php"
-  },
-  {
-    "name": "Yearly Horoscope",
-    "link": "/horoscope/yearly-horoscope.php"
-  }
-]
-const NavigateLinkHindi = [
-  {
-    "name": " दैनिक राशिफल ",
-    "link": "/hindi/horoscope/daily-horoscope.php"
-  },
-  {
-    "name": " साप्ताहिक राशिफल ",
-    "link": "/hindi/horoscope/weekly-horoscope.php "
-  },
-  {
-    "name": " मासिक राशिफल ",
-    "link": "/hindi/horoscope/monthly-horoscope.php"
-  },
-  {
-    "name": " वार्षिक राशिफल ",
-    "link": "/hindi/horoscope/yearly-horoscope.php"
-  }
-]
+
 export default function HoroscopePageData({data}) {
   const router = useRouter();
   const dayType = data && data.zodiacPeriod ? data.zodiacPeriod + '-horoscope' : "daily-horoscope";
@@ -91,37 +57,7 @@ export default function HoroscopePageData({data}) {
                         </div>
                     </div>
                 </div>
-
-                {
-                  data.language=== "Hindi" ?
-                  (
-                    <>
-                       <div className="grid grid-cols-4 mb-5 mt-5">
-                          { NavigateLinkHindi.map((item, index)=> (
-                              <div className='col-span-1' key={index}>
-                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
-                                    {item.name}
-                                  </button>
-                              </div>
-                            ))}
-                        </div>
-                    </>
-                  ) 
-                  :
-                  (
-                    <>
-                      <div className="grid grid-cols-4 mb-5 mt-5">
-                          { NavigateLink.map((item, index)=> (
-                              <div className='col-span-1' key={index}>
-                                  <button onClick={()=> router.push(item.link)} className='w-full h-10 bg-orange-500 text-white border-r border-r-white/50'>
-                                    {item.name}
-                                  </button>
-                              </div>
-                            ))}
-                        </div>
-                    </>
-                  )
-                }
+                <HoroscopeFourButton lang={data.language} />
 
                 {data.blogBannerImage ? <>
                   <div className="w-[100%] md:w-[100%] mb-5 mt-5">

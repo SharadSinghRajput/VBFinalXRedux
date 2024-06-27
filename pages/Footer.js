@@ -63,8 +63,8 @@ export default function Example() {
 
     <div className="bg-slate-100 py-10">
 
-      <div className="container mx-auto">
-        <div className="grid grid-cols-2  gap-10 md:grid-cols-4">
+      <div className="mx-auto max-w-7xl p-10 lg:px-5 py-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2  gap-10 md:grid-cols-4">
           <div>
             <div>
               <h3 className="text-lg font-semibold leading-6 text-gray-900 mb-6 ">About Dr. Vinay Bajrangi</h3>

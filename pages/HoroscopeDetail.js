@@ -32,6 +32,7 @@ import MetaData from './pageAssets/MetaData';
 import Description from './pageAssets/Description';
 import {MAIN_URL} from '../config/config';
 import Holder from './pageAssets/Holder';
+
 import { Horoscope } from '../config/Horoscope';
 
 
@@ -91,7 +92,7 @@ export default function DailyHoroscopeDetailed({data}) {
     
     switch (day) {
         case 'tomorrow':
-        today.setDate(today.getDate() + 1); // Increment by 1 day for tomorrow
+        today.setDate(today.getDate() + 1);
         const formattedData = format(today, "do MMM yyyy");
         TotalDays = formattedData;
         changeDate = TotalDays;
@@ -108,7 +109,7 @@ export default function DailyHoroscopeDetailed({data}) {
         HitTheHoroscopeFunction(CapitalizedZodiac, currentDay, 'overall', currentDate);
         break;
 
-        case 'monthly':   
+        case 'monthly':
         const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
         const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         const formattedStartOfMonth = formatDate(firstDayOfMonth);
@@ -289,14 +290,15 @@ export default function DailyHoroscopeDetailed({data}) {
                         {horoscopes.map((item) => (
                             <a  
                                 key={item.name}
-                                className="text-xs text-white gap-1 text-center no-underline flex flex-col justify-center items-center cursor-pointer"
+                                className="text-xs text-white gap-1 text-center no-underline
+                                flex flex-col justify-center items-center cursor-pointer"
                                 href={`${MAIN_URL}${pageLanguage === "Hindi" ? item?.hindiLink : item?.link}`}
                                 onClick={(e) => handleClickRouter(e, pageLanguage === "Hindi" ? item?.hindiLink : item?.link)}
                             >
                                 <div className="flex justify-center items-center bg-white rounded-full p-2">
-                                    <Image src={item?.imgSrc} width={80} height={80} alt={item?.alt} className='w-[60px] aspect-square rounded-lg' />
+                                    <Image src={item?.imgSrc} width={80} height={80} alt={item?.alt} className='w-[40px] md:w-[60px] aspect-square rounded-lg' />
                                 </div>
-                                <span className='text-sm'>{pageLanguage === "Hindi" ? item?.nameHindi : item?.name}</span>
+                                <span className='text-xs md:text-sm'>{pageLanguage === "Hindi" ? item?.nameHindi : item?.name}</span>
                             </a>                
                         ))}
                     </div>
@@ -306,9 +308,9 @@ export default function DailyHoroscopeDetailed({data}) {
       
         <div className="mx-auto flex flex-col sm:flex-row w-full max-w-7xl items-start gap-x-8 px-0 py-6 sm:px-6 lg:px-8">
         
-        <div className="flex w-full">
-            <div className="block w-40 pr-4 sm:pr-8 sm:w-30 sm:top-8">
-                <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 mt-5 rounded-lg">
+        <div className="flex max-sm:flex-col w-full">
+            <div className="pr-4 sm:pr-8 sm:w-30 sm:top-8 max-sm:flex max-sm:flex-wrap">
+                <div className="w-40 max-sm:w-auto max-sm:p-2 mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 rounded-lg">
                     <div className="flex justify-center items-center aries-pR1">
                         <div className="aries-pR"> 
                             <div className="flex justify-center items-center bg-white rounded-full p-5 w-20 h-20">
@@ -323,62 +325,63 @@ export default function DailyHoroscopeDetailed({data}) {
                         </div>
                     </div>
                 </div>
-
-
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button onClick={() => handleClick('daily')} className={`w-full p-2 rounded-lg ${buttonStyleDay('today')}`}>
-                        <h5 className="text-center font-bold text-sm">{pageLanguage === "Hindi" ? " आपका दैनिक" : "Your Daily"}</h5>
-                    </button>
+                <div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button onClick={() => handleClick('daily')} className={`w-full p-2 rounded-lg ${buttonStyleDay('today')}`}>
+                            <h5 className="text-center font-bold text-sm">{pageLanguage === "Hindi" ? " आपका दैनिक" : "Your Daily"}</h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button onClick={() => handleClick('tomorrow')} className={`w-full p-2 rounded-lg ${buttonStyleDay('tomorrow')}`}>
+                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका आने वाला कल" : "Your Tomorrow"}</h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button onClick={() => handleClick('weekly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('weekly')}`}>
+                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? " आपका साप्ताहिक " : "Your Weekly"} </h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button onClick={() => handleClick('monthly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('monthly')}`}>
+                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका मासिक " : "Your Monthly"} </h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button onClick={() => handleClick('yearly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('yearly')}`}> 
+                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका वार्षिक " : "Your Yearly"} </h5>
+                        </button>
+                    </div>
                 </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button onClick={() => handleClick('tomorrow')} className={`w-full p-2 rounded-lg ${buttonStyleDay('tomorrow')}`}>
-                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका आने वाला कल" : "Your Tomorrow"}</h5>
-                    </button>
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button onClick={() => handleClick('weekly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('weekly')}`}>
-                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? " आपका साप्ताहिक " : "Your Weekly"} </h5>
-                    </button>
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button onClick={() => handleClick('monthly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('monthly')}`}>
-                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका मासिक " : "Your Monthly"} </h5>
-                    </button>
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button onClick={() => handleClick('yearly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('yearly')}`}> 
-                        <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका वार्षिक " : "Your Yearly"} </h5>
-                    </button>
-                </div>
-
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-[86px] sm:mt-5 rounded-lg">
-                    <button className={`w-full p-2 rounded-lg ${buttonStyle('love')}`} onClick={() => handleButtonClick('love')}> 
-                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
-                    </button>
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button className={`w-full p-2 rounded-lg ${buttonStyle('finance')}`} onClick={() => handleButtonClick('finance')}> 
-                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Finance for: {changeDate}</h5>
-                    </button>
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button className={`w-full p-2 rounded-lg ${buttonStyle('career')}`} onClick={() => handleButtonClick('career')}> 
-                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Career for: {changeDate}</h5>
-                    </button>
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                    <button className={`w-full p-2 rounded-lg ${buttonStyle('health')}`} onClick={() => handleButtonClick('health')}> 
-                        <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Health for: {changeDate}</h5>
-                    </button>
+                <div className='mt-5 max-sm:ml-2'>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white sm:mt-5 rounded-lg">
+                        <button className={`w-full p-2 rounded-lg ${buttonStyle('love')}`} onClick={() => handleButtonClick('love')}> 
+                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button className={`w-full p-2 rounded-lg ${buttonStyle('finance')}`} onClick={() => handleButtonClick('finance')}> 
+                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Finance for: {changeDate}</h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button className={`w-full p-2 rounded-lg ${buttonStyle('career')}`} onClick={() => handleButtonClick('career')}> 
+                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Career for: {changeDate}</h5>
+                        </button>
+                    </div>
+                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                        <button className={`w-full p-2 rounded-lg ${buttonStyle('health')}`} onClick={() => handleButtonClick('health')}> 
+                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Health for: {changeDate}</h5>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <main className="flex-1 w-80 sm:w-70">
-                <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
+            <main className="flex-1 w-80 max-sm:w-full max-sm:mt-5">
+                <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 max-sm:p-2 rounded-lg bg-[#091d5a]">
                     <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
                         <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
                     </div>
-                    <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 mt-2">
+                    <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2 mt-2">
                         <div className="text-justify text-sm pb-2 text-white">
                             {horoscopeData === "In Process" ? (
                                 <div className="text-center">
@@ -422,8 +425,8 @@ export default function DailyHoroscopeDetailed({data}) {
                     
                     
                 </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
-                    <div className="max-h-[284px] overflow-y-scroll scrollbar-red px-5">
+                <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 max-sm:px-2 mt-5 rounded-lg bg-[#091d5a]">
+                    <div className="max-h-[284px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2">
                         <div className="text-justify text-sm pb-2 text-white">
                             {response === "In Process" ? (
                                 <div className="text-center">

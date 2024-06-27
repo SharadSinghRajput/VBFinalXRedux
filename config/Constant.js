@@ -712,7 +712,7 @@ export const MainMenu = [
         name: 'Kundli', url: '#',
         sublinks: [
             { name: "Kundli", url: `${MAIN_URL}kundli.php`,},
-            { name: "Kundli Matching", url: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`,},
+            { name: "Kundli Matching", url: `${MAIN_URL}kundli-matching`,},
             { name: "How to read kundli", url: `${MAIN_URL}kundli/how-to-read-kundli.php`, },
         ]
     },

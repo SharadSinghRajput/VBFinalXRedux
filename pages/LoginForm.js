@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react'
 import CountryCode from "../config/CountryCode"
-import {API_KEY, API_NEW_URL} from '../config/config'
+import {API_KEY, API_NEW_URL, API_NEW_URL_LOGIN} from '../config/config'
 import { useRouter } from 'next/router';
 import DatePicker from 'react-datepicker';
 import Datetime from 'react-datetime';
@@ -71,7 +71,7 @@ export default function Login({pageslug}) {
       return;
     }
     
-    const apiUrl = `${API_NEW_URL}send-otp.php`;
+    const apiUrl = `${API_NEW_URL_LOGIN}send-otp.php`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -121,7 +121,7 @@ export default function Login({pageslug}) {
       setVerifyOtpLoder(false)
       return;
     }
-    const apiUrl = `${API_NEW_URL}login-api.php`;
+    const apiUrl = `${API_NEW_URL_LOGIN}login-api.php`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -155,6 +155,10 @@ export default function Login({pageslug}) {
             }
             setLocalStorageItem('tokenKey', token)
         }
+      }else{
+        alert( "Please check the OTP you entered.");
+        setVerifyOtpLoder(false)
+        return;
       }
     } catch (error) {
       setVerifyOtpLoder(false)
