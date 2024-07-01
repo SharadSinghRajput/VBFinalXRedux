@@ -30,6 +30,8 @@ export default function HoroscopeMatching({language = "English", routing}) {
     const [mainURL, setMainURL] = useState(MAIN_URL);
     const [Loading, setLoading] = useState(false);
 
+    
+
     function filterPeople(LocationData, SearchLocation) {
         return LocationData.filter((person) => {
             if (
@@ -49,6 +51,9 @@ export default function HoroscopeMatching({language = "English", routing}) {
 
 
     const [MaleName, setMaleName] = useState("");
+    const [MatchingDate, setMatchingDate] = useState("");
+    const [MatchingTime, setMatchingTime] = useState("");
+
     const [MaleDob, setMaleDob] = useState("Please Select DOB");
     let MaleinputProps = {
         placeholder: MaleDob,
@@ -62,6 +67,9 @@ export default function HoroscopeMatching({language = "English", routing}) {
 
 
     const [FemaleName, setFemaleName] = useState("");
+    const [MatchingDateSec, setMatchingDateSec] = useState("");
+    const [MatchingTimeSec, setMatchingTimeSec] = useState("");
+
     const [FemaleDob, setFemaleDob] = useState("Please Select DOB");
     let FemaleinputProps = {
         placeholder: FemaleDob,
@@ -76,15 +84,20 @@ export default function HoroscopeMatching({language = "English", routing}) {
     useEffect(() => {
         const GetUserData = async () => {
           const savedInputValue = getLocalStorageItem("HMMaleKey");
+          console.log(savedInputValue);
           if (savedInputValue !== null) {
             setMaleName(savedInputValue.name);
             setMaleDob(savedInputValue.dob);
+            setMatchingDate(savedInputValue.dob);
+            setMatchingTime(savedInputValue.tob);
             setSelectedBirthLocation(savedInputValue.birth_place);
           }
           const FemaleGetData = getLocalStorageItem("HMFemaleKey");
           if (FemaleGetData !== null) {
             setFemaleName(FemaleGetData.name);
             setFemaleDob(FemaleGetData.dob);
+            setMatchingDateSec(savedInputValue.dob);
+            setMatchingTimeSec(savedInputValue.tob);
             setFBirthLocation(FemaleGetData.birth_place);
           }
         };
@@ -104,12 +117,13 @@ export default function HoroscopeMatching({language = "English", routing}) {
     const Match = async () => {
         setLoading(true)
         if (
-            MaleName === "" ||
-            MaleDob === "Please Select DOB" ||
+            MatchingDate === "" ||
+            MatchingTime === "" ||
             selectedBirthLocation === "" ||
             selectedBirthLocation === null ||
             FemaleName === "" ||
-            FemaleDob === "Please Select DOB" ||
+            MatchingDateSec === "" ||
+            MatchingTimeSec === "" ||
             FBirthLocation === "" ||
             FBirthLocation === null
         ) {
@@ -139,11 +153,10 @@ export default function HoroscopeMatching({language = "English", routing}) {
 
           
         // Male Time Zone 
-          const [DatePart] = MaleFormattedDOB.split(" ");
           const dataForTimeZone = {
               latitude:  selectedBirthLocation.latitude,
               longitude: selectedBirthLocation.longitude,
-              date: DatePart,
+              date: MatchingDate,
           };
 
           
@@ -158,11 +171,10 @@ export default function HoroscopeMatching({language = "English", routing}) {
         // Male Time Zone 
 
         // Female Time Zone 
-          const [FDatePart] = MaleFormattedDOB.split(" ");
           const FdataForTimeZone = {
               latitude:  selectedBirthLocation.latitude,
               longitude: selectedBirthLocation.longitude,
-              date: FDatePart,
+              date: MatchingDateSec,
           };
 
           
@@ -175,19 +187,25 @@ export default function HoroscopeMatching({language = "English", routing}) {
         } catch (error) {}
         // Female Time Zone 
 
-        const DateFormateforAstrologyAPIMale = formatDate(MaleFormattedDOB);
-        const DateFormateforAstrologyAPIFemale = formatDate(FemaleFormattedDOB);
-console.log(DateFormateforAstrologyAPIMale)
+        const MaleNewDateTime = MatchingDate + " " + MatchingTime ;
+        const FemaleNewDateTime = MatchingDateSec + " " + MatchingTimeSec ;
+        const DateFormateforAstrologyAPIMale = formatDate(MaleNewDateTime);
+        const DateFormateforAstrologyAPIFemale = formatDate(FemaleNewDateTime);
+
         const HMMale = {
             name: MaleName,
             birth_place: {city_name: selectedBirthLocation.city_name, latitude: selectedBirthLocation.latitude, longitude: selectedBirthLocation.longitude},
-            dob: MaleFormattedDOB,
+            dob: MatchingDate,
+            tob: MatchingTime,
           };
+
         const HMFemale = {
             name: FemaleName,
             birth_place: {city_name: FBirthLocation.city_name, latitude: FBirthLocation.latitude, longitude: FBirthLocation.longitude},
-            dob: FemaleFormattedDOB,
+            dob: MatchingDateSec,
+            tob: MatchingTimeSec,
           };
+
 
 
           const data = {
@@ -225,7 +243,8 @@ console.log(DateFormateforAstrologyAPIMale)
     const HandleTabActive = () =>{
         if(
             MaleName === "" ||
-            MaleDob === "Please Select DOB" ||
+            MatchingDate === "" ||
+            MatchingTime === "" ||
             selectedBirthLocation === "" ||
             selectedBirthLocation === null
         ) {
@@ -391,21 +410,48 @@ console.log(DateFormateforAstrologyAPIMale)
                                 )}
                             </div>
                         </Combobox>
-                        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-6">
+                        <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-8">
+                            <div className="col-span-1">
                                 <label
                                 htmlFor="first-name"
                                 className="block text-sm font-medium leading-6 text-gray-900">
                                 { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
                                 </label>
                                 <div className="mt-2">
-                                <Datetime
+                                {/* <Datetime
                                     inputProps={MaleinputProps}
                                     // onChange={handleDateChange}
                                     onChange={(e)=> setMaleDob(e.toString())}
                                     closeOnClickOutside={true}
                                     className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                                /> */}
+                                <input
+                                    type="date"
+                                    name="name"
+                                    id="name"
+                                    value={MatchingDate}
+                                    onChange={(value) => {setMatchingDate(value.target.value); console.log(value.target.value)}}
+                                    className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    placeholder="Jane Smith"
                                 />
+                                </div>
+                            </div>
+                            <div className="col-span-1">
+                                <label
+                                htmlFor="first-name"
+                                className="block text-sm font-medium leading-6 text-gray-900">
+                                { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
+                                </label>
+                                <div className="mt-2">
+                                    <input
+                                        type="time"
+                                        name="name"
+                                        id="name"
+                                        value={MatchingTime}
+                                        onChange={(value) => {setMatchingTime(value.target.value); console.log(value.target.value)}}
+                                        className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Jane Smith"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -548,21 +594,41 @@ console.log(DateFormateforAstrologyAPIMale)
                                 )}
                             </div>
                         </Combobox>
-                        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-6">
+                        <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-8">
+                            <div className="col-span-1">
                                 <label
                                 htmlFor="first-name"
                                 className="block text-sm font-medium leading-6 text-gray-900">
                                 { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
                                 </label>
                                 <div className="mt-2">
-                                <Datetime
-                                    inputProps={FemaleinputProps}
-                                    // onChange={handleDateChange}
-                                    onChange={(e)=> setFemaleDob(e.toString())}
-                                    closeOnClickOutside={true}
-                                    className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
-                                />
+                                    <input
+                                        type="date"
+                                        name="name"
+                                        id="name"
+                                        value={MatchingDateSec}
+                                        onChange={(value) => {setMatchingDateSec(value.target.value); console.log(value.target.value)}}
+                                        className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Jane Smith"
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-span-1">
+                                <label
+                                htmlFor="first-name"
+                                className="block text-sm font-medium leading-6 text-gray-900">
+                                { language === "Hindi" ? ( <>जन्म की तारीख</> ) : ( <>Date of Birth</> ) }
+                                </label>
+                                <div className="mt-2">
+                                    <input
+                                        type="time"
+                                        name="name"
+                                        id="name"
+                                        value={MatchingTimeSec}
+                                        onChange={(value) => {setMatchingTimeSec(value.target.value); console.log(value.target.value)}}
+                                        className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        placeholder="Jane Smith"
+                                    />
                                 </div>
                             </div>
                         </div>

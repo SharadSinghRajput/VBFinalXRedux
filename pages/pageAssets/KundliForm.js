@@ -40,7 +40,6 @@ export default function KundliForm({language = "English"}) {
       const savedInputValue = getLocalStorageItem("AutoFillFormDataKey");
       if (savedInputValue !== null) {
         setGender(savedInputValue.gender);
-        console.log("savedInputValue", savedInputValue);
 
         setName(savedInputValue.name);
         setselectedDateTime(savedInputValue.dob);
@@ -103,8 +102,6 @@ const handleClick = (e, url) => {
     
     e.preventDefault();
     if (selectedDateTime || selectedDateTime) {
-      if (!selectedDateTime) console.log("date not entered");
-      if (!selectedDateTime) console.log("time not entered");
 
         const convertDateTime = (dateTimeStr) => {
             const date = new Date(dateTimeStr);
@@ -198,7 +195,6 @@ const handleClick = (e, url) => {
         try {
           const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
           setLocalStorageItem("AstroDetailKey", AstroDetail);
-          console.log("AstroDetail", AstroDetail);
         } catch (error) {}
 
         try {
@@ -208,7 +204,6 @@ const handleClick = (e, url) => {
             setLocalStorageItem("AstroAPIHitDataKey", AstroDataBack);
             router.push("/kundli-report.php");
         } catch (error) {
-            console.log("Not set");
             console.log(error);
         }
     }
