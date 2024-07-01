@@ -320,7 +320,7 @@ const DataExistMailList = (DataExistItem) => {
 
             <div className='bg-white p-5 shadow-lg rounded-2xl overflow-hidden'>
               <div className='flex flex-col md:flex-row'>
-                <div className='flex-1 rounded-lg overflow-hidden'>
+                <div className='flex-1 rounded-lg z-50'>
                 {data.language === "Hindi" ?
                     <div><HoroscopeMatching language={data.language} routing={"/hindi/kundli/kundli-matching-report.php"} /></div>
                 :
@@ -352,8 +352,6 @@ const DataExistMailList = (DataExistItem) => {
                     </>:<></>}
                   </div> */}
                   <div className='flex gap-5 z-0'>
-
-                    
                   {/* <button
                     type="button"
                     onClick={()=> setOpen(true)}
@@ -362,9 +360,6 @@ const DataExistMailList = (DataExistItem) => {
                     focus-visible:outline-orange-600">
                     Generate short report
                   </button> */}
-
-
-
                   {SessionAction?
                     <>
                       {data.price && Array.isArray(data.price) && data.price.length > 0 ? (
