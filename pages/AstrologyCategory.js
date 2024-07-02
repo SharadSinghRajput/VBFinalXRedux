@@ -60,25 +60,25 @@ export default function ArticleDetails({data}) {
                   </div>
                 </>:<></>}
                     {data.nestedPages ? <>
-                    <div className="flex flex-wrap gap-5 mb-5 mt-5">
+                    <div className="mb-5 mt-5 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-5">
                         {data.nestedPages.map((item, index) => (
                             <a key={index} 
                               href={MAIN_URL + item?.path}
                               onClick={(e) => handleClickRouter(e, item?.path)}
-                              className="w-40 flex-col flex justify-center items-center shadow-lg p-2 rounded-lg">    
+                              className="flex-col flex justify-center items-center shadow-lg p-2">
                               {item.featuredImage ?
                                 <img
                                     src={item.featuredImage}
                                     alt=""
                                     title=""
-                                    class="w-16 h-16 object-cover rounded-full block" />
+                                    class="w-full h-10 block object-contain" />
                               :
                               <Image
                                   src={placeholderImage}
                                   alt="Placeholder Image"
                                   width={64}
                                   height={64}
-                                  className="w-16 h-16 object-cover rounded-full block"
+                                  className="w-16 h-16 object-cover block rounded-full"
                                   priority
                                   />
                               }
