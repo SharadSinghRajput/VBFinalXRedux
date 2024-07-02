@@ -16,7 +16,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CalculatorForm({routing}) {
+export default function CalculatorForm({routing, lang = "Hindi"}) {
     const router = useRouter();
   
 

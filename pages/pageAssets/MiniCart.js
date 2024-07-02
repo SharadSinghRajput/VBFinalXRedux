@@ -19,7 +19,6 @@ export default function MiniCart({Design}) {
   const getProductTrigger = useSelector(state => state.trigger.getProductTrigger);
   const dispatch = useDispatch()
   
-console.log(getProductTrigger);
   
   const [SessionAction, setSessionAction] = useState(false)
 

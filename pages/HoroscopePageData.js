@@ -54,7 +54,6 @@ export default function HoroscopePageData({data}) {
   const fetchCategoryWiseData = async (CapitalizedZodiac,zodiacPeriod,type,currentDate) => {
     try {
           const astrologyData = await HoroscopeFetchAPI(CapitalizedZodiac, type, zodiacPeriod, currentDate, pageLanguage);
-          // console.log(type);
           if(astrologyData){
               return astrologyData;
           }else{
@@ -129,6 +128,14 @@ export default function HoroscopePageData({data}) {
 
   const PageSlug = router?.query?.slug[router?.query?.slug.length - 1];
 
+  const handleClickRouter = (e, url) => {
+    e.preventDefault(); // Prevent the default anchor behavior
+    router.push(`${MAIN_URL}${url}`);
+};
+
+
+console.log(CapitalizedZodiacType);
+
   return (
     <>
       <MetaData data={data} />
@@ -150,7 +157,7 @@ export default function HoroscopePageData({data}) {
                 {data.title ? <>
                   <Title titleData={data.title} />
                 </>:<></>}
-                <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
+                {/* <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
@@ -166,14 +173,14 @@ export default function HoroscopePageData({data}) {
                       ))}
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {
                   zodiacSign && zodiacPeriod && horoscopeType ? 
                   <>
                   {/* {console.log(zodiacSign, CapitalizedZodiacPeriod, CapitalizedZodiacType)} */}
-                    <div className="flex min-h-full flex-col">
-                    <div className="mx-auto flex w-full max-w-7xl items-start gap-x-8 mb-5">
-                      <div className="block w-full sm:top-8 sm:w-44">
+                    <div className="flex min-h-full flex-col mt-5">
+                    <div className="mx-auto flex max-sm:flex-col w-full max-w-7xl items-start gap-x-8 mb-5">
+                        <div className="block w-full sm:top-8 sm:w-44">
                           <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 mt-5 rounded-lg">
                               <div className="flex justify-center items-center aries-pR1">
                                   <div className="aries-pR"> 
@@ -212,7 +219,7 @@ export default function HoroscopePageData({data}) {
                                       )}
                                   </div>
                               </div>
-                              <a
+                              {/* <a
                                   href="#"
                                   className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
                                   >
@@ -220,7 +227,79 @@ export default function HoroscopePageData({data}) {
                                   <span>
                                       Get Instant Answer on {CapitalizedZodiacType} Matters in 'Yes' or 'No'
                                   </span>
-                              </a>
+                              </a> */}
+                              {pageLanguage === "Hindi" ?
+                                <a
+                                    href={`${MAIN_URL}${
+                                      CapitalizedZodiacType === "Love"
+                                            ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
+                                            : CapitalizedZodiacType === "Finance"
+                                            ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
+                                            : CapitalizedZodiacType === "Career"
+                                            ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
+                                            : CapitalizedZodiacType === "Health"
+                                            ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
+                                            : ""
+                                    }`}
+                                    onClick={(e) => handleClickRouter(e, `${
+                                      CapitalizedZodiacType === "Love"
+                                            ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
+                                            : CapitalizedZodiacType === "Finance"
+                                            ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
+                                            : CapitalizedZodiacType === "Career"
+                                            ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
+                                            : CapitalizedZodiacType === "Health"
+                                            ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
+                                            : ""
+                                    }`)}
+                                    className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                                    >
+                                    <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                                    <span>
+                                        {
+                                            CapitalizedZodiacType === "Love"
+                                            ? "अब तुरंत पाएं “हां” या “ना” में अपनी लव लाइफ़ से जुड़े सवालों के जवाब।"
+                                            : CapitalizedZodiacType === "Finance"
+                                            ? "अब तुरंत पाएं “हां” या “ना” में अपनी फाइनेंस लाइफ से जुड़े सवालों के जवाब। "
+                                            : CapitalizedZodiacType === "Career"
+                                            ? " अब तुरंत पाएं “हां” या “ना” में अपनी करियर लाइफ से जुड़े सवालों के जवाब।"
+                                            : CapitalizedZodiacType === "Health"
+                                            ? " अब तुरंत पाएं “हां” या “ना” में अपनी हेल्थ लाइफ से जुड़े सवालों के जवाब।"
+                                            : ""}
+                                    </span>
+                                </a>
+                                :
+                                <a
+                                    href={`${MAIN_URL}${
+                                      CapitalizedZodiacType === "Love"
+                                            ? "ask-question/get-instant-answer-on-love-matters.php"
+                                            : CapitalizedZodiacType === "Finance"
+                                            ? "ask-question/get-instant-answer-on-finance-matters.php"
+                                            : CapitalizedZodiacType === "Career"
+                                            ? "ask-question/get-instant-answer-on-career-matters.php"
+                                            : CapitalizedZodiacType === "Health"
+                                            ? "ask-question/get-instant-answer-on-health-matters.php"
+                                            : ""
+                                    }`}
+                                    onClick={(e) => handleClickRouter(e, `${
+                                      CapitalizedZodiacType === "Love"
+                                            ? "ask-question/get-instant-answer-on-love-matters.php"
+                                            : CapitalizedZodiacType === "Finance"
+                                            ? "ask-question/get-instant-answer-on-finance-matters.php"
+                                            : CapitalizedZodiacType === "Career"
+                                            ? "ask-question/get-instant-answer-on-career-matters.php"
+                                            : CapitalizedZodiacType === "Health"
+                                            ? "ask-question/get-instant-answer-on-health-matters.php"
+                                            : ""
+                                    }`)}
+                                    className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                                    >
+                                    <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                                    <span>
+                                        Get Instant Answer on {CapitalizedZodiacType} Matters in 'Yes' or 'No'
+                                    </span>
+                                </a>
+                                }
                           </div>
                         </div>
                     </div>

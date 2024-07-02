@@ -32,6 +32,8 @@ import MetaData from './pageAssets/MetaData';
 import Description from './pageAssets/Description';
 import {MAIN_URL} from '../config/config';
 import Holder from './pageAssets/Holder';
+import moonsignm from "./assets/images/moonsign.png";
+import questionimg from "./assets/images/question.png";
 
 import { Horoscope } from '../config/Horoscope';
 
@@ -86,7 +88,6 @@ export default function DailyHoroscopeDetailed({data}) {
     
     const HitTheHoroscopeFunction = async (CapitalizedZodiac, currentDay, type, currentDate) => {
         const data = await fetchCategoryWiseData(CapitalizedZodiac, currentDay, type, currentDate);
-        console.log(data);
         setHoroscopeData(data);
     };    
     
@@ -306,251 +307,256 @@ export default function DailyHoroscopeDetailed({data}) {
             </div>
         </div>
       
-        <div className="mx-auto flex flex-col sm:flex-row w-full max-w-7xl items-start gap-x-8 px-0 py-6 sm:px-6 lg:px-8">
-        
-        <div className="flex max-sm:flex-col w-full">
-            <div className="pr-4 sm:pr-8 sm:w-30 sm:top-8 max-sm:flex max-sm:flex-wrap">
-                <div className="w-40 max-sm:w-auto max-sm:p-2 mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 rounded-lg">
-                    <div className="flex justify-center items-center aries-pR1">
-                        <div className="aries-pR"> 
-                            <div className="flex justify-center items-center bg-white rounded-full p-5 w-20 h-20">
-                            <Image
-                                src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
-                                alt={`${zodiacSign} Icon`}
-                                width={50}
-                                height={50}
-                            />
-                            </div>
-                            <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> {zodiacSign} </h5>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button onClick={() => handleClick('daily')} className={`w-full p-2 rounded-lg ${buttonStyleDay('today')}`}>
-                            <h5 className="text-center font-bold text-sm">{pageLanguage === "Hindi" ? " आपका दैनिक" : "Your Daily"}</h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button onClick={() => handleClick('tomorrow')} className={`w-full p-2 rounded-lg ${buttonStyleDay('tomorrow')}`}>
-                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका आने वाला कल" : "Your Tomorrow"}</h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button onClick={() => handleClick('weekly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('weekly')}`}>
-                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? " आपका साप्ताहिक " : "Your Weekly"} </h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button onClick={() => handleClick('monthly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('monthly')}`}>
-                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका मासिक " : "Your Monthly"} </h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button onClick={() => handleClick('yearly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('yearly')}`}> 
-                            <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका वार्षिक " : "Your Yearly"} </h5>
-                        </button>
-                    </div>
-                </div>
-                <div className='mt-5 max-sm:ml-2'>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white sm:mt-5 rounded-lg">
-                        <button className={`w-full p-2 rounded-lg ${buttonStyle('love')}`} onClick={() => handleButtonClick('love')}> 
-                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button className={`w-full p-2 rounded-lg ${buttonStyle('finance')}`} onClick={() => handleButtonClick('finance')}> 
-                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Finance for: {changeDate}</h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button className={`w-full p-2 rounded-lg ${buttonStyle('career')}`} onClick={() => handleButtonClick('career')}> 
-                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Career for: {changeDate}</h5>
-                        </button>
-                    </div>
-                    <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
-                        <button className={`w-full p-2 rounded-lg ${buttonStyle('health')}`} onClick={() => handleButtonClick('health')}> 
-                            <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Health for: {changeDate}</h5>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <main className="flex-1 w-80 max-sm:w-full max-sm:mt-5">
-                <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 max-sm:p-2 rounded-lg bg-[#091d5a]">
-                    <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
-                        <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
-                    </div>
-                    <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2 mt-2">
-                        <div className="text-justify text-sm pb-2 text-white">
-                            {horoscopeData === "In Process" ? (
-                                <div className="text-center">
-                                    <div role="status">
-                                        <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                                        </svg>
-                                        <span className="sr-only">Loading...</span>
-                                    </div>
+        <div className="mx-auto flex flex-row max-lg:flex-col w-full max-w-7xl items-start gap-x-8 px-0 py-6 sm:px-6 lg:px-8">
+        <div className='w-full'>
+            <div className="flex w-full max-md:flex-col">
+                <div className="pr-4 md:pr-8 sm:top-8">
+                    <div className="w-30 md:w-40 mx-auto shadow-2xl bg-orange-500 pt-6 pb-4 rounded-lg">
+                        <div className="flex justify-center items-center aries-pR1">
+                            <div className="aries-pR"> 
+                                <div className="flex justify-center items-center bg-white rounded-full p-5 w-20 h-20">
+                                <Image
+                                    src={`/images/HoroscopeSign/${CapitalizedZodiac}.png`}
+                                    alt={`${zodiacSign} Icon`}
+                                    width={50}
+                                    height={50}
+                                />
                                 </div>
-                                ) : (
-                                horoscopeData
-                            )}
+                                <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> {zodiacSign} </h5>
+                            </div>
                         </div>
-                    </div>      
-                    {pageLanguage === "Hindi" ?
+                    </div>
+                    <div className='w-30 md:w-40 max-md:grid max-md:grid-cols-2 gap-x-2'>
+                        <div className="w-40 max-sm:w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button onClick={() => handleClick('daily')} className={`w-full p-2 rounded-lg ${buttonStyleDay('today')}`}>
+                                <h5 className="text-center font-bold text-sm">{pageLanguage === "Hindi" ? " आपका दैनिक" : "Your Daily"}</h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button onClick={() => handleClick('tomorrow')} className={`w-full p-2 rounded-lg ${buttonStyleDay('tomorrow')}`}>
+                                <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका आने वाला कल" : "Your Tomorrow"}</h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button onClick={() => handleClick('weekly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('weekly')}`}>
+                                <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? " आपका साप्ताहिक " : "Your Weekly"} </h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button onClick={() => handleClick('monthly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('monthly')}`}>
+                                <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका मासिक " : "Your Monthly"} </h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-full mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button onClick={() => handleClick('yearly')} className={`w-full p-2 rounded-lg ${buttonStyleDay('yearly')}`}> 
+                                <h5 className="text-center font-bold text-sm"> {pageLanguage === "Hindi" ? "आपका वार्षिक " : "Your Yearly"} </h5>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <main className="flex-1 w-80 max-md:w-full max-sm:mt-5">
+                    <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 max-sm:p-2 rounded-lg bg-[#091d5a]">
+                        <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
+                            <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
+                        </div>
+                        <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2 mt-2">
+                            <div className="text-justify text-sm pb-2 text-white">
+                                {horoscopeData === "In Process" ? (
+                                    <div className="text-center">
+                                        <div role="status">
+                                            <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                            </svg>
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    ) : (
+                                    horoscopeData
+                                )}
+                            </div>
+                        </div>      
+                        {pageLanguage === "Hindi" ?
+                            <a
+                                className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                                href={`${MAIN_URL}hindi/ask-question/get-an-instant-answer.php`}
+                                onClick={(e) => handleClickRouter(e, `/hindi/ask-question/get-an-instant-answer.php`)}
+                            >
+                                <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                                <span>
+                                अब तुरंत पाएं “हां” या “ना” में अपने भविष्य से जुड़े सवालों के जवाब
+                                    {/* Unlock the secrets of {currentDay} and get your instant answer in Yes or No. */}
+                                </span>
+                            </a>
+                        :
                         <a
                             className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
-                            href={`${MAIN_URL}hindi/ask-question/get-an-instant-answer.php`}
-                            onClick={(e) => handleClickRouter(e, `/hindi/ask-question/get-an-instant-answer.php`)}
-                        >
+                            href={`${MAIN_URL}ask-question/get-an-instant-answer.php`}
+                            onClick={(e) => handleClickRouter(e, `/ask-question/get-an-instant-answer.php`)}
+                            >
                             <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
                             <span>
-                            अब तुरंत पाएं “हां” या “ना” में अपने भविष्य से जुड़े सवालों के जवाब
-                                {/* Unlock the secrets of {currentDay} and get your instant answer in Yes or No. */}
+                                Unlock the secrets of {currentDay} and get your instant answer in Yes or No.
                             </span>
-                        </a>
-                    :
-                    <a
-                        className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
-                        href={`${MAIN_URL}ask-question/get-an-instant-answer.php`}
-                        onClick={(e) => handleClickRouter(e, `/ask-question/get-an-instant-answer.php`)}
-                        >
-                        <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                        <span>
-                            Unlock the secrets of {currentDay} and get your instant answer in Yes or No.
-                        </span>
-                    </a>}
-                    
-                    
-                    
-                </div>
-                <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 max-sm:px-2 mt-5 rounded-lg bg-[#091d5a]">
-                    <div className="max-h-[284px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2">
-                        <div className="text-justify text-sm pb-2 text-white">
-                            {response === "In Process" ? (
-                                <div className="text-center">
-                                    <div role="status">
-                                        <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                                        </svg>
-                                        <span className="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                                ) : (
-                                    <>
-                                    {response} &nbsp; 
-                                    <a 
-                                        className="text-sm text-white font-bold underline" 
-                                        href={`${MAIN_URL}${newUrlPath ? newUrlPath : ""}`}
-                                        onClick={(e) => handleClickRouter(e, newUrlPath ? newUrlPath : "")}
-                                    >
-                                        Read More About {changeText}...
-                                    </a>
-                                    </>
-                            )}
-                            
+                        </a>}
+                    </div>
+                </main>
+            </div>
+            <div className="flex max-md:flex-col w-full">
+                <div className="pr-4 md:pr-8 sm:w-30 sm:top-8 max-md:flex max-md:flex-wrap max-md:mt-5">
+                    <div className='w-30 md:w-40 max-md:grid max-md:grid-cols-2 gap-x-2'>
+                        <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white sm:mt-5 rounded-lg">
+                            <button className={`w-full p-2 rounded-lg ${buttonStyle('love')}`} onClick={() => handleButtonClick('love')}> 
+                                <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} love life for: {changeDate} </h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button className={`w-full p-2 rounded-lg ${buttonStyle('finance')}`} onClick={() => handleButtonClick('finance')}> 
+                                <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Finance for: {changeDate}</h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button className={`w-full p-2 rounded-lg ${buttonStyle('career')}`} onClick={() => handleButtonClick('career')}> 
+                                <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Career for: {changeDate}</h5>
+                            </button>
+                        </div>
+                        <div className="w-40 max-sm:w-auto mx-auto shadow-2xl border-[1px] border-orange-500 bg-white mt-1 rounded-lg">
+                            <button className={`w-full p-2 rounded-lg ${buttonStyle('health')}`} onClick={() => handleButtonClick('health')}> 
+                                <h5 className="text-center font-bold text-sm"> {CapitalizedCurrentDay} Health for: {changeDate}</h5>
+                            </button>
                         </div>
                     </div>
-                    {pageLanguage === "Hindi" ?
-                    <a
-                        href={`${MAIN_URL}${
-                            changeText === "love"
-                                ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
-                                : changeText === "finance"
-                                ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
-                                : changeText === "career"
-                                ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
-                                : changeText === "health"
-                                ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
-                                : ""
-                        }`}
-                        onClick={(e) => handleClickRouter(e, `${
-                            changeText === "love"
-                                ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
-                                : changeText === "finance"
-                                ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
-                                : changeText === "career"
-                                ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
-                                : changeText === "health"
-                                ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
-                                : ""
-                        }`)}
-                        className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
-                        >
-                        <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                        <span>
-                            {
-                                changeText === "love"
-                                ? "अब तुरंत पाएं “हां” या “ना” में अपनी लव लाइफ़ से जुड़े सवालों के जवाब।"
-                                : changeText === "finance"
-                                ? "अब तुरंत पाएं “हां” या “ना” में अपनी फाइनेंस लाइफ से जुड़े सवालों के जवाब। "
-                                : changeText === "career"
-                                ? " अब तुरंत पाएं “हां” या “ना” में अपनी करियर लाइफ से जुड़े सवालों के जवाब।"
-                                : changeText === "health"
-                                ? " अब तुरंत पाएं “हां” या “ना” में अपनी हेल्थ लाइफ से जुड़े सवालों के जवाब।"
-                                : ""}
-                        </span>
-                    </a>
-                    :
-                    <a
-                        href={`${MAIN_URL}${
-                            changeText === "love"
-                                ? "ask-question/get-instant-answer-on-love-matters.php"
-                                : changeText === "finance"
-                                ? "ask-question/get-instant-answer-on-finance-matters.php"
-                                : changeText === "career"
-                                ? "ask-question/get-instant-answer-on-career-matters.php"
-                                : changeText === "health"
-                                ? "ask-question/get-instant-answer-on-health-matters.php"
-                                : ""
-                        }`}
-                        onClick={(e) => handleClickRouter(e, `${
-                            changeText === "love"
-                                ? "ask-question/get-instant-answer-on-love-matters.php"
-                                : changeText === "finance"
-                                ? "ask-question/get-instant-answer-on-finance-matters.php"
-                                : changeText === "career"
-                                ? "ask-question/get-instant-answer-on-career-matters.php"
-                                : changeText === "health"
-                                ? "ask-question/get-instant-answer-on-health-matters.php"
-                                : ""
-                        }`)}
-                        className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
-                        >
-                        <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                        <span>
-                            Get Instant Answer on {changeText} Matters in 'Yes' or 'No'
-                        </span>
-                    </a>
-                    }
-                   
-                    
                 </div>
-            </main>
+
+                <main className="flex-1 w-80 max-md:w-full">
+                    <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 max-sm:px-2 mt-5 rounded-lg bg-[#091d5a]">
+                        <div className="max-h-[284px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2">
+                            <div className="text-justify text-sm pb-2 text-white">
+                                {response === "In Process" ? (
+                                    <div className="text-center">
+                                        <div role="status">
+                                            <svg aria-hidden="true" className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                            </svg>
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    ) : (
+                                        <>
+                                        {response} &nbsp; 
+                                        <a 
+                                            className="text-sm text-white font-bold underline" 
+                                            href={`${MAIN_URL}${newUrlPath ? newUrlPath : ""}`}
+                                            onClick={(e) => handleClickRouter(e, newUrlPath ? newUrlPath : "")}
+                                        >
+                                            Read More About {changeText}...
+                                        </a>
+                                        </>
+                                )}
+                                
+                            </div>
+                        </div>
+                        {pageLanguage === "Hindi" ?
+                        <a
+                            href={`${MAIN_URL}${
+                                changeText === "love"
+                                    ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
+                                    : changeText === "finance"
+                                    ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
+                                    : changeText === "career"
+                                    ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
+                                    : changeText === "health"
+                                    ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
+                                    : ""
+                            }`}
+                            onClick={(e) => handleClickRouter(e, `${
+                                changeText === "love"
+                                    ? "hindi/ask-question/get-instant-answer-on-love-matters.php"
+                                    : changeText === "finance"
+                                    ? "hindi/ask-question/get-instant-answer-on-finance-matters.php"
+                                    : changeText === "career"
+                                    ? "hindi/ask-question/get-instant-answer-on-career-matters.php"
+                                    : changeText === "health"
+                                    ? "hindi/ask-question/get-instant-answer-on-health-matters.php"
+                                    : ""
+                            }`)}
+                            className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                            >
+                            <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                            <span>
+                                {
+                                    changeText === "love"
+                                    ? "अब तुरंत पाएं “हां” या “ना” में अपनी लव लाइफ़ से जुड़े सवालों के जवाब।"
+                                    : changeText === "finance"
+                                    ? "अब तुरंत पाएं “हां” या “ना” में अपनी फाइनेंस लाइफ से जुड़े सवालों के जवाब। "
+                                    : changeText === "career"
+                                    ? " अब तुरंत पाएं “हां” या “ना” में अपनी करियर लाइफ से जुड़े सवालों के जवाब।"
+                                    : changeText === "health"
+                                    ? " अब तुरंत पाएं “हां” या “ना” में अपनी हेल्थ लाइफ से जुड़े सवालों के जवाब।"
+                                    : ""}
+                            </span>
+                        </a>
+                        :
+                        <a
+                            href={`${MAIN_URL}${
+                                changeText === "love"
+                                    ? "ask-question/get-instant-answer-on-love-matters.php"
+                                    : changeText === "finance"
+                                    ? "ask-question/get-instant-answer-on-finance-matters.php"
+                                    : changeText === "career"
+                                    ? "ask-question/get-instant-answer-on-career-matters.php"
+                                    : changeText === "health"
+                                    ? "ask-question/get-instant-answer-on-health-matters.php"
+                                    : ""
+                            }`}
+                            onClick={(e) => handleClickRouter(e, `${
+                                changeText === "love"
+                                    ? "ask-question/get-instant-answer-on-love-matters.php"
+                                    : changeText === "finance"
+                                    ? "ask-question/get-instant-answer-on-finance-matters.php"
+                                    : changeText === "career"
+                                    ? "ask-question/get-instant-answer-on-career-matters.php"
+                                    : changeText === "health"
+                                    ? "ask-question/get-instant-answer-on-health-matters.php"
+                                    : ""
+                            }`)}
+                            className="flex items-center justify-center gap-x-1.5 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-[#091d5a] shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white w-full mt-4 text-center"
+                            >
+                            <CheckCircleIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+                            <span>
+                                Get Instant Answer on {changeText} Matters in 'Yes' or 'No'
+                            </span>
+                        </a>
+                        }
+                    
+                        
+                    </div>
+                </main>
+            </div>
         </div>
 
-        <div className="block w-full sm:w-auto sm:top-8">
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
+        <div className="block w-full sm:w-auto sm:top-8 max-lg:grid max-lg:grid-cols-3">
+            <div className="w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
                 <h3 className='text-indigo-950 text-center text-sm font-bold'>Lucky Number and Colour for: {formattedDate}</h3>
                 <h2 className='text-indigo-950 text-lg font-bold text-center'>Number - 1</h2>
                 <h3 className='text-sm text-center text-indigo-950 font-bold'>Colour - Orange</h3>
             </div>
             
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-5 mt-5 rounded-lg">
+            <div className="w-full mx-auto shadow-2xl bg-orange-500 p-5 mt-5 rounded-lg">
                 <h3 className='text-white text-center text-sm font-bold'>Mantra Of the day  for: {formattedDate}</h3>
                 <h2 className='text-white text-lg font-bold text-center'>Mantra </h2>
                 <h3 className='text-sm text-center text-white font-bold'>Om Ang Angrakaya Namah!</h3>
             </div>
             
-            <div className="max-w-6xl w-full mx-auto shadow-2xl bg-[#091d5a] p-5 mt-5 rounded-lg">
+            <div className="w-full mx-auto shadow-2xl bg-[#091d5a] p-5 mt-5 rounded-lg">
                 <h3 className='text-white text-center text-sm font-bold'>Remedy for: {formattedDate}</h3>
                 <h2 className='text-white text-lg font-bold text-center'>Remedy </h2>
                 <h3 className='text-sm text-center text-white font-bold'>Recite Bajrang Baardha</h3>
             </div>
 
-            <div className='flex-1 gap-3 mt-5'>
+            <div className='flex-1 gap-3 mt-5 max-lg:col-span-4'>
                 <div className='grid gap-3 grid-cols-2'>
                     {Services.map((item, index) => (
                         <div key={index} className="bg-orange-500 rounded-md py-3 min-h-15">
@@ -561,19 +567,35 @@ export default function DailyHoroscopeDetailed({data}) {
                         </div>
                     ))}
                 </div>
-                <button
-                    href={`${MAIN_URL}astrology-news.php`}
-                    onClick={(e) => handleClickRouter(e, "astrology-news.php")}
-                    className='bg-white mt-5 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
-                    <Image 
-                        width={40} 
-                        height={40} 
-                        className='w-10' 
-                        src="/asset_frontend/img/newsicon.png" 
-                        alt="Astrology News and Articles"
-                    />
-                    <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
-                </button> 
+                <div className='max-lg:grid max-lg:grid-cols-3 max-sm:grid-cols-1'>
+                    <a
+                        href={`${MAIN_URL}astrology-news.php`}
+                        onClick={(e) => handleClickRouter(e, "/astrology-news.php")}
+                        className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                        <Image 
+                            width={40} 
+                            height={40} 
+                            className='w-10' 
+                            src="/asset_frontend/img/newsicon.png" 
+                            alt="Astrology News and Articles"
+                        />
+                        <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
+                    </a> 
+                    <a
+                        href={`${pageLanguage === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
+                        onClick={(e) => handleClickRouter(e, `${pageLanguage === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}
+                        className='bg-white w-full mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                        <Image src={questionimg} width={60} className='w-[60px] aspect-square rounded-lg' />
+                        <p className="text-sm font-semibold">Ask a question</p>
+                    </a>
+                    <a
+                    href={`${pageLanguage === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
+                    onClick={(e) => handleClickRouter(e, `${pageLanguage === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
+                    className='bg-white w-full mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                        <Image src={moonsignm} width={60} className='w-[60px] aspect-square rounded-lg' />
+                        <p className="text-sm font-semibold">Know your moon sign</p>
+                    </a>
+                </div>
             </div>
         </div>
        
