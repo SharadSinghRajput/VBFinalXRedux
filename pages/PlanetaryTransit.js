@@ -36,7 +36,7 @@ export default function Kundli({ data }) {
                                                             <h3 className="inner-div mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                                                                 <span className="inner-div text-red-700">{post.name}</span>
                                                             </h3>
-                                                            <div className="inner-div h-36  overflow-y-auto scrollbar-thumb-red-500 scrollbar-track-red-300">
+                                                            <div className="inner-div h-36  overflow-y-auto scrollbar-thumb-red-500 scrollbar-track-red-300 pr-3">
                                                                 <div className='text-sm text-black text-justify ' dangerouslySetInnerHTML={{ __html: post.description }} />
                                                             </div>
                                                         </div>

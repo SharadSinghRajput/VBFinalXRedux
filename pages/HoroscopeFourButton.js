@@ -9,7 +9,7 @@ import Title from "./pageAssets/TitlewithBG";
 
 ("use client");
 
-export default function HomePage({ lang = "English" }) {
+export default function HomePage({ lang = "English", slug = "" }) {
   const router = useRouter();
   const NavigateLink = [
     {
@@ -17,24 +17,28 @@ export default function HomePage({ lang = "English" }) {
       HindiName: "दैनिक राशिफल",
       link: `${MAIN_URL}horoscope/daily-horoscope.php`,
       HindiLink: `${MAIN_URL}hindi/horoscope/daily-horoscope.php`,
+      slug: `daily-horoscope.php`,
     },
     {
       name: "Weekly Horoscope",
       HindiName: "साप्ताहिक राशिफल",
       link: `${MAIN_URL}horoscope/weekly-horoscope.php`,
       HindiLink: `${MAIN_URL}hindi/horoscope/weekly-horoscope.php`,
+      slug: `weekly-horoscope.php`,
     },
     {
       name: "Monthly Horoscope",
       HindiName: "मासिक राशिफल",
       link: `${MAIN_URL}horoscope/monthly-horoscope.php`,
       HindiLink: `${MAIN_URL}hindi/horoscope/monthly-horoscope.php`,
+      slug: `monthly-horoscope.php`,
     },
     {
       name: "Yearly Horoscope",
       HindiName: "वार्षिक राशिफल",
       link: `${MAIN_URL}horoscope/yearly-horoscope.php`,
       HindiLink: `${MAIN_URL}hindi/horoscope/yearly-horoscope.php`,
+      slug: `yearly-horoscope.php`,
     },
   ];
 
@@ -45,15 +49,18 @@ export default function HomePage({ lang = "English" }) {
 
   return (
     <>
-      <div className="grid grid-cols-4 m-5">
+      <div className="flex m-5">
         {NavigateLink.map((item, index) => (
-          <div className="col-span-1" key={index}>
-            <button
-              onClick={() => router.push(lang === "Hindi" ? item.HindiLink : item.link)}
-              className="w-full h-10 bg-orange-500 text-white border-r border-r-white/50">
+          slug !== item.slug ? 
+          <div className="flex-1" key={index}>
+            <a
+              href={`${MAIN_URL}${lang === "Hindi" ? item.HindiLink : item.link}`}
+              onClick={(e) => handleClick(e, lang === "Hindi" ? item.HindiLink : item.link)}
+              className="w-full h-10 bg-orange-500 text-white border-r border-r-white/50 flex justify-center items-center">
               {lang === "Hindi" ? item.HindiName : item.name}
-            </button>
+            </a>
           </div>
+          : ""
         ))}
       </div>
     </>

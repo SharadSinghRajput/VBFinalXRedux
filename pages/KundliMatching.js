@@ -405,7 +405,7 @@ const DataExistMailList = (DataExistItem) => {
 
               <div className="mx-auto mt-5">
                 <div className="relative isolate overflow-hidden bg-[#ea580c] main-report-div px-4 py-4 text-center shadow-2xl sm:rounded-3xl sm:px-10 sm:py-10">
-                  <p className="mx-auto mt-6 text-lg text-left leading-6 text-white text-justify">
+                  <p className="mx-auto mt-6 text-lg leading-6 text-white text-justify">
                   {data.description ? (<div className=''
                   dangerouslySetInnerHTML={{ __html: data.description }}
                 />) : (<></>)}
