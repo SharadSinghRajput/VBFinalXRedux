@@ -207,7 +207,6 @@ export default function HoroscopeMatching({language = "English", routing}) {
           };
 
 
-
           const data = {
             m_day: DateFormateforAstrologyAPIMale.day,
             m_month: DateFormateforAstrologyAPIMale.month,

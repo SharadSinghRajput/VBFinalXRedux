@@ -321,12 +321,9 @@ const DataExistMailList = (DataExistItem) => {
             <div className='bg-white p-5 shadow-lg rounded-2xl overflow-hidden'>
               <div className='flex flex-col md:flex-row'>
                 <div className='flex-1 rounded-lg z-50'>
-                {data.language === "Hindi" ?
-                    <div><HoroscopeMatching language={data.language} routing={"/hindi/kundli/kundli-matching-report.php"} /></div>
-                :
-                    <div><HoroscopeMatching language={data.language} routing={"/kundli/kundli-matching-report.php"} /></div>
-                }
-                
+                  {data.bannerImage ? <>
+                    <Banner BannerData={data.bannerImage}/>
+                  </>:<></>}
                 </div>
 
                 <div className='w-[420px] gap-5 p-5 md:pt-0'>
@@ -400,6 +397,8 @@ const DataExistMailList = (DataExistItem) => {
                 </div>
               </div>
 
+              
+
               {data.extraComponentData ? data.extraComponentData.Holder7 ? <Holder data={data.extraComponentData.Holder7} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder8 ? <Holder data={data.extraComponentData.Holder8} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
@@ -422,6 +421,7 @@ const DataExistMailList = (DataExistItem) => {
                   </div>
                 </div>
               </div>
+              
 
               {/* <div className='pt-5 relative'>
                 {data.description ? (<div className='text-base font-normal mt-5 text-justify'
@@ -429,12 +429,21 @@ const DataExistMailList = (DataExistItem) => {
                 />) : (<></>)}
               </div> */}
             </div>
+            <div className='mt-5 grid grid-cols-2 gap-10'>
+              <div>
+                {data.language === "Hindi" ?
+                  <div><HoroscopeMatching language={data.language} routing={"/hindi/kundli/kundli-matching-report.php"} /></div>
+                :
+                  <div><HoroscopeMatching language={data.language} routing={"/kundli/kundli-matching-report.php"} /></div>
+                }
+              </div>
+              <div>
+                {data.extraComponentData ? data.extraComponentData.Holder10 ? <Holder data={data.extraComponentData.Holder10} /> : <></> :<></>}
+              </div>
+            </div>
 
-            {data.extraComponentData ? data.extraComponentData.Holder10 ? <Holder data={data.extraComponentData.Holder10} /> : <></> :<></>}
             {data.extraComponentData ? data.extraComponentData.Holder11 ? <Holder data={data.extraComponentData.Holder11} /> : <></> :<></>}
             {data.extraComponentData ? data.extraComponentData.Holder12 ? <Holder data={data.extraComponentData.Holder12} /> : <></> :<></>}
-
-            
 
             {data.questionAnswerData?.Serial1 ? 
                 <div className="bg-white mt-5">
