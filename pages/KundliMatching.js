@@ -404,8 +404,8 @@ const DataExistMailList = (DataExistItem) => {
               {data.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
 
               <div className="mx-auto mt-5">
-                <div className="relative isolate overflow-hidden bg-[#ea580c] main-report-div px-10 py-10 text-center shadow-2xl sm:rounded-3xl sm:px-10">
-                  <p className="mx-auto mt-6 text-lg text-left leading-8 text-white">
+                <div className="relative isolate overflow-hidden bg-[#ea580c] main-report-div px-4 py-4 text-center shadow-2xl sm:rounded-3xl sm:px-10 sm:py-10">
+                  <p className="mx-auto mt-6 text-lg text-left leading-6 text-white text-justify">
                   {data.description ? (<div className=''
                   dangerouslySetInnerHTML={{ __html: data.description }}
                 />) : (<></>)}
@@ -428,8 +428,9 @@ const DataExistMailList = (DataExistItem) => {
                   dangerouslySetInnerHTML={{ __html: data.description }}
                 />) : (<></>)}
               </div> */}
+              
             </div>
-            <div className='mt-5 grid grid-cols-2 gap-10'>
+            <div className='mt-5 grid grid-cols-1 md:grid-cols-2 gap-10'>
               <div>
                 {data.language === "Hindi" ?
                   <div><HoroscopeMatching language={data.language} routing={"/hindi/kundli/kundli-matching-report.php"} /></div>
