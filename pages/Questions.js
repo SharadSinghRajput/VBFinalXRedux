@@ -39,11 +39,11 @@ export default function Questions({language = "English"}) {
         <dd className="text-sm text-gray-900 bg-white">
             <ul role="list" className="divide-y divide-orange-500 rounded-md border border-orange-500">
                 {Questions.map((item, index) => (
-                    <li key={index} className="flex items-center justify-between py-2 pl-4 pr-5 text-sm leading-6">
-                        <div className="flex w-0 flex-1 items-center">
+                    <li key={index} className="flex items-center justify-between py-2  pl-4 pr-5 max-md:pr-2 max-md:pl-2 text-sm leading-6">
+                        <div className="flex w-full flex-1 items-center">
                             <ArrowRightIcon className="h-5 w-5 flex-shrink-0 text-orange-500" aria-hidden="true" />
                             <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                                <span className="truncate text-orange-500 font-medium">
+                                <span className="text-orange-500 font-medium">
                                     { language=== "Hindi" ? item.titlehindi : item.title }
                                 </span>
                             </div>
