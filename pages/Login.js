@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react'
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import LoginImage from './assets/images/4812.jpg';
 
 import LoginForm from "./LoginForm"
 
@@ -55,13 +56,12 @@ export default function Login() {
             </div>
           </div>
           <div className="relative hidden w-0 flex-1 lg:block">
-            <Image
+          <Image
               width={1200}
               height={500}
               className="absolute inset-0 h-full w-full object-cover"
-              src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
-              alt="Login"
-              fetchPriority
+              src={LoginImage}
+              alt="Signup"
             />
           </div>
         </div>

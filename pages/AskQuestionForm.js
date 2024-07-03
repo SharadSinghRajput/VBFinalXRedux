@@ -729,8 +729,8 @@ export default function AskQueForm({ data, role }) {
                     GetUserDetails(),
                     dispatch(toggleStartSession());
                 }}
-                className="-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-blue-500 shadow-sm ring-1 ring-inset ring-blue-500 hover:bg-gray-50 focus-visible:ring-transparent">
-                Close
+                className="-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-green-500 shadow-sm ring-1 ring-inset ring-green-500 hover:bg-gray-50 focus-visible:ring-transparent">
+                After logging in, click here to submit.
               </button>
             </div>
           </>

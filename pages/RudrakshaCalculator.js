@@ -19,8 +19,7 @@ import CalculatorForm from './pageAssets/CalculatorForm'
 import MetaData from './pageAssets/MetaData';
 
 export default function Kundli({ data }) {
-  
- 
+  const lang = data?.language
 
   return (
     <>
@@ -34,17 +33,19 @@ export default function Kundli({ data }) {
               {/* {data.title ? <>
                   <Title titleData={data.title} />
               </>:<></>} */}
-
-              <div className="grid grid-cols-2 mb-10">
+              <div className="grid grid-cols-2 max-md:grid-cols-1 mb-10">
                 <div className="bg-bgForm p-5 flex justify-center items-center flex-col gap-6">
-                  <p className="font-bold text-lg text-white ">Get your free Rudraksha report</p>
+                  <p className="font-bold text-lg text-white ">{lang === "Hindi" ? "अपनी नि: शुल्क रुद्राक्ष रिपोर्ट प्राप्त करें" : "Get your free Rudraksha report"}</p>
                   <Image src={GlobImg} width={100} height={100} />
                 </div>
                 <div className="p-10 bg-gray-100">
-                  <CalculatorForm routing={"/calculator/rudraksha-suggestion.php"} />
+                  {data.language === "Hindi" ? <>
+                  <CalculatorForm lang="Hindi" routing={"/hindi/calculator/rudraksha-suggestion.php"}/>
+                  </> : <>
+                    <CalculatorForm lang="English" routing={"/calculator/rudraksha-suggestion.php"}/>
+                  </>}
                 </div>
               </div>
-
               {data.blogBannerImage ? <>
                   <div className={`w-[100%] md:w-[100%] mb-5 mt-5`}>
                   <Banner BannerData={data.blogBannerImage} AltName={data.title} />

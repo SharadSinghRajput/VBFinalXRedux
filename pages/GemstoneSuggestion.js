@@ -10,15 +10,12 @@ import { formatDate } from "../config/formatDatetoAstrologyAPI";
 import fetchAstrologyData from "../config/getAstroAPI";
 import HoroscopeFetchAPI from "../config/horoscopeFetchAPI";
 import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage";
-
 import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import GlobImg from './assets/images/calculator/glob.png';
 import CalculatorForm from './pageAssets/CalculatorForm'
 import MetaData from './pageAssets/MetaData';
-
-
 
 export default function Kundli({ data }) {
   
@@ -60,7 +57,6 @@ export default function Kundli({ data }) {
                     <Title titleData={data.title} />
                 </div>
                 </>:<></>}
-                
             </>
             : null}
             <div className="grid grid-cols-3 gap-5">

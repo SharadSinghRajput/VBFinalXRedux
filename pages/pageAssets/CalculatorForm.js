@@ -16,16 +16,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CalculatorForm({routing, lang = "Hindi"}) {
-    const router = useRouter();
-  
+export default function CalculatorForm({ routing, lang = "English" }) {
+  const router = useRouter();
+
 
   const GenderType = [
     { id: "RepMale", title: "Male" },
     { id: "RepFemale", title: "Female" },
   ];
 
-  
+
   const [SearchLocation, setSearchLocation] = useState("");
   const [selectedBirthLocation, setSelectedBirthLocation] = useState(null);
   const [Gender, setGender] = useState("Male");
@@ -51,7 +51,7 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
     };
     GetUserData();
   }, []);
-  
+
 
 
 
@@ -85,7 +85,7 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
     if (selectedDateTime === "Please Select DOB") {
       errorMessages.push("Please Select DOB");
     }
-    
+
     // Check if the name is empty
     if (Name === "") {
       errorMessages.push("Please Enter Name");
@@ -94,124 +94,124 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
     if (selectedBirthLocation === "" || selectedBirthLocation === null) {
       errorMessages.push("Please Select Place of Birth");
     }
-    
+
     // Check if the gender is empty or null
     if (Gender === "" || Gender === null) {
       errorMessages.push("Please Choose your Gender");
     }
-    
+
     // Set the error messages
     setErrorMessage(errorMessages);
-    
+
     // If there are error messages, do not proceed further
     if (errorMessages.length > 0) {
       return;
     }
-    
+
 
 
     if (selectedDateTime || selectedDateTime) {
-        const convertDateTime = (dateTimeStr) => {
-          const date = new Date(dateTimeStr);
-          console.log("dateTimeStr", date);
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0');
-          const day = String(date.getDate()).padStart(2, '0');
-          const hours = String(date.getHours()).padStart(2, '0');
-          const minutes = String(date.getMinutes()).padStart(2, '0');
-          const seconds = String(date.getSeconds()).padStart(2, '0');
-        
-          const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-          return formattedDate;
-          
-        };
+      const convertDateTime = (dateTimeStr) => {
+        const date = new Date(dateTimeStr);
+        console.log("dateTimeStr", date);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
 
-        const formattedDateTime = convertDateTime(selectedDateTime)
+        const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return formattedDate;
 
-          function formatDateIn(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
-            return `${month}-${day}-${year} ${hours}:${minutes}`;
-          }
-          
-          const CurrentDate = formatDateIn(new Date());
+      };
 
-          const [DatePart] = formattedDateTime.split(" ");
-          const dataForTimeZone = {
-              latitude:  selectedBirthLocation.latitude,
-              longitude: selectedBirthLocation.longitude,
-              date: DatePart,
-          };
-        
+      const formattedDateTime = convertDateTime(selectedDateTime)
 
-        let TimeZone;
-        try {
-            const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-            if(astrologyData.status === true ){
-                TimeZone = astrologyData.timezone
-            }
-        } catch (error) {}
+      function formatDateIn(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${month}-${day}-${year} ${hours}:${minutes}`;
+      }
+
+      const CurrentDate = formatDateIn(new Date());
+
+      const [DatePart] = formattedDateTime.split(" ");
+      const dataForTimeZone = {
+        latitude: selectedBirthLocation.latitude,
+        longitude: selectedBirthLocation.longitude,
+        date: DatePart,
+      };
 
 
-        const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
-
-        const data = {
-            apiKey: API_KEY,
-            dob: formattedDateTime,
-            birth_place_longitude: selectedBirthLocation.latitude,
-            birth_place_latitude: selectedBirthLocation.longitude,
-            cdate: CurrentDate,
-        };
-    
-        const UserInfoData = {
-            name: Name,
-            dob: formattedDateTime,
-            birth_place_longitude: selectedBirthLocation.latitude,
-            birth_place_latitude: selectedBirthLocation.longitude,
-        };
-
-        const UserData = JSON.stringify(data);
-        const AstroDataBack = {
-            dobData: DateFormateforAstrologyAPI,
-            birth_place_longitude: selectedBirthLocation.latitude,
-            birth_place_latitude: selectedBirthLocation.longitude,
-            tzone: TimeZone,
+      let TimeZone;
+      try {
+        const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
+        if (astrologyData.status === true) {
+          TimeZone = astrologyData.timezone
         }
+      } catch (error) { }
 
-        const datatoHitBasic = {
-          day: AstroDataBack.dobData.day,
-          month: AstroDataBack.dobData.month,
-          year: AstroDataBack.dobData.year,
-          hour: AstroDataBack.dobData.hour,
-          min: AstroDataBack.dobData.min,
-          lat: AstroDataBack.birth_place_latitude,
-          lon: AstroDataBack.birth_place_longitude,
-          tzone: AstroDataBack.tzone,
-        };
-        const DataAutoFill = {
-          gender: Gender,
-          name: Name,
-          birth_place: selectedBirthLocation.city_name,
-          birth_place_longitude: selectedBirthLocation.longitude,
-          birth_place_latitude: selectedBirthLocation.latitude,
-          dob: formattedDateTime,
-        };
 
-        try {
-          const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
-          setLocalStorageItem("AstroDetailKey", AstroDetail);
-        } catch (error) {}
+      const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
 
-        try {
-            setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
-            setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
-            router.push(routing);
-        }catch (error) {
-            console.log(error);
-        }
+      const data = {
+        apiKey: API_KEY,
+        dob: formattedDateTime,
+        birth_place_longitude: selectedBirthLocation.latitude,
+        birth_place_latitude: selectedBirthLocation.longitude,
+        cdate: CurrentDate,
+      };
+
+      const UserInfoData = {
+        name: Name,
+        dob: formattedDateTime,
+        birth_place_longitude: selectedBirthLocation.latitude,
+        birth_place_latitude: selectedBirthLocation.longitude,
+      };
+
+      const UserData = JSON.stringify(data);
+      const AstroDataBack = {
+        dobData: DateFormateforAstrologyAPI,
+        birth_place_longitude: selectedBirthLocation.latitude,
+        birth_place_latitude: selectedBirthLocation.longitude,
+        tzone: TimeZone,
+      }
+
+      const datatoHitBasic = {
+        day: AstroDataBack.dobData.day,
+        month: AstroDataBack.dobData.month,
+        year: AstroDataBack.dobData.year,
+        hour: AstroDataBack.dobData.hour,
+        min: AstroDataBack.dobData.min,
+        lat: AstroDataBack.birth_place_latitude,
+        lon: AstroDataBack.birth_place_longitude,
+        tzone: AstroDataBack.tzone,
+      };
+      const DataAutoFill = {
+        gender: Gender,
+        name: Name,
+        birth_place: selectedBirthLocation.city_name,
+        birth_place_longitude: selectedBirthLocation.longitude,
+        birth_place_latitude: selectedBirthLocation.latitude,
+        dob: formattedDateTime,
+      };
+
+      try {
+        const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
+        setLocalStorageItem("AstroDetailKey", AstroDetail);
+      } catch (error) { }
+
+      try {
+        setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
+        setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
+        router.push(routing);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
   };
@@ -220,25 +220,25 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
     <>
       <form className="z-50 relative">
         {ErrorMessage.length > 0 ?
-            <div className="rounded-md bg-red-50 p-4">
-                <div className="flex">
-                    {/* <div className="flex-shrink-0">
+          <div className="rounded-md bg-red-50 p-4">
+            <div className="flex">
+              {/* <div className="flex-shrink-0">
                     <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
                     </div> */}
-                    <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">There were {ErrorMessage.length} errors with your submission</h3>
-                    <div className="mt-2 text-sm text-red-700">
-                        <ul role="list" className="list-disc space-y-1 pl-5">
-                            {ErrorMessage.map((item, index)=>(
-                                <li key={index}>{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    </div>
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-red-800">There were {ErrorMessage.length} errors with your submission</h3>
+                <div className="mt-2 text-sm text-red-700">
+                  <ul role="list" className="list-disc space-y-1 pl-5">
+                    {ErrorMessage.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
+              </div>
             </div>
-        : null}
-        <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
+          </div>
+          : null}
+        <div className="space-y-4 mt-5 flex items-center space-x-10 space-y-0">
 
           {GenderType.map((item) => (
             <div key={item?.id} className="flex items-center">
@@ -261,8 +261,8 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
         <div className="relative mt-7">
           <label
             htmlFor="name"
-            className="absolute -top-2 left-2 inline-block bg-gray-100 px-1 text-xs font-medium text-gray-900">
-            Name
+            className="block text-sm font-medium leading-6 text-gray-900">
+            {lang === "Hindi" ? "नाम" : "Name"}
           </label>
           <input
             type="text"
@@ -276,7 +276,7 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
         </div>
         <Combobox as="div" value={selectedBirthLocation} onChange={setSelectedBirthLocation}>
           <Combobox.Label className="block text-sm font-medium leading-6 mt-5 text-gray-900">
-            Birth location
+            {lang === "Hindi" ? "जन्म स्थान" : "Birth location"}
           </Combobox.Label>
           <div className="relative mt-2">
             <Combobox.Input
@@ -399,13 +399,13 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
             <label
               htmlFor="first-name"
               className="block text-sm font-medium leading-6 text-gray-900">
-              Date of Birth
+              {lang === "Hindi" ? "जन्म तिथि" : "Date of Birth"}
             </label>
             <div className="mt-2">
               <Datetime
                 inputProps={inputProps}
                 // onChange={handleDateChange}
-                onChange={(e)=> setselectedDateTime(e.toString())}
+                onChange={(e) => setselectedDateTime(e.toString())}
                 closeOnClickOutside={true}
                 className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
               />
@@ -417,7 +417,7 @@ export default function CalculatorForm({routing, lang = "Hindi"}) {
           type="button"
           onClick={handleSubmit}
           className="w-[100%] inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#091d5a] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">
-          Submit
+          {lang === "Hindi" ? "प्रस्तुत" : "Submit"}
         </button>
       </form>
     </>

@@ -435,7 +435,7 @@ export default function DefaultPage({ data }) {
                         </table>
                       </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-5">
+                    <div className="grid grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-5">
                       <table className="w-full bg-blue-800 rounded-lg overflow-hidden mt-5" >
                         <tbody className="divide-y divide-gray-200">
                           <tr>
