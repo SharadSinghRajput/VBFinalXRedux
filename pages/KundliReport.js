@@ -307,19 +307,19 @@ export default function Kundli({data}) {
                                 <h3 className="text-lg font-bold">Astrology News and Articles</h3>
                             </button>
                                 <a
-                                    href={`${data.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
-                                    onClick={(e) => handleClickRouter(e, `${data.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}
+                                    href={`${data?.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
+                                    onClick={(e) => handleClickRouter(e, `${data?.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}
                                     className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
                                     <Image src={questionimg} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
-                                    <p className="text-sm font-semibold">{data.language === "Hindi" ? "प्रश्न पूछें" : "Ask a question"}</p>
+                                    <p className="text-sm font-semibold">{data?.language === "Hindi" ? "प्रश्न पूछें" : "Ask a question"}</p>
                                     </a>
                                 <a
-                                    href={`${data.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
-                                    onClick={(e) => handleClickRouter(e, `${data.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
+                                    href={`${data?.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
+                                    onClick={(e) => handleClickRouter(e, `${data?.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
                                     
                                     className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
                                     <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
-                                    <p className="text-sm font-semibold">{data.language === "Hindi" ? "अपनी चंद्र राशि जानें" : "Know your moon sign"}</p>
+                                    <p className="text-sm font-semibold">{data?.language === "Hindi" ? "अपनी चंद्र राशि जानें" : "Know your moon sign"}</p>
                                 </a>
                         </div>
                     </div>
