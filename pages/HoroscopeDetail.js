@@ -36,6 +36,7 @@ import moonsignm from "./assets/images/moonsign.png";
 import questionimg from "./assets/images/question.png";
 
 import { Horoscope } from '../config/Horoscope';
+import { lifesProblems } from "../config/json/lifesProblems";
 
 
 export default function DailyHoroscopeDetailed({data}) {
@@ -232,7 +233,7 @@ export default function DailyHoroscopeDetailed({data}) {
         { name : "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png", Link: "/services/life-readings.php"}
     ];
 
-    const Questions= [
+    const Questions = [
         { name: "Loan and Debt", img: loanDebt, url: `${MAIN_URL}loan-and-debts.php` },
         { name: "Children Astrology", img: childrenAstrology, url: `${MAIN_URL}children-astrology.php` },
         { name: "Betting & Gambling", img: Icons, url: `${MAIN_URL}astrology-for-betting.php` },
@@ -633,12 +634,20 @@ export default function DailyHoroscopeDetailed({data}) {
                               autoplay={{ delay: 3000 }}
                               loop={true}
                             >
-                            {Questions.map((item, index) => (
+                            {lifesProblems.map((item, index) => (
                                 <SwiperSlide key={index}>
-                                    <a className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center" href={item?.url}>
-                                        <Image src={item?.img} width={80} height={80} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-full' alt={item?.name} />
-                                        <span>{item?.name}</span>
-                                    </a>    
+                                    <a
+                                        className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
+                                        href={pageLanguage === "Hindi" ? item.hindiUrl : item.url}
+                                    >
+                                        <Image
+                                        src={item.img}
+                                        width={80}
+                                        alt={pageLanguage === "Hindi" ? item.hindiName : item.name}
+                                        className="w-[80px] p-3 bg-orange-500 aspect-square rounded-lg"
+                                        />
+                                        <span>{pageLanguage === "Hindi" ? item.hindiName : item.name}</span>
+                                    </a> 
                                 </SwiperSlide>                    
                             ))}
 

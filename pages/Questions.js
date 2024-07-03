@@ -8,7 +8,6 @@ export default function Questions({language = "English"}) {
     const router = useRouter();
     const [mainURL, setMainURL] = useState(MAIN_URL);
     const Questions= [
-
         { titlehindi: "कुंडली मिलान हेतु ऑनलाइन रिपोर्ट",title: "Online Report for Horoscope Matching", url: "services/online-reports/horoscope-matching.php" },
         { titlehindi: "क्या आप 2024 में यूपीएससी परीक्षा क्रैक कर पाएंगे? ",title: "Will You be Successful in UPSC Exam?", url: "services/online-reports/will-i-be-successful-in-upsc-exam.php" },
         { titlehindi: "क्या आपको स्टॉक मार्केट में इन्वेस्ट करना चाहिए? ",title: "Should You Invest in the Stock Market?", url: "services/online-reports/stock-market-2024.php" },
@@ -20,7 +19,6 @@ export default function Questions({language = "English"}) {
         { titlehindi: "शनि का किस-किस तरह से प्रभाव है आप पर ",title: "Find Saturn’s Secrets and how they affect you", url: "services/online-reports/know-about-saturn-secrets.php" },
         { titlehindi: "शनि का किस-किस तरह से प्रभाव है आप पर ",title: "Get Most accurate result on Manglik Dosh", url: "services/online-reports/mangal-dosha-calculator.php" },
         { titlehindi: "सबसे सटीक मांगलिक दोष आकलन",title: "Assess status and personality of your Future Life Partner", url: "services/online-reports/future-life-partner.php" },
-
     ]
 
     useEffect(() => {
