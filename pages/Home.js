@@ -55,6 +55,80 @@ export default function HomePage() {
         <title>Dr. Vinay Bajrangi - Best Online Astrologer in India, Delhi NCR </title>
         <meta name="description" content="Dr. Vinay Bajrangi- a Vedic astrologer for all human problems and solutions-Famous for Marriage, career, business, past life readings and child astrology."  />
         <meta name="keywords" content="Vinay Bajrangi, Marriage Astrology, Business Astrology, Career Astrology, Property Astrology, Health Astrology, Astrology Yoga, Astrology Houses, Astrology Remedies, Astrology Dasha, Children Astrology, Astrology Secrets, Astrology Services, Vedic astrologer, Astrology for court cases, Birth time rectification & Horoscope, Best Astrologer Near Me, Good Astrologer in India, Best Jyotish Near Me" />
+        <link href="https://www.vinaybajrangi.com/" hreflang="en" />
+        <meta name="robots" content="index, follow" />
+        <meta name="image" content="https://www.vinaybajrangi.com/asset_frontend/img/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="drvinaybajrangi" />
+        <meta name="twitter:title" content="Dr. Vinay Bajrangi - Best Online Astrologer in India, Delhi NCR" />
+        <meta name="twitter:description" content="Dr. Vinay Bajrangi- a Vedic astrologer for all human problems and solutions-Famous for Marriage, career, business, past life readings and child astrology." />
+        <meta name="twitter:image" content="https://www.vinaybajrangi.com/upload/maillogo.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Dr. Vinay Bajrangi - Best Online Astrologer in India, Delhi NCR" />
+        <meta property="og:description" content="Dr. Vinay Bajrangi- a Vedic astrologer for all human problems and solutions-Famous for Marriage, career, business, past life readings and child astrology." />
+        <meta property="og:url" content="https://www.vinaybajrangi.com/" />
+        <meta property="og:image" content="https://www.vinaybajrangi.com/upload/maillogo.jpg" />
+        <meta property="fb:app_id" content="604745720385710" />
+        <meta name="geo.region" content="IN-UP" />
+        <meta name="geo.placename" content="Noida" />
+        <meta name="geo.position" content="28.60168;77.378096" />
+        <meta name="ICBM" content="28.60168, 77.378096" />
+        <meta name="og:title" content="Vinay Bajrangi" />
+        <meta name="og:image" content="https://www.vinaybajrangi.com/upload/maillogo.jpg" />
+        <meta name="og:url" content="https://www.vinaybajrangi.com/" />
+        <meta name="og:site_name" content="Vinay Bajrangi" />
+        <meta name="fb:admins" content="261473347307163" />
+        <meta name="og:type" content="website" />
+        <meta name="p:domain_verify" content="c5ac04686373597652056e184e950195" />
+
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://www.schema.org",
+            "@type": "Organization",
+            "name": "Dr. Vinay Bajrangi - Best Online Astrologer in India, Delhi NCR",
+            "url": "https://www.vinaybajrangi.com/",
+            "logo": "https://www.vinaybajrangi.com/asset_frontend/img/logo.png",
+            "image": "https://www.vinaybajrangi.com/upload/pages/139_karma%20Karrection.jpg",
+            "description": "I Dr. Vinay Bajrangi, am a trustworthy Indian Vedic astrologer who acts as a facilitator for helping you to achieve your ultimate goals and am also dedicated to the cause till you get the desired goals.",
+            "sameAs": [
+              "https://www.facebook.com/ptVinayBajrangi/",
+              "https://twitter.com/drvinaybajrangi",
+              "https://plus.google.com/u/0/116937443282048557482",
+              "https://www.instagram.com/drvinaybajrangi/",
+              "https://www.youtube.com/c/DrVinayBajrangi"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "BAJRANGI DHAM",
+              "addressLocality": "M-22, Sector-66, ",
+              "addressRegion": "Noida",
+              "postalCode": "201301",
+              "addressCountry": "India"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "Bajrangi Dham Customer Support",
+              "telephone": "+91-9278555588"
+            },
+            "aggregateRating": {
+              "ratingValue": "4.9",
+              "reviewCount": "1724"
+            }
+          })
+        }} />
+
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.vinaybajrangi.com/"
+            }]
+          })
+        }} />
       </Head>
       <Menu />
       <PopularReports />
