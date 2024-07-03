@@ -22,7 +22,8 @@ export default function HomePage({ data }) {
   const dayType = data && data.zodiacPeriod ? data.zodiacPeriod + "-horoscope" : "daily-horoscope";
   // console.log("Day Type: " , data.zodiacPeriod);
   const horoscopes = Horoscope(dayType);
-  const PageSlug = router?.query?.slug[router?.query?.slug.length - 1];
+  
+  const PageSlug = router?.query?.slug ? router.query.slug[router.query.slug.length - 1] : null;
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function HomePage({ data }) {
             </div>
           </div>
         </div>
-        <HoroscopeFourButton slug={PageSlug} lang={data.language} />
+        <HoroscopeFourButton slug={PageSlug} lang={data?.language} />
 
         {data?.blogBannerImage && (
           <div className="w-full md:w-full mb-5 mt-5 p-2">

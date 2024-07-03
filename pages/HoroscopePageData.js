@@ -126,7 +126,8 @@ export default function HoroscopePageData({data}) {
   
   const horoscopes = Horoscope(dayType);
 
-  const PageSlug = router?.query?.slug[router?.query?.slug.length - 1];
+  const PageSlug = router?.query?.slug ? router.query.slug[router.query.slug.length - 1] : null;
+
 
   const handleClickRouter = (e, url) => {
     e.preventDefault(); // Prevent the default anchor behavior
