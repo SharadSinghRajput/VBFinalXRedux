@@ -56,7 +56,7 @@ export default function HomePage({ lang = "English", slug = "" }) {
             <a
               href={`${MAIN_URL}${lang === "Hindi" ? item.HindiLink : item.link}`}
               onClick={(e) => handleClick(e, lang === "Hindi" ? item.HindiLink : item.link)}
-              className="w-full h-10 bg-orange-500 text-white border-r border-r-white/50 flex justify-center items-center p-2 max-sm:h-full max-sm:text-sm max-sm:text-center">
+              className="w-full h-10 bg-orange-500 text-white border-r border-r-white/50 flex justify-center items-center p-2 max-md:h-full max-md:text-sm max-md:text-center">
               {lang === "Hindi" ? item.HindiName : item.name}
             </a>
           </div>
