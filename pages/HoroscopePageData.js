@@ -203,7 +203,7 @@ console.log(CapitalizedZodiacType);
                               <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
                                   <h2 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedZodiacPeriod} {CapitalizedZodiacType} Horoscope ({TotalDays})</h2>
                               </div>
-                              <div className="max-h-72 overflow-y-scroll scrollbar-red px-5 mt-2">
+                              <div className="max-h-72 overflow-y-scroll scrollbar-red px-5 mt-2 max-md:px-2 max-md:pl-0">
                                   <div className="text-justify text-sm pb-2 text-white">
                                       {horoscopeData === "In Process" ? (
                                           <div className="text-center">
