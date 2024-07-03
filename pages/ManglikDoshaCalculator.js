@@ -18,6 +18,7 @@ import CalculatorForm from './pageAssets/CalculatorForm'
 import MetaData from './pageAssets/MetaData';
 
 export default function Kundli({ data }) {
+  const lang = data?.language
   return (
     <>
       {data ? (
@@ -27,13 +28,17 @@ export default function Kundli({ data }) {
             <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             {data ? (
               <>
-              <div className="grid grid-cols-2 mb-10">
+              <div className="grid grid-cols-2 max-md:grid-cols-1 mb-10">
                 <div className="bg-bgForm p-5 flex justify-center items-center flex-col gap-6">
-                  <p className="font-bold text-lg text-white ">Manglik Dosha Calculator</p>
+                  <p className="font-bold text-lg text-white ">{lang === "Hindi" ? "मांगलिक दोष कैलकुलेटर" : "Manglik Dosha Calculator"}</p>
                   <Image src={GlobImg} width={100} height={100} />
                 </div>
                 <div className="p-10 bg-gray-100">
-                  <CalculatorForm routing={"/calculator/manglik-dosha-report.php"} />
+                  {data.language === "Hindi" ? <>
+                      <CalculatorForm lang="Hindi" routing={"/hindi/marriage-astrology/manglik-dosha-reasons-and-solutions.php"} />
+                    </> : <>
+                      <CalculatorForm lang="English" routing={"/marriage-astrology/manglik-dosha-reasons-and-solutions.php"} />
+                    </>}
                 </div>
               </div>
 

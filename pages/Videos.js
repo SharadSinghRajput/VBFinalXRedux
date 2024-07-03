@@ -26,9 +26,10 @@ export default function Videos({data}) {
             domainSecreteCode: Domain_Secrete_Code,
             getTotal : 20,
             dataFrom : (pageNumber > 0 ? pageNumber - 1 : 0) * 20,
-            pageId : AllData.type === "Videos" ? "5359101" : AllData.reportID,
+            pageId : data.type === "Videos" ? "5359101" : data.reportID,
             checkVideo : true,
         }
+        console.log(dataToAdd);
         const apiUrl = `${API_NEW_URL}data-list-api.php`;
         try {
           const response = await fetch(apiUrl, {
@@ -41,7 +42,7 @@ export default function Videos({data}) {
     
           const data = await response.json();
           if(data){
-            console.log(data)
+            
             setVideo(data.data)
             setTotalRows(data.totalRows)
           }

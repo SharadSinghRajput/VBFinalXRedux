@@ -306,15 +306,21 @@ export default function Kundli({data}) {
                                 <Image width={30} height={30} className="w-6" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
                                 <h3 className="text-lg font-bold">Astrology News and Articles</h3>
                             </button>
-                            <button
-                                className="p-2 bg-white rounded-lg flex items-center w-full justify-start">
-                                <Image src={questionimg} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
-                                <p className="text-sm font-semibold">Ask a question</p>
-                            </button>
-                                <button onClick={()=> router.push('/calculator/moon-sign-calculator.php')} className="p-2 bg-white rounded-lg flex items-center w-full justify-start">
-                                <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
-                                <p className="text-sm font-semibold">Know your moon sign</p>
-                            </button>
+                                <a
+                                    href={`${data.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
+                                    onClick={(e) => handleClickRouter(e, `${data.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}
+                                    className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
+                                    <Image src={questionimg} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
+                                    <p className="text-sm font-semibold">{data.language === "Hindi" ? "प्रश्न पूछें" : "Ask a question"}</p>
+                                    </a>
+                                <a
+                                    href={`${data.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
+                                    onClick={(e) => handleClickRouter(e, `${data.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
+                                    
+                                    className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
+                                    <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
+                                    <p className="text-sm font-semibold">{data.language === "Hindi" ? "अपनी चंद्र राशि जानें" : "Know your moon sign"}</p>
+                                </a>
                         </div>
                     </div>
                 </div>
@@ -344,7 +350,7 @@ export default function Kundli({data}) {
                     }}
                     autoplay={{ delay: 3000 }}
                     loop={true}
-                    onSwiper={(swiper) => console.log(swiper)}
+                    // onSwiper={(swiper) => console.log(swiper)}
                     >
                     {KundliCalculation.map((item, index) => (
                         <SwiperSlide key={index}>   
@@ -406,8 +412,8 @@ export default function Kundli({data}) {
                             }}
                             autoplay={{ delay: 3000 }}
                             loop={true}
-                            onSlideChange={() => console.log('slide change')}
-                            onSwiper={(swiper) => console.log(swiper)}
+                            // onSlideChange={() => console.log('slide change')}
+                            // onSwiper={(swiper) => console.log(swiper)}
                             >
                             {lifesProblems.map((item, index) => (
                                 <SwiperSlide key={index}>

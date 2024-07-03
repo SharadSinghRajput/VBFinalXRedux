@@ -49,7 +49,7 @@ export default function Login({pageslug}) {
 
   const SendOtp = async (ResendSignal) => {
     setSendOtpLoder(true)
-    console.log(ResendSignal)
+    
     if(ResendSignal){
       setOtpSent(true)
     }
@@ -233,7 +233,7 @@ export default function Login({pageslug}) {
         });
 
         const data = await response.json();
-        console.log(data)
+        
         if (data.success === true) {
             const tokenLength = 32;
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -292,7 +292,7 @@ export default function Login({pageslug}) {
       </div>
       </>:<>
       {NewUserData ? <>
-        <form action="#" method="POST" className="space-y-6">
+        <form className="space-y-6">
             <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                 {notificationMethods.map((notificationMethod) => (
                     <div key={notificationMethod.id} className="flex items-center">
@@ -369,7 +369,7 @@ export default function Login({pageslug}) {
             </div>
         </form>
       </>:<>
-        <form action="#" method="POST" className="space-y-6">
+        <form  className="space-y-6">
             <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
             <div className="mt-2 flex">
@@ -391,6 +391,12 @@ export default function Login({pageslug}) {
                 type="tel"
                 value={phoneNumber}
                 onChange={(e) => {setPhoneNumber(e.target.value)}}
+                onKeyPress={(event) => {
+                  if (event.key === 'Enter') {
+                    SendOtp();
+                  }
+                }}
+                
                 autoComplete="tel"
                 required
                 className="block flex-1 rounded-r-md border-0 py-1.5 px-2 shadow-sm ring-1 ring-inset ring-gray-300 

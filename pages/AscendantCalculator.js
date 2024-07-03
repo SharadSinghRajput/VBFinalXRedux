@@ -18,6 +18,7 @@ import CalculatorForm from './pageAssets/CalculatorForm'
 import MetaData from './pageAssets/MetaData';
 
 export default function Kundli({ data }) {
+  const lang = data?.language
   return (
     <>
       {data ? (
@@ -31,16 +32,16 @@ export default function Kundli({ data }) {
                   <Title titleData={data.title} />
               </>:<></>} */}
 
-              <div className="grid grid-cols-2 mb-10">
+              <div className="grid grid-cols-2 max-md:grid-cols-1 mb-10">
                 <div className="bg-bgForm p-5 flex justify-center items-center flex-col gap-6">
-                  <p className="font-bold text-lg text-white ">Ascendant Calculator</p>
+                  <p className="font-bold text-lg text-white ">{lang === "Hindi" ? "लगन कैलकुलेटर" : "Ascendant Calculator"} </p>
                   <Image src={GlobImg} width={100} height={100} />
                 </div>
                 <div className="p-10 bg-gray-100">
                   {data.language === "Hindi" ? <>
-                  <CalculatorForm routing={"/hindi/calculator/ascendant-report.php"} />
+                  <CalculatorForm lang={data.language} routing={"/hindi/calculator/ascendant-report.php"} />
                   </> : <>
-                  <CalculatorForm routing={"/calculator/ascendant-report.php"} />
+                  <CalculatorForm lang={data.language} routing={"/calculator/ascendant-report.php"} />
                   </>}
                 </div>
               </div>

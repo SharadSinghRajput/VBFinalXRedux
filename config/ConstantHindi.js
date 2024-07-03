@@ -665,7 +665,7 @@ export const MainMenuHindi = [
         name: 'कुंडली', url: '#',
         sublinks: [
             { name: "कुंडली", url: `${MAIN_URL_HINDI}kundli.php`,},
-            { name: "कुंडली मिलान", url: `${MAIN_URL}kundli-matching-in-hindi`,},
+            { name: "कुंडली मिलान", url: `${MAIN_URL}kundali-matching-in-hindi`,},
             { name: "कुंडली कैसे पढ़ें", url: `${MAIN_URL_HINDI}kundli/how-to-read-kundli.php`, },
         ]
     },
