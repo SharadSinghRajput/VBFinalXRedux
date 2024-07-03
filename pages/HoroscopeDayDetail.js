@@ -56,8 +56,9 @@ export default function HomePage({ data }) {
             </div>
           </div>
         </div>
-        <HoroscopeFourButton slug={PageSlug} lang={data?.language} />
 
+        <HoroscopeFourButton slug={PageSlug} lang={data?.language} />
+        
         {data?.blogBannerImage && (
           <div className="w-full md:w-full mb-5 mt-5 p-2">
             <Banner BannerData={data.blogBannerImage} />
