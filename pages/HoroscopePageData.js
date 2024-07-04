@@ -158,7 +158,7 @@ console.log(CapitalizedZodiacType);
                 {data.title ? <>
                   <Title titleData={data.title} />
                 </>:<></>}
-                {/* <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
+                <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
                     <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
@@ -174,7 +174,7 @@ console.log(CapitalizedZodiacType);
                       ))}
                     </div>
                   </div>
-                </div> */}
+                </div>
                 {
                   zodiacSign && zodiacPeriod && horoscopeType ? 
                   <>
