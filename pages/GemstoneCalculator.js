@@ -29,9 +29,9 @@ export default function Kundli({ data }) {
             <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             {data ? (
               <>
-              {data.title ? <>
+              {/* {data.title ? <>
                   <Title titleData={data.title} />
-              </>:<></>}
+              </>:<></>} */}
 
               <div className="grid grid-cols-2 max-md:grid-cols-1 mb-10">
                 <div className="bg-bgForm p-5 flex justify-center items-center flex-col gap-6">
