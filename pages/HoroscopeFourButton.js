@@ -15,29 +15,36 @@ export default function HomePage({ lang = "English", slug = "" }) {
     {
       name: "Daily Horoscope",
       HindiName: "दैनिक राशिफल",
-      link: `${MAIN_URL}horoscope/daily-horoscope.php`,
-      HindiLink: `${MAIN_URL}hindi/horoscope/daily-horoscope.php`,
+      link: `/horoscope/daily-horoscope.php`,
+      HindiLink: `/hindi/horoscope/daily-horoscope.php`,
       slug: `daily-horoscope.php`,
+    },
+    {
+      name: "Tomorrow Horoscope",
+      HindiName: "कल का राशिफल",
+      link: `/horoscope/tomorrow-horoscope.php`,
+      HindiLink: `/kal-ka-rashiphal/kal-ka-rashiphal`,
+      slug: `tomorrow-horoscope.php`,
     },
     {
       name: "Weekly Horoscope",
       HindiName: "साप्ताहिक राशिफल",
-      link: `${MAIN_URL}horoscope/weekly-horoscope.php`,
-      HindiLink: `${MAIN_URL}hindi/horoscope/weekly-horoscope.php`,
+      link: `/horoscope/weekly-horoscope.php`,
+      HindiLink: `/hindi/horoscope/weekly-horoscope.php`,
       slug: `weekly-horoscope.php`,
     },
     {
       name: "Monthly Horoscope",
       HindiName: "मासिक राशिफल",
-      link: `${MAIN_URL}horoscope/monthly-horoscope.php`,
-      HindiLink: `${MAIN_URL}hindi/horoscope/monthly-horoscope.php`,
+      link: `/horoscope/monthly-horoscope.php`,
+      HindiLink: `/hindi/horoscope/monthly-horoscope.php`,
       slug: `monthly-horoscope.php`,
     },
     {
       name: "Yearly Horoscope",
       HindiName: "वार्षिक राशिफल",
-      link: `${MAIN_URL}horoscope/yearly-horoscope.php`,
-      HindiLink: `${MAIN_URL}hindi/horoscope/yearly-horoscope.php`,
+      link: `/horoscope/yearly-horoscope.php`,
+      HindiLink: `/hindi/horoscope/yearly-horoscope.php`,
       slug: `yearly-horoscope.php`,
     },
   ];
@@ -49,7 +56,7 @@ export default function HomePage({ lang = "English", slug = "" }) {
 
   return (
     <>
-      <div className="flex m-5">
+      <div className="md:flex m-5 max-md:grid-cols-2 max-md:grid max-md:divide-y max-md:divide-white">
         {NavigateLink.map((item, index) => (
           slug !== item.slug ? 
           <div className="flex-1" key={index}>
