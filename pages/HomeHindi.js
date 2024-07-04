@@ -69,7 +69,7 @@ export default function HomePage({data}) {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div><MoonSign language={data?.language}  /></div>
           <div className="drop-shadow-2xl bg-white p-5 rounded-xl"><KundliForm language={data?.language}  /></div>
-          <div><HoroscopeMatching language={data?.language} /></div>
+          <div><HoroscopeMatching language={data?.language} routing={"/kundli/kundli-matching-report.php"}  /></div>
         </div>
       </div>
       <Services language={data?.language} />

@@ -488,3 +488,31 @@ color: #323232;
 .inner-data-mb-5 * {
   margin-bottom:10px;
 }
+
+
+.custom-table-class table {
+  display: block;
+  overflow: auto;
+}
+
+.custom-table-class table tr {
+  border-bottom: 1px solid #000;
+}
+
+
+/* width */
+.custom-table-class table::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+}
+
+/* Track */
+.custom-table-class table::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.custom-table-class table::-webkit-scrollbar-thumb {
+  background: rgb(165 180 252);
+  border-radius: 5px;
+}

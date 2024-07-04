@@ -218,9 +218,9 @@ export default function DefaultPage({ data }) {
                 {!Loding ? <>
                   <div>
                     <div>
-                      <div className="bg-blue-800 p-5 grid grid-cols-1 md:grid-cols-3 mt-5 gap-5">
+                      <div className="bg-blue-800 p-5 grid grid-cols-3 mt-5 gap-5">
                         <p className="font-bold text-white text-base col-span-3">{selectedDateTime.toString()}</p>
-                        <div>
+                        <div className="max-md:col-span-3">
                           {PanchangD ?
                             <>
                               <p className="text-base font-light text-white">
@@ -232,7 +232,7 @@ export default function DefaultPage({ data }) {
                             </>
                             : <></>}
                         </div>
-                        <div>
+                        <div className="max-md:col-span-3">
                           {PanchangD ?
                             <>
                               <p className="text-base font-light text-white">
@@ -244,7 +244,7 @@ export default function DefaultPage({ data }) {
                             </>
                             : <></>}
                         </div>
-                        <div>
+                        <div className="max-md:col-span-3">
                           {PanchangD ?
                             <>
                               <p className="text-base font-light text-white">

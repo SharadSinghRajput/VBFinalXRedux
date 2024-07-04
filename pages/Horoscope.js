@@ -19,6 +19,7 @@ import HoroscopeFourButton from './HoroscopeFourButton';
 export default function HoroscopePageData({data}) {
   const router = useRouter();
   const dayType = data && data.zodiacPeriod ? data.zodiacPeriod + '-horoscope' : "daily-horoscope";
+  const PageSlug = router?.query?.slug ? router.query.slug[router.query.slug.length - 1] : null;
   
   const horoscopes = Horoscope(dayType);
 
@@ -40,11 +41,10 @@ export default function HoroscopePageData({data}) {
             ) : (
               <>
                 
-               
-
                 {data.title ? <>
                     <Title titleData={data.title} />
                 </>:<></>}
+
                 <div className="grid grid-cols-1 gap-10 mt-5">
                     <div className={` p-2 md:p-4 rounded-lg bg-orange-500`}>
                         <div className="grid grid-cols-3 gap-5 sm:grid-cols-6">
@@ -57,9 +57,10 @@ export default function HoroscopePageData({data}) {
                         </div>
                     </div>
                 </div>
-                <HoroscopeFourButton lang={data.language} />
 
-                {data.blogBannerImage ? <>
+                <HoroscopeFourButton slug={PageSlug} lang={data.language} />
+
+                {data.blogBannerImage ? <>  
                   <div className="w-[100%] md:w-[100%] mb-5 mt-5">
                     <Banner BannerData={data.blogBannerImage} />
                   </div>
