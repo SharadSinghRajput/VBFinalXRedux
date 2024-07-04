@@ -358,7 +358,7 @@ export default function DailyHoroscopeDetailed({data}) {
 
                 <main className="flex-1 w-80 max-md:w-full max-sm:mt-5">
                     <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 max-sm:p-2 rounded-lg bg-[#091d5a]">
-                        <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
+                        <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg max-md:mt-0">
                             <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
                         </div>
                         <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2 mt-2">
@@ -538,7 +538,7 @@ export default function DailyHoroscopeDetailed({data}) {
             </div>
         </div>
 
-        <div className="block w-full sm:w-auto sm:top-8 max-lg:grid max-lg:grid-cols-3">
+        <div className="block w-full sm:w-auto sm:top-8 max-lg:grid max-lg:grid-cols-3 gap-2">
             <div className="w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
                 <h3 className='text-indigo-950 text-center text-sm font-bold'>Lucky Number and Colour for: {formattedDate}</h3>
                 <h2 className='text-indigo-950 text-lg font-bold text-center'>Number - 1</h2>
@@ -612,6 +612,9 @@ export default function DailyHoroscopeDetailed({data}) {
                             spaceBetween={50}
                             slidesPerView={9}
                             breakpoints={{
+                                100: {
+                                    slidesPerView: 2,
+                                  },
                                 400: {
                                   slidesPerView: 3,
                                 },

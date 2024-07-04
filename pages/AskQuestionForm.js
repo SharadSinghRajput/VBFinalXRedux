@@ -69,14 +69,14 @@ export default function AskQueForm({ data, role }) {
     if (SessionToken !== null) {
       setSessionAction(true);
       setOpenModal(false);
+      return true;
     } else {
       setOpenModal(true);
+      return false;  
     }
+
   };
 
-  useEffect(() => {
-    GetSession();
-  }, []);
 
   const GetUserDetails = async () => {
     const UserDetails = getLocalStorageItem("UserDataKey");
@@ -113,6 +113,16 @@ export default function AskQueForm({ data, role }) {
     e.preventDefault();
 
     setLoding(true);
+
+    try {
+      const sessionActive = await GetSession();  // Wait for GetSession to complete
+      if(!sessionActive){
+        setLoding(false);
+        return;
+      }
+    } catch (error) {
+    }
+
     let errorMessages = [];
     if (selectedDateTime === "Please Select DOB" || selectedDateTime === "")
       errorMessages.push("Please select your date of birth.");
@@ -128,6 +138,18 @@ export default function AskQueForm({ data, role }) {
       setLoding(false);
       return;
     }
+    if (!/^[6-9]\d{9}$/.test(Mobile)) {
+      setLoding(false);
+      alert("Enter a valid mobile number");
+      return
+    }
+    if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(Email)) {
+      setLoding(false);
+      alert("Enter a valid email address");
+      return
+    }
+    
+    const validateEmail = email => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
 
     const convertDateTime = (dateTimeStr) => {
       const date = new Date(dateTimeStr);
@@ -332,12 +354,13 @@ export default function AskQueForm({ data, role }) {
                             <th
                               scope="col"
                               className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                              Question
+                                {data?.language === "Hindi" ? "सवाल" : "Question"}
+                              
                             </th>
                             <th
                               scope="col"
                               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                {PaymentSuccess ? "Answer" : "Price"}
+                                {data?.language === "Hindi" ? <>{PaymentSuccess ? "उत्तर" : "कीमत"}</> : <>{PaymentSuccess ? "Answer" : "Price"}</>}
                               
                             </th>
                           </tr>
@@ -383,19 +406,22 @@ export default function AskQueForm({ data, role }) {
                           <button
                             className="bg-blue-600 p-2 px-4 text-white rounded-md"
                             onClick={()=> window.location.reload()}>
-                            Ask another question
+                            {data?.language === "Hindi" ? "दूसरा प्रश्न पूछें" : "Ask another question"}
+                            
                           </button>
                         </>
                         : <>
                           <button
                             onClick={handleCancle}
                             className="bg-red-600 p-2 px-4 text-white rounded-md">
-                            Cancel
+                              {data?.language === "Hindi" ? "रद्द करें" : "Cancel"}
+                            
                           </button>
                           <button
                             className="bg-blue-600 p-2 px-4 text-white rounded-md"
                             onClick={PlaceOrder}>
-                            Make Payment
+                              {data?.language === "Hindi" ? "भुगतान करें" : "Make Payment"}
+                            
                           </button>
                           {MakePaymentLoder ?<>
                             <div role="status" className="flex justify-center items-center">
@@ -476,12 +502,12 @@ export default function AskQueForm({ data, role }) {
                       </div>
                     </div>
                   ) : null}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-2 gap-5">
                     <div className="relative col-span-2">
                       <label
                         htmlFor="name"
                         className="block text-sm font-medium leading-6 mb-1 text-gray-900">
-                        Name
+                          {data?.language === "Hindi" ? "नाम" : "Name"}
                       </label>
                       <input
                         type="text"
@@ -493,14 +519,15 @@ export default function AskQueForm({ data, role }) {
                         placeholder="Enter Your Name"
                       />
                     </div>
-                    <div className="relative">
+                    <div className="relative col-span-2 md:col-span-1" >
                       <label
                         htmlFor="mobile"
                         className="block text-sm font-medium leading-6 mb-1 text-gray-900">
-                        Mobile
+                          {data?.language === "Hindi" ? "मोबाइल नंबर" : "Mobile"}
+                        
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         name="mobile"
                         id="mobile"
                         value={Mobile}
@@ -509,14 +536,15 @@ export default function AskQueForm({ data, role }) {
                         placeholder="Enter Your Mobile"
                       />
                     </div>
-                    <div className="relative ">
+                    <div className="relative col-span-2 md:col-span-1" >
                       <label
                         htmlFor="Email"
                         className="block text-sm font-medium leading-6 mb-1 text-gray-900">
-                        Email
+                          {data?.language === "Hindi" ? "ईमेल" : "Email"}
+                        
                       </label>
                       <input
-                        type="text"
+                        type="email"
                         name="Email"
                         id="Email"
                         value={Email}
@@ -527,10 +555,12 @@ export default function AskQueForm({ data, role }) {
                     </div>
                     <Combobox
                       as="div"
+                      className={"col-span-2 md:col-span-1"}
                       value={selectedBirthLocation}
                       onChange={setSelectedBirthLocation}>
                       <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">
-                        Birth location
+                        {data?.language === "Hindi" ? "जन्म स्थान" : "Birth location"}
+                        
                       </Combobox.Label>
                       <div className="relative mt-2">
                         <Combobox.Input
@@ -657,11 +687,12 @@ export default function AskQueForm({ data, role }) {
                         )}
                       </div>
                     </Combobox>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                       <label
                         htmlFor="first-name"
                         className="block text-sm font-medium leading-6 text-gray-900">
-                        Date of Birth
+                          {data?.language === "Hindi" ? "जन्म की तारीख" : "Date of Birth"}
+                        
                       </label>
                       <div className="mt-2">
                         <Datetime
@@ -679,15 +710,16 @@ export default function AskQueForm({ data, role }) {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Enter Your Question
+                        className="block mb-2 text-sm font-medium text-gray-900">
+                          {data?.language === "Hindi" ? "अपना प्रश्न दर्ज करें" : "Enter Your Question"}
+                        
                       </label>
                       <textarea
                         id="message"
                         rows="4"
                         value={Question}
                         onChange={(e) => setQuestion(e.target.value)}
-                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
                         placeholder="Write your thoughts here..."></textarea>
                     </div>
                   </div>
@@ -696,7 +728,8 @@ export default function AskQueForm({ data, role }) {
                     type="button"
                     onClick={handleSubmit}
                     className="w-[100%] inline-flex items-center justify-center gap-x-1.5 rounded-md bg-[#091d5a] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">
-                    Submit
+                      {data?.language === "Hindi" ? "दर्ज करें" : "Submit"}
+                    
                   </button>
                 </form>
               </>
@@ -708,8 +741,11 @@ export default function AskQueForm({ data, role }) {
                 </div>
                 <div className="ml-3 flex-1 md:flex md:justify-between">
                   <p className="text-sm text-blue-700">
-                    <b>Note:</b> Mind you that the answer will only be in 'Yes', 'No' or May be.
-                    "Put in your question considering this."
+                    {data?.language === "Hindi" ? <><b>नोट:</b> ध्यान रखें कि उत्तर केवल 'हाँ', 'नहीं' या 'शायद' में ही होगा।
+                      अपने प्रश्न को इस बात को ध्यान में रखकर पूछें।</> : <><b>Note:</b> Mind you that the answer will only be in 'Yes', 'No' or May be.
+                      "Put in your question considering this."</>}
+                    
+                    
                   </p>
                 </div>
               </div>
@@ -719,9 +755,11 @@ export default function AskQueForm({ data, role }) {
         {openModal ? (
           <>
             <div className="flex flex-col justify-center items-center z-30 backdrop-blur-md bg-white/20 fixed left-0 top-0 w-full h-full">
-              <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 w-96">
-                <LoginForm />
-              </div>
+            <div>
+              <button onClick={()=> setOpenModal(false)} className="float-right w-8 h-8 bg-red-500 text-white">X</button>
+                <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 w-96">
+                  <LoginForm />
+                </div>
               <button
                 onClick={() => {
                     setOpenModal(false),
@@ -732,6 +770,7 @@ export default function AskQueForm({ data, role }) {
                 className="-mt-5 w-96 flex items-center justify-center gap-2 rounded-b-md bg-white px-4 py-2 text-sm font-semibold text-green-500 shadow-sm ring-1 ring-inset ring-green-500 hover:bg-gray-50 focus-visible:ring-transparent">
                 After logging in, click here to submit.
               </button>
+            </div>
             </div>
           </>
         ) : (

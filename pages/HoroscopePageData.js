@@ -160,7 +160,9 @@ console.log(CapitalizedZodiacType);
                 </>:<></>}
                 <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
-                    <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
+                    <h2 className="text-xl text-white font-bold text-center mb-4">
+                    {data.language === "Hindi" ? "निःशुल्क दैनिक/साप्ताहिक/मासिक राशिफल" : "Free Daily / Weekly / Monthly horoscope" }
+                    </h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
                       {horoscopes.map((person) => (
                         <a  
@@ -199,8 +201,8 @@ console.log(CapitalizedZodiacType);
                           </div>
                         </div>
                         <div className="flex-1 ">
-                          <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a]">
-                              <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg">
+                          <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 rounded-lg bg-[#091d5a] max-md:p-2">
+                              <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg max-md:mt-0">
                                   <h2 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedZodiacPeriod} {CapitalizedZodiacType} Horoscope ({TotalDays})</h2>
                               </div>
                               <div className="max-h-72 overflow-y-scroll scrollbar-red px-5 mt-2 max-md:px-2 max-md:pl-0">
@@ -330,12 +332,14 @@ console.log(CapitalizedZodiacType);
 
                 <div className="grid grid-cols-1 gap-10 mb-5 mt-5">
                   <div className={`bg-orange-500 p-2 md:p-4 rounded-lg`}>
-                    <h2 className="text-xl text-white font-bold text-center mb-4">Free Daily / Weekly / Monthly Horoscope</h2>
+                    <h2 className="text-xl text-white font-bold text-center mb-4">
+                      {data.language === "Hindi" ? "निःशुल्क दैनिक/साप्ताहिक/मासिक राशिफल" : "Free Daily / Weekly / Monthly horoscope" }
+                      </h2>
                     <div className="flex flex-row flex-wrap gap-3 justify-center ">
                       {horoscopes.map((person) => (
                         <a  
                             key={person.name} 
-                            href={`${MAIN_URL}${data.language=== "Hindi" ? person.hindiLink :person.link}`}
+                            href={`${MAIN_URL}${data.language === "Hindi" ? person.hindiLink :person.link}`}
                             onClick={(e) => handleClick(e, data.language=== "Hindi" ? person.hindiLink :person.link)}
                         >
                             <Image width={50} height={50} className="bg-white h-10 w-10 bg-white w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[75px] lg:h-[75px] rounded-[50px] flex flex-col justify-center items-center px-2 py-2 " src={person.imgSrc} alt="" />
