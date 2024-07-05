@@ -66,8 +66,10 @@ export default function Kundli({ data }) {
         try {
           const astrologyData = await fetchAstrologyData(data, "general_ascendant_report");
           setGemstoneSuggestion(astrologyData);
+
           
           const cachedData = getLocalStorageItem("AscendantReporrtHindi");
+
           if (cachedData && cachedData.timestamp > Date.now() - 5 * 60 * 60 * 1000) {
             const areSame = areDatesEqual(cachedData.dobData, GetData);
             if(areSame){
@@ -79,6 +81,8 @@ export default function Kundli({ data }) {
           } else {
             setInLocal(astrologyData?.asc_report?.report, GetData)
           }
+
+
         } catch (error) {}
       }
     };
@@ -97,8 +101,10 @@ export default function Kundli({ data }) {
       setAscendantHindi(convertedText);
     }
   }
+
+
+
   const chatGPTAnswer = async (Text) => {
-    
     const dataGpt = {
       prompt: `convert this paragraph in hindi '${Text}'`,
       temperature: 0.5,
@@ -151,13 +157,13 @@ export default function Kundli({ data }) {
           ) : null}
           <div className="">
             <p className="font-bold text-base">
-              {data.language === "Hindi" ?
+              {data?.language === "Hindi" ?
               "लगन क्या है?"
               : "What is Ascendant?"}
               </p>
             <p className="text-base">
 
-              {data.language === "Hindi" ?
+              {data?.language === "Hindi" ?
               "लगन पहले घर के रूप में जाना जाता है जो किसी व्यक्ति की शारीरिक अभिव्यक्ति को चित्रित करता है। यह उनके बचपन, स्वास्थ्य, चरित्र, प्रकृति और उनके या उनके जीवन की विभिन्न विशेषताओं पर प्रकाश डालता है। यह उसके कमजोर बिंदुओं, पसंद, और नापसंद, ताकत और कमजोरियों, एट वगैरह को जानने के अर्थ में एक अंतर्दृष्टि प्रदान करता है। इसलिए, यह किसी व्यक्ति के व्यक्तित्व के लिए बहुत उपयोगी है — वह कैसा व्यवहार करता है, वह क्या रवैया अपनाता है, आदि।"
               : `Ascendant is known to be the first house that portrays an individual’s physical
               manifestation. It also throws light on his childhood, health, character, nature, and
@@ -165,10 +171,9 @@ export default function Kundli({ data }) {
               knowing his or her weak points, likes, and dislikes, strength and weaknesses, et
               cetera. So, it is very helpful for an individual’s personality—how he or she behaves,
               what attitudes he or she adopts, et cetera.`}
-              
             </p>
             <p className="bg-orange-500 p-5 text-center my-4 text-white">
-            {data.language === "Hindi" ?
+            {data?.language === "Hindi" ?
             `आपका लगन है - 
             ${GemstoneSuggestion.asc_report?.ascendant.toLowerCase() === "aries" ? "मेष" :
             GemstoneSuggestion.asc_report?.ascendant.toLowerCase() === "taurus" ? "वृषभ" :
@@ -189,7 +194,7 @@ export default function Kundli({ data }) {
                 
             </p>
             <p className="text-base">
-            {data.language === "Hindi" ? <>{AscendantHindi ? AscendantHindi : <>
+            {data?.language === "Hindi" ? <>{AscendantHindi ? AscendantHindi : <>
               <div role="status" className='flex justify-center items-center' >
                 <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

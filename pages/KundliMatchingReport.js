@@ -26,7 +26,6 @@ export default function KaalsarpDoshReport({ data }) {
   const [FemaleAstro, setFemaleAstro] = useState("");
   const [ActiveChartBtn, setActiveChartBtn] = useState("");
 
-console.log(AshtakootPoints);
   useEffect(() => {
     const fetchData = async () => {
       const MaleData = getLocalStorageItem("HMMaleKey");
@@ -149,9 +148,13 @@ console.log(AshtakootPoints);
   };
 
   const TDStyle = "text-sm bg-blue-800 p-2 text-white border-b font-light capitalize border-b-white/50"
+
+  const [percentage, setPercentage] = useState(50);
+
   return (
     <>
       <div className="">
+      
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
           <div className="grid grid-cols-1 md:grid-cols-2 h-full">
             <div className="h-full shadow-lg bg-white">
@@ -190,6 +193,28 @@ console.log(AshtakootPoints);
                 : null }
               </div>
             </div>
+          </div>
+          <div>
+          <div className="flex justify-center items-center">
+            {/* Displaying the percentage as text for reference */}
+            <div className="text-4xl font-bold">{percentage}%</div>
+            {/* Creating a circular progress bar */}
+            <div className="relative w-24 h-24">
+                <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
+                    {/* Filled circle based on percentage */}
+                    <div className="absolute bottom-0 left-0 w-full bg-blue-500"
+                         style={{ height: `${percentage}%`, clipPath: 'url(#waveClipPath)' }}>
+                    </div>
+                </div>
+                <svg >
+                    <defs>
+                        <clipPath id="waveClipPath">
+                        <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+        </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="mt-5">

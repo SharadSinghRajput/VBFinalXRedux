@@ -149,7 +149,6 @@ export default function AskQueForm({ data, role }) {
       return
     }
     
-    const validateEmail = email => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
 
     const convertDateTime = (dateTimeStr) => {
       const date = new Date(dateTimeStr);
@@ -194,7 +193,7 @@ export default function AskQueForm({ data, role }) {
       price: role === "popup" ? 151 : data.price[0].price,
       miniCart : true
     };
-
+console.log(dataToAdd);
     setLocalStorageItem("AutoFill_ASKQ_Form", dataStore);
     const apiUrlCart = `${API_NEW_URL_LOGIN}cart-api.php`;
     try {
@@ -206,6 +205,7 @@ export default function AskQueForm({ data, role }) {
         body: JSON.stringify(dataToAdd),
       });
       const dataAdd = await response.json();
+      
       if(dataAdd.success === true){
         setCartReturnData(dataAdd.data)
       }
@@ -279,7 +279,7 @@ export default function AskQueForm({ data, role }) {
 
   const options = {
     key: "rzp_test_bJShg4py6mnQe0",
-    amount: data?.price[0]?.price * 100,
+    amount: role === "popup" ? 151 * 100 : data?.price[0]?.price * 100,
     name: "Vinay Bajrangi",
     description:
       "One should know how to judge a good astrologer than going by the name. The best astrologer is the one who believes more in Astrology based on the Karmic theory than only following rituals and remedies...",
