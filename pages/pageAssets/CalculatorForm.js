@@ -75,6 +75,8 @@ export default function CalculatorForm({ routing, lang = "English" }) {
   }
   const filteredPeople = filterPeople(LocationData, SearchLocation);
 
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 

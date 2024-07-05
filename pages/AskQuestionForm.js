@@ -268,7 +268,7 @@ export default function AskQueForm({ data, role }) {
       }else if(data.message === "Order Already Created") {
         openPayModal();
         setMakePaymentLoder(false)
-        alert(data.message);
+        // alert(data.message);
       }else{
         setMakePaymentLoder(false)
         alert("Something went wrong please try again");
