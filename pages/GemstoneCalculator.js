@@ -40,7 +40,7 @@ export default function Kundli({ data }) {
                 </div>
                 <div className="p-10 bg-gray-100">
                   {data.language === "Hindi" ? <>
-                  <CalculatorForm lang="Hindi" routing={"/hindi/calculator/gemstone-suggestion.php"}/>
+                    <CalculatorForm lang="Hindi" routing={"/hindi/calculator/gemstone-suggestion.php"}/>
                   </> : <>
                     <CalculatorForm lang="English" routing={"/calculator/gemstone-suggestion.php"}/>
                   </>}
