@@ -47,11 +47,11 @@ export default function Kundli({ data }) {
                 </div>
               </div>
 
-              {data.blogBannerImage ? <>
+              {/* {data.bannerImage ? <>
                   <div className={`w-[100%] md:w-[100%] mb-5 mt-5`}>
-                  <Banner BannerData={data.blogBannerImage} AltName={data.title} />
+                  <Banner BannerData={data.bannerImage} AltName={data.title} />
                   </div>
-              </>:<></>}
+              </>:<></>} */}
 
               {data.description ?
                   <Description descData={data.description} />

@@ -203,14 +203,19 @@ export default function DailyHoroscopeDetailed({data}) {
 
 
     const handleClick = (day) => {
-        setActiveButtonDay(day);
-        changeDate = TotalDays;
-        setHoroscopeData("In Process");
-        router.push(`/horoscope/${day}-horoscope/${zodiacSign}.php`);
-        // if(pageLanguage === "Hindi"){
-        //     router.push(`hindi/horoscope/${day}-horoscope/${zodiacSign}.php`);
-        // }else{
-        // }
+        if(pageLanguage === "Hindi"){
+            setActiveButtonDay(day);
+            changeDate = TotalDays;
+            const HindiPath = data?.bilingualData?.Hindi[0].path
+            const HindiSlug = HindiPath.split('/').filter(Boolean).pop();
+
+            router.push(`hindi/horoscope/${day}-horoscope/${HindiSlug}`);
+        }else{
+            setActiveButtonDay(day);
+            changeDate = TotalDays;
+            setHoroscopeData("In Process");
+            router.push(`/horoscope/${day}-horoscope/${zodiacSign}.php`);
+        }
     };
 
     async function fetchHoroscopeData() {
