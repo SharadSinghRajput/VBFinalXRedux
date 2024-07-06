@@ -55,10 +55,13 @@ export default function Questions({language = "English"}) {
     <>
     <div className='drop-shadow-2xl bg-white p-5 rounded-xl'>
         <h3 className="text-xl font-bold">
-        { language === "Hindi" ? ( <> अपनी <span className="text-orange-500">चंद्र राशि जानें</span> </> ) : ( <> Know your <span className="text-orange-500">Moon Sign</span> </> ) }
-        
+          { language === "Hindi" ? ( <> अपनी <span className="text-orange-500">चंद्र राशि जानें</span> </> ) : ( <> Know your <span className="text-orange-500">Moon Sign</span> </> ) }
         </h3>
-        <CalculatorForm routing={"/calculator/moon-sign-calculator-result.php"} />
+        {language === "Hindi" ? <>
+            <CalculatorForm lang={language} routing={"/hindi/calculator/moon-sign-calculator-result.php"} />
+          </> : <>
+            <CalculatorForm lang={language} routing={"/calculator/moon-sign-calculator-result.php"} />
+          </>}
     </div>
     </>
   )
