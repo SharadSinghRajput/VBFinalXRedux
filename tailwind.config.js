@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'pt-serif': ['"PT Serif"', 'serif'],
+      },
       backgroundImage: {
         'bgForm': "url('/calculator/bgForm.png')",
       }
