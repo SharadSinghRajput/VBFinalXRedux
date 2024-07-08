@@ -254,7 +254,9 @@ export default function HoroscopeMatching({language = "English", routing}) {
     <div className=' bg-white p-5 rounded-xl'>
         <div>
             <div>
-                <p className='text-xl font-bold'>Love Calculator</p>
+                <div className='bg-orange-500 p-2'>
+                    <p className='border border-white p-5 pb-8 text-xl font-bold text-center uppercase text-white'>Love Calculator</p>
+                </div>
                 {ShowNoDataText ?
                 <>
                 <p>We do not have your and your partner details. Kindly provide your and your partner details for exact calculations. Please </p>
@@ -262,28 +264,35 @@ export default function HoroscopeMatching({language = "English", routing}) {
                 </>
                 : <></>}
                 {ShowFormData ?<>
-                    <p>Dear {MaleName}, As per our record your Dob is {MatchingDate} and time {MatchingTime} and
-                        place of birth is {selectedBirthLocation.city_name} and your partner {FemaleName} DOB
-                        is {MatchingDateSec} and time {MatchingTimeSec} and place of birth is {FBirthLocation.city_name}. Is this
-                        <button onClick={Match} className='py-2 px-5 bg-orange-500 text-white'> Correct </button> or 
-                        <button onClick={()=> {setFormShowHide(!FormShowHide); setShowFormData(false) } } className='py-2 px-5 bg-orange-500 text-white'> Not </button>
-                        </p>
+                {!LCReport ? <>
+                    <div className='bg-blue-500 p-5'>
+                        <p className='text-white'>Dear {MaleName}, As per our record your Dob is {MatchingDate} and time {MatchingTime} and
+                            place of birth is {selectedBirthLocation.city_name} and your partner {FemaleName} DOB
+                            is {MatchingDateSec} and time {MatchingTimeSec} and place of birth is {FBirthLocation.city_name}. Is this
+                            <button onClick={Match} className='py-1 px-4 bg-white text-gray-800 text-sm mx-2'> Correct </button>or 
+                            <button onClick={()=> {setFormShowHide(!FormShowHide); setShowFormData(false) } } className='py-1 px-4 text-sm  bg-white text-gray-800 mx-2'> Not </button>
+                            </p>
+                    </div>
+                </> : <></>}
                 </>: <>
                     {FormShowHide || ShowNoDataText ?  <></> : 
-                    <button onClick={CheckData} className='py-2 px-5 bg-orange-500 text-white'> Calculate Now </button>
+                    <button onClick={CheckData} className='py-2 px-5 -mt-7 rounded-full mx-auto block text-white bg-green-500'> Calculate Now </button>
                     }
                 </>}
                 {LCReport ? 
-                    <button onClick={()=> {CheckData(); setLCReport("")}} className='py-2 px-5 bg-orange-500 text-white'> Calculate Another</button>
+                    <button onClick={()=> {CheckData(); setLCReport("")}} className='py-2 px-5 -mt-7 mb-5 rounded-full mx-auto block text-white bg-green-500'> Calculate Another</button>
                  : null}
 
             </div>
             {LCReport ?<>
-            <ul>
-                {LCReport.love_report.map((item, index)=>(
-                    <li className='text-sm list-disc my-1 text-justify' key={index}>{item}</li>
-                ))}
-            </ul>
+            <div className='bg-blue-300 p-5'>
+                <p className='p-2 bg-blue-800 text-center text-white text-lg uppercase font-pt-serif'>{MaleName} with {FemaleName}</p>
+                <ul>
+                    {LCReport.love_report.map((item, index)=>(
+                        <li className='text-base list-decimal ml-4 my-2 text-blue-800 font-light text-justify' key={index}>{item}</li>
+                    ))}
+                </ul>
+            </div>
             </>: <></>}
             {FormShowHide ?
                 <div >
