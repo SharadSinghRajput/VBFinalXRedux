@@ -249,81 +249,65 @@ const DataExistMailList = (DataExistItem) => {
               </>:<></>
             : null} */}
 
-
-            <div className="relative isolate overflow-hidden bg-gray-900 px-8 py-8 sm:py-8 rounded-lg mb-5 mt-5">
-              {data.title ?
-                <div
-                  className={`?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=824838&sat=-100&exp=15&blend-mode=multiply, absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center`}
-                />
-              : null}
-                <div
-                  className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
-                  aria-hidden="true"
-                >
-                  <div
-                    className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
-                    style={{
-                      clipPath:
-                        'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }}
+            <div className='bg-orange-500 p-2 mt-5 rounded-lg'>
+              <h1 className="text-2xl font-bold text-center tracking-tight text-white">{data.title}</h1>
+            </div>
+            {/* <div className="flex gap-4">
+                <div>
+                {data.titleLogo2 ? (
+                  <Image
+                    width={100}
+                    height={100}
+                    src={data.titleLogo2}
+                    alt={data.title || "Banner Image"}
+                    className="w-full rounded-lg "
+                    priority
                   />
+                ) : (null)}
                 </div>
-                <div
-                  className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
-                  aria-hidden="true"
-                >
-                  <div
-                    className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
-                    style={{
-                      clipPath:
-                        'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                    }}
-                  />
+                <div className="">
+                  {data.title ?
+                    <h1 className="text-4xl font-bold text-center tracking-tight text-white">{data.title}</h1>
+                  : null}
                 </div>
-                <div className="flex gap-4">
-                    <div>
-                    {data.titleLogo2 ? (
-                      <Image
-                        width={100}
-                        height={100}
-                        src={data.titleLogo2}
-                        alt={data.title || "Banner Image"}
-                        className="w-full rounded-lg "
-                        priority
-                      />
-                    ) : (null)}
-                    </div>
-                    <div className="">
-                      {data.title ?
-                        <h1 className="text-4xl font-bold text-center tracking-tight text-white">{data.title}</h1>
-                      : null}
-                    </div>
-                    <div>
-                      {data.titleLogo1 ? (
-                        <Image
-                          width={100}
-                          height={100}
-                          src={data.titleLogo1}
-                          alt={data.title || "Banner Image"}
-                          className="w-full rounded-lg "
-                          priority
-                        />
-                      ) : (null)}
-                    </div>
+                <div>
+                  {data.titleLogo1 ? (
+                    <Image
+                      width={100}
+                      height={100}
+                      src={data.titleLogo1}
+                      alt={data.title || "Banner Image"}
+                      className="w-full rounded-lg "
+                      priority
+                    />
+                  ) : (null)}
                 </div>
-              </div>
+            </div> */}
 
             {data.extraComponentData ? data.extraComponentData.Holder4 ? <Holder data={data.extraComponentData.Holder4} /> : <></> :<></>}
             {data.extraComponentData ? data.extraComponentData.Holder5 ? <Holder data={data.extraComponentData.Holder5} /> : <></> :<></>}
             {data.extraComponentData ? data.extraComponentData.Holder6 ? <Holder data={data.extraComponentData.Holder6} /> : <></> :<></>}
 
 
-            <div className='bg-white p-5 shadow-lg rounded-2xl overflow-hidden'>
+            <div className='overflow-hidden pt-5'>
               <div className='flex flex-col md:flex-row'>
-                <div className='flex-1 rounded-lg overflow-hidden'>
-                  {data.bannerImage ? <>
-                    <Banner BannerData={data.bannerImage}/>
-                  </>:<></>}
+                <div className="relative flex-1 rounded-lg overflow-hidden flex justify-center items-center">
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage: `url(${data.bannerImage})`,
+                      backgroundSize: 'cover',
+                      filter: 'blur(15px)',
+                      zIndex: 0 // ensure the background is behind the content
+                    }}
+                  ></div>
+                  <div className="relative z-10">
+                    {data.bannerImage ? (
+                      <Banner BannerData={data.bannerImage} />
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
 
                 <div className='w-[420px] gap-5 p-5 md:pt-0'>
@@ -348,7 +332,7 @@ const DataExistMailList = (DataExistItem) => {
                       </>}
                     </>:<></>}
                   </div> */}
-                  <div className='flex gap-5 z-0'>
+                  <div className='flex gap-5 z-0 mt-5'>
 
                     
                   {/* <button
@@ -370,18 +354,14 @@ const DataExistMailList = (DataExistItem) => {
                           <button
                             type="button"
                             onClick={()=> router.push("cart")}
-                            className="bg-[#091d5a] z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                            hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                            focus-visible:outline-orange-600 mt-2">
+                            className="bg-[#091d5a] p-3 px-5 text-white">
                             Added to Cart
                           </button>
                           </>:<>
                             <button
                               type="button"
                               onClick={() => handleAddProduct(data.reportID, data.price[0] ? data.price[0].dealPrice ? data.price[0].dealPrice : data.price[0].price : "", "Single Product")}
-                              className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                              hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                              focus-visible:outline-orange-600 mt-2">
+                              className="bg-orange-500 p-3 px-5 text-white">
                                 {ProductAdding === data.reportID ? "Please wait...": "Book Consultancy"}
                             </button>
                           </>}
@@ -392,9 +372,7 @@ const DataExistMailList = (DataExistItem) => {
                   <button
                     type="button"
                     onClick={() => setOpenModal(true)}
-                    className="bg-orange-500 z-0 text-white rounded-md relative py-2 px-4 text-sm font-normal text-whiteshadow-sm
-                    hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                    focus-visible:outline-orange-600">
+                    className="bg-[#091d5a] p-3 px-5 text-white">
                       Add to cart
                   </button>
                   </>}
@@ -406,23 +384,38 @@ const DataExistMailList = (DataExistItem) => {
               {data.extraComponentData ? data.extraComponentData.Holder8 ? <Holder data={data.extraComponentData.Holder8} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder9 ? <Holder data={data.extraComponentData.Holder9} /> : <></> :<></>}
 
-              <div className="mx-auto mt-5">
-                <div className="relative isolate overflow-hidden bg-[#ea580c] main-report-div px-4 py-4 text-center shadow-2xl sm:rounded-3xl sm:px-10 sm:py-10">
-                  <p className="mx-auto mt-6 text-lg text-left leading-5 text-white">
-                  {data.description ? (<div className=''
-                  dangerouslySetInnerHTML={{ __html: data.description }}
-                />) : (<></>)}
-                  </p>
-                  <div className="absolute -top-24 right-0 -z-10 transform-gpu blur-3xl" aria-hidden="true">
-                    <div
-                      className="aspect-[1404/767] w-[87.75rem] bg-gradient-to-r from-[#ffbd97] to-[#ffd9a3] opacity-25"
-                      style={{
-                        clipPath:
-                          'polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)',
-                      }}
+              <div className="mx-auto mt-5 flex gap-5">
+                  {data.titleLogo2 ? (
+                <div className='w-40'>
+                    <Image
+                      width={160}
+                      height={160}
+                      src={data.titleLogo1}
+                      alt={data.title || "Banner Image"}
+                      className="w-full rounded-lg "
+                      priority
                     />
                   </div>
+                  ) : (null)}
+                <div className='flex-1'>
+                  <p className="mx-auto text-base leading-6 text-gray-800 text-justify">
+                    {data.description ? (<div className=''
+                    dangerouslySetInnerHTML={{ __html: data.description }}
+                  />) : (<></>)}
+                  </p>
                 </div>
+                    {data.titleLogo2 ? (
+                    <div className='w-40'>
+                      <Image
+                        width={160}
+                        height={160}
+                        src={data.titleLogo2}
+                        alt={data.title || "Banner Image"}
+                        className="w-full rounded-lg "
+                        priority
+                      />
+                  </div>
+                    ) : (null)}
               </div>
 
               {/* <div className='pt-5 relative'>
@@ -439,18 +432,18 @@ const DataExistMailList = (DataExistItem) => {
             
 
             {data.questionAnswerData?.Serial1 ? 
-                <div className="bg-white mt-5">
+                <div className="mt-5">
                   {/* <h2 className="text-2xl mb-5 font-bold tracking-tight text-[#091d5a]">Questions for You</h2> */}
-                  <dl className="flex flex-wrap gap-1">
+                  <dl className="flex flex-col gap-1">
                     {data.questionAnswerData.Serial1.map((item, index) => (
                       <Disclosure as="div" key={index}  className={({ open }) =>
-                        `bg-[#091d5a] p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
+                        `bg-orange-600 p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
                       } >
                         {({ open }) => (
                           <>
                             <dt>
-                              <Disclosure.Button className={`${open ? 'bg-blue-900 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
-                                <span className={`text-lg font-bold leading-7`}>{item.question} ?</span>
+                              <Disclosure.Button className={`${open ? 'bg-orange-500 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
+                                <span className={`text-lg font-bold leading-7 font-pt-serif`}>{item.question} ?</span>
                                 <div className='flex gap-5'>
                                   <span className="ml-6 flex h-7 items-center font-bold">{
                                   item.repotPrice ?
@@ -623,18 +616,18 @@ const DataExistMailList = (DataExistItem) => {
             
 
             {data.questionAnswerData?.Serial2 ? 
-                <div className="bg-white mt-5">
+                <div className="mt-5">
                   {/* <h2 className="text-2xl mb-5 font-bold tracking-tight text-[#091d5a]">Questions for You</h2> */}
                   <dl className="flex flex-wrap gap-1">
                     {data.questionAnswerData.Serial2.map((item, index) => (
                       <Disclosure as="div" key={index}  className={({ open }) =>
-                        `bg-[#091d5a] p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
+                        `bg-orange-600 p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
                       } >
                         {({ open }) => (
                           <>
                             <dt>
-                            <Disclosure.Button className={`${open ? 'bg-blue-900 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
-                                <span className="text-base font-semibold leading-7">{item.question} ?</span>
+                            <Disclosure.Button className={`${open ? 'bg-orange-600 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
+                                <span className="text-base font-semibold leading-7 font-pt-serif">{item.question} ?</span>
                                 <div className='flex gap-5'>
                                   <span className="ml-6 flex h-7 items-center font-bold">{
                                   item.repotPrice ?
@@ -807,18 +800,18 @@ const DataExistMailList = (DataExistItem) => {
             {data.extraComponentData ? data.extraComponentData.Holder18 ? <Holder data={data.extraComponentData.Holder18} /> : <></> :<></>}
 
             {data.questionAnswerData?.Serial3 ? 
-                <div className="bg-white mt-5">
+                <div className="mt-5">
                   {/* <h2 className="text-2xl mb-5 font-bold tracking-tight text-[#091d5a]">Questions for You</h2> */}
                   <dl className="flex flex-wrap gap-1">
                     {data.questionAnswerData.Serial3.map((item, index) => (
                       <Disclosure as="div" key={index}  className={({ open }) =>
-                        `bg-[#091d5a] p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
+                        `bg-orange-600 p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
                       } >
                         {({ open }) => (
                           <>
                             <dt>
-                              <Disclosure.Button className={`${open ? 'bg-blue-900 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
-                                <span className="text-base font-semibold leading-7">{item.question} ?</span>
+                              <Disclosure.Button className={`${open ? 'bg-orange-600 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
+                                <span className="text-base font-semibold leading-7 font-pt-serif">{item.question} ?</span>
                                 <div className='flex gap-5'>
                                   <span className="ml-6 flex h-7 items-center font-bold">{
                                   item.repotPrice ?
@@ -993,18 +986,18 @@ const DataExistMailList = (DataExistItem) => {
 
 
               {data.questionAnswerData?.Serial4 ? 
-                <div className="bg-white mt-5">
+                <div className="mt-5">
                   {/* <h2 className="text-2xl mb-5 font-bold tracking-tight text-[#091d5a]">Questions for You</h2> */}
                   <dl className="flex flex-wrap gap-1">
                     {data.questionAnswerData.Serial4.map((item, index) => (
                       <Disclosure as="div" key={index}  className={({ open }) =>
-                        `bg-[#091d5a] p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
+                        `bg-orange-600 p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
                       } >
                         {({ open }) => (
                           <>
                             <dt>
-                            <Disclosure.Button className={`${open ? 'bg-blue-900 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
-                                <span className="text-base font-semibold leading-7">{item.question} ?</span>
+                            <Disclosure.Button className={`${open ? 'bg-orange-600 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
+                                <span className="text-base font-semibold leading-7 font-pt-serif">{item.question} ?</span>
                                 <div className='flex gap-5'>
                                   <span className="ml-6 flex h-7 items-center font-bold">{
                                   item.repotPrice ?
@@ -1179,18 +1172,18 @@ const DataExistMailList = (DataExistItem) => {
 
 
               {data.questionAnswerData?.Serial5 ? 
-                <div className="bg-white mt-5">
+                <div className="mt-5">
                   {/* <h2 className="text-2xl mb-5 font-bold tracking-tight text-[#091d5a]">Questions for You</h2> */}
                   <dl className="flex flex-wrap gap-1">
                     {data.questionAnswerData.Serial5.map((item, index) => (
                       <Disclosure as="div" key={index}  className={({ open }) =>
-                        `bg-[#091d5a] p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
+                        `bg-orange-600 p-4 ${open ? 'bg-white w-full' : ' flex-auto'}`
                       } >
                         {({ open }) => (
                           <>
                             <dt>
-                            <Disclosure.Button className={`${open ? 'bg-blue-900 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
-                                <span className="text-base font-semibold leading-7">{item.question} ? </span>
+                            <Disclosure.Button className={`${open ? 'bg-orange-600 p-5' : ' '} flex w-full items-start justify-between text-left text-white`}>
+                                <span className="text-base font-semibold leading-7 font-pt-serif">{item.question} ? </span>
                                 <div className='flex gap-5'>
                                   <span className="ml-6 flex h-7 items-center font-bold">{
                                   item.repotPrice ?
@@ -1368,9 +1361,9 @@ const DataExistMailList = (DataExistItem) => {
 
             {data.faqData && data.faqData.length !== 0 ? <>
                 <div className="mt-10 divide-y divide-orange-200">
-                <h2 className="text-2xl mb-5 font-bold tracking-tight text-orange-500">Frequently asked questions</h2>
+                <h2 className="text-2xl mb-5 font-bold tracking-tight text-orange-600">Frequently asked questions</h2>
                 {data.faqData.map((faq, index) => (
-                  <div key={index} className="bg-orange-500 p-4 mb-4">
+                  <div key={index} className="bg-orange-600 p-4 mb-4">
                     <Disclosure as="dt">
                       {({ open }) => (
                         <>
