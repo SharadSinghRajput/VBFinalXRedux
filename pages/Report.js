@@ -55,9 +55,13 @@ export default function Report({data}) {
   const [ProductAdding, setProductAdding] = useState(false)
 
   const [SessionAction, setSessionAction] = useState(false)
+  const [questionModal, setQuestionModal] = useState(false)
+  const [CustomQuestion, setCustomQuestion] = useState([])
+  const [CustomQuestionAdded, setCustomQuestionAdded] = useState([])
+  const [typedQuestion, setTypedQuestion] = useState("")
 
 
-  
+  console.log(CustomQuestion);
   const [AddedProduct, setAddedProduct] = useState("")
   useEffect(() => {
     const updatedProductIds = products.map(item=> item.productId)
@@ -72,6 +76,7 @@ const DataExistMailList = (DataExistItem) => {
   }
 };
   
+
   useEffect(()=>{
     const GetUserDetails = async () => {
       const UserDetails = getLocalStorageItem('UserDataKey');
@@ -158,6 +163,7 @@ const DataExistMailList = (DataExistItem) => {
       quantity: 1,
       price: ItemPrice,
       bundleType: bundleType,
+      remark: bundleType,
     }
     const apiUrl = `${API_NEW_URL}cart-api.php`;
     try {
@@ -170,6 +176,7 @@ const DataExistMailList = (DataExistItem) => {
       });
 
       const data = await response.json();
+      console.log(data);
       if(data.success === true){
         setProductId(true)
         setProductAdding(false)
@@ -206,6 +213,44 @@ const DataExistMailList = (DataExistItem) => {
     }
   },[])
 
+
+  const AddQuestion = () => {
+    if(!typedQuestion){
+      alert("Please write question first")
+      return
+    }
+
+    const questionExists = CustomQuestionAdded.some(item => item.question === typedQuestion);
+
+    if (questionExists) {
+      alert("This question already exists");
+      return;
+    }
+
+    let idCounter = 0;
+    const generateUniqueId = () => {
+      idCounter++;
+      return idCounter;
+    };
+
+    const newObj = { id: generateUniqueId(), question: typedQuestion, stats: true };
+    console.log(newObj);
+    setCustomQuestionAdded(prevState => [...prevState, newObj]);
+  };
+    
+  const Add = (item) => {
+    if(CustomQuestion.length > 7){
+      alert("you can choose only 8 question")
+      return
+    }
+    setCustomQuestion(prevState => [...prevState, item]);
+  };
+  const Remove = (item) => {
+    setCustomQuestion(prevState => prevState.filter(q => q !== item));
+  };
+  const FindAdded = (item) => {
+    return CustomQuestion.includes(item);
+  };
 
 
   const links = [
@@ -310,7 +355,7 @@ const DataExistMailList = (DataExistItem) => {
                   </div>
                 </div>
 
-                <div className='w-[420px] gap-5 p-5 md:pt-0'>
+                <div className='w-[420px] max-md:w-full gap-5 p-5 max-md:p-0 md:pt-0'>
                   {data.extraComponentData ? data.extraComponentData.Holder34 ? <Holder data={data.extraComponentData.Holder34} /> : <></> :<></>}
                   {data.extraComponentData ? data.extraComponentData.Holder35 ? <Holder data={data.extraComponentData.Holder35} /> : <></> :<></>}
                   
@@ -353,14 +398,21 @@ const DataExistMailList = (DataExistItem) => {
                           {whichButton || ProductId ? <>
                           <button
                             type="button"
-                            onClick={()=> router.push("cart")}
+                            // onClick={()=> router.push("cart")}
+                            onClick={() => setQuestionModal(!questionModal)}
                             className="bg-[#091d5a] p-3 px-5 text-white">
                             Added to Cart
                           </button>
                           </>:<>
+                          {/* <button
+                            type="button"
+                            onClick={() => handleAddProduct(data.reportID, data.price[0] ? data.price[0].dealPrice ? data.price[0].dealPrice : data.price[0].price : "", "Single Product")}
+                            className="bg-orange-500 p-3 px-5 text-white">
+                              {ProductAdding === data.reportID ? "Please wait...": "Book Consultancy"}
+                          </button> */}
                             <button
                               type="button"
-                              onClick={() => handleAddProduct(data.reportID, data.price[0] ? data.price[0].dealPrice ? data.price[0].dealPrice : data.price[0].price : "", "Single Product")}
+                              onClick={() => setQuestionModal(!questionModal)}
                               className="bg-orange-500 p-3 px-5 text-white">
                                 {ProductAdding === data.reportID ? "Please wait...": "Book Consultancy"}
                             </button>
@@ -373,12 +425,177 @@ const DataExistMailList = (DataExistItem) => {
                     type="button"
                     onClick={() => setOpenModal(true)}
                     className="bg-[#091d5a] p-3 px-5 text-white">
-                      Add to cart
+                      Book Consultancy
                   </button>
                   </>}
                   </div>
                 </div>
               </div>
+
+            {questionModal ?<>
+            <div className='fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center'>
+              <button onClick={() => setQuestionModal(!questionModal)} className='absolute w-full h-full backdrop-blur-md'></button>
+              <div className="bg-white p-5 max-w-4xl w-full z-50 max-h-screen overflow-auto">
+                <p className='font-pt-serif font-bold text-xl text-gray-800 mb-1'>{data.title}</p>
+                <p className='font-pt-serif text-base text-gray-800 mb-5 italic'>Select the Questions You Wish to Ask (You Can Choose Up to a Maximum of 8)</p>
+                {CustomQuestion && CustomQuestion.length > 0 ? <>
+                <div className='flex flex-col mb-5 justify-end items-end'>
+                  <div className='mb-2 flex flex-wrap gap-2'>
+                  {CustomQuestion.map((item, index)=> (
+                    <p className='text-sm flex gap-2 text-gray-700 justify-center items-center bg-white border border-gray-500 p-1 pr-2 rounded-full' key={index}>
+                      <span className='bg-green-500 text-white w-5 h-5 rounded-full flex justify-center items-center'>{index + 1}</span>
+                      {item}</p>
+                  ))}
+                  </div>
+                  <button className='bg-blue-500 p-2 text-sm px-5 text-white uppercase mt-0'>Submit</button>
+                </div>
+                </> : <></>}
+                <div className='divide-y divide-gray-200 max-h-96 overflow-auto'>
+                  {data.questionAnswerData?.Serial1 ?
+                    data.questionAnswerData?.Serial1.map((item, index) =>(
+                      <div key={index}>
+                        {FindAdded(item.question) ? <>
+                          <button key={index} onClick={() => Remove(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span className="text-green-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            </span>
+                          </button>
+                        </>: <>
+                          <button key={index} onClick={() => Add(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
+                          </button>
+                          </>}
+                        </div>
+                    ))
+                  : <></>}
+                  {data.questionAnswerData?.Serial2 ?
+                    data.questionAnswerData?.Serial2.map((item, index) =>(
+                      <div key={index}>
+                        {FindAdded(item.question) ? <>
+                          <button key={index} onClick={() => Remove(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span className="text-green-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            </span>
+                          </button>
+                        </>: <>
+                          <button key={index} onClick={() => Add(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
+                          </button>
+                          </>}
+                        </div>
+                    ))
+                  : <></>}
+                  {data.questionAnswerData?.Serial3 ?
+                    data.questionAnswerData?.Serial3.map((item, index) =>(
+                      <div key={index}>
+                        {FindAdded(item.question) ? <>
+                          <button key={index} onClick={() => Remove(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span className="text-green-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            </span>
+                          </button>
+                        </>: <>
+                          <button key={index} onClick={() => Add(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
+                          </button>
+                          </>}
+                        </div>
+                    ))
+                  : <></>}
+                  {data.questionAnswerData?.Serial4 ?
+                    data.questionAnswerData?.Serial4.map((item, index) =>(
+                      <div key={index}>
+                        {FindAdded(item.question) ? <>
+                          <button key={index} onClick={() => Remove(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span className="text-green-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            </span>
+                          </button>
+                        </>: <>
+                          <button key={index} onClick={() => Add(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
+                          </button>
+                          </>}
+                        </div>
+                    ))
+                  : <></>}
+                  {data.questionAnswerData?.Serial5 ?
+                    data.questionAnswerData?.Serial5.map((item, index) =>(
+                      <button key={index} onClick={() => Add(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                        <span className='text-sm'>{item.question}</span>
+                        <span className={`${FindAdded(item.question) ? "text-green-500" : ""}`}>
+                          {FindAdded(item.question) ?<>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                          </> : <>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle"><circle cx="12" cy="12" r="10"/></svg>
+                          </>}
+                        </span>
+                      </button>
+                    ))
+                  : <></>}
+                 {CustomQuestionAdded ? (
+                    CustomQuestionAdded.map((item, index) => (
+                      <div key={index}>
+                        {FindAdded(item.question) ? <>
+                          <button key={index} onClick={() => Remove(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span className="text-green-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            </span>
+                          </button>
+                        </>: <>
+                          <button key={index} onClick={() => Add(item.question)} className="flex gap-4 justify-between items-center w-full py-1 text-left">
+                            <span className='text-sm'>{item.question}</span>
+                            <span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle"><circle cx="12" cy="12" r="10"/></svg>
+                            </span>
+                          </button>
+                          </>}
+                        </div>
+                    ))
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                  <div className="relative flex items-center mt-5">
+                    <div className="min-w-0 flex-1 text-sm leading-6">
+                      <div className='flex justify-between items-center p-1 px-0 gap-2'>
+                        <textarea
+                          id="question"
+                          name="question"
+                          rows={1}
+                          placeholder='Ask Your Custom Question ...'
+                          value={typedQuestion}
+                          onChange={(e)=> setTypedQuestion(e.target.value)}
+                          className="p-2 w-full outline-none bg-white/0 text-gray-800 border border-gray-500"
+                        ></textarea>
+                        <button
+                        onClick={AddQuestion}
+                          className='bg-orange-500 py-2 px-4 w-44 rounded-md text-sm text-white'>Add Question</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+              </div>
+            </div>
+            </>: <></>}
+
 
               {data.extraComponentData ? data.extraComponentData.Holder7 ? <Holder data={data.extraComponentData.Holder7} /> : <></> :<></>}
               {data.extraComponentData ? data.extraComponentData.Holder8 ? <Holder data={data.extraComponentData.Holder8} /> : <></> :<></>}
@@ -386,7 +603,7 @@ const DataExistMailList = (DataExistItem) => {
 
               <div className="mx-auto mt-5 flex gap-5">
                   {data.titleLogo2 ? (
-                <div className='w-40'>
+                <div className='w-40 max-md:hidden'>
                     <Image
                       width={160}
                       height={160}
@@ -405,7 +622,7 @@ const DataExistMailList = (DataExistItem) => {
                   </p>
                 </div>
                     {data.titleLogo2 ? (
-                    <div className='w-40'>
+                    <div className='w-40 max-md:hidden'>
                       <Image
                         width={160}
                         height={160}

@@ -17,7 +17,7 @@ export default function Cart() {
     const router = useRouter();
     
     const products = useSelector(state => state.adProduct.products);
-
+    console.log("Cart Page", products);
     const dispatch = useDispatch()
     const [productId, setProductId] = useState([])
     const [SessionAction, setSessionAction] = useState(false)
@@ -26,14 +26,7 @@ export default function Cart() {
     const [ProductRemoved, setProductRemoved] = useState("")
     const [ProductAdding, setProductAdding] = useState(false)
     const [cartId, setcartId] = useState("")
-    console.log(products);
     
-    useEffect(() => {
-        if (products && products.length > 0) {
-            setcartId(products[0].cartId);
-        }
-    }, [products]);
-
     useEffect(()=>{
         const GetUserDetails = async () => {
             const UserDetails = getLocalStorageItem('UserDataKey');
@@ -62,6 +55,7 @@ export default function Cart() {
             setProductId(updatedProductIds)
         }
     }, [products]);
+
     
     const DataExist = (DataExistItem) => {
         const checkArray = (arr) => Array.isArray(arr) && arr.some(item => item === DataExistItem);
@@ -130,18 +124,17 @@ export default function Cart() {
                 dispatch(removeProduct(reportID));
                 console.log("Product removed:", reportID);
             }
-            if (data.data) {
-                console.log("Cart Page", data.data);
-                if (data.data && Array.isArray(data.data)) {
-                    data.data.forEach(item => {
-                        dispatch(addProduct(item));
-                        dispatch(toggleGetProduct());
-                    });
-                } else {
-                    dispatch(addProduct(data.data));
-                    dispatch(toggleGetProduct());
-                }
-            }
+            // if (data.data) {
+            //     if (data.data && Array.isArray(data.data)) {
+            //         data.data.forEach(item => {
+            //             dispatch(addProduct(item));
+            //             dispatch(toggleGetProduct());
+            //         });
+            //     } else {
+            //         dispatch(addProduct(data.data));
+            //         dispatch(toggleGetProduct());
+            //     }
+            // }
             setProductRemoving(false);
         } catch (error) {
             setProductRemoving(false);
@@ -191,6 +184,44 @@ export default function Cart() {
           setProductAdding(false)
         }        
       };
+
+
+      useEffect(()=>{
+        const handleGetProduct = async () => {
+          if(UnderId){
+            const dataToAdd = {
+              apiKey: API_KEY, 
+              domainSecreteCode: Domain_Secrete_Code,
+              user_id: UnderId,
+              returnData: true
+            }
+            try {
+              const apiUrl = `${API_NEW_URL}cart-api.php`;
+              const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToAdd),
+              });
+        
+              const data = await response.json();
+              
+              if(data.success === true){
+                if(data.data && Array.isArray(data.data)){
+                  data.data.map((item)=>{
+                    dispatch(addProduct(item));
+                  })
+                }else{
+                  dispatch(addProduct(data.data));
+                }
+              }
+            } catch (error) {}
+          }
+        };
+    
+        handleGetProduct();
+      },[UnderId])
 
 
     return (
@@ -268,7 +299,7 @@ export default function Cart() {
                                                                 priority
                                                             />
                                                         </>:<>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                                                         </>}
                                                     </button>
                                                 </div>

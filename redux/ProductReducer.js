@@ -15,7 +15,7 @@ const adProductSlice = createSlice({
       }
     },
     removeProduct: (state, action) => {
-      state.products = state.products.filter(product => product.itemsId !== action.payload);
+      state.products = state.products.filter(product => product.productId !== action.payload);
     },
   },
 });

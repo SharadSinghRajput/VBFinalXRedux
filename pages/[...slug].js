@@ -36,7 +36,7 @@ export default function DynamicPage() {
   const [PageComponent, setPageComponent] = useState(null);
   const [DataComponentWise, setDataComponentWise] = useState("")
   const [ShowMiniCartStyle, setShowMiniCartStyle] = useState(false)
-  
+  console.log(ShowMiniCartStyle);
   
   useEffect(() => {
     
@@ -195,6 +195,7 @@ export default function DynamicPage() {
         {ShowMiniCartStyle !== "hindi" ?
           <> <MiniCart Design={ShowMiniCartStyle} /> <AllSideBar /> </>
         : <></>}
+
         {DataComponentWise ?
         <LanguageSelector data={DataComponentWise} />
         : null}
