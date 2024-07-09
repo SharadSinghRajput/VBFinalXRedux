@@ -38,7 +38,6 @@ import Services from "./Services"
 
 
 export default function Report({data, FirstData}) {
-  console.log(data);
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   
@@ -201,7 +200,8 @@ const DataExistMailList = (DataExistItem) => {
   const handleAddProductInConsultation = async () => {
     const itemID = 5916710
     const Price = 11000
-    const Remark = `title: ${data.title}, questions: ${CustomQuestion},`
+    const RemarkCont = `title: ${data?.title} questions: ${CustomQuestion}`;
+    console.log(RemarkCont);
 
     setProductAdding(itemID)
     const dataToAdd = {
@@ -212,9 +212,9 @@ const DataExistMailList = (DataExistItem) => {
       quantity: 1,
       price: Price,
       bundleType: "Single Product",
+      remark: "dfbddfklmx",
     }
-    // remark: Remark,
-    console.log("dfdx", JSON.stringify(dataToAdd));
+    console.log("dfdx", dataToAdd);
     const apiUrl = `${API_NEW_URL}cart-api.php`;
     try {
       const response = await fetch(apiUrl, {
@@ -227,22 +227,22 @@ const DataExistMailList = (DataExistItem) => {
 
       const data = await response.json();
       console.log(data);
-      if(data.success === true){
-        setProductId(true)
-        setProductAdding(false)
-        setAddedProduct(prevProducts => [...prevProducts, dataToAdd.page_id]);
-      }
-      if(data.data === true){
-        if(data.data && Array.isArray(data.data)){
-          data.data.map((item)=>{
-            dispatch(addProduct(item));
-          })
-        }else{
-          dispatch(addProduct(data.data));
-        }
-        setProductAdding(false)
-      }
-      dispatch(toggleGetProduct());
+      // if(data.success === true){
+      //   setProductId(true)
+      //   setProductAdding(false)
+      //   setAddedProduct(prevProducts => [...prevProducts, dataToAdd.page_id]);
+      // }
+      // if(data.data === true){
+      //   if(data.data && Array.isArray(data.data)){
+      //     data.data.map((item)=>{
+      //       dispatch(addProduct(item));
+      //     })
+      //   }else{
+      //     dispatch(addProduct(data.data));
+      //   }
+      //   setProductAdding(false)
+      // }
+      // dispatch(toggleGetProduct());
     } catch (error) {
       console.log(error);
       setProductAdding(false)

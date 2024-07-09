@@ -67,20 +67,20 @@ export const MainMenuHindi = [
                 ]
             },
             { name: "आज का शेयर बाजार", url : `${MAIN_URL_HINDI}share-market-today.php`, },
-            { name: "प्रेम अनुकूलता", url : `${MAIN_URL_HINDI}zodiac-signs-compatibility.php`,
+            { name: "प्रेम अनुकूलता", url : `${MAIN_URL}love-compatibility-in-hindi`,
                 sublinksL2 :[
-                    { name: 'मेष राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/aries-with-other-signs.php`,},
-                    { name: 'वृषभ राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/taurus-with-other-signs.php`,},
-                    { name: 'मिथुन राशी का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/gemini-with-other-signs.php`,},
-                    { name: 'कर्क राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/cancer-with-other-signs.php`,},
-                    { name: 'सिंह राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/leo-with-other-signs.php`,},
-                    { name: 'कन्या राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/virgo-with-other-signs.php`,},
-                    { name: 'तुला राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/libra-with-other-signs.php`,},
-                    { name: 'वृश्चिक राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/scorpio-with-other-signs.php`,},
-                    { name: 'धनु राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/sagittarius-with-other-signs.php`,},
-                    { name: 'मकर राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/capricorn-with-other-signs.php`,},
-                    { name: 'कुंभ राशि का प्रेम मिलान ', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/aquarius-with-other-signs.php`,},
-                    { name: 'मीन राशि का प्रेम मिलान', url : `${MAIN_URL_HINDI}zodiac-signs-compatibility/pisces-with-other-signs.php`,}
+                    { name: 'मेष राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/mesh`,},
+                    { name: 'वृषभ राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/vrishabh`,},
+                    { name: 'मिथुन राशी का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/mithun`,},
+                    { name: 'कर्क राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/kark`,},
+                    { name: 'सिंह राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/singh`,},
+                    { name: 'कन्या राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/kanya`,},
+                    { name: 'तुला राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/tula`,},
+                    { name: 'वृश्चिक राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/vrishchik`,},
+                    { name: 'धनु राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/dhanu`,},
+                    { name: 'मकर राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/makar`,},
+                    { name: 'कुंभ राशि का प्रेम मिलान ', url : `${MAIN_URL}love-compatibility-in-hindi/kumbh`,},
+                    { name: 'मीन राशि का प्रेम मिलान', url : `${MAIN_URL}love-compatibility-in-hindi/meen`,}
                 ]
             },
             { name: "कुंडली दोष", url : `${MAIN_URL_HINDI}kundli-doshas.php`,
