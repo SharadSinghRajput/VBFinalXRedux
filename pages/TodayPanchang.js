@@ -29,6 +29,7 @@ export default function DefaultPage({ data }) {
     class: "w-full bg-gray-100 placeholder:text-gray-900"
   };
 
+
   const GetPanchang = async (DatetoHit) => {
     setLoding(true)
     let Latitude;

@@ -99,15 +99,16 @@ export default function Cart() {
         }
     }, [products]);
 
-    const handleRemoveProduct = async (reportID) => {
-        setProductRemoving(reportID);
+    const handleRemoveProduct = async (ReportID) => {
+        console.log("sfxkj", ReportID);
+        setProductRemoving(ReportID);
         const dataToAdd = {
             apiKey: API_KEY,
             domainSecreteCode: Domain_Secrete_Code,
             user_id: UnderId,
-            removeProduct: reportID,
+            removeProduct: ReportID,
         };
-    
+        console.log(JSON.stringify(dataToAdd))
         const apiUrl = `${API_NEW_URL}cart-api.php`;
         try {
             const response = await fetch(apiUrl, {
@@ -119,10 +120,11 @@ export default function Cart() {
             });
     
             const data = await response.json();
+            console.log(data)
             if (data.success === true) {
                 setProductRemoving(false);
-                dispatch(removeProduct(reportID));
-                console.log("Product removed:", reportID);
+                dispatch(removeProduct(ReportID));
+                console.log("Product removed:", ReportID);
             }
             // if (data.data) {
             //     if (data.data && Array.isArray(data.data)) {
@@ -206,7 +208,7 @@ export default function Cart() {
               });
         
               const data = await response.json();
-              
+              console.log(data);
               if(data.success === true){
                 if(data.data && Array.isArray(data.data)){
                   data.data.map((item)=>{

@@ -542,7 +542,7 @@ export default function DailyHoroscopeDetailed({data}) {
         </div>
 
         <div className="block w-full sm:w-auto sm:top-8 max-lg:grid max-lg:grid-cols-3 gap-2">
-            <div className="w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
+            {/* <div className="w-full mx-auto shadow-2xl bg-yellow-300 p-5 mt-5 rounded-lg">
                 <h3 className='text-indigo-950 text-center text-sm font-bold'>Lucky Number and Colour for: {formattedDate}</h3>
                 <h2 className='text-indigo-950 text-lg font-bold text-center'>Number - 1</h2>
                 <h3 className='text-sm text-center text-indigo-950 font-bold'>Colour - Orange</h3>
@@ -558,7 +558,7 @@ export default function DailyHoroscopeDetailed({data}) {
                 <h3 className='text-white text-center text-sm font-bold'>Remedy for: {formattedDate}</h3>
                 <h2 className='text-white text-lg font-bold text-center'>Remedy </h2>
                 <h3 className='text-sm text-center text-white font-bold'>Recite Bajrang Baardha</h3>
-            </div>
+            </div> */}
 
             <div className='flex-1 gap-3 mt-5 max-lg:col-span-4'>
                 <div className='grid gap-3 grid-cols-2'>
