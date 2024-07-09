@@ -197,9 +197,7 @@ export default function DailyHoroscopeDetailed({data}) {
         }
     };    
 
-    if(bilingualData){
-        
-    }
+    if(bilingualData){}
 
 
     const handleClick = (day) => {

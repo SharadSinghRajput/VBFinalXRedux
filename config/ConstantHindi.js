@@ -693,4 +693,8 @@ export const MainMenuHindi = [
         title: "क्या आप 2024 में यूपीएससी परीक्षा क्रैक कर पाएंगे?",
         link: `${MAIN_URL_HINDI}services/online-report/will-i-be-successful-in-upsc-exam.php`,
       },
+      {
+        title: "जन्म कुंडली अनुसार सही करियर का चयन",
+        link: `${MAIN_URL_HINDI}janam-kundali-anusar-career-ki-bhavishyawani`,
+      },
     ]
