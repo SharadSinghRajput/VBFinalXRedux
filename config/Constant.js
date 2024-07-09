@@ -66,20 +66,20 @@ export const MainMenu = [
                 ]
             },
             { name: "Stock Market Today", url : `${MAIN_URL}share-market-today.php`, },
-            { name: "Love Compatibility", url : `${MAIN_URL}zodiac-signs-compatibility.php`,
+            { name: "Love Compatibility", url : `${MAIN_URL}love-compatibility`,
                 sublinksL2 :[
-                    { name: 'Aries Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/aries-with-other-signs.php`,},
-                    { name: 'Taurus Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/taurus-with-other-signs.php`,},
-                    { name: 'Gemini Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/gemini-with-other-signs.php`,},
-                    { name: 'Cancer Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/cancer-with-other-signs.php`,},
-                    { name: 'Leo Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/leo-with-other-signs.php`,},
-                    { name: 'Virgo Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/virgo-with-other-signs.php`,},
-                    { name: 'Libra Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/libra-with-other-signs.php`,},
-                    { name: 'Scorpio Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/scorpio-with-other-signs.php`,},
-                    { name: 'Sagittarius Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/sagittarius-with-other-signs.php`,},
-                    { name: 'Capricorn Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/capricorn-with-other-signs.php`,},
-                    { name: 'Aquarius Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/aquarius-with-other-signs.php`,},
-                    { name: 'Pisces Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/pisces-with-other-signs.php`,}
+                    { name: 'Aries Love Compatibility', url : `${MAIN_URL}love-compatibility/aries`,},
+                    { name: 'Taurus Love Compatibility', url : `${MAIN_URL}love-compatibility/taurus`,},
+                    { name: 'Gemini Love Compatibility', url : `${MAIN_URL}love-compatibility/gemini`,},
+                    { name: 'Cancer Love Compatibility', url : `${MAIN_URL}love-compatibility/cancer`,},
+                    { name: 'Leo Love Compatibility', url : `${MAIN_URL}love-compatibility/leo`,},
+                    { name: 'Virgo Love Compatibility', url : `${MAIN_URL}love-compatibility/virgo`,},
+                    { name: 'Libra Love Compatibility', url : `${MAIN_URL}love-compatibility/libra`,},
+                    { name: 'Scorpio Love Compatibility', url : `${MAIN_URL}love-compatibility/scorpio`,},
+                    { name: 'Sagittarius Love Compatibility', url : `${MAIN_URL}love-compatibility/sagittarius`,},
+                    { name: 'Capricorn Love Compatibility', url : `${MAIN_URL}love-compatibility/capricorn`,},
+                    { name: 'Aquarius Love Compatibility', url : `${MAIN_URL}love-compatibility/aquarius`,},
+                    { name: 'Pisces Love Compatibility', url : `${MAIN_URL}love-compatibility/pisces`,}
                 ]
             },
             { name: "Kundli Doshas", url : `${MAIN_URL}kundli-doshas.php`,

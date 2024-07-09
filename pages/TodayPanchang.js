@@ -15,7 +15,6 @@ import Image from "next/image";
 
 
 export default function DefaultPage({ data }) {
-  console.log(data);
   const router = useRouter();
   const [PanchangD, setPanchang] = useState("");
   const [DatetoShow, setDatetoShow] = useState("");
@@ -124,7 +123,7 @@ export default function DefaultPage({ data }) {
 
   useEffect(() => {
     GetPanchang(new Date(selectedDateTime));
-    if (data.language === "Hindi") {
+    if (data?.language === "Hindi") {
       setMainURL(MAIN_URL_HINDI);
     }
   }, [data, selectedDateTime]);
