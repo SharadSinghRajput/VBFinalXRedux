@@ -186,18 +186,7 @@ const DataExistMailList = (DataExistItem) => {
     }    
   };
 
-  const [firstHalfData, setfirstHalfData] = useState("")
-  const [secondHalfData, setsecondHalfData] = useState("")
 
-  useEffect(()=>{
-    if(data.questionAnswerData.length > 4 ){
-      const midpoint = Math.ceil(data.questionAnswerData.length / 2);
-      setfirstHalfData(data.questionAnswerData.slice(0, midpoint))
-      setsecondHalfData(data.questionAnswerData.slice(midpoint, data.questionAnswerData.length -1))
-    } else{
-      setfirstHalfData(data.questionAnswerData)
-    }
-  },[])
 
 
 

@@ -272,7 +272,7 @@ export default function ContMenuBankComp({data}) {
                                                                             <Popover.Panel className="absolute left-[100%] z-10 mt-2 flex w-screen max-w-min -translate-x-1/2 px-4">
                                                                             <div className="w-56 shrink rounded-xl bg-white p-4 text-sm font-medium leading-6 text-orange-800 shadow-lg ring-1 ring-gray-900/5">
                                                                                 {item.sublinksL3.map((item, index) => (    
-                                                                                    <Popover className="relative " key={index}>
+                                                                                    <Popover className="relative border-b border-b-orange-200 " key={index}>
                                                                                         {item.sublinksL3 ? <>
                                                                                           <div className='flex justify-between'>
                                                                                               <a  href={item.url} className='text-left text-xs'>{item.name}</a>
