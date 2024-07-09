@@ -692,10 +692,10 @@ export const MainMenu = [
         {
             name: "Vastu For Commercial", url: `${MAIN_URL}vastu-for-commercial.php` ,
             sublinksL2: [
-                { name: "Vastu for Factory", url: `${MAIN_URL}vastu-for-commercial/factory-vastu.php`, },
-                { name: "Vastu for a Shop/Showroom", url: `${MAIN_URL}vastu-for-commercial/vastu-for-shops-and-showroom.php`, },
-                { name: "Vastu For Office", url: `${MAIN_URL}vastu-for-commercial/office-vastu.php`, },
-                { name: "Vastu For Plots", url: `${MAIN_URL}vastu-for-commercial/vastu-for-plots.php`, },
+                { name: "Vastu for Factory", url: `${MAIN_URL}vastu-for-commercial/factory-vastu.php`,},
+                { name: "Vastu for a Shop/Showroom", url: `${MAIN_URL}vastu-for-commercial/vastu-for-shops-and-showroom.php`,},
+                { name: "Vastu For Office", url: `${MAIN_URL}vastu-for-commercial/office-vastu.php`,},
+                { name: "Vastu For Plots", url: `${MAIN_URL}vastu-for-commercial/vastu-for-plots.php`,},
                 { name: "Vastu For Hospital", url: `${MAIN_URL}vastu-for-commercial/vastu-for-hospital.php`, },
                 { name: "Vastu Tips for School", url: `${MAIN_URL}vastu-for-commercial/vastu-for-school.php`, },
                 { name: "Vastu for Flats and Apartments", url: `${MAIN_URL}vastu-for-commercial/vastu-for-flats-apartments.php`, },
