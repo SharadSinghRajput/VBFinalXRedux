@@ -9,9 +9,9 @@ export const MainMenu = [
             { name: 'Weekly Horoscope', url : `${MAIN_URL}horoscope/weekly-horoscope.php`,},
             { name: 'Monthly Horoscope', url : `${MAIN_URL}horoscope/monthly-horoscope.php`,},
             { name: 'Yearly Horoscope', url : `${MAIN_URL}horoscope/yearly-horoscope.php`,},
-            { name: 'Horoscope 2025', url : `${MAIN_URL}horoscope/horoscope-prediction-2025.php`,
+            { name: 'Horoscope 2025', url : `${MAIN_URL}horoscope/horoscope-2025.php`,
                 sublinksL2: [
-                    { name: 'Horoscope 2025', url : `${MAIN_URL}horoscope/horoscope-prediction-2025.php`,},
+                    { name: 'Horoscope 2025', url : `${MAIN_URL}horoscope/horoscope-2025.php`,},
                     { name: 'Aries Yearly Horoscope 2025', url : `${MAIN_URL}horoscope/aries-horoscope-2025.php`,},
                     { name: 'Yearly Horoscope 2025 for Taurus', url : `${MAIN_URL}horoscope/taurus-horoscope-2025.php`,},
                     { name: 'Yearly Horoscope 2025 for Gemini', url : `${MAIN_URL}horoscope/gemini-horoscope-2025.php`,},
@@ -55,13 +55,13 @@ export const MainMenu = [
                 sublinksL2 :[
                     { name: 'Sun Transit', url : `${MAIN_URL}planetary-transit/sun-transit.php`,},
                     { name: 'Mars Transit', url : `${MAIN_URL}planetary-transit/mars-transit.php`,},
-                    { name: 'Mercury Transit', url : `${MAIN_URL}planetary-transit/mercury-transit.php`,},
+                    { name: 'Mercury Transit', url : `${MAIN_URL}planetary-transit/mercury-transit.php `,},
                     { name: 'Jupiter Transit', url : `${MAIN_URL}planetary-transit/jupiter-transit.php`,},
                     { name: 'Venus Transit', url : `${MAIN_URL}planetary-transit/venus-transit.php`,},
                     { name: 'Saturn Transit', url : `${MAIN_URL}planetary-transit/saturn-transit.php`,},
                     { name: 'Rahu Transit', url : `${MAIN_URL}planetary-transit/rahu-transit.php`,},
                     { name: 'Ketu Transit', url : `${MAIN_URL}planetary-transit/ketu-transit.php`,},
-                    { name: 'Eclipse', url : `${MAIN_URL}planetary-transit/eclipse.php`,},
+                    { name: 'Eclipse', url : `${MAIN_URL}eclipse`,},
                     { name: 'Conjunction of Planets', url : `${MAIN_URL}planetary-transit/conjunction.php`,}
                 ]
             },
@@ -566,7 +566,7 @@ export const MainMenu = [
                     { name : "Hanuman Jayanti", url : `${MAIN_URL}jayanti/hanuman-jayanti.php`,}
                 ]
             },
-            { name: "Muhurata", url : `${MAIN_URL}shubh-muhurat.php`,}
+            { name: "Muhurata", url : `${MAIN_URL}today-panchang/shubh-muhurat.php`,}
         ]
     },
     { name: 'Life Problems', url: '#',
@@ -599,7 +599,7 @@ export const MainMenu = [
         },
         {
             name: "Career Astrology",
-            url: `${MAIN_URL}career-astrology.php`,
+            url: `${MAIN_URL}career-astrology`,
             sublinksL2: [
                 { name: "Subject Selection per Birth Chart", url: `${MAIN_URL}career-astrology/courses-after-10-and-12.php`, },
                 { name: "Career as per your Zodiac Sign", url: `${MAIN_URL}career-astrology/right-career-selection.php`, },
@@ -611,14 +611,14 @@ export const MainMenu = [
         },
         {
             name: "Court / Legal issues",
-            url: `${MAIN_URL}court-case-astrology`,
+            url: `${MAIN_URL}court-case-astrology.php`,
             sublinksL2: [
                 { name: "Bandhan Yoga", url: `${MAIN_URL}court-cases/bandhan-yoga.php`, }
             ]
         },
         {
             name: "Property astrology",
-            url: `${MAIN_URL}property.php`,
+            url: `${MAIN_URL}property-astrology`,
             sublinksL2: [
                 { name: "Astrological Solutions for Property Disputes in Horoscope", url: `${MAIN_URL}property/property-disputes.php`, },
                 { name: "Ancestral and Parental Property in your Birth Chart", url: `${MAIN_URL}property/ancestral-property.php`, },
@@ -635,7 +635,7 @@ export const MainMenu = [
                 { name: "Drug Addiction and Alcoholism indications in the birth chart", url: `${MAIN_URL}health-astrology/drug-addiction.php`, },
                 { name: "Specific Diseases in birth chart", url: `${MAIN_URL}health-astrology/diseases-caused.php`, },
                 { name: "Sex Health, Desires and Habits", url: `${MAIN_URL}health-astrology/sexual-health.php`, },
-                { name: "Your Life Span - Longevity Reading", url: `${MAIN_URL}health-astrology/longevity-calculator.php`, }
+                { name: "Your Life Span - Longevity Reading", url: `${MAIN_URL}health-astrology/life-span.php`, }
             ]
         },
         { name: "Loan and Debt", url: `${MAIN_URL}loan-and-debts.php`, },
@@ -647,7 +647,7 @@ export const MainMenu = [
             ]
         },
         {
-            name: "Past Life Readings", url: `${MAIN_URL}life-predictions.php`,
+            name: "Past Life Readings", url: `${MAIN_URL}past-life-reading`,
             sublinksL2: [
                 { name: "Life events: Detailed life predictions", url: `${MAIN_URL}life-predictions/life-event-prediction.php`, },
                 { name: "Law of Karma and Karma Correction", url: `${MAIN_URL}life-predictions/karma-correction.php` , }
@@ -692,10 +692,10 @@ export const MainMenu = [
         {
             name: "Vastu For Commercial", url: `${MAIN_URL}vastu-for-commercial.php` ,
             sublinksL2: [
-                { name: "Vastu for Factory", url: `${MAIN_URL}vastu-for-commercial/factory-vastu.php`, },
-                { name: "Vastu for a Shop/Showroom", url: `${MAIN_URL}vastu-for-commercial/vastu-for-shops-and-showroom.php`, },
-                { name: "Vastu For Office", url: `${MAIN_URL}vastu-for-commercial/office-vastu.php`, },
-                { name: "Vastu For Plots", url: `${MAIN_URL}vastu-for-commercial/vastu-for-plots.php`, },
+                { name: "Vastu for Factory", url: `${MAIN_URL}vastu-for-commercial/factory-vastu.php`,},
+                { name: "Vastu for a Shop/Showroom", url: `${MAIN_URL}vastu-for-commercial/vastu-for-shops-and-showroom.php`,},
+                { name: "Vastu For Office", url: `${MAIN_URL}vastu-for-commercial/office-vastu.php`,},
+                { name: "Vastu For Plots", url: `${MAIN_URL}vastu-for-commercial/vastu-for-plots.php`,},
                 { name: "Vastu For Hospital", url: `${MAIN_URL}vastu-for-commercial/vastu-for-hospital.php`, },
                 { name: "Vastu Tips for School", url: `${MAIN_URL}vastu-for-commercial/vastu-for-school.php`, },
                 { name: "Vastu for Flats and Apartments", url: `${MAIN_URL}vastu-for-commercial/vastu-for-flats-apartments.php`, },
@@ -713,7 +713,7 @@ export const MainMenu = [
         name: 'Kundli', url: '#',
         sublinks: [
             { name: "Kundli", url: `${MAIN_URL}kundli.php`,},
-            { name: "Kundli Matching", url: `${MAIN_URL}kundli-matching`,},
+            { name: "Kundli Matching", url: `${MAIN_URL}horoscope-matching`,},
             { name: "How to read kundli", url: `${MAIN_URL}kundli/how-to-read-kundli.php`, },
         ]
     },
