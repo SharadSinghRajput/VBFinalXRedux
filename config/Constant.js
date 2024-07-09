@@ -732,6 +732,8 @@ export const MainMenu = [
     { name: "Blogs", url: `${MAIN_URL}blog/`, },
   ];
 
+
+
   export const PopularReportsContent = [
       {
         title: "Get most accurate result on Manglik Dosh ",
@@ -742,4 +744,14 @@ export const MainMenu = [
         title: "Will You Qualify in UPSC Exam in 2024? ",
         link: `${MAIN_URL}services/online-report/future-life-partner.php`,
       },
+    {
+        title: "Right Career Selection As Per Birth Chart",
+        link: `${MAIN_URL}career-astrology/right-career-selection`,
+      },
+    {
+        title: "Which career will bring me the most success and recognition",
+        link: `${MAIN_URL}career-astrology/right-career-selection/which-career-will-bring-me-the-most-success-and-recognition`,
+      },
     ]
+
+

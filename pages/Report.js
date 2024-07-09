@@ -37,7 +37,8 @@ import Services from "./Services"
 
 
 
-export default function Report({data}) {
+export default function Report({data, FirstData}) {
+  console.log(data);
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   
@@ -61,7 +62,6 @@ export default function Report({data}) {
   const [typedQuestion, setTypedQuestion] = useState("")
 
 
-  console.log(CustomQuestion);
   const [AddedProduct, setAddedProduct] = useState("")
   useEffect(() => {
     const updatedProductIds = products.map(item=> item.productId)
@@ -163,8 +163,8 @@ const DataExistMailList = (DataExistItem) => {
       quantity: 1,
       price: ItemPrice,
       bundleType: bundleType,
-      remark: bundleType,
     }
+    console.log(dataToAdd);
     const apiUrl = `${API_NEW_URL}cart-api.php`;
     try {
       const response = await fetch(apiUrl, {
@@ -198,8 +198,59 @@ const DataExistMailList = (DataExistItem) => {
     }    
   };
 
-  const [firstHalfData, setfirstHalfData] = useState("")
-  const [secondHalfData, setsecondHalfData] = useState("")
+  const handleAddProductInConsultation = async () => {
+    const itemID = 5916710
+    const Price = 11000
+    const Remark = `title: ${data.title}, questions: ${CustomQuestion},`
+
+    setProductAdding(itemID)
+    const dataToAdd = {
+      apiKey: API_KEY, 
+      domainSecreteCode: Domain_Secrete_Code,
+      user_id: UnderId,
+      page_id: itemID,
+      quantity: 1,
+      price: Price,
+      bundleType: "Single Product",
+    }
+    // remark: Remark,
+    console.log("dfdx", JSON.stringify(dataToAdd));
+    const apiUrl = `${API_NEW_URL}cart-api.php`;
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToAdd),
+      });
+
+      const data = await response.json();
+      console.log(data);
+      if(data.success === true){
+        setProductId(true)
+        setProductAdding(false)
+        setAddedProduct(prevProducts => [...prevProducts, dataToAdd.page_id]);
+      }
+      if(data.data === true){
+        if(data.data && Array.isArray(data.data)){
+          data.data.map((item)=>{
+            dispatch(addProduct(item));
+          })
+        }else{
+          dispatch(addProduct(data.data));
+        }
+        setProductAdding(false)
+      }
+      dispatch(toggleGetProduct());
+    } catch (error) {
+      console.log(error);
+      setProductAdding(false)
+    }    
+  };
+
+  const [firstHalfData, setfirstHalfData] = useState("");
+  const [secondHalfData, setsecondHalfData] = useState("");
 
   useEffect(()=>{
     if(data){
@@ -234,7 +285,6 @@ const DataExistMailList = (DataExistItem) => {
     };
 
     const newObj = { id: generateUniqueId(), question: typedQuestion, stats: true };
-    console.log(newObj);
     setCustomQuestionAdded(prevState => [...prevState, newObj]);
   };
     
@@ -269,6 +319,17 @@ const DataExistMailList = (DataExistItem) => {
   return (
     <>
       <MetaData data={data} />
+      {!data ?
+        FirstData?.title ?
+            <div className="max-w-6xl mx-auto rounded-lg">
+              <div className="p-5 pt-0">
+                  <div className='bg-orange-500 p-2 mt-5 rounded-lg'>
+                    <h1 className="text-2xl font-bold text-center tracking-tight text-white">{FirstData.title}</h1>
+                </div>
+              </div>
+            </div>
+        : null
+      : null}
       {data?.breadcrumb && <BreadCrumb data={data.breadcrumb} />}
       {/* <div className='sticky top-0 z-50 bg-white'>
         <Services location={"report"} />
@@ -293,10 +354,15 @@ const DataExistMailList = (DataExistItem) => {
                 </div>
               </>:<></>
             : null} */}
-
+            {data.title ?
             <div className='bg-orange-500 p-2 mt-5 rounded-lg'>
               <h1 className="text-2xl font-bold text-center tracking-tight text-white">{data.title}</h1>
             </div>
+            : 
+            <div className='bg-orange-500 p-2 mt-5 rounded-lg'>
+              <h1 className="text-2xl font-bold text-center tracking-tight text-white">{FirstData.title}</h1>
+            </div>
+            }
             {/* <div className="flex gap-4">
                 <div>
                 {data.titleLogo2 ? (
@@ -447,7 +513,7 @@ const DataExistMailList = (DataExistItem) => {
                       {item}</p>
                   ))}
                   </div>
-                  <button className='bg-blue-500 p-2 text-sm px-5 text-white uppercase mt-0'>Submit</button>
+                  <button onClick={handleAddProductInConsultation} className='bg-blue-500 p-2 text-sm px-5 text-white uppercase mt-0'>Submit</button>
                 </div>
                 </> : <></>}
                 <div className='divide-y divide-gray-200 max-h-96 overflow-auto'>

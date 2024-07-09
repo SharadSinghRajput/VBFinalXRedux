@@ -36,7 +36,8 @@ export default function DynamicPage() {
   const [PageComponent, setPageComponent] = useState(null);
   const [DataComponentWise, setDataComponentWise] = useState("")
   const [ShowMiniCartStyle, setShowMiniCartStyle] = useState(false)
-  console.log(ShowMiniCartStyle);
+  
+  const [FirstData, setFirstData] = useState("")
   
   useEffect(() => {
     
@@ -76,6 +77,8 @@ export default function DynamicPage() {
                 const PageModule = await import(`./${responseData.data[0].componentToShow}`);
                 const component = PageModule.default;
                 setPageComponent(() => component);
+                console.log(responseData.data[0])
+                setFirstData(responseData.data[0])
               }else{
                 setCompNotAvail(true)
               }
@@ -186,10 +189,13 @@ export default function DynamicPage() {
           {DataComponentWise ?
           <PageComponent data={DataComponentWise} />
           : 
+          <>
+          <PageComponent FirstData={FirstData} />
           <div className="relative flex justify-center items-center min-h-96 w-full">
               <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-b-orange-500 border-t-blue-500"></div>
               <Image src={Logo} alt="Logo" className="h-24 w-auto" />
           </div>
+          </>
           }
 
         {ShowMiniCartStyle !== "hindi" ?

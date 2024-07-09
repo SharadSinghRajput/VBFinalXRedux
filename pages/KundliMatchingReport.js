@@ -150,7 +150,7 @@ export default function KaalsarpDoshReport({ data }) {
   const TDStyle = "text-sm bg-blue-800 p-2 text-white border-b font-light capitalize border-b-white/50"
 
   const [percentage, setPercentage] = useState(50);
-
+console.log(MatchPercentage);
   return (
     <>
       <div className="">
@@ -196,24 +196,6 @@ export default function KaalsarpDoshReport({ data }) {
           </div>
           <div>
           <div className="flex justify-center items-center">
-            {/* Displaying the percentage as text for reference */}
-            <div className="text-4xl font-bold">{percentage}%</div>
-            {/* Creating a circular progress bar */}
-            <div className="relative w-24 h-24">
-                <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
-                    {/* Filled circle based on percentage */}
-                    <div className="absolute bottom-0 left-0 w-full bg-blue-500"
-                         style={{ height: `${percentage}%`, clipPath: 'url(#waveClipPath)' }}>
-                    </div>
-                </div>
-                <svg >
-                    <defs>
-                        <clipPath id="waveClipPath">
-                        <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
-                        </clipPath>
-                    </defs>
-                </svg>
-            </div>
         </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -305,42 +287,121 @@ export default function KaalsarpDoshReport({ data }) {
               </table>
             </div>
             <div>
-              <div className="mt-5 flex flex-col gap-5">
+              <div className="mt-5 flex flex-wrap gap-5">
                 {MatchPercentage.ashtakoota_percentage ?
-                  <div>
-                    <p className="font-bold uppercase mb-2">Ashtakoota Percentage</p>
-                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
-                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.ashtakoota_percentage}%] h-full `}></div>
-                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.ashtakoota_percentage}%</p>
+                <>
+                <div className="flex flex-col justify-center items-center bg-gray-100">
+                  <div className="relative w-24 h-24">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
+                        {/* Filled circle based on percentage */}
+                        <p className="absolute bottom-0 left-10 top-10 z-10 w-full">{MatchPercentage.ashtakoota_percentage}%</p>
+                        <div className="absolute bottom-0 left-0 w-full bg-blue-300"
+                            style={{ height: `${MatchPercentage.ashtakoota_percentage}%`, clipPath: 'url(#waveClipPath)' }}>
+                        </div>
                     </div>
+                    <svg >
+                        <defs>
+                            <clipPath id="waveClipPath">
+                            <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
+                            </clipPath>
+                        </defs>
+                    </svg>
                   </div>
+                  <p className="font-normal text-center text-sm mb-2">Ashtakoota Percentage</p>
+                </div>
+                </>
                 : null}
                 {MatchPercentage.manglik_match_percentage ?
-                  <div>
-                    <p className="font-bold uppercase mb-2">Manglik Match Percentage</p>
-                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
-                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.manglik_match_percentage}%] h-full `}></div>
-                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.manglik_match_percentage}%</p>
+                <>
+                <div className="flex flex-col justify-center items-center">
+                  <div className="relative w-24 h-24">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
+                        {/* Filled circle based on percentage */}
+                        <p className="absolute bottom-0 left-10 top-10 z-10 w-full">{MatchPercentage.manglik_match_percentage}%</p>
+                        <div className="absolute bottom-0 left-0 w-full bg-blue-300"
+                            style={{ height: `${MatchPercentage.manglik_match_percentage}%`, clipPath: 'url(#waveClipPath)' }}>
+                        </div>
                     </div>
+                    <svg >
+                        <defs>
+                            <clipPath id="waveClipPath">
+                            <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
+                            </clipPath>
+                        </defs>
+                    </svg>
                   </div>
+                  <p className="font-normal text-center text-sm mb-2">Manglik Match Percentage</p>
+                </div>
+                </>
                 : null}
                 {MatchPercentage.rajju_match_percentage ?
-                  <div>
-                    <p className="font-bold uppercase mb-2">Rajju Match Percentage</p>
-                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
-                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.rajju_match_percentage}%] h-full `}></div>
-                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.rajju_match_percentage}%</p>
-                    </div>
-                  </div>
+                 <>
+                 <div className="flex flex-col justify-center items-center">
+                   <div className="relative w-24 h-24">
+                     <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
+                         {/* Filled circle based on percentage */}
+                         <p className="absolute bottom-0 left-10 top-10 z-10 w-full">{MatchPercentage.rajju_match_percentage}%</p>
+                         <div className="absolute bottom-0 left-0 w-full bg-blue-300"
+                             style={{ height: `${MatchPercentage.rajju_match_percentage}%`, clipPath: 'url(#waveClipPath)' }}>
+                         </div>
+                     </div>
+                     <svg >
+                         <defs>
+                             <clipPath id="waveClipPath">
+                             <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
+                             </clipPath>
+                         </defs>
+                     </svg>
+                   </div>
+                   <p className="font-normal text-center text-sm mb-2">Rajju Match Percentage</p>
+                 </div>
+                 </>
+                : null}
+                {MatchPercentage.rajju_match_percentage === 0 ?
+                 <>
+                 <div className="flex flex-col justify-center items-center">
+                   <div className="relative w-24 h-24">
+                     <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
+                         {/* Filled circle based on percentage */}
+                         <p className="absolute bottom-0 left-10 top-10 z-10 w-full">{MatchPercentage.rajju_match_percentage}%</p>
+                         <div className="absolute bottom-0 left-0 w-full bg-blue-300"
+                             style={{ height: `${MatchPercentage.rajju_match_percentage}%`, clipPath: 'url(#waveClipPath)' }}>
+                         </div>
+                     </div>
+                     <svg >
+                         <defs>
+                             <clipPath id="waveClipPath">
+                             <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
+                             </clipPath>
+                         </defs>
+                     </svg>
+                   </div>
+                   <p className="font-normal text-center text-sm mb-2">Rajju Match Percentage</p>
+                 </div>
+                 </>
                 : null}
                 {MatchPercentage.match_percentage ?
-                  <div>
-                    <p className="font-bold uppercase mb-2">Match Percentage</p>
-                    <div className="w-full h-8 bg-gray-200 rounded-full relative overflow-hidden">
-                      <div className={`absolute bg-orange-500 w-[${MatchPercentage.match_percentage}%] h-full `}></div>
-                      <p className="absolute left-5 top-1 text-white font-bold">{MatchPercentage.match_percentage}%</p>
-                    </div>
-                  </div>
+                <>
+                 <div className="flex flex-col justify-center items-center">
+                   <div className="relative w-24 h-24">
+                     <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full overflow-hidden">
+                         {/* Filled circle based on percentage */}
+                         <p className="absolute bottom-0 left-10 top-10 z-10 w-full">{MatchPercentage.match_percentage}%</p>
+                         <div className="absolute bottom-0 left-0 w-full bg-blue-300"
+                             style={{ height: `${MatchPercentage.match_percentage}%`, clipPath: 'url(#waveClipPath)' }}>
+                         </div>
+                     </div>
+                     <svg >
+                         <defs>
+                             <clipPath id="waveClipPath">
+                             <path d="M0,12 C30,28 50,8 100,12 L100,100 L0,100 Z"></path>
+                             </clipPath>
+                         </defs>
+                     </svg>
+                   </div>
+                   <p className="font-normal text-center text-sm mb-2">Match Percentage</p>
+                 </div>
+                </>
                 : null}
                 
               </div>
