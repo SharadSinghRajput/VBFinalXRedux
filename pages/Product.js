@@ -98,7 +98,7 @@ const DataExistMailList = (DataExistItem) => {
 
   useEffect(() => {
     products.map((item)=>{
-      if(item.productId === data.reportID){
+      if(item.productId === data?.reportID){
         setWhichButton(true)
       }
     })

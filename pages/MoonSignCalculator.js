@@ -35,7 +35,7 @@ export default function Kundli({ data }) {
 
                   <div className="grid grid-cols-2 max-md:grid-cols-1 mb-10">
                     <div className="bg-bgForm p-5 flex justify-center items-center flex-col gap-6">
-                      <p className="font-bold text-lg text-white ">{lang === "Hindi" ? "अपनी निशुल्क चंद्र राशि रिपोर्ट प्राप्त करें" : "Free Kaal Sarp Dosha Calculator"}</p>
+                      <p className="font-bold text-lg text-white ">{lang === "Hindi" ? "अपनी निशुल्क चंद्र राशि रिपोर्ट प्राप्त करें" : "Get Your Free Moon Sign Report"}</p>
                       <Image src={GlobImg} width={100} height={100} />
                     </div>
                     <div className="p-10 bg-gray-100">
