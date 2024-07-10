@@ -402,11 +402,14 @@ export default function Kundli({ data }) {
                         spaceBetween={50}
                         slidesPerView={4}
                         breakpoints={{
-                            400: {
+                            100: {
+                                slidesPerView: 1,
+                            },
+                            450: {
                                 slidesPerView: 2,
                             },
                             500: {
-                                slidesPerView: 3,
+                                slidesPerView: 2,
                             },
                             768: {
                                 slidesPerView: 4,
@@ -436,7 +439,7 @@ export default function Kundli({ data }) {
                 </div>
                 <div>
                     <h2 className='text-lg font-bold mt-5 mb-5'>Your Kundli Dosha</h2>
-                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5'>
+                    <div className='grid   grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-1 gap-5'>
                         {KundliDosha.map((item, index) => (
                             <div key={index} className="w-full mx-auto shadow-xl border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
                                 <a
@@ -458,8 +461,11 @@ export default function Kundli({ data }) {
                                 spaceBetween={50}
                                 slidesPerView={4}
                                 breakpoints={{
+                                    100: {
+                                        slidesPerView: 1,
+                                    },
                                     400: {
-                                        slidesPerView: 3,
+                                        slidesPerView: 2,
                                     },
                                     500: {
                                         slidesPerView: 4,
