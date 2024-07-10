@@ -47,7 +47,10 @@ export default function Kundli({ data }) {
 
   return (
     <>
+
+    {data ?
       <MetaData data={data} />
+    : null}
       <div className="">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             {data ?
@@ -59,7 +62,7 @@ export default function Kundli({ data }) {
                 </>:<></>}
             </>
             : null}
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
               {GemstoneSuggestion ?
                 Object.entries(GemstoneSuggestion).map(([category, attributes]) => (
                     <div key={category} >
