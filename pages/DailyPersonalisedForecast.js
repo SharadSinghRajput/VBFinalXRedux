@@ -1,34 +1,53 @@
-
 import React, { useEffect, useState, Fragment } from 'react';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import 'swiper/css';
 import { useRouter } from 'next/router';
 import HoroscopeFetchAPI from '../config/horoscopeFetchAPI';
 import { setLocalStorageItem, getLocalStorageItem } from '../config/localStorage';
-import fetchAstrologyData from '../config/getAstroAPI';
+import ParagraphLoder from './pageAssets/ParagraphLoder';
+
+const ForcastSign = {
+    Love: {
+        alt: "Love",
+        imgsrc: "images/ForcastSign/love.png"
+    },
+    Finance: {
+        alt: "Finance",
+        imgsrc: "images/ForcastSign/finance.png"
+    },
+    Health: {
+        alt: "Health",
+        imgsrc: "images/ForcastSign/health.png"
+    },
+    Career: {
+        alt: "Career",
+        imgsrc: "images/ForcastSign/career.png"
+    },
+    Overall: {
+        alt: "Overall",
+        imgsrc: "images/ForcastSign/overall.png"
+    }
+};
+
 
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(' ')
 }
-
-export default function Kundli({data}) {
+export default function Kundli({ data }) {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState(2);
     const pageLanguage = data ? data.language || false : false;
 
-    
-      const statuses = {
+    const statuses = {
         Paid: 'text-green-700 bg-green-50 ring-green-600/20',
         Withdraw: 'text-gray-600 bg-gray-50 ring-gray-500/10',
         Overdue: 'text-red-700 bg-red-50 ring-red-600/10',
-      }
+    }
 
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     };
-  
 
     const [AstroDetail, setAstroDetail] = useState("");
     const [currentDate, setCurrentDate] = useState("");
@@ -36,128 +55,219 @@ export default function Kundli({data}) {
     const [Forecast, setForecast] = useState("");
     const [OverAll, setOverAll] = useState("");
     const [Love, setLove] = useState("");
+    const [Career, setCareer] = useState("");
+    const [Finance, setFinance] = useState("");
+    const [Health, setHealth] = useState("")
 
     useEffect(() => {
         const GetDataThird = getLocalStorageItem('AstroDetailKey');
-        // const AstroDet = getLocalStorageItem('AstroAPIHitDataKey');
-        if(GetDataThird){
-            fetchDataTodat("today", GetDataThird)
-            setAstroDetail(GetDataThird)
+        if (GetDataThird) {
+            fetchData("today", GetDataThird.sign);
+            setAstroDetail(GetDataThird);
         }
-    }, []); 
+    }, []);
 
-
-
-    const fetchDataTodat = async (item, sign) => {
+    const formatDate = () => {
         const date = new Date().toLocaleString();
-        const [DatePart, timePart] = date.split(',')
+        const [DatePart] = date.split(',');
         const [day, month, year] = DatePart.split('/');
-        const finalDate = `${year}-${month}-${day}`
-        const horoscopeperiod = sign ? sign : AstroDetail.sign
+        return `${year}-${month}-${day}`;
+    };
+
+    const fetchAstroData = async (type, period, sign) => {
         try {
-            const astrologyData = await HoroscopeFetchAPI(AstroDetail.sign, "overall", horoscopeperiod, finalDate, pageLanguage);
-            console.log(astrologyData);
-            setOverAll(astrologyData);
-            const GetLoveAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "love", horoscopeperiod, finalDate, pageLanguage);
-            setLove(GetLoveAstroData);
-        } catch (error) {}
-    }
+            return await HoroscopeFetchAPI(sign, type, period, formatDate(), pageLanguage);
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    };
 
-    const fetchDataonClick = async (item) => {
-        const date = new Date().toLocaleString();
-        const [DatePart, timePart] = date.split(',')
-        const [day, month, year] = DatePart.split('/');
-        const finalDate = `${year}-${month}-${day}`
-        try {
-            const astrologyData = await HoroscopeFetchAPI(AstroDetail.sign, "overall", item, finalDate, pageLanguage);
-            console.log(astrologyData);
-            setOverAll(astrologyData);
-            const GetLoveAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "love", item, finalDate, pageLanguage);
-            setLove(GetLoveAstroData);
-        } catch (error) {}
-    }
-  
 
-  return (
-    <>
-    {data ? (
-    <div className="">
-        <div className={`bg-white mx-auto max-w-6xl mx-auto shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
-            {data.title ? <>
-                <h1 className='text-lg font-bold mb-5'>
-                    {data.title}
-                </h1>
-            </>:<></>}
-            <div className="flex flex-col">
-                <div className="flex bg-[#4f6199] hover:bg-[#2e4280] rounded-lg transition p-1">
-                    <nav className="flex space-x-1" aria-label="Tabs" role="tablist">
-                    {/* <button
-                        type="button"
-                        className={`py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg ${
-                        activeTab === 1 ? 'bg-[#091d5a] text-white' : 'bg-transparent text-white hover:white'
-                        }`}
-                        id="segment-item-1"
-                        onClick={() => {handleTabClick(1), fetchDataonClick("yesterday")}}
-                        aria-controls="segment-1"
-                        role="tab"
-                    >
-                        Yesterday
-                    </button> */}
-                    <button
-                        type="button"
-                        className={`py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg ${
-                        activeTab === 2 ? 'bg-[#091d5a] text-white' : 'bg-transparent text-white hover:white'
-                        }`}
-                        id="segment-item-2"
-                        onClick={() => {handleTabClick(2), fetchDataTodat("today", undefined)}}
-                        aria-controls="segment-2"
-                        role="tab"
-                    >
-                        Today
-                    </button>
-                    <button
-                        type="button"
-                        className={`py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg ${
-                        activeTab === 3 ? 'bg-[#091d5a] text-white' : 'bg-transparent text-white hover:white'
-                        }`}
-                        id="segment-item-3"
-                        onClick={() => {handleTabClick(3), fetchDataonClick("tomorrow")}}
-                        aria-controls="segment-3"
-                        role="tab"
-                    >
-                        Tomorrow
-                    </button>
-                    </nav>
+    const fetchData = async (period, sign) => {
+        const horoscopeSign = sign ? sign : AstroDetail.sign;
+        setOverAll("")
+        setLove("")
+        setCareer("")
+        setFinance("")
+        setHealth("")
+        setOverAll(await fetchAstroData("overall", period, horoscopeSign));
+        setLove(await fetchAstroData("love", period, horoscopeSign));
+        setCareer(await fetchAstroData("career", period, horoscopeSign));
+        setFinance(await fetchAstroData("finance", period, horoscopeSign));
+        setHealth(await fetchAstroData("health", period, horoscopeSign));
+    };
+
+    // const fetchDataTodat = async (item, sign) => {
+    //     const date = new Date().toLocaleString();
+    //     const [DatePart, timePart] = date.split(',')
+    //     const [day, month, year] = DatePart.split('/');
+    //     const finalDate = `${year}-${month}-${day}`
+    //     const horoscopeperiod = sign ? sign : AstroDetail.sign
+    //     try {
+    //         const astrologyData = await HoroscopeFetchAPI(AstroDetail.sign, "overall", horoscopeperiod, finalDate, pageLanguage);
+    //         setOverAll(astrologyData);
+    //         const GetLoveAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "love", horoscopeperiod, finalDate, pageLanguage);
+    //         setLove(GetLoveAstroData);
+    //         const GetcareerAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "career", horoscopeperiod, finalDate, pageLanguage);
+    //         setCareer(GetcareerAstroData);
+    //         const GetfinanceAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "finance", horoscopeperiod, finalDate, pageLanguage);
+    //         setFinance(GetfinanceAstroData);
+    //         const GethealthAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "health", horoscopeperiod, finalDate, pageLanguage);
+    //         setHealth(GethealthAstroData)
+    //     } catch (error) { }
+    // }
+
+    // const fetchDataonClick = async (item) => {
+    //     const date = new Date().toLocaleString();
+    //     const [DatePart, timePart] = date.split(',')
+    //     const [day, month, year] = DatePart.split('/');
+    //     const finalDate = `${year}-${month}-${day}`
+    //     try {
+    //         const astrologyData = await HoroscopeFetchAPI(AstroDetail.sign, "overall", item, finalDate, pageLanguage);
+    //         setOverAll(astrologyData);
+    //         const GetLoveAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "love", item, finalDate, pageLanguage);
+    //         setLove(GetLoveAstroData);
+    //         const GetcareerAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "career", item, finalDate, pageLanguage);
+    //         setCareer(GetcareerAstroData);
+    //         const GetfinanceAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "finance", item, finalDate, pageLanguage);
+    //         setFinance(GetfinanceAstroData);
+    //         const GethealthAstroData = await HoroscopeFetchAPI(AstroDetail.sign, "health", item, finalDate, pageLanguage);
+    //         setHealth(GethealthAstroData)
+    //     } catch (error) { }
+    // }
+
+    return (
+        <>
+            {data ? (
+                <div className="">
+                    <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
+                        {data.title ? <>
+                            <h1 className='text-lg font-bold mb-5'>
+                                {data.title}
+                            </h1>
+                        </> : <></>}
+                        <div className="flex flex-col">
+                            <div className="flex bg-[#2e4280] rounded-lg transition p-1 w-max">
+                                <nav className="flex space-x-1" aria-label="Tabs" role="tablist">
+                                    <button
+                                        type="button"
+                                        className={`py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg ${activeTab === 2 ? 'bg-[#091d5a] text-white' : 'bg-transparent text-white hover:white'
+                                            }`}
+                                        id="segment-item-2"
+                                        onClick={() => { handleTabClick(2); fetchData("today"); }}
+                                        aria-controls="segment-2"
+                                        role="tab"
+                                    >
+                                        Today
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className={`py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg ${activeTab === 3 ? 'bg-[#091d5a] text-white' : 'bg-transparent text-white hover:white'
+                                            }`}
+                                        id="segment-item-3"
+                                        onClick={() => { handleTabClick(3); fetchData("tomorrow"); }}
+                                        aria-controls="segment-3"
+                                        role="tab"
+                                    >
+                                        Tomorrow
+                                    </button>
+                                </nav>
+                            </div>
+
+                            <div className="mt-3 rounded-xl border border-gray-200">
+                                <div id="segment-2" className={`${activeTab === 2 ? 'block' : 'hidden'} border-gray-900/5 bg-gray-50 p-3`} role="tabpanel" aria-labelledby="segment-item-2">
+                                    <div className="text-gray-900">
+                                        <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 mb-4">
+                                            <img src={ForcastSign.Overall.imgsrc} alt={ForcastSign.Overall.alt} className="w-12 h-12 mb-2" />
+                                            <p className="font-bold text-3xl mb-2">Overall</p>
+                                            {OverAll ? 
+                                            <p className="p-2 text-justify text-sm">{OverAll}</p>
+                                            : <ParagraphLoder />}
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Love.imgsrc} alt={ForcastSign.Love.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Love</p>
+                                                {Love ? 
+                                                <p className="p-2 text-justify text-sm">{Love}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Career.imgsrc} alt={ForcastSign.Career.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Career</p>
+                                                {Career ? 
+                                                <p className="p-2 text-justify text-sm">{Career}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Finance.imgsrc} alt={ForcastSign.Finance.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Finance</p>
+                                                {Finance ? 
+                                                <p className="p-2 text-justify text-sm">{Finance}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Health.imgsrc} alt={ForcastSign.Health.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Health</p>
+                                                {Health ? 
+                                                <p className="p-2 text-justify text-sm">{Health}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="segment-3" className={`${activeTab === 3 ? 'block' : 'hidden'} border-gray-900/5 bg-gray-50 p-3`} role="tabpanel" aria-labelledby="segment-item-3">
+                                    <div className="text-gray-900">
+                                        <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 mb-4">
+                                            <img src={ForcastSign.Overall.imgsrc} alt={ForcastSign.Overall.alt} className="w-12 h-12 mb-2" />
+                                            <p className="font-bold text-3xl mb-2">Overall</p>
+                                            {OverAll ? 
+                                            <p className="p-2 text-justify text-sm">{OverAll}</p>
+                                            : <ParagraphLoder />}
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Love.imgsrc} alt={ForcastSign.Love.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Love</p>
+                                                {Love ? 
+                                                <p className="p-2 text-justify text-sm">{Love}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Career.imgsrc} alt={ForcastSign.Career.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Career</p>
+                                                {Career ? 
+                                                <p className="p-2 text-justify text-sm">{Career}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Finance.imgsrc} alt={ForcastSign.Finance.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Finance</p>
+                                                {Finance ? 
+                                                <p className="p-2 text-justify text-sm">{Finance}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4">
+                                                <img src={ForcastSign.Health.imgsrc} alt={ForcastSign.Health.alt} className="w-12 h-12 mb-2" />
+                                                <p className="font-bold text-3xl mb-2">Health</p>
+                                                {Health ? 
+                                                <p className="p-2 text-justify text-sm">{Health}</p>
+                                                : <ParagraphLoder />}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
-                <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8 rounded-xl border border-gray-200">
-                    <div id="segment-1" className={`${activeTab === 1 ? 'block' : 'hidden'} border-gray-900/5 bg-gray-50 p-3`} role="tabpanel" aria-labelledby="segment-item-1">
-                        <p className="text-gray-900">
-                            This is the <em className="font-semibold text-gray-900">first</em> item's tab body.
-                        </p>
-                    </div>
-                    <div id="segment-2" className={`${activeTab === 2 ? 'block' : 'hidden'} border-gray-900/5 bg-gray-50 p-3`} role="tabpanel" aria-labelledby="segment-item-2">
-                        <p className="text-gray-900">
-                            {OverAll}
-                            <p className='font-bold'>Love</p>
-                            {Love}
-                        </p>
-                    </div>
-                    <div id="segment-3" className={`${activeTab === 3 ? 'block' : 'hidden'} border-gray-900/5 bg-gray-50 p-3`} role="tabpanel" aria-labelledby="segment-item-3">
-                        <p className="text-gray-900">
-                            {OverAll}
-                            <p className='font-bold'>Love</p>
-                            {Love}
-                        </p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    ) : (
-        <></>
-    )}
-    </>
-  )
+            ) : (
+                <></>
+            )}
+        </>
+    )
 }
