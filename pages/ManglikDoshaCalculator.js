@@ -35,9 +35,9 @@ export default function Kundli({ data }) {
                 </div>
                 <div className="p-10 bg-gray-100">
                   {data.language === "Hindi" ? <>
-                      <CalculatorForm lang="Hindi" routing={"/hindi/marriage-astrology/manglik-dosha-reasons-and-solutions.php"} />
+                      <CalculatorForm lang="Hindi" routing={"/calculator/manglik-dosha-report.php"} />
                     </> : <>
-                      <CalculatorForm lang="English" routing={"/marriage-astrology/manglik-dosha-reasons-and-solutions.php"} />
+                      <CalculatorForm lang="English" routing={"/calculator/manglik-dosha-report.php"} />
                     </>}
                 </div>
               </div>

@@ -254,15 +254,15 @@ export default function Kundli({data}) {
                     <p className='text-sm font-normal text-justify'> Lagna or Ascendant is the sign which keeps rising on the eastern horizon at the time of the birth of an individual. This Lagna is the most important and powerful sign lying in Lagna or natal chart. This sign is regarded as the first house the horoscope, and the record of other houses follow in a sequential manner through the remaining signs of the zodiac. Thus, the Lagna not only exactly shows the rising sign but also other houses in an individual	&apos;s chart. </p>
                     <h2 className='text-lg font-bold mt-5'>Select Chart</h2>
                 </div>
-              <div className='flex mt-5'>
+              <div className='flex mt-5 max-md:flex-col'>
                 
-                <div className='gap-2 grid grid-cols-3 w-[60%]'>
+                <div className='gap-2 grid grid-cols-3 w-[60%] max-md:w-full'>
                   {ChartList.map((item, index)=>(
-                    <button onClick={() => HandleGenrateChart(item.value)} className={` ${HoroscopeChartBtnActive === item.value ? "bg-orange-500 text-white" : "bg-white" } border-orange-500 text-orange-500 border-[1px] flex gap-5 justify-between items-center rounded-lg px-4 py-2 text-xs`} key={index}>{item.label}
-                    <CheckCircleIcon className={classNames(`${HoroscopeChartBtnActive === item.value ? "text-white" : "text-orange-500" } h-5 w-5 `)} aria-hidden="true" /></button>
+                    <button onClick={() => HandleGenrateChart(item.value)} className={` ${HoroscopeChartBtnActive === item.value ? "bg-orange-500 text-white" : "bg-white" } border-orange-500 text-orange-500 border-[1px] flex gap-5 justify-between items-center rounded-lg px-4 py-2 text-xs max-md:py-1 text-left`} key={index}>{item.label}
+                    <CheckCircleIcon className={classNames(`${HoroscopeChartBtnActive === item.value ? "text-white" : "text-orange-500" } h-5 w-5 max-md:hidden `)} aria-hidden="true" /></button>
                   ))}
                 </div>
-                <div className='flex gap-2 flex-col w-[38%] justify-center items-center'>
+                <div className='flex gap-2 flex-col w-[38%] justify-center items-center max-md:mt-5'>
                     {SvgChart ? <>
                         <div className='shadow-xl w-max mx-auto rounded-lg p-2 bg-orange-200' dangerouslySetInnerHTML={{ __html: SvgChart.svg ? SvgChart.svg : SvgChart }} />
                     </>:<></>}
@@ -274,20 +274,20 @@ export default function Kundli({data}) {
                     <div>
                         <h2 className='text-lg font-bold'>Read Your Kundli Yourselves</h2>
                         {listItems ? <>
-                        <div className='flex flex-col gap-2 mt-5'>
+                        <div className='flex flex-col gap-2 mt-5 max-md:gap-5'>
                             {listItems.map((item)=>(
-                                <div key={item.number} className='flex gap-2 justify-start items-center'>
-                                    <div className='w-10 h-10 rounded-full bg-orange-500 flex justify-center items-center'>
+                                <div key={item.number} className='flex max-md:flex-col gap-2 justify-start items-center max-md:justify-start max-md:items-start max-md:bg-orange-500 '>
+                                    <div className='max-md:hidden w-10 h-10 rounded-full bg-orange-500 flex justify-center items-center'>
                                         <span className='text-white'>{item.number}</span>
                                     </div>
-                                    <div className="pointer-events-auto rounded-lg p-3 h-auto flex flex-1 items-center justify-between gap-x-6 bg-orange-500">
+                                    <div className="pointer-events-auto rounded-lg p-3 max-md:p-2 h-auto flex flex-1 items-center justify-between gap-x-6 bg-orange-500">
                                         <p className="text-xs leading-6 text-white">
                                             <a href={item.link.url}>{item.text}</a>
                                         </p>
                                     </div>
                                     <button
                                     onClick={ ()=> router.push(item.link.url)}
-                                    type="button" className=" text-white rounded-lg h-auto bg-orange-500 flex-none p-3 text-xs flex justify-center items-center focus-visible:outline-offset-[-4px]">
+                                    type="button" className=" text-white rounded-lg h-auto bg-orange-500 flex-none p-3 max-md:pt-0 text-xs flex justify-center items-center focus-visible:outline-offset-[-4px]">
                                         {item.link.label}
                                         <RightArrow width={20} height={20} />
                                     </button>

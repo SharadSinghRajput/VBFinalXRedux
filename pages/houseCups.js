@@ -38,90 +38,6 @@ import { RightArrow } from '../config/SvgConst';
     { value: "D60", label: "Shashtymsha Chart" }
   ]
 
-
-  const listItems = [
-    {
-      number: "1.",
-      text: "Your Rahu might be giving you sleepless nights. Know other disturbances Rahu can create in your life.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/rahu.php",
-        label: "Click here"
-      }
-    },
-    {
-      number: "2.",
-      text: "Your Saturn may drag you back when you are just close to your goal. Know the reasons for delays and hurdles in most of your tasks.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/saturn.php",
-        label: "Click here to learn more."
-      }
-    },
-    {
-      number: "3.",
-      text: "Mars can cause depression, stress, frustration, arguments and misunderstandings in this house.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/mars.php",
-        label: "Click here to know what role Mars is playing for you."
-      }
-    },
-    {
-      number: "4.",
-      text: "If looking for fame, success, govt. job and recognition, you should know the position of your Sun.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/sun.php",
-        label: "Click here to learn more."
-      }
-    },
-    {
-      number: "5.",
-      text: "A strong Jupiter guarantees wealth, fortunes, marital happiness, knowledge, and good children. Know the strength of your Jupiter to make out how lucky you are.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/jupiter.php",
-        label: "Click here"
-      }
-    },
-    {
-      number: "6.",
-      text: "Your love life will be in trouble if Venus doesn’t support you. A well-placed Venus gives comfort, wealth and attraction. To know about your Venus,",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/venus.php",
-        label: "click here"
-      }
-    },
-    {
-      number: "7.",
-      text: "Are you in business? Check your Mercury to know how much success you will get in the business. Good Mercury also gives good finance.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/mercury.php",
-        label: "Click here."
-      }
-    },
-    {
-      number: "8.",
-      text: "Your Moon might be in trouble if you constantly remain worried, confused, sad, unsecured, or frustrated.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planets/moon.php",
-        label: "Click here to learn more about your Moon."
-      }
-    },
-    {
-      number: "9.",
-      text: "A strong 7th house gives good married life. Likewise, all houses bring a specific promise to your life. Know the blessings and curses of your life.",
-      link: {
-        url: "https://www.vinaybajrangi.com/astrology-houses.php",
-        label: "Click here to learn more."
-      }
-    },
-    {
-      number: "10.",
-      text: "Saturn in transit can make you change your house or lose your job. The transit of planets has a significant impact on life. Know which planet will hit which area of life this month or year.",
-      link: {
-        url: "https://www.vinaybajrangi.com/planetary-transit.php",
-        label: "Click to learn more"
-      }
-    }
-  ]
-
   
 
 
@@ -207,7 +123,7 @@ export default function Kundli() {
 
   return (
     <div className="">
-        <div className={`bg-white mx-auto max-w-6xl mx-auto shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
+        <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
             <h1 className='text-lg font-bold'>House Cusps &amp; Sandhi</h1>
             <div className="mt-5 flow-root">
                 <h2 className='text-sm font-bold'>What is a House Cusps and Sandhi?</h2>
@@ -216,7 +132,7 @@ export default function Kundli() {
             <div className='bg-orange-500 border-b border-orange-200 mt-5'>
               <p className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white'>Bhav Madhya & Bhav Sandhi</p>
             </div>
-            <div className='flex divide-x divide-orange-200'>
+            <div className='flex divide-x divide-orange-200 overflow-auto'>
               <div className='flex-1'>
                 <table className="min-w-full divide-y divide-orange-200">
                   <thead className="bg-orange-500">
@@ -291,16 +207,16 @@ export default function Kundli() {
               </div>
             </div>
             <div>
-              <div className='flex mt-10'>
-                <div className='gap-2 grid grid-cols-3 w-[60%]'>
+              <div className='max-md:flex-col flex mt-10'>
+                <div className='gap-2 grid grid-cols-3 w-[60%] max-md:w-full max-md:mb-5'>
                   {ChartList.map((item, index)=>(
                     <button onClick={() => HandleGenrateChart(item.value)} className={` ${HoroscopeChartBtnActive === item.value ? "bg-orange-500 text-white" : "bg-white" } border-orange-500 text-orange-500 border-[1px] flex gap-5 justify-between items-center rounded-lg px-4 py-2 text-xs`} key={index}>{item.label}
-                    <CheckCircleIcon className={classNames(`${HoroscopeChartBtnActive === item.value ? "text-white" : "text-orange-500" } h-5 w-5 `)} aria-hidden="true" /></button>
+                    <CheckCircleIcon className={classNames(`${HoroscopeChartBtnActive === item.value ? "text-white" : "text-orange-500" } h-5 w-5 max-md:hidden`)} aria-hidden="true" /></button>
                   ))}
                 </div>
-                <div className='flex gap-2 flex-col w-[38%] justify-center items-center'>
+                <div className='flex gap-2 flex-col w-[38%] justify-center items-center max-md:w-full overflow-auto'>
                     {SvgChart ? <>
-                        <div className='shadow-xl w-max mx-auto rounded-lg p-2 bg-orange-200' dangerouslySetInnerHTML={{ __html: SvgChart.svg ? SvgChart.svg : SvgChart }} />
+                        <div className='shadow-xl w-max mx-auto rounded-lg p-2 bg-orange-200 overflow-auto' dangerouslySetInnerHTML={{ __html: SvgChart.svg ? SvgChart.svg : SvgChart }} />
                     </>:<></>}
                 </div>
               </div>

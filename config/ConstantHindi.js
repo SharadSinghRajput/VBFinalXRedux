@@ -23,7 +23,7 @@ export const MainMenuHindi = [
                     { name: 'धनु वार्षिक राशिफल 2025', url : `${MAIN_URL_HINDI}horoscope/dhanu-varshik-rashifal-2025.php`},
                     { name: 'मकर वार्षिक राशिफल 2025', url : `${MAIN_URL_HINDI}horoscope/makar-varshik-rashifal-2025.php`},
                     { name: 'कुंभ वार्षिक राशिफल 2025', url : `${MAIN_URL_HINDI}horoscope/kumbh-varshik-rashifal-2025.php`},
-                    { name: 'मीन वार्षिक राशिफल 2025', url : `${MAIN_URL_HINDI}horoscope/meen-varshik-rashifal-2025.ph`}
+                    { name: 'मीन वार्षिक राशिफल 2025', url : `${MAIN_URL_HINDI}horoscope/meen-varshik-rashifal-2025.php`}
                 ]
             }
         ]

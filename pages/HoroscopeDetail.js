@@ -326,7 +326,28 @@ export default function DailyHoroscopeDetailed({data}) {
                                     height={50}
                                 />
                                 </div>
-                                <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> {zodiacSign} </h5>
+                                <h5 className="text-white text-center font-bold mt-2 mb-0 capitalize"> 
+                                {pageLanguage === "Hindi" ?
+                                <>
+                                    {zodiacSign === "aries" ? "मेष" :
+                                        zodiacSign === "taurus" ? "वृषभ" :
+                                        zodiacSign === "gemini" ? "मिथुन" :
+                                        zodiacSign === "cancer" ? "कर्क" :
+                                        zodiacSign === "leo" ? "सिंह" :
+                                        zodiacSign === "virgo" ? "कन्या" :
+                                        zodiacSign === "libra" ? "तुला" :
+                                        zodiacSign === "scorpio" ? "वृश्चिक" :
+                                        zodiacSign === "sagittarius" ? "धनु" :
+                                        zodiacSign === "capricorn" ? "मकर" :
+                                        zodiacSign === "aquarius" ? "कुंभ" :
+                                        zodiacSign === "pisces" ? "मीन" :
+                                        zodiacSign}
+                                </>
+                                :
+                                <>
+                                {zodiacSign}
+                                </>
+                                }</h5>
                             </div>
                         </div>
                     </div>
@@ -362,7 +383,48 @@ export default function DailyHoroscopeDetailed({data}) {
                 <main className="flex-1 w-80 max-md:w-full max-sm:mt-5">
                     <div className="max-w-6xl w-full mx-auto shadow-2xl p-5 mt-5 max-sm:p-2 rounded-lg bg-[#091d5a]">
                         <div className="max-w-6xl w-full mx-auto shadow-2xl bg-orange-500 p-2 mt-[-40px] rounded-lg max-md:mt-0">
-                            <h1 className="text-white text-center font-bold capitalize"> {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
+                            {pageLanguage === "Hindi" ?
+                                <h1 className="text-white text-center font-bold capitalize">
+                                    {CapitalizedCurrentDay === "Today" ? "आज का" :
+                                    CapitalizedCurrentDay === "Tomorrow" ? "कल का" :
+                                    CapitalizedCurrentDay === "Weekly" ? "साप्ताहिक" :
+                                    CapitalizedCurrentDay === "Monthly" ? "मासिक" :
+                                    CapitalizedCurrentDay === "Yearly" ? "वार्षिक" :CapitalizedCurrentDay}
+                                    {" "}{zodiacSign === "aries" ? "मेष" :
+                                    zodiacSign === "taurus" ? "वृषभ" :
+                                    zodiacSign === "gemini" ? "मिथुन" :
+                                    zodiacSign === "cancer" ? "कर्क" :
+                                    zodiacSign === "leo" ? "सिंह" :
+                                    zodiacSign === "virgo" ? "कन्या" :
+                                    zodiacSign === "libra" ? "तुला" :
+                                    zodiacSign === "scorpio" ? "वृश्चिक" :
+                                    zodiacSign === "sagittarius" ? "धनु" :
+                                    zodiacSign === "capricorn" ? "मकर" :
+                                    zodiacSign === "aquarius" ? "कुंभ" :
+                                    zodiacSign === "pisces" ? "मीन" :
+                                    zodiacSign}{" "}
+                                    | {CapitalizedCurrentDay === "Today" ? "आज का" :
+                                    CapitalizedCurrentDay === "Tomorrow" ? "कल का" :
+                                    CapitalizedCurrentDay === "Weekly" ? "साप्ताहिक" :
+                                    CapitalizedCurrentDay === "Monthly" ? "मासिक" :
+                                    CapitalizedCurrentDay === "Yearly" ? "वार्षिक" :CapitalizedCurrentDay} भविष्यवाणी 
+                                    {" "}{ zodiacSign === "taurus" ? "वृषभ" :
+                                    zodiacSign === "gemini" ? "मिथुन" :
+                                    zodiacSign === "cancer" ? "कर्क" :
+                                    zodiacSign === "leo" ? "सिंह" :
+                                    zodiacSign === "virgo" ? "कन्या" :
+                                    zodiacSign === "libra" ? "तुला" :
+                                    zodiacSign === "scorpio" ? "वृश्चिक" :
+                                    zodiacSign === "sagittarius" ? "धनु" :
+                                    zodiacSign === "capricorn" ? "मकर" :
+                                    zodiacSign === "aquarius" ? "कुंभ" :
+                                    zodiacSign === "pisces" ? "मीन" :
+                                    zodiacSign}{" "}
+                                    के लिए </h1>
+                            :
+                                <h1 className="text-white text-center font-bold capitalize">
+                                    {zodiacSign} {CapitalizedCurrentDay} Horoscope | {CapitalizedCurrentDay}'s Prediction for {zodiacSign} </h1>
+                            }
                         </div>
                         <div className="max-h-[310px] overflow-y-scroll scrollbar-red px-5 max-sm:px-2 mt-2">
                             <div className="text-justify text-sm pb-2 text-white">
@@ -572,6 +634,21 @@ export default function DailyHoroscopeDetailed({data}) {
                     ))}
                 </div>
                 <div className='max-lg:grid max-lg:grid-cols-3 max-sm:grid-cols-1'>
+                    {data?.language === "Hindi" ? <>
+                    <a
+                        href={`${MAIN_URL}hindi/astrology-news.php`}
+                        onClick={(e) => handleClickRouter(e, "/hindi/astrology-news.php")}
+                        className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                        <Image 
+                            width={40} 
+                            height={40} 
+                            className='w-10' 
+                            src="/asset_frontend/img/newsicon.png" 
+                            alt="Astrology News and Articles"
+                        />
+                        <h3 className='text-lg font-bold text-[#091d5a]'>ज्योतिष समाचार एवं आलेख</h3>
+                    </a> 
+                    </> : <>
                     <a
                         href={`${MAIN_URL}astrology-news.php`}
                         onClick={(e) => handleClickRouter(e, "/astrology-news.php")}
@@ -585,19 +662,20 @@ export default function DailyHoroscopeDetailed({data}) {
                         />
                         <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
                     </a> 
+                    </>}
                     <a
                         href={`${pageLanguage === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
                         onClick={(e) => handleClickRouter(e, `${pageLanguage === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}
                         className='bg-white w-full mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
                         <Image src={questionimg} width={60} className='w-[60px] aspect-square rounded-lg' />
-                        <p className="text-sm font-semibold">Ask a question</p>
+                        <p className="text-sm font-semibold">{pageLanguage === "Hindi" ? "प्रश्न पूछें" : "Ask a question"}</p>
                     </a>
                     <a
                     href={`${pageLanguage === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
                     onClick={(e) => handleClickRouter(e, `${pageLanguage === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
                     className='bg-white w-full mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
                         <Image src={moonsignm} width={60} className='w-[60px] aspect-square rounded-lg' />
-                        <p className="text-sm font-semibold">Know your moon sign</p>
+                        <p className="text-sm font-semibold">{pageLanguage === "Hindi" ? "अपनी चंद्र राशि जानें" : "Know your moon sign"}</p>
                     </a>
                 </div>
             </div>

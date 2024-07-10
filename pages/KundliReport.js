@@ -1,12 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
-
 import { setLocalStorageItem, getLocalStorageItem } from '../config/localStorage';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
-
 import { KundliCalculation } from '../config/json/KundliCalculation'
 import { KundliDosha } from '../config/json/KundliDosha'
 import { RightArrow, User, Date } from '../config/SvgConst';
@@ -15,11 +13,7 @@ import { lifesProblems } from "../config/json/lifesProblems"
 import { VedicAstrologyCalculators } from "../config/json/VedicAstrologyCalculators"
 import moonsignm from "./assets/images/moonsign.png";
 import questionimg from "./assets/images/question.png";
-
-
 import { MAIN_URL, MAIN_URL_HINDI } from '../config/config';
-
-
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -33,53 +27,53 @@ const ServicesNew = [
 ]
 const tabs = [
     {
-        name: 'Kundali', submenu: [
-            { name: "Dashboard", },
-            { name: "Astro Profile", link: "astro-details.php" },
-            { name: "Kundli Chart", link: "kundli-chart.php" },
-            { name: "House Cusps", link: "house-cups.php" },
-            { name: "Planet Ashtak", link: "planet-ashtak.php" },
-            { name: "Sarvashtak", link: "sarvashtak.php" }
+        name: 'Kundali', hindiName: 'कुंडली', submenu: [
+            { name: "Dashboard", hindiName:"डैशबोर्ड" },
+            { name: "Astro Profile", link: "astro-details.php", hindiName: "ज्योतिषीय प्रोफाइल", hindiLink: "hindi/astro-details.php" },
+            { name: "Kundli Chart", link: "kundli-chart.php", hindiName: "कुंडली चार्ट", hindiLink: "hindi/kundli-chart.php" },
+            { name: "House Cusps", link: "house-cups.php", hindiName: "हाउस कप्स", hindiLink: "hindi/house-cups.php" },
+            { name: "Planet Ashtak", link: "planet-ashtak.php", hindiName: "ग्रह अष्टक", hindiLink: "hindi/planet-ashtak.php" },
+            { name: "Sarvashtak", link: "sarvashtak.php", hindiName: "सर्वाष्टक", hindiLink: "hindi/sarvashtak.php" }
         ]
     },
     {
-        name: 'Daily Forecast', submenu: [
-            { name: "Daily Prediction", link: "daily-personalised-forecast.php" },
-            { name: "Biorhythm", link: "biorhythm.php" }
+        name: 'Daily Forecast', hindiName: 'दैनिक भविष्यवाणी', submenu: [
+            { name: "Daily Prediction", link: "daily-personalised-forecast.php", hindiName: "दैनिक भविष्यवाणी", hindiLink: "hindi/daily-personalised-forecast.php" },
+            { name: "Biorhythm", link: "biorhythm.php", hindiName: "बायोरिथ्म", hindiLink: "hindi/biorhythm.php" }
         ]
     },
 
     {
-        name: 'Horoscope Dasha', submenu: [
-            { name: "Vimshottari Dasha", link: "vimshottari-dasha.php" },
-            { name: "Yogini Dasha", link: "yogini-dasha.php" },
-            { name: "Char Dasha", link: "char-dasha.php" }
+        name: 'Horoscope Dasha', hindiName: ' कुंडली दशा', submenu: [
+            { name: "Vimshottari Dasha", link: "vimshottari-dasha.php", hindiName: "विम्शोत्तरी दशा", hindiLink: "hindi/sarvashtak.php" },
+            { name: "Yogini Dasha", link: "yogini-dasha.php", hindiName: "योगिनी दशा", hindiLink: "hindi/yogini-dasha.php" },
+            { name: "Char Dasha", link: "char-dasha.php", hindiName: "चार दशा", hindiLink: "hindi/char-dasha.php" }
         ]
     },
     {
-        name: 'Horoscope Dosha', submenu: [
-            { name: "Kaalsarp Dosha", link: "calculator/kaalsarp-dosh-calculator.php" },
-            { name: "Manglik Dosha", },
-            { name: "Pitra Dosha", },
-            { name: "Sadesati Cycle", link: "calculator/sadesati-calculator.php" }
+        name: 'Horoscope Dosha', hindiName: 'कुंडली दोष ', submenu: [
+            { name: "Kaalsarp Dosha", link: "calculator/kaalsarp-dosh-calculator.php", hindiName: "कालसर्प दोष", hindiLink: "hindi/calculator/kaalsarp-dosh-calculator.php" },
+            { name: "Manglik Dosha", link: "marriage-astrology/manglik-dosha-reasons-and-solutions.php", hindiName: "मांगलिक दोष", hindiLink: "hindi/calculator/manglik-dosha-calculator.php" },
+            { name: "Pitra Dosha", link: "calculator/pitra-dosha-calculator.php", hindiName: "पितृ दोष", hindiLink: "hindi/calculator/pitra-dosha-calculator.php" },
+            { name: "Sadesati Cycle", link: "calculator/sadesati-calculator.php", hindiName: "साढ़ेसाती चक्र", hindiLink: "hindi/calculator/sadesati-calculator.php" }
         ]
     },
     {
-        name: 'Remedies', submenu: [
-            { name: "Gemstone Suggestion", link: "calculator/gemstone-calculator.php" },
-            { name: "Rudraksha Suggestion", link: "calculator/rudraksha-calculator.php" }
+        name: 'Remedies', hindiName: 'उपाय', submenu: [
+            { name: "Gemstone Suggestion", link: "calculator/gemstone-calculator.php", hindiName: "रत्न का सुझावट", hindiLink: "hindi/calculator/gemstone-suggestion.php" },
+            { name: "Rudraksha Suggestion", link: "calculator/rudraksha-calculator.php", hindiName: "रुद्राक्ष सुझाव", hindiLink: "hindi/calculator/rudraksha-calculator.php" }
         ]
     },
     {
-        name: 'Prediction Reports', submenu: [
-            { name: "Ascendant Report", link: "calculator/ascendant-calculator.php" },
-            { name: "Kundli Predictions", link: "kundli-predictions.php" }
+        name: 'Prediction Reports', hindiName: 'भविष्यवाणी रिपोर्ट्स', submenu: [
+            { name: "Ascendant Report", link: "calculator/ascendant-calculator.php", hindiName: "लगन की रिपोर्ट", hindiLink: "hindi/calculator/ascendant-calculator.php" },
+            { name: "Kundli Predictions", link: "kundli-predictions.php", hindiName: "कुंडली भविष्यवाणीम", hindiLink: "hindi/kundli-predictions.php" }
         ]
     },
     {
-        name: 'Numerology', submenu: [
-            { name: "Favorable Points", link: "favorable-points.php" },
-            { name: "Numerology Prediction", link: "calculator/numerology-calculator.php" }
+        name: 'Numerology', hindiName: 'अंक शास्त्र', submenu: [
+            { name: "Favorable Points", link: "favorable-points.php", hindiName: "अनुकूल बिंदु", hindiLink: "hindi/favorable-points.php" },
+            { name: "Numerology Prediction", link: "calculator/numerology-calculator.php", hindiName: "अंक शास्त्र भविष्यवाणी", hindiLink: "hindi/calculator/numerology-calculator.php" }
         ]
     },
 ]
@@ -104,6 +98,7 @@ export default function Kundli({ data }) {
     const [KundaliReport, setKundaliReport] = useState('');
     const [UserInfo, setUserInfo] = useState('');
     const [mainURL, setMainURL] = useState(MAIN_URL);
+    const lang = data?.language
 
     const handleSubmit = async () => {
         const savedInputValueNew = getLocalStorageItem('KundliFromDataKey');
@@ -191,7 +186,11 @@ export default function Kundli({ data }) {
                                 className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
                             >
                                 {tabs.map((tab) => (
-                                    <option value={tab.value} key={tab.name}>{tab.name}</option>
+                                    lang === "Hindi" ?
+                                        <option value={tab.value} key={tab.hindiName}>{tab.hindiName}</option>
+                                        :
+                                        <option value={tab.value} key={tab.name}>{tab.name}</option>
+
                                 ))}
                             </select>
                         </div>
@@ -199,7 +198,7 @@ export default function Kundli({ data }) {
                             <nav className="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
                                 {tabs.map((tab, tabIdx) => (
                                     <button
-                                        key={tab.name}
+                                        key={tabIdx}
                                         onClick={() => settabActive(tab.name)}
                                         className={classNames(
                                             tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
@@ -209,14 +208,15 @@ export default function Kundli({ data }) {
                                         )}
                                         aria-current={tab.current ? 'page' : undefined}
                                     >
-                                        <span>{tab.name}</span>
+                                        <span>{lang === "Hindi" ? tab.hindiName : tab.name}</span>
                                         <span
                                             aria-hidden="true"
                                             className={classNames(
-                                                tabActive === tab.name ? 'bg-indigo-500' : 'bg-transparent',
+                                                tabActive === (lang === "Hindi" ? tab.hindiName : tab.name) ? 'bg-indigo-500' : 'bg-transparent',
                                                 'absolute inset-x-0 bottom-0 h-0.5'
                                             )}
                                         />
+
                                     </button>
                                 ))}
                             </nav>
@@ -229,11 +229,11 @@ export default function Kundli({ data }) {
                                     item.submenu.map((subItem) => (
                                         <button
                                             key={subItem.name}
-                                            onClick={subItem.link ? () => router.push(subItem.link) : undefined}
+                                            onClick={subItem.link ? () => router.push(lang === "Hindi" ? subItem.hindiLink : subItem.link) : undefined}
                                             className="isolate inline-flex rounded-md shadow-sm"
                                         >
                                             <span className="relative inline-flex items-center gap-x-1.5 rounded-l-md bg-orange-500 px-3 p-4 px-5 text-sm font-semibold text-white focus:z-10">
-                                                {subItem.name}
+                                                { lang === "Hindi" ?  subItem.hindiName :  subItem.name}
                                             </span>
                                             <span className="relative -ml-px inline-flex items-center rounded-r-md bg-orange-500 px-3 p-4 px-5 text-sm font-semibold text-white focus:z-10">
                                                 <RightArrow width={20} height={20} />
@@ -248,7 +248,7 @@ export default function Kundli({ data }) {
                     <div className="mb-5 flex flex-col gap-8">
                         <div className="flex flex-col md:flex-row h-full bg-white p-5 rounded-lg">
                             <div className="w-full md:w-60 mb-5 md:mb-0 md:mr-5">
-                                <span className="text-white w-60 aspect-square flex justify-center items-center bg-orange-500 rounded-lg">
+                                <span className=" max-md:hidden text-white w-60 aspect-square flex justify-center items-center bg-orange-500 rounded-lg">
                                     <User width={100} height={100} strokeWidth={1} />
                                 </span>
                                 <div className="flex flex-col">
@@ -344,10 +344,35 @@ export default function Kundli({ data }) {
                                 ))}
                             </div>
                             <div className='grid grid-cols-1 md:grid-cols-4 gap-5 mt-5'>
-                                <button onClick={() => router.push('astrology-news.php')} className="p-2 bg-white rounded-lg flex gap-5 items-center w-full justify-center md:col-span-2">
-                                    <Image width={30} height={30} className="w-6" src="https://www.vinaybajrangi.com/asset_frontend/img/newsicon.png" alt='newsicon.png' />
-                                    <h3 className="text-lg font-bold">Astrology News and Articles</h3>
-                                </button>
+                                {data?.language === "Hindi" ? <>
+                                <a
+                                    href={`${MAIN_URL}hindi/astrology-news.php`}
+                                    onClick={(e) => handleClickRouter(e, "/hindi/astrology-news.php")}
+                                    className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                                    <Image 
+                                        width={40} 
+                                        height={40} 
+                                        className='w-10' 
+                                        src="/asset_frontend/img/newsicon.png" 
+                                        alt="Astrology News and Articles"
+                                    />
+                                    <h3 className='text-lg font-bold text-[#091d5a]'>ज्योतिष समाचार एवं आलेख</h3>
+                                </a> 
+                                </> : <>
+                                <a
+                                    href={`${MAIN_URL}astrology-news.php`}
+                                    onClick={(e) => handleClickRouter(e, "/astrology-news.php")}
+                                    className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                                    <Image 
+                                        width={40} 
+                                        height={40} 
+                                        className='w-10' 
+                                        src="/asset_frontend/img/newsicon.png" 
+                                        alt="Astrology News and Articles"
+                                    />
+                                    <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
+                                </a> 
+                                </>}
                                 <a
                                     href={`${data?.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
                                     onClick={(e) => handleClickRouter(e, `${data?.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`)}

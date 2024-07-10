@@ -81,7 +81,7 @@ export default function ContMenuBankComp({data}) {
       <Disclosure as="header" className="bg-white shadow">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8 z-40 relative">
             <div className="relative flex h-16 justify-between z-10">
               <div className="relative z-10 flex px-2 lg:px-0">
                 <button onClick={()=> router.push(MAIN_URL)} className="flex flex-shrink-0 items-center">
