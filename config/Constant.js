@@ -47,7 +47,7 @@ export const MainMenu = [
     },
     { name: 'Astrology', url : '#',
         sublinks: [
-            { name: 'Today Panchang', url : `${MAIN_URL}today-panchang.php`, },
+            { name: 'Today Panchang', url : `${MAIN_URL}panchang`, },
             { name: 'Festivals', url : `${MAIN_URL}festivals.php`, },
             { 
                 name: "Planetary Transit",
