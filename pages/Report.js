@@ -56,6 +56,7 @@ export default function Report({data, FirstData}) {
 
   const [SessionAction, setSessionAction] = useState(false)
   const [questionModal, setQuestionModal] = useState(false)
+  const [WhichModal, setWhichModal] = useState("")
   const [CustomQuestion, setCustomQuestion] = useState([])
   const [CustomQuestionAdded, setCustomQuestionAdded] = useState([])
   const [typedQuestion, setTypedQuestion] = useState("")
@@ -302,6 +303,11 @@ const DataExistMailList = (DataExistItem) => {
     return CustomQuestion.includes(item);
   };
 
+  const QuestionModalSet = (which) => {
+    setQuestionModal(!questionModal)
+    setWhichModal(which)
+  };
+
 
   const links = [
     { name: 'Open roles', href: '#' },
@@ -465,7 +471,7 @@ const DataExistMailList = (DataExistItem) => {
                           <button
                             type="button"
                             // onClick={()=> router.push("cart")}
-                            onClick={() => setQuestionModal(!questionModal)}
+                            onClick={() => QuestionModalSet("consultancy")}
                             className="bg-[#091d5a] p-3 px-5 text-white">
                             Added to Cart
                           </button>
@@ -478,9 +484,15 @@ const DataExistMailList = (DataExistItem) => {
                           </button> */}
                             <button
                               type="button"
-                              onClick={() => setQuestionModal(!questionModal)}
+                              onClick={() => QuestionModalSet("consultancy")}
                               className="bg-orange-500 p-3 px-5 text-white">
                                 {ProductAdding === data.reportID ? "Please wait...": "Book Consultancy"}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => QuestionModalSet("report")}
+                              className="bg-orange-500 p-3 px-5 text-white">
+                                {ProductAdding === data.reportID ? "Please wait...": "Book Voice Report"}
                             </button>
                           </>}
                         </>
@@ -493,6 +505,12 @@ const DataExistMailList = (DataExistItem) => {
                     className="bg-[#091d5a] p-3 px-5 text-white">
                       Book Consultancy
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal(true)}
+                    className="bg-[#091d5a] p-3 px-5 text-white">
+                      Book Voice Report
+                  </button>
                   </>}
                   </div>
                 </div>
@@ -503,6 +521,7 @@ const DataExistMailList = (DataExistItem) => {
               <button onClick={() => setQuestionModal(!questionModal)} className='absolute w-full h-full backdrop-blur-md'></button>
               <div className="bg-white p-5 max-w-4xl w-full z-50 max-h-screen overflow-auto">
                 <p className='font-pt-serif font-bold text-xl text-gray-800 mb-1'>{data.title}</p>
+                {WhichModal === "consultancy" ? <></>:<></> }
                 <p className='font-pt-serif text-base text-gray-800 mb-5 italic'>Select the Questions You Wish to Ask (You Can Choose Up to a Maximum of 8)</p>
                 {CustomQuestion && CustomQuestion.length > 0 ? <>
                 <div className='flex flex-col mb-5 justify-end items-end'>
