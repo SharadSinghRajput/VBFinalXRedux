@@ -56,6 +56,7 @@ export default function Report({data, FirstData}) {
 
   const [SessionAction, setSessionAction] = useState(false)
   const [questionModal, setQuestionModal] = useState(false)
+  const [WhichModal, setWhichModal] = useState("")
   const [CustomQuestion, setCustomQuestion] = useState([])
   const [CustomQuestionAdded, setCustomQuestionAdded] = useState([])
   const [typedQuestion, setTypedQuestion] = useState("")
@@ -197,9 +198,10 @@ const DataExistMailList = (DataExistItem) => {
     }    
   };
 
-  const handleAddProductInConsultation = async () => {
-    const itemID = 5916710
-    const Price = 11000
+  const handleAddProductInConsultation = async (type) => {
+    console.log(type);
+    const itemID = type === "consultancy" ? 5916710 : 5243310;
+    const Price = type === "consultancy" ? 11000 : 4500;
     const RemarkCont = `title: ${data?.title} questions: ${CustomQuestion}`;
     console.log(RemarkCont);
 
@@ -215,6 +217,7 @@ const DataExistMailList = (DataExistItem) => {
       remark: "dfbddfklmx",
     }
     console.log("dfdx", dataToAdd);
+    return
     const apiUrl = `${API_NEW_URL}cart-api.php`;
     try {
       const response = await fetch(apiUrl, {
@@ -289,10 +292,18 @@ const DataExistMailList = (DataExistItem) => {
   };
     
   const Add = (item) => {
-    if(CustomQuestion.length > 7){
-      alert("you can choose only 8 question")
-      return
+    if(WhichModal === "consultancy"){
+      if(CustomQuestion.length > 7){
+        alert("you can choose only 8 question")
+        return
+      }
+    }else{
+      if(CustomQuestion.length > 3){
+        alert("you can choose only 4 question")
+        return
+      }
     }
+      
     setCustomQuestion(prevState => [...prevState, item]);
   };
   const Remove = (item) => {
@@ -300,6 +311,11 @@ const DataExistMailList = (DataExistItem) => {
   };
   const FindAdded = (item) => {
     return CustomQuestion.includes(item);
+  };
+
+  const QuestionModalSet = (which) => {
+    setQuestionModal(!questionModal);
+    setWhichModal(which);
   };
 
 
@@ -465,7 +481,7 @@ const DataExistMailList = (DataExistItem) => {
                           <button
                             type="button"
                             // onClick={()=> router.push("cart")}
-                            onClick={() => setQuestionModal(!questionModal)}
+                            onClick={() => QuestionModalSet("consultancy")}
                             className="bg-[#091d5a] p-3 px-5 text-white">
                             Added to Cart
                           </button>
@@ -478,9 +494,15 @@ const DataExistMailList = (DataExistItem) => {
                           </button> */}
                             <button
                               type="button"
-                              onClick={() => setQuestionModal(!questionModal)}
+                              onClick={() => QuestionModalSet("consultancy")}
                               className="bg-orange-500 p-3 px-5 text-white">
                                 {ProductAdding === data.reportID ? "Please wait...": "Book Consultancy"}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => QuestionModalSet("report")}
+                              className="bg-orange-500 p-3 px-5 text-white">
+                                {ProductAdding === data.reportID ? "Please wait...": "Book Voice Report"}
                             </button>
                           </>}
                         </>
@@ -493,6 +515,12 @@ const DataExistMailList = (DataExistItem) => {
                     className="bg-[#091d5a] p-3 px-5 text-white">
                       Book Consultancy
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal(true)}
+                    className="bg-[#091d5a] p-3 px-5 text-white">
+                      Book Voice Report
+                  </button>
                   </>}
                   </div>
                 </div>
@@ -503,7 +531,11 @@ const DataExistMailList = (DataExistItem) => {
               <button onClick={() => setQuestionModal(!questionModal)} className='absolute w-full h-full backdrop-blur-md'></button>
               <div className="bg-white p-5 max-w-4xl w-full z-50 max-h-screen overflow-auto">
                 <p className='font-pt-serif font-bold text-xl text-gray-800 mb-1'>{data.title}</p>
+                {WhichModal === "consultancy" ? <>
                 <p className='font-pt-serif text-base text-gray-800 mb-5 italic'>Select the Questions You Wish to Ask (You Can Choose Up to a Maximum of 8)</p>
+                </>:<>
+                <p className='font-pt-serif text-base text-gray-800 mb-5 italic'>Select the Questions You Wish to Ask (You Can Choose Up to a Maximum of 4)</p>
+                </> }
                 {CustomQuestion && CustomQuestion.length > 0 ? <>
                 <div className='flex flex-col mb-5 justify-end items-end'>
                   <div className='mb-2 flex flex-wrap gap-2'>
@@ -513,7 +545,7 @@ const DataExistMailList = (DataExistItem) => {
                       {item}</p>
                   ))}
                   </div>
-                  <button onClick={handleAddProductInConsultation} className='bg-blue-500 p-2 text-sm px-5 text-white uppercase mt-0'>Submit</button>
+                  <button onClick={()=> handleAddProductInConsultation(WhichModal)} className='bg-blue-500 p-2 text-sm px-5 text-white uppercase mt-0'>Submit</button>
                 </div>
                 </> : <></>}
                 <div className='divide-y divide-gray-200 max-h-96 overflow-auto'>
