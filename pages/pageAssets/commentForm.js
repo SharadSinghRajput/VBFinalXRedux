@@ -2,7 +2,7 @@ export default function Tags(props) {
   
   return (
     <>
-    <div className="relative isolate bg-white mt-10">
+    <div className="relative isolate bg-white mt-10 hidden">
         <div className="md:grid-cols-2 gap-20">
         <div>
             <div className="border-b border-gray-200 bg-white px-0 py-5 ">

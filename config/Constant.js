@@ -1,7 +1,7 @@
 import {MAIN_URL} from '../config/config'
 export const MainMenu = [
     { name: 'Home', url : '/'},
-    { name: 'Horoscope', url : '#', 
+    { name: 'Horoscope', url : '#',
         sublinks: [
             { name: 'Horoscope', url : `${MAIN_URL}horoscope/horoscope.php`,  },
             { name: 'Daily Horoscope', url : `${MAIN_URL}horoscope/daily-horoscope.php`,},
@@ -66,20 +66,20 @@ export const MainMenu = [
                 ]
             },
             { name: "Stock Market Today", url : `${MAIN_URL}share-market-today.php`, },
-            { name: "Love Compatibility", url : `${MAIN_URL}love-compatibility`,
+            { name: "Love Compatibility", url : `${MAIN_URL}zodiac-signs-compatibility.php`,
                 sublinksL2 :[
-                    { name: 'Aries Love Compatibility', url : `${MAIN_URL}love-compatibility/aries`,},
-                    { name: 'Taurus Love Compatibility', url : `${MAIN_URL}love-compatibility/taurus`,},
-                    { name: 'Gemini Love Compatibility', url : `${MAIN_URL}love-compatibility/gemini`,},
-                    { name: 'Cancer Love Compatibility', url : `${MAIN_URL}love-compatibility/cancer`,},
-                    { name: 'Leo Love Compatibility', url : `${MAIN_URL}love-compatibility/leo`,},
-                    { name: 'Virgo Love Compatibility', url : `${MAIN_URL}love-compatibility/virgo`,},
-                    { name: 'Libra Love Compatibility', url : `${MAIN_URL}love-compatibility/libra`,},
-                    { name: 'Scorpio Love Compatibility', url : `${MAIN_URL}love-compatibility/scorpio`,},
-                    { name: 'Sagittarius Love Compatibility', url : `${MAIN_URL}love-compatibility/sagittarius`,},
-                    { name: 'Capricorn Love Compatibility', url : `${MAIN_URL}love-compatibility/capricorn`,},
-                    { name: 'Aquarius Love Compatibility', url : `${MAIN_URL}love-compatibility/aquarius`,},
-                    { name: 'Pisces Love Compatibility', url : `${MAIN_URL}love-compatibility/pisces`,}
+                    { name: 'Aries Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/aries-with-other-signs.php`,},
+                    { name: 'Taurus Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/taurus-with-other-signs.php`,},
+                    { name: 'Gemini Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/gemini-with-other-signs.php`,},
+                    { name: 'Cancer Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/cancer-with-other-signs.php`,},
+                    { name: 'Leo Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/leo-with-other-signs.php`,},
+                    { name: 'Virgo Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/virgo-with-other-signs.php`,},
+                    { name: 'Libra Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/libra-with-other-signs.php`,},
+                    { name: 'Scorpio Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/scorpio-with-other-signs.php`,},
+                    { name: 'Sagittarius Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/sagittarius-with-other-signs.php`,},
+                    { name: 'Capricorn Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/capricorn-with-other-signs.php`,},
+                    { name: 'Aquarius Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/aquarius-with-other-signs.php`,},
+                    { name: 'Pisces Love Compatibility', url : `${MAIN_URL}zodiac-signs-compatibility/pisces-with-other-signs.php`,}
                 ]
             },
             { name: "Kundli Doshas", url : `${MAIN_URL}kundli-doshas.php`,
@@ -566,22 +566,22 @@ export const MainMenu = [
                     { name : "Hanuman Jayanti", url : `${MAIN_URL}jayanti/hanuman-jayanti.php`,}
                 ]
             },
-            { name: "Muhurata", url : `${MAIN_URL}today-panchang/shubh-muhurat.php`,}
+            { name: "Muhurata", url : `${MAIN_URL}today-panchang/today-panchang/shubh-muhurat.php`,}
         ]
     },
     { name: 'Life Problems', url: '#',
     sublinks: [
         {name: "Marriage Astrology", url: `${MAIN_URL}marriage-astrology` ,
             sublinksL2: [
-                { name: "Future Life Partner Prediction", url: `${MAIN_URL}marriage-astrology/life-partners-predictions.php`, },
-                { name: "Love Marriage", url: `${MAIN_URL}marriage-astrology/love-marriage.php`, },
-                { name: "Delay in Marriage Reasons", url: `${MAIN_URL}marriage-astrology/delay-in-marriage-reasons-solutions.php`, },
+                { name: "Future Life Partner Prediction", url: `${MAIN_URL}marriage-astrology/life-partner-prediction`, },
+                { name: "Love Marriage", url: `${MAIN_URL}marriage-astrology/love-marriage`, },
+                { name: "Delay in Marriage Reasons", url: `${MAIN_URL}marriage-astrology/late-marriage`, },
                 { name: "Mangal Dosha Effects and Remedies", url: `${MAIN_URL}marriage-astrology/manglik-mangal-dosha-remedies.php`, },
-                { name: "Horoscope Matching for Marriage", url: `${MAIN_URL}marriage-astrology/kundli-matching-horoscopes-matching-for-marriage.php`, },
+                { name: "Horoscope Matching for Marriage", url: `${MAIN_URL}horoscope-matching`, },
                 { name: "Pre Marriage Counselling", url: `${MAIN_URL}marriage-astrology/pre-marriage-counseling.php`, },
-                { name: "Problems in Married Life", url: `${MAIN_URL}marriage-astrology/marriage-life-problems-reasons.php`, },
-                { name: "Post Marriage Counseling", url: `${MAIN_URL}marriage-astrology/post-marriage-counseling.php`, },
-                { name: "Divorce and Separation", url: `${MAIN_URL}marriage-astrology/divorce.php` , }
+                { name: "Problems in Married Life", url: `${MAIN_URL}marriage-astrology/married-life-issues`, },
+                { name: "Post Marriage Counseling", url: `${MAIN_URL}marriage-astrology/married-life-issues`, },
+                { name: "Divorce and Separation", url: `${MAIN_URL}marriage-astrology/divorce-issues` , }  
             ]
         },
         {
@@ -594,18 +594,19 @@ export const MainMenu = [
                 { name: "Selection of business partnership", url: `${MAIN_URL}business-astrology/business-partnership.php`, },
                 { name: "Tips for Business Expansion", url: `${MAIN_URL}business-astrology/business-growth.php`, },
                 { name: "Success In Business", url: `${MAIN_URL}business-astrology/success-in-business.php`, },
-                { name: "Parental and Family-Owned Business as per birth chart", url: `${MAIN_URL}business-astrology/family-owned-parental-business.php`, }
+                { name: "Parental and Family-Owned Business as per birth chart", url: `${MAIN_URL}business-astrology/family-owned-parental-business.php
+`, }
             ]
         },
         {
             name: "Career Astrology",
             url: `${MAIN_URL}career-astrology`,
             sublinksL2: [
-                { name: "Subject Selection per Birth Chart", url: `${MAIN_URL}career-astrology/courses-after-10-and-12.php`, },
-                { name: "Career as per your Zodiac Sign", url: `${MAIN_URL}career-astrology/right-career-selection.php`, },
-                { name: "What to Do: Job or Business", url: `${MAIN_URL}career-astrology/job-or-business.php`, },
-                { name: "Govt. Job predictions", url: `${MAIN_URL}career-astrology/government-job.php`, },
-                { name: "Job Issues or No Job in Birth Chart", url: `${MAIN_URL}career-astrology/unemployment-problem-solution.php`, },
+                { name: "Subject Selection per Birth Chart", url: `${MAIN_URL}career-astrology/education`, },
+                { name: "Career as per your Zodiac Sign", url: `${MAIN_URL}career-astrology/right-career-selection`, },
+                { name: "What to Do: Job or Business", url: `${MAIN_URL}career-astrology/job-or-business`, },
+                { name: "Govt. Job predictions", url: `${MAIN_URL}career-astrology/govt-job`, },
+                { name: "Job Issues or No Job in Birth Chart", url: `${MAIN_URL}career-astrology/job-issues`, },
                 { name: "Change & Promotion in Jobs", url: `${MAIN_URL}career-astrology/job-promotion.php`, }
             ]
         },
@@ -620,10 +621,10 @@ export const MainMenu = [
             name: "Property astrology",
             url: `${MAIN_URL}property-astrology`,
             sublinksL2: [
-                { name: "Astrological Solutions for Property Disputes in Horoscope", url: `${MAIN_URL}property/property-disputes.php`, },
-                { name: "Ancestral and Parental Property in your Birth Chart", url: `${MAIN_URL}property/ancestral-property.php`, },
-                // { name: "Buying Selling Property per birth chart", url: `${MAIN_URL}property.php`, },
-                { name: "Predictions for own House", url: `${MAIN_URL}property/property-yoga.php`, }
+                { name: "Astrological Solutions for Property Disputes in Horoscope", url: `${MAIN_URL}property-astrology/property-dispute`, },
+                { name: "Ancestral and Parental Property in your Birth Chart", url: `${MAIN_URL}property-astrology/ancestral-property   `, },
+                { name: "Buying Selling Property per birth chart", url: `${MAIN_URL}property-astrology`, },
+                { name: "Predictions for own House", url: `${MAIN_URL}property-astrology/property-yoga`, }
             ]
         },
         {
@@ -631,17 +632,17 @@ export const MainMenu = [
             url: `${MAIN_URL}health-astrology.php`,
             sublinksL2: [
                 { name: "Timings of Disease in birth chart", url: `${MAIN_URL}health-astrology/planets-and-diseases-in-astrology.php`, },
-                // { name: "Medical Astrology & Severe Health Issues", url: `${MAIN_URL}health-astrology.php`, },
+                // { name: "Medical Astrology & Severe Health Issues", url: `${MAIN_URL}health-astrology.php` },
                 { name: "Drug Addiction and Alcoholism indications in the birth chart", url: `${MAIN_URL}health-astrology/drug-addiction.php`, },
                 { name: "Specific Diseases in birth chart", url: `${MAIN_URL}health-astrology/diseases-caused.php`, },
                 { name: "Sex Health, Desires and Habits", url: `${MAIN_URL}health-astrology/sexual-health.php`, },
                 { name: "Your Life Span - Longevity Reading", url: `${MAIN_URL}health-astrology/life-span.php`, }
             ]
         },
-        { name: "Loan and Debt", url: `${MAIN_URL}loan-and-debts.php`, },
+        { name: "Loan and Debt", url: `${MAIN_URL}finance-astrology`, },
         { name: "Betting and Gambling", url: `${MAIN_URL}astrology-for-betting.php`, },
         {
-            name: "Foreign Settlement", url: `${MAIN_URL}foreign-settlement.php`,
+            name: "Foreign Settlement", url: `${MAIN_URL}foreign-settlement-astrology.php`,
             sublinksL2: [
                 { name: "Deportation and Immigration issues", url: `${MAIN_URL}foreign-travel/deportation-issues.php` , }
             ]
@@ -649,12 +650,12 @@ export const MainMenu = [
         {
             name: "Past Life Readings", url: `${MAIN_URL}past-life-reading`,
             sublinksL2: [
-                { name: "Life events: Detailed life predictions", url: `${MAIN_URL}life-predictions/life-event-prediction.php`, },
+                { name: "Life events: Detailed life predictions", url: `${MAIN_URL}past-life-reading/life-reading`, },
                 { name: "Law of Karma and Karma Correction", url: `${MAIN_URL}life-predictions/karma-correction.php` , }
             ]
         },
         {
-            name: "Birth Time Correction", url: `${MAIN_URL}time-rectification.php` ,
+            name: "Birth Time Correction", url: `${MAIN_URL}birth-time-rectification` ,
             sublinksL2: [
                 { name: "Birth Time Rectification with Ascendant", url: `${MAIN_URL}time-rectification/birth-time-rectification-with-ascendant.php` , }
             ]

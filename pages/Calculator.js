@@ -77,7 +77,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/maglik-dosha-calculator1.png",
       backData: "Whether Kuja or Manglik dosha is present in your horoscope? Check here.",
       hindiBackData: "कुजा या मांगलिक दोष आपकी कुंडली में मौजूद है या नहीं? यहा जांचिये।",
-      hindiLink: "hindi/marriage-astrology/manglik-dosha-reasons-and-solutions.php",
+      hindiLink: "marriage-astrology-in-hindi/manglik-mangal-dosha",
       link: "calculator/manglik-dosha-calculator.php"
   },
   {

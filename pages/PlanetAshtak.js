@@ -100,7 +100,7 @@ export default function Kundli({data}) {
               </div>
             </div>
             <div className='flex divide-x divide-orange-200 mt-5'>
-              <div className='flex-1'>
+              <div className='overflow-auto flex-1'>
                 <table className="min-w-full divide-y divide-orange-200">
                   <thead className="bg-orange-500">
                     <tr>
