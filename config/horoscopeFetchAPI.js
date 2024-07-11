@@ -3,7 +3,6 @@ import {API_KEY, API_NEW_URL} from '../config/config'
 
 
 export default async function handler(HoroscopeSign, TypeToHit, HoroscopeDayWise, finalFormattedDate, language = "English") {
-  console.log(`${API_NEW_URL}aapkikismat-api-horoscope.php?zodiac_sign=${HoroscopeSign}&api_key=${API_KEY}&language=${language}&type=${TypeToHit}&horoscopeperiod=${HoroscopeDayWise}&date=${finalFormattedDate}`);
   try {
     const options = {
       method: 'POST',
@@ -16,6 +15,7 @@ export default async function handler(HoroscopeSign, TypeToHit, HoroscopeDayWise
     };
 
     const response = await axios.request(options);
+    
     if (response.data.status === "success") {
       return response.data.message;
     }else{
