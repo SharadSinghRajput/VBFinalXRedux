@@ -19,6 +19,7 @@ import CalculatorForm from './pageAssets/CalculatorForm';
 export default function Kundli({ data }) {
   
   const [RudrakshaSuggestion, setRudrakshaSuggestion] = useState(null);
+  const [RudrakshaSuggestionHindi, setRudrakshaSuggestionHindi] = useState("");
 
   useEffect(() => {
       const fetchData = async () => {
@@ -44,12 +45,51 @@ export default function Kundli({ data }) {
       }
       fetchData();
   }, []);
+
+
+  const setInLocal = async (Text, dob) => {
+    const convertedText = await chatGPTAnswer(Text);
+    if(convertedText){
+      setLocalStorageItem("RudrakshaSuggestionHindi", {
+        hindiText: convertedText,
+        timestamp: Date.now(),
+        dobData: dob,
+      });
+      setRudrakshaSuggestionHindi(convertedText);
+    }
+  }
+
+  const chatGPTAnswer = async (Text) => {
+    const dataGpt = {
+      prompt: `convert this paragraph in hindi '${Text}'`,
+      temperature: 0.5,
+      max_tokens: 800
+    };
+
+    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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'
+      },
+      body: JSON.stringify(dataGpt)
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+
+    const result = await response.json();
+    const answer = result.choices[0].text;
+    return JSON.stringify(answer);
+  }
+
   
   console.log(RudrakshaSuggestion);
   return (
     <>
       <div className="">
-        <div className={`bg-white mx-auto max-w-full shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
+        <div className={`bg-white mx-auto max-w-7xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
           {data && data.title && (
             <div className="mb-5">
               <Title titleData={data.title} />
@@ -61,6 +101,7 @@ export default function Kundli({ data }) {
                 <h2 className="text-xl font-bold mb-2">Your Rudraksha Suggestion</h2>
                 <div className="mb-3">
                   <strong>Name:</strong> {RudrakshaSuggestion.name}
+                  {RudrakshaSuggestionHindi}
                 </div>
                 <div className="mb-3">
                   <strong>Recommendation:</strong> {RudrakshaSuggestion.recommend}
