@@ -21,6 +21,16 @@ const nextConfig = {
         destination: '/foreign-settlement.php',
         permanent: true,
       },
+      {
+        source: '/marriage-astrology/post-marriage-counseling.php',
+        destination: '/marriage-astrology/married-life-issues',
+        permanent: true,
+      },
+      {
+        source: '/marriage-astrology/pre-marriage-counseling.php',
+        destination: '/marriage-astrology/married-life-issues',
+        permanent: true,
+      },
     ];
   },
 };

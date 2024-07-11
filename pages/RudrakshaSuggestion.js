@@ -14,12 +14,14 @@ import Title from './pageAssets/Title';
 import Banner from './pageAssets/Banner';
 import Description from './pageAssets/Description';
 import GlobImg from './assets/images/calculator/glob.png';
-import CalculatorForm from './pageAssets/CalculatorForm';
+import ParagraphLineLoder from './pageAssets/ParagraphLineLoder';
 
 export default function Kundli({ data }) {
   
   const [RudrakshaSuggestion, setRudrakshaSuggestion] = useState(null);
-  const [RudrakshaSuggestionHindi, setRudrakshaSuggestionHindi] = useState("");
+  const [RDRName, setRDRName] = useState("");
+  const [RDRrecommend, setRDRrecommend] = useState("");
+  const [RDRdetail, setRDRdetail] = useState("");
 
   useEffect(() => {
       const fetchData = async () => {
@@ -38,6 +40,12 @@ export default function Kundli({ data }) {
             try {
                 const astrologyData = await fetchAstrologyData(data, "rudraksha_suggestion");
                 setRudrakshaSuggestion(astrologyData);
+                setRDRName("")
+                setRDRrecommend("")
+                setRDRdetail("")
+                setInLocal(astrologyData?.name, "name")
+                setInLocal(astrologyData?.recommend, "recommend")
+                setInLocal(astrologyData?.detail, "detail")
             } catch (error) {
                 console.error("Failed to fetch astrology data", error);
             }
@@ -47,17 +55,30 @@ export default function Kundli({ data }) {
   }, []);
 
 
-  const setInLocal = async (Text, dob) => {
-    const convertedText = await chatGPTAnswer(Text);
-    if(convertedText){
-      setLocalStorageItem("RudrakshaSuggestionHindi", {
-        hindiText: convertedText,
-        timestamp: Date.now(),
-        dobData: dob,
-      });
-      setRudrakshaSuggestionHindi(convertedText);
+  const setInLocal = async (text, key) => {
+    try {
+      const convertedText = await chatGPTAnswer(text);
+      if (convertedText) {
+        switch (key) {
+          case 'name':
+            setRDRName(convertedText);
+            break;
+          case 'recommend':
+            setRDRrecommend(convertedText);
+            break;
+          case 'detail':
+            setRDRdetail(convertedText);
+            break;
+          default:
+            console.warn(`Unhandled data key: ${key}`);
+            break;
+        }
+      }
+    } catch (error) {
+      console.error(`Error converting ${key} to Hindi:`, error);
     }
-  }
+  };
+
 
   const chatGPTAnswer = async (Text) => {
     const dataGpt = {
@@ -80,10 +101,9 @@ export default function Kundli({ data }) {
     }
 
     const result = await response.json();
-    const answer = result.choices[0].text;
-    return JSON.stringify(answer);
+    const answer = result.choices[0].text.trim();
+    return answer;
   }
-
   
   console.log(RudrakshaSuggestion);
   return (
@@ -98,16 +118,32 @@ export default function Kundli({ data }) {
           {RudrakshaSuggestion && (
             <div className="grid grid-cols-1 gap-5">
               <div className="p-5 bg-blue-800 rounded-lg text-white">
+              {data?.language === "Hindi" ? <>
+                <h2 className="text-xl font-bold mb-2">आपका रुद्राक्ष सुझाव</h2>
+              </>:<>
                 <h2 className="text-xl font-bold mb-2">Your Rudraksha Suggestion</h2>
-                <div className="mb-3">
-                  <strong>Name:</strong> {RudrakshaSuggestion.name}
-                  {RudrakshaSuggestionHindi}
+              </>}
+                <div className="mb-3 flex gap-5 max-md:flex-col">
+                  {data?.language === "Hindi" ? <>
+                    <strong>नाम:</strong> {RDRName ? RDRName : <><ParagraphLineLoder /></>}
+                  </> : <>
+                    <strong>Name:</strong> {RudrakshaSuggestion.name ? RudrakshaSuggestion.name : <><ParagraphLineLoder /></>}
+                  </> }
                 </div>
-                <div className="mb-3">
-                  <strong>Recommendation:</strong> {RudrakshaSuggestion.recommend}
+                <div className="mb-3 flex gap-5 max-md:flex-col">
+                  {data?.language === "Hindi" ? <>
+                    <strong>सिफ़ारिश:</strong> {RDRrecommend ? RDRrecommend : <><ParagraphLineLoder /></>}
+                  </> : <>
+                    <strong>Recommendation:</strong> {RudrakshaSuggestion.recommend ? RudrakshaSuggestion.recommend : <><ParagraphLineLoder /></>}
+                  </> }
+                  
                 </div>
-                <div className="mb-3">
-                  <strong>Detail:</strong> {RudrakshaSuggestion.detail}
+                <div className="mb-3 flex gap-5 max-md:flex-col">
+                  {data?.language === "Hindi" ? <>
+                    <strong>विवरण:</strong> {RDRdetail ? RDRdetail : <><ParagraphLineLoder /></>}
+                  </> : <>
+                    <strong>Detail:</strong> {RudrakshaSuggestion.detail ? RudrakshaSuggestion.detail : <><ParagraphLineLoder /></>}
+                  </> }
                 </div>
                 {/* {RudrakshaSuggestion.img_url && (
                   <div className="mb-3">

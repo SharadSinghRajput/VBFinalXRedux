@@ -17,6 +17,7 @@ import Description from './pageAssets/Description';
 import GlobImg from './assets/images/calculator/glob.png';
 import CalculatorForm from './pageAssets/CalculatorForm'
 import MetaData from './pageAssets/MetaData';
+import ParagraphLineLoder from './pageAssets/ParagraphLineLoder';
 
 
 
@@ -28,7 +29,13 @@ export default function Kundli({ data }) {
   const [NumeroFastsReport, setNumeroFastsReport] = useState("");
   const [NumeroFavLord, setNumeroFavLord] = useState("");
   const [NumeroFavMantra, setNumeroFavMantra] = useState("");
-
+  console.log(NumeroFavTime);
+  const [NumeroFavTimeHindi, setNumeroFavTimeHindi] = useState("");
+  const [NumeroPlaceVastuHindi, setNumeroPlaceVastuHindi] = useState("");
+  const [NumeroFastsReportHindi, setNumeroFastsReportHindi] = useState("");
+  const [NumeroFavLordHindi, setNumeroFavLordHindi] = useState("");
+  const [NumeroFavMantraHindi, setNumeroFavMantraHindi] = useState("");
+  
   useEffect(() => {
       const fetchData = async () => {
           const GetData = getLocalStorageItem('AstroAPICalculatorKey');
@@ -49,17 +56,83 @@ export default function Kundli({ data }) {
                 const numero_fasts_report = await fetchAstrologyData(data, "numero_fasts_report");
                 const numero_fav_lord = await fetchAstrologyData(data, "numero_fav_lord");
                 const numero_fav_mantra = await fetchAstrologyData(data, "numero_fav_mantra");
+
                 setNumeroFavTime(astrologyData);
                 setNumeroPlaceVastu(numero_place_vastu);
                 setNumeroFastsReport(numero_fasts_report);
                 setNumeroFavLord(numero_fav_lord);
                 setNumeroFavMantra(numero_fav_mantra);
+
+                setInLocal(astrologyData?.description, "NumeroFavTime")
+                setInLocal(numero_place_vastu?.description, "NumeroPlaceVastuHindi")
+                setInLocal(numero_fasts_report?.description, "numero_fasts_report")
+                setInLocal(numero_fav_lord?.description, "numero_fav_lord")
+                setInLocal(numero_fav_mantra?.description, "numero_fav_mantra")
+                
             } catch (error) {
             }
           }
       }
       fetchData();
   },[])
+
+
+  const setInLocal = async (text, key) => {
+    try {
+      const convertedText = await chatGPTAnswer(text);
+      if (convertedText) {
+        switch (key) {
+          case 'NumeroFavTime':
+            setNumeroFavTimeHindi(convertedText);
+            break;
+          case 'NumeroPlaceVastuHindi':
+            setNumeroPlaceVastuHindi(convertedText);
+            break;
+          case 'numero_fasts_report':
+            setNumeroFastsReportHindi(convertedText);
+            break;
+          case 'numero_fav_lord':
+            setNumeroFavLordHindi(convertedText);
+            break;
+          case 'numero_fav_mantra':
+            setNumeroFavMantraHindi(convertedText);
+            break;
+          default:
+            console.warn(`Unhandled data key: ${key}`);
+            break;
+        }
+      }
+    } catch (error) {
+      console.error(`Error converting ${key} to Hindi:`, error);
+    }
+  };
+
+
+  const chatGPTAnswer = async (Text) => {
+    const dataGpt = {
+      prompt: `convert this paragraph in hindi '${Text}'`,
+      temperature: 0.5,
+      max_tokens: 800
+    };
+
+    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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'
+      },
+      body: JSON.stringify(dataGpt)
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+
+    const result = await response.json();
+    const answer = result.choices[0].text.trim();
+    return answer;
+  }
+
 
   return (
     <>
@@ -78,32 +151,57 @@ export default function Kundli({ data }) {
             : null}
             {NumeroFavTime ?
                 <div className="p-5 my-5 shadow-lg">
-                    <p className="text-base font-bold mb-2">{NumeroFavTime.title}</p>
+                    {data?.language === "Hindi" ?<>
+                    <p className="text-base font-bold mb-2">आपके लिए अनुकूल समय है</p>
+                    <p className="text-base">{NumeroFavTimeHindi ? NumeroFavTimeHindi :<ParagraphLineLoder />}</p>
+                    </>:<>
+                    <p className="text-base font-bold mb-2">Favourable Time For You</p>
                     <p className="text-base">{NumeroFavTime.description}</p>
+                    </>}
                 </div>
             : null}
             {NumeroPlaceVastu ?
                 <div className="p-5 my-5 shadow-lg">
-                    <p className="text-base font-bold mb-2">{NumeroPlaceVastu.title}</p>
+                    {data?.language === "Hindi" ?<>
+                    <p className="text-base font-bold mb-2">आपके लिए अनुकूल स्थान वास्तु</p>
+                    <p className="text-base">{NumeroPlaceVastuHindi ? NumeroPlaceVastuHindi :<ParagraphLineLoder />}</p>
+                    </>:<>
+                    <p className="text-base font-bold mb-2">Favourable Place Vastu For You</p>
                     <p className="text-base">{NumeroPlaceVastu.description}</p>
+                    </>}
                 </div>
             : null}
             {NumeroFastsReport ?
                 <div className="p-5 my-5 shadow-lg">
-                    <p className="text-base font-bold mb-2">{NumeroFastsReport.title}</p>
+                    {data?.language === "Hindi" ?<>
+                    <p className="text-base font-bold mb-2">आपके लिए व्रत का त्वरित समय</p>
+                    <p className="text-base">{NumeroFastsReportHindi ? NumeroFastsReportHindi :<ParagraphLineLoder />}</p>
+                    </>:<>
+                    <p className="text-base font-bold mb-2">Fast Vrata Timing For You</p>
                     <p className="text-base">{NumeroFastsReport.description}</p>
+                    </>}
                 </div>
             : null}
             {NumeroFavLord ?
                 <div className="p-5 my-5 shadow-lg">
-                    <p className="text-base font-bold mb-2">{NumeroFavLord.title}</p>
+                    {data?.language === "Hindi" ?<>
+                    <p className="text-base font-bold mb-2">आपके लिए अनुकूल भगवान</p>
+                    <p className="text-base">{NumeroFavLordHindi ? NumeroFavLordHindi :<ParagraphLineLoder />}</p>
+                    </>:<>
+                    <p className="text-base font-bold mb-2">Favourable Lord For You</p>
                     <p className="text-base">{NumeroFavLord.description}</p>
+                    </>}
                 </div>
             : null}
             {NumeroFavMantra ?
                 <div className="p-5 my-5 shadow-lg">
-                    <p className="text-base font-bold mb-2">{NumeroFavMantra.title}</p>
+                    {data?.language === "Hindi" ?<>
+                    <p className="text-base font-bold mb-2">आपके लिए अनुकूल गायत्री मंत्र</p>
+                    <p className="text-base">{NumeroFavMantraHindi ? NumeroFavMantraHindi :<ParagraphLineLoder />}</p>
+                    </>:<>
+                    <p className="text-base font-bold mb-2">Favourable Gayatri Mantra For You</p>
                     <p className="text-base">{NumeroFavMantra.description}</p>
+                    </>}
                 </div>
             : null}
         </div>

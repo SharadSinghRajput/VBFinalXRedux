@@ -22,33 +22,6 @@ export default function Kundli({ data }) {
 
   const [AscendantHindi, setAscendantHindi] = useState('');
 
-  function areDatesEqual(date1, date2) {
-    if (
-      !date1.dobData || !date2.dobData ||
-      date1.dobData.day === undefined || date2.dobData.day === undefined ||
-      date1.dobData.month === undefined || date2.dobData.month === undefined ||
-      date1.dobData.year === undefined || date2.dobData.year === undefined ||
-      date1.dobData.hour === undefined || date2.dobData.hour === undefined ||
-      date1.dobData.min === undefined || date2.dobData.min === undefined ||
-      date1.birth_place_latitude === undefined || date2.birth_place_latitude === undefined ||
-      date1.birth_place_longitude === undefined || date2.birth_place_longitude === undefined ||
-      date1.tzone === undefined || date2.tzone === undefined
-    ) {
-      return false;
-    }
-    return (
-      date1.dobData.day === date2.dobData.day &&
-      date1.dobData.month === date2.dobData.month &&
-      date1.dobData.year === date2.dobData.year &&
-      date1.dobData.hour === date2.dobData.hour &&
-      date1.dobData.min === date2.dobData.min &&
-      date1.birth_place_latitude === date2.birth_place_latitude &&
-      date1.birth_place_longitude === date2.birth_place_longitude &&
-      date1.tzone === date2.tzone
-    );
-  }
-
-
   useEffect(() => {
     const fetchData = async () => {
       const GetData = getLocalStorageItem("AstroAPICalculatorKey");
@@ -66,42 +39,30 @@ export default function Kundli({ data }) {
         try {
           const astrologyData = await fetchAstrologyData(data, "general_ascendant_report");
           setGemstoneSuggestion(astrologyData);
-
-          
-          const cachedData = getLocalStorageItem("AscendantReporrtHindi");
-
-          if (cachedData && cachedData.timestamp > Date.now() - 5 * 60 * 60 * 1000) {
-            const areSame = areDatesEqual(cachedData.dobData, GetData);
-            if(areSame){
-              console.log(cachedData);
-              setAscendantHindi(cachedData.hindiText);
-            }else{
-              setInLocal(astrologyData?.asc_report?.report, GetData)
-            }
-          } else {
-            setInLocal(astrologyData?.asc_report?.report, GetData)
-          }
-
-
+          setInLocal(astrologyData?.asc_report?.report, "asc_report")
         } catch (error) {}
       }
     };
     fetchData();
   }, []);
 
-
-  const setInLocal = async (Text, dob) => {
-    const convertedText = await chatGPTAnswer(Text);
-    if(convertedText){
-      setLocalStorageItem("AscendantReporrtHindi", {
-        hindiText: convertedText,
-        timestamp: Date.now(),
-        dobData: dob,
-      });
-      setAscendantHindi(convertedText);
+  const setInLocal = async (text, key) => {
+    try {
+      const convertedText = await chatGPTAnswer(text);
+      if (convertedText) {
+        switch (key) {
+          case 'asc_report':
+            setAscendantHindi(convertedText);
+            break;
+          default:
+            console.warn(`Unhandled data key: ${key}`);
+            break;
+        }
+      }
+    } catch (error) {
+      console.error(`Error converting ${key} to Hindi:`, error);
     }
-  }
-
+  };
 
 
   const chatGPTAnswer = async (Text) => {
@@ -129,12 +90,6 @@ export default function Kundli({ data }) {
     return JSON.stringify(answer);
   }
 
-
-  // useEffect(() => {
-  //   if (GemstoneSuggestion.asc_report?.ascendant) {
-  //     chatGPTAnswer(GemstoneSuggestion.asc_report?.ascendant).then(setAscendantHindi);
-  //   }
-  // }, [GemstoneSuggestion]);
 
 
   return (

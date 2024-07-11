@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+ import React, { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Title from './pageAssets/Title';
@@ -14,7 +14,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/ascendant-calculator1.png",
       backData: "Get to know your Ascendant as per your Kundli.",
       hindiBackData: "अपने कुंडली के अनुसार अपने लगन को जान लें।",
-      hindiLink: "hindi/calculator/ascendant-calculator.php",
+      hindiLink: "calculator-in-hindi/ascendant-calculator",
       link: "calculator/ascendant-calculator.php"
   },
   {
@@ -23,7 +23,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/gemstone-suggestion.png",
       backData: "Favorable and lucky Gemstones for you as per your horoscope.",
       hindiBackData: "आपकी कुंडली के अनुसार आपके लिए अनुकूल और भाग्यशाली रत्न।",
-      hindiLink: "hindi/calculator/gemstone-calculator.php",
+      hindiLink: "calculator-in-hindi/gemstone-calculator",
       link: "calculator/gemstone-calculator.php"
   },
   {
@@ -32,7 +32,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/rudraksha-suggestion1.png",
       backData: "Know which Rudraksha can bring good luck for you as per your Kundli.",
       hindiBackData: "जानिए आपकी कुंडली के अनुसार कौन सा रुद्राक्ष आपके लिए सौभाग्य ला सकता है।",
-      hindiLink: "hindi/calculator/rudraksha-calculator.php",
+      hindiLink: "calculator-in-hindi/rudraksha-calculator",
       link: "calculator/rudraksha-calculator.php"
   },
   {
@@ -41,7 +41,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/check-numerology1.png",
       backData: "Get your Lucky Numbers and Numerology Predictions.",
       hindiBackData: "अपने लकी नंबर और अंक प्रिडिक्शन प्राप्त करें।",
-      hindiLink: "hindi/calculator/numerology-calculator.php",
+      hindiLink: "calculator-in-hindi/numerology-calculator",
       link: "calculator/numerology-calculator.php"
   },
   {
@@ -50,7 +50,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/kalsarpdosh.png",
       backData: "Check whether your kundli has Kalsarpa dosha or not.",
       hindiBackData: "जांचें कि आपकी कुंडली में कालसर्प दोष है या नहीं।",
-      hindiLink: "hindi/calculator/kaalsarp-dosh-calculator.php",
+      hindiLink: "calculator-in-hindi/kaalsarp-dosh-calculator",
       link: "calculator/kaalsarp-dosh-calculator.php"
   },
   {
@@ -59,7 +59,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/sadhesati-calculator1.png",
       backData: "Are you going under Saturn Sadhesati? Check here.",
       hindiBackData: "क्या आप शनि साढ़ेसाती के अंतर्गत जा रहे हैं? यहा जांचिये।",
-      hindiLink: "hindi/calculator/sadesati-calculator.php",
+      hindiLink: "calculator-in-hindi/sadesati-calculator",
       link: "calculator/sadesati-calculator.php"
   },
   {
@@ -68,7 +68,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/pitra-dosha-calculator1.png",
       backData: "Get to know if your Kundli has Pitra Dosha and their effects.",
       hindiBackData: "पता करें कि क्या आपकी कुंडली में पितृ दोष और उनके प्रभाव हैं।",
-      hindiLink: "hindi/calculator/pitra-dosha-calculator.php",
+      hindiLink: "calculator-in-hindi/pitra-dosha-calculator",
       link: "calculator/pitra-dosha-calculator.php"
   },
   {
@@ -86,7 +86,7 @@ const Calculator = [
       imageUrl: "https://www.vinaybajrangi.com/upload/calculator-img/moon.jpg",
       backData: "Get to know Your Moon Sign as per your Kundli? Check here.",
       hindiBackData: "अपनी कुंडली के अनुसार अपने चंद्रमा राशि को जानें। यहां जांचें।",
-      hindiLink: "hindi/calculator/moon-sign-calculator.php",
+      hindiLink: "calculator-in-hindi/moon-sign-calculator",
       link: "calculator/moon-sign-calculator.php"
   }
 ];
