@@ -13,12 +13,15 @@ import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage
 import Title from './pageAssets/TitlewithBG';
 import Description from './pageAssets/Description';
 import MetaData from './pageAssets/MetaData';
+import ParagraphLineLoder from './pageAssets/ParagraphLineLoder';
 
 
 
 
 export default function KaalsarpDoshReport({ data }) {
     const [HoroscopeChart, setHoroscopeChart] = useState("");
+    const [One_line, setOne_line] = useState("");
+    const [Report, setReport] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,6 +40,10 @@ export default function KaalsarpDoshReport({ data }) {
               try {
                   const astrologyData = await fetchAstrologyData(data, "kalsarpa_details");
                   setHoroscopeChart(astrologyData);
+                  setOne_line("")
+                  setReport("")
+                  setInLocal(astrologyData?.one_line, "one_line")
+                  setInLocal(astrologyData?.report?.report, "report")
               } catch (error) {
               }
             }
@@ -44,6 +51,54 @@ export default function KaalsarpDoshReport({ data }) {
         fetchData();
     },[])
  
+
+    
+  const setInLocal = async (text, key) => {
+    try {
+      const convertedText = await chatGPTAnswer(text);
+      if (convertedText) {
+        switch (key) {
+          case 'one_line':
+            setOne_line(convertedText);
+            break;
+          case 'report':
+            setReport(convertedText);
+            break;
+          default:
+            console.warn(`Unhandled data key: ${key}`);
+            break;
+        }
+      }
+    } catch (error) {
+      console.error(`Error converting ${key} to Hindi:`, error);
+    }
+  };
+
+
+  const chatGPTAnswer = async (Text) => {
+    const dataGpt = {
+      prompt: `convert this paragraph in hindi '${Text}'`,
+      temperature: 0.5,
+      max_tokens: 800
+    };
+
+    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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'
+      },
+      body: JSON.stringify(dataGpt)
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+
+    const result = await response.json();
+    const answer = result.choices[0].text.trim();
+    return answer;
+  }
     
 
   return (
@@ -51,41 +106,37 @@ export default function KaalsarpDoshReport({ data }) {
     {data ? <MetaData data={data} /> : <></>}
     <div className="">
         <div className={`bg-white mx-auto max-w-6xl shadow-2xl p-5 mt-5 mb-5 rounded-lg`}>
-            {data ?
-            <>
-                {data.title ? <>
-                <div className="mb-5">
-                    <Title titleData={data.title} />
+            <div className="mt-5">
+                <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">
+                    
+                    {data?.language === "Hindi" ?
+                    "एक पंक्ति में कालसर्प"
+                    :"Kaalsarp in one line"}
+                    </h4>
+                <div className="bg-gray-100 p-2 pb-4">
+                    {data?.language === "Hindi" ?
+                    <p>{One_line ? One_line : <><ParagraphLineLoder /></> }</p>
+                    :
+                    <p>{HoroscopeChart?.one_line ? HoroscopeChart.one_line : <><ParagraphLineLoder /></> }</p>
+                    }
                 </div>
-                </>:<></>}
-                
-                {data.description ?
-                    <Description extra="text-base" descData={data.description} />
-                :<></>}
-            </>
-            : null}
-
-            {HoroscopeChart ?
-                <>
-                {HoroscopeChart.one_line ?
-                    <div className="mt-5">
-                        <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white">Kaalsarp in one line</h4>
-                        <div className="bg-orange-100 p-2 pb-4">
-                            <p>{HoroscopeChart.one_line}</p>
-                        </div>
-                    </div>
-                : null}
-                        {HoroscopeChart.report?.report ?
-                    <div className="mt-5">
-                        <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white ">Your Kaalsarp report in brief</h4>
-                        <div className="bg-orange-100 p-2 pb-4">
-                            <Description extra="text-base" descData={HoroscopeChart.report.report} />
-                        </div>
-                    </div>
-                    : null}
-                </>
-            : null}
-            {/* <h1>Kaalsarp <span> Dosha</span></h1> */}
+            </div>
+            <div className="mt-5">
+                <h4 class="border-b-2 bg-blue-900 p-2 text-lg font-bold text-white ">
+                    {data?.language === "Hindi" ?
+                    "आपकी कालसर्प रिपोर्ट संक्षेप में"
+                    : "Your Kaalsarp report in brief" }
+                    
+                    </h4>
+                <div className="bg-gray-100 p-2 pb-4">
+                    {data?.language === "Hindi" ?
+                        <p>{Report ? <Description extra="text-base" descData={Report} /> : <><ParagraphLineLoder /></> }</p>
+                    :
+                        <p>{HoroscopeChart?.report?.report ? <Description extra="text-base" descData={HoroscopeChart.report.report} /> : <><ParagraphLineLoder /></> }</p>
+                    }
+                    
+                </div>
+            </div>
         </div>
     </div>
     </>

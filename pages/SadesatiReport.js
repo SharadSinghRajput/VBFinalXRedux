@@ -17,6 +17,7 @@ import Description from './pageAssets/Description';
 import GlobImg from './assets/images/calculator/glob.png';
 import CalculatorForm from './pageAssets/CalculatorForm'
 import MetaData from './pageAssets/MetaData';
+import ParagraphLineLoder from './pageAssets/ParagraphLineLoder';
 
 
 export default function Kundli({ data }) {
@@ -65,31 +66,35 @@ export default function Kundli({ data }) {
                     <Title titleData={data.title} />
                 </div>
                 </>:<></>}
-                {data.description ?
+                {/* {data.description ?
                 <Description descData={data.description} />
-                :<></>}
+                :<></>} */}
                 
             </>
             : null}
             <div className="">
+                {data?.language === "Hindi" ?
+                <>
+                <h4 class="font-bold text-xl border-b-4 border-b-orange-500 mb-2">स्थिति</h4>
+                </>
+                :<>
                 <h4 class="font-bold text-xl border-b-4 border-b-orange-500 mb-2">Status</h4>
-                {SadhesatiCurrentStatus ?
-                <>
-                    <p className="">{SadhesatiCurrentStatus.is_undergoing_sadhesati}</p>
-                    <p className="">Moon Sign : {SadhesatiCurrentStatus.moon_sign}</p>
-                    <p className="">Saturn Sign : {SadhesatiCurrentStatus.saturn_sign}</p>
-                </>
-                : null}
-                {Remedies ?
-                <>
-                    <h4 class="font-bold text-xl border-b-4 border-b-orange-500 mt-5 mb-2">Remedies for Sadesati</h4>
-                    <ul className="list-disc ml-5">
-                        {Remedies.remedies.map((item, index)=>(
+                <p className="">{SadhesatiCurrentStatus.is_undergoing_sadhesati ?
+                SadhesatiCurrentStatus.is_undergoing_sadhesati : <ParagraphLineLoder />}</p>
+                <p className="">Moon Sign : {SadhesatiCurrentStatus.moon_sign ? SadhesatiCurrentStatus.moon_sign :
+                    <ParagraphLineLoder />}</p>
+                <p className="">Saturn Sign : {SadhesatiCurrentStatus.saturn_sign ? SadhesatiCurrentStatus.saturn_sign :
+                    <ParagraphLineLoder />}</p>
+                </>}
+                
+                <h4 class="font-bold text-xl border-b-4 border-b-orange-500 mt-5 mb-2">Remedies for Sadesati</h4>
+                <ul className="list-disc ml-5">
+                    {Remedies ?
+                        Remedies.remedies.map((item, index)=>(
                         <li key={index} className="text-base my-1">{item}</li>
-                        ))}
-                    </ul>
-                </>
-                : null}
+                        ))
+                    : <ParagraphLineLoder />}
+                </ul>
             </div>
         </div>
     </div>

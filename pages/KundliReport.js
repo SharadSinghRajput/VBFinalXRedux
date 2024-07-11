@@ -20,15 +20,15 @@ function classNames(...classes) {
 }
 
 const ServicesNew = [
-    { name: "Consultation", ImgUrl: "/asset_frontend/img/consultation.png", Link: "services/consultation.php" },
-    { name: "Online Report", ImgUrl: "/asset_frontend/img/online-report.png", Link: "services/online-reports.php" },
-    { name: "Voice Report", ImgUrl: "/asset_frontend/img/voice-report.png", Link: "services/voice-report.php" },
-    { name: "Life Readings", ImgUrl: "/asset_frontend/img/life-readings.png", Link: "services/life-readings.php" }
-]
+    { name: "Consultation", hindiName: "परामर्श", ImgUrl: "/asset_frontend/img/consultation.png", Link: "/services/consultation.php", hindiLink: "/hindi/services/consultation.php" },
+    { name: "Online Report", hindiName: "ऑनलाइन रिपोर्ट", ImgUrl: "/asset_frontend/img/online-report.png", Link: "/services/online-reports.php", hindiLink: "/hindi/services/online-reports.php" },
+    { name: "Voice Report", hindiName: "ध्वनि रिपोर्ट", ImgUrl: "/asset_frontend/img/voice-report.png", Link: "/services/voice-report.php", hindiLink: "/hindi/services/voice-report.php" },
+    { name: "Life Readings", hindiName: "जीवन वाचन", ImgUrl: "/asset_frontend/img/life-readings.png", Link: "/services/life-readings.php", hindiLink: "/hindi/services/life-readings.php" }
+];
 const tabs = [
     {
         name: 'Kundali', hindiName: 'कुंडली', submenu: [
-            { name: "Dashboard", hindiName:"डैशबोर्ड" },
+            { name: "Dashboard", hindiName: "डैशबोर्ड" },
             { name: "Astro Profile", link: "astro-details.php", hindiName: "ज्योतिषीय प्रोफाइल", hindiLink: "hindi/astro-details.php" },
             { name: "Kundli Chart", link: "kundli-chart.php", hindiName: "कुंडली चार्ट", hindiLink: "hindi/kundli-chart.php" },
             { name: "House Cusps", link: "house-cups.php", hindiName: "हाउस कप्स", hindiLink: "hindi/house-cups.php" },
@@ -233,7 +233,7 @@ export default function Kundli({ data }) {
                                             className="isolate inline-flex rounded-md shadow-sm"
                                         >
                                             <span className="relative inline-flex items-center gap-x-1.5 rounded-l-md bg-orange-500 px-3 p-4 px-5 text-sm font-semibold text-white focus:z-10">
-                                                { lang === "Hindi" ?  subItem.hindiName :  subItem.name}
+                                                {lang === "Hindi" ? subItem.hindiName : subItem.name}
                                             </span>
                                             <span className="relative -ml-px inline-flex items-center rounded-r-md bg-orange-500 px-3 p-4 px-5 text-sm font-semibold text-white focus:z-10">
                                                 <RightArrow width={20} height={20} />
@@ -336,42 +336,42 @@ export default function Kundli({ data }) {
                                                 height={40}
                                                 className="w-[40px] md:w-[50px] lg:w-[75px] aspect-square object-contain"
                                                 src={item.ImgUrl}
-                                                alt={item.name}
+                                                alt={lang === "Hindi" ? item.hindiName : item.name}
                                             />
-                                            <span className="text-xs text-white">{item.name}</span>
+                                            <span className="text-xs text-white">{lang === "Hindi" ? item.hindiName : item.name}</span>
                                         </a>
                                     </div>
                                 ))}
                             </div>
                             <div className='grid grid-cols-1 md:grid-cols-4 gap-5 mt-5'>
                                 {data?.language === "Hindi" ? <>
-                                <a
-                                    href={`${MAIN_URL}hindi/astrology-news.php`}
-                                    onClick={(e) => handleClickRouter(e, "/hindi/astrology-news.php")}
-                                    className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
-                                    <Image 
-                                        width={40} 
-                                        height={40} 
-                                        className='w-10' 
-                                        src="/asset_frontend/img/newsicon.png" 
-                                        alt="Astrology News and Articles"
-                                    />
-                                    <h3 className='text-lg font-bold text-[#091d5a]'>ज्योतिष समाचार एवं आलेख</h3>
-                                </a> 
+                                    <a
+                                        href={`${MAIN_URL}hindi/astrology-news.php`}
+                                        onClick={(e) => handleClickRouter(e, "/hindi/astrology-news.php")}
+                                        className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                                        <Image
+                                            width={40}
+                                            height={40}
+                                            className='w-10'
+                                            src="/asset_frontend/img/newsicon.png"
+                                            alt="Astrology News and Articles"
+                                        />
+                                        <h3 className='text-lg font-bold text-[#091d5a]'>ज्योतिष समाचार एवं आलेख</h3>
+                                    </a>
                                 </> : <>
-                                <a
-                                    href={`${MAIN_URL}astrology-news.php`}
-                                    onClick={(e) => handleClickRouter(e, "/astrology-news.php")}
-                                    className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
-                                    <Image 
-                                        width={40} 
-                                        height={40} 
-                                        className='w-10' 
-                                        src="/asset_frontend/img/newsicon.png" 
-                                        alt="Astrology News and Articles"
-                                    />
-                                    <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
-                                </a> 
+                                    <a
+                                        href={`${MAIN_URL}astrology-news.php`}
+                                        onClick={(e) => handleClickRouter(e, "/astrology-news.php")}
+                                        className='bg-white mt-5 max-lg:mt-2 flex items-center justify-evenly rounded-lg p-2 shadow-xl border-[1px] border-[#091d5a]'>
+                                        <Image
+                                            width={40}
+                                            height={40}
+                                            className='w-10'
+                                            src="/asset_frontend/img/newsicon.png"
+                                            alt="Astrology News and Articles"
+                                        />
+                                        <h3 className='text-lg font-bold text-[#091d5a]'>Astrology News and Articles</h3>
+                                    </a>
                                 </>}
                                 <a
                                     href={`${data?.language === "Hindi" ? "/hindi/ask-question.php" : "/ask-question.php"}`}
@@ -397,7 +397,7 @@ export default function Kundli({ data }) {
 
             <div className='container mx-auto pt-10 max-w-6xl shadow-2xl bg-white p-5 mt-5 mb-5 rounded-lg'>
                 <div>
-                    <h2 className='text-lg font-bold mb-5'>Your Kundli Calculation</h2>
+                    <h2 className='text-lg font-bold mb-5'>{lang === "Hindi" ? "आपकी कुंडली की गणना" : "Your Kundli Calculation"}</h2>
                     <Swiper
                         spaceBetween={50}
                         slidesPerView={4}
@@ -426,11 +426,11 @@ export default function Kundli({ data }) {
                             <SwiperSlide key={index}>
                                 <div className="w-full mx-auto mb-5 shadow-lg border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
                                     <a
-                                        href={`${MAIN_URL}${item.link}`}
+                                        href={`${MAIN_URL}${lang === "Hindi" ? item.hindiUrls : item.link}`}
                                         onClick={(e) => handleClickRouter(e, item.link)}
                                         className="gap-4 min-h-16 flex flex-row justify-start items-center">
-                                        <Image width={40} height={40} src={item.image} alt={item.name} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' />
-                                        <h5 className="text-orange-600 text-sm text-left font-bold">{item.name}</h5>
+                                        <Image width={40} height={40} src={item.image} alt={lang === "Hindi" ? item.hindiName : item.name} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' />
+                                        <h5 className="text-orange-600 text-sm text-left font-bold">{lang === "Hindi" ? item.hindiName : item.name}</h5>
                                     </a>
                                 </div>
                             </SwiperSlide>
@@ -438,16 +438,16 @@ export default function Kundli({ data }) {
                     </Swiper>
                 </div>
                 <div>
-                    <h2 className='text-lg font-bold mt-5 mb-5'>Your Kundli Dosha</h2>
+                    <h2 className='text-lg font-bold mt-5 mb-5'>{lang === "Hindi" ? "कुंडली के दोषों का विश्लेषण" : "Your Kundli Dosha"}</h2>
                     <div className='grid   grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-1 gap-5'>
                         {KundliDosha.map((item, index) => (
                             <div key={index} className="w-full mx-auto shadow-xl border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
                                 <a
-                                    href={`${MAIN_URL}${item.link}`}
+                                    href={`${MAIN_URL}${lang === "Hindi" ? item.hindiLink : item.link}`}
                                     onClick={(e) => handleClickRouter(e, item.link)}
                                     className="block flex gap-4 min-h-16 flex-row justify-start items-center">
-                                    <Image width={50} height={50} src={item.image} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' alt={item.name} />
-                                    <h5 className="text-orange-600 text-sm text-left font-bold">{item.name}</h5>
+                                    <Image width={50} height={50} src={item.image} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' alt={lang === "Hindi" ? item.hindiName : item.name} />
+                                    <h5 className="text-orange-600 text-sm text-left font-bold">{lang === "Hindi" ? item.hindiName : item.name}</h5>
                                 </a>
                             </div>
                         ))}
@@ -456,7 +456,7 @@ export default function Kundli({ data }) {
                 <div className='bg-[#091d5a] p-5 mt-5 mb-5 rounded-lg '>
                     <div className='container mx-auto'>
                         <div>
-                            <p className="text-lg text-center mb-5 text-white font-bold">Astrological Solutions for all life’s problems</p>
+                            <p className="text-lg text-center mb-5 text-white font-bold">{lang === "Hindi" ? "जीवन की सभी समस्याओं का ज्योतिषीय समाधान" : "Astrological Solutions for all life’s problems"}</p>
                             <Swiper
                                 spaceBetween={50}
                                 slidesPerView={4}
@@ -492,11 +492,11 @@ export default function Kundli({ data }) {
                                     <SwiperSlide key={index}>
                                         <a
                                             className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
-                                            href={`${mainURL}${item.url}`}
+                                            href={`${mainURL}${lang === "Hindi" ? item.hindiUrl : item.url}`}
                                             onClick={(e) => handleClick(e, item.url)}
                                         >
-                                            <Image src={item.img} width={80} height={50} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-lg' alt={item.name} />
-                                            <span>{item.name}</span>
+                                            <Image src={item.img} width={80} height={50} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-lg' alt={lang === "Hindi" ? item.hindiName : item.name} />
+                                            <span>{lang === "Hindi" ? item.hindiName : item.name}</span>
                                         </a>
                                     </SwiperSlide>
                                 ))}
@@ -509,94 +509,94 @@ export default function Kundli({ data }) {
                         <ul role="list" className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 lg:grid-cols-3 xl:gap-x-8">
                             <li className="overflow-hidden rounded-xl border border-orange-200">
                                 <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-orange-50 p-6">
-                                    <div className="text-base font-bold leading-6 text-gray-900">Your Remedial Measures</div>
+                                    <div className="text-base font-bold leading-6 text-gray-900">{lang === "Hindi" ? "कुंडली के दोषों का उपाय" : "Your Remedial Measures"}</div>
                                 </div>
                                 <dl className="-my-3 divide-y divide-orange-100 px-6 py-4 text-sm leading-6">
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Rudraksha for your Kundli</dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपको कौन सा राशि रत्न पहनना चाहिए" : "Rudraksha for your Kundli"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"calculator/rudraksha-suggestion.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/rudraksha-suggestion.php" : "calculator/rudraksha-suggestion.php"}`}
                                             onClick={(e) => handleClick(e, "calculator/rudraksha-suggestion.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Which gemstones you can wear? </dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली के लिए रुद्राक्ष" : "Which gemstones you can wear?"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"calculator/gemstone-suggestion.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/gemstone-suggestion" : "calculator/gemstone-suggestion.php"}`}
                                             onClick={(e) => handleClick(e, "calculator/gemstone-suggestion.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                 </dl>
                             </li>
                             <li className="overflow-hidden rounded-xl border border-orange-200">
                                 <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-orange-50 p-6">
-                                    <div className="text-base font-bold leading-6 text-gray-900">Kundli based Personalised Predictions</div>
+                                    <div className="text-base font-bold leading-6 text-gray-900">{lang === "Hindi" ? "कुंडली पर आधारित भविष्यवाणियां" : "Kundli based Personalised Predictions"}</div>
                                 </div>
                                 <dl className="-my-3 divide-y divide-orange-100 px-6 py-4 text-sm leading-6">
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Your kundli based daily prediction</dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली के आधार पर दैनिक भविष्यवाणी" : "Your kundli based daily prediction"}</dt>
                                         <a
                                             className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"daily-personalised-forecast.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "hindi/daily-personalised-forecast" : "daily-personalised-forecast.php"}`}
                                             onClick={(e) => handleClick(e, "daily-personalised-forecast.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Your Biorhythms for today  </dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपका दैनिक जीवन चक्र" : "Your Biorhythms for today"}  </dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"biorhythm.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "hindi/biorhythm.php" : "biorhythm.php"}`}
                                             onClick={(e) => handleClick(e, "biorhythm.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Get your ascendant report</dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपका लग्न रिपोर्ट" : "Get your ascendant report"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"calculator/ascendant-report.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/ascendant-report.php" : "/calculator/ascendant-report.php"}`}
                                             onClick={(e) => handleClick(e, "calculator/ascendant-report.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                 </dl>
                             </li>
                             <li className="overflow-hidden rounded-xl border border-orange-200">
                                 <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-orange-50 p-6">
-                                    <div className="text-base font-bold leading-6 text-gray-900">Kundli Predictions and Analysis</div>
+                                    <div className="text-base font-bold leading-6 text-gray-900">{lang === "Hindi" ? "कुंडली आधारित भविष्यवाणियां और उसका विश्लेषण" : "Kundli Predictions and Analysis"}</div>
                                 </div>
                                 <dl className="-my-3 divide-y divide-orange-100 px-6 py-4 text-sm leading-6">
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Read your kundli predictions here </dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली पर आधारित भविष्यवाणी" : "Read your kundli predictions here"} </dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"kundli-predictions.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "hindi/kundli-predictions.php" : "kundli-predictions.php"}`}
                                             onClick={(e) => handleClick(e, "kundli-predictions.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Numerology analysis for you</dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपका अंकज्योतिष विश्लेषण" : "Numerology analysis for you"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"calculator/numerology-calculator.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "/hindi/calculator/numerology-calculator.php" : "calculator/numerology-calculator.php"}`}
                                             onClick={(e) => handleClick(e, "calculator/numerology-calculator.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                     <div className="flex justify-between gap-x-4 py-3">
-                                        <dt className="text-gray-500">Numerology Favorable Points</dt>
+                                        <dt className="text-gray-500">{lang === "Hindi" ? "आपका अंकज्योतिष के अनुकूल अंक" : "Numerology Favorable Points"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${"favorable-points.php"}`}
+                                            href={`${mainURL}${lang === "Hindi" ? "/hindi/favorable-points.php" : "favorable-points.php"}`}
                                             onClick={(e) => handleClick(e, "favorable-points.php")}
                                         >
-                                            Read more
+                                            {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
                                     </div>
                                 </dl>
@@ -606,7 +606,7 @@ export default function Kundli({ data }) {
                 </div>
                 <div className={`bg-[#091d5a] mt-5 rounded-lg`}>
                     <div className="py-4 mx-auto">
-                        <p className="text-lg text-center text-white font-bold">Free Vedic Astrology Calculators</p>
+                        <p className="text-lg text-center text-white font-bold">{lang === "Hindi" ? "निःशुल्क वैदिक ज्योतिष कैलकुलेटर" : "Free Vedic Astrology Calculators"}</p>
                         <ul className="flex flex-row flex-wrap gap-4 pt-4 pb-4 justify-center">
                             {VedicAstrologyCalculators.map((item) => (
                                 <li key={item.name} className="lg:w-[9%] md:w-[15%] w-[28%]">
@@ -616,7 +616,7 @@ export default function Kundli({ data }) {
                                         onClick={(e) => handleClick(e, item.link)}
                                     >
                                         <Image width={100} height={50} className="w-[100px] aspect-square rounded-[50px]" src={item.imageUrl} alt={item.name} />
-                                        <span>{item.text}</span>
+                                        <span>{lang==="Hindi"?item.hindiName:item.text}</span>
                                     </a>
                                 </li>
                             ))}
@@ -624,6 +624,6 @@ export default function Kundli({ data }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
