@@ -444,7 +444,7 @@ export default function Kundli({ data }) {
                             <div key={index} className="w-full mx-auto shadow-xl border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
                                 <a
                                     href={`${MAIN_URL}${lang === "Hindi" ? item.hindiLink : item.link}`}
-                                    onClick={(e) => handleClickRouter(e, item.link)}
+                                    onClick={(e) => handleClickRouter(e, lang === "Hindi" ? item.hindiLink : item.link)}
                                     className="block flex gap-4 min-h-16 flex-row justify-start items-center">
                                     <Image width={50} height={50} src={item.image} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' alt={lang === "Hindi" ? item.hindiName : item.name} />
                                     <h5 className="text-orange-600 text-sm text-left font-bold">{lang === "Hindi" ? item.hindiName : item.name}</h5>
@@ -493,7 +493,7 @@ export default function Kundli({ data }) {
                                         <a
                                             className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
                                             href={`${mainURL}${lang === "Hindi" ? item.hindiUrl : item.url}`}
-                                            onClick={(e) => handleClick(e, item.url)}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? item.hindiUrl : item.url)}
                                         >
                                             <Image src={item.img} width={80} height={50} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-lg' alt={lang === "Hindi" ? item.hindiName : item.name} />
                                             <span>{lang === "Hindi" ? item.hindiName : item.name}</span>
@@ -516,7 +516,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपको कौन सा राशि रत्न पहनना चाहिए" : "Rudraksha for your Kundli"}</dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/rudraksha-suggestion.php" : "calculator/rudraksha-suggestion.php"}`}
-                                            onClick={(e) => handleClick(e, "calculator/rudraksha-suggestion.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/calculator/rudraksha-suggestion.php" : "calculator/rudraksha-suggestion.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -525,7 +525,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली के लिए रुद्राक्ष" : "Which gemstones you can wear?"}</dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/gemstone-suggestion" : "calculator/gemstone-suggestion.php"}`}
-                                            onClick={(e) => handleClick(e, "calculator/gemstone-suggestion.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/calculator/gemstone-suggestion" : "calculator/gemstone-suggestion.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -542,7 +542,7 @@ export default function Kundli({ data }) {
                                         <a
                                             className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "hindi/daily-personalised-forecast" : "daily-personalised-forecast.php"}`}
-                                            onClick={(e) => handleClick(e, "daily-personalised-forecast.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/daily-personalised-forecast" : "daily-personalised-forecast.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -551,7 +551,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका दैनिक जीवन चक्र" : "Your Biorhythms for today"}  </dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "hindi/biorhythm.php" : "biorhythm.php"}`}
-                                            onClick={(e) => handleClick(e, "biorhythm.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/biorhythm.php" : "biorhythm.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -560,7 +560,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका लग्न रिपोर्ट" : "Get your ascendant report"}</dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/ascendant-report.php" : "/calculator/ascendant-report.php"}`}
-                                            onClick={(e) => handleClick(e, "calculator/ascendant-report.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/calculator/ascendant-report.php" : "/calculator/ascendant-report.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -576,7 +576,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली पर आधारित भविष्यवाणी" : "Read your kundli predictions here"} </dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "hindi/kundli-predictions.php" : "kundli-predictions.php"}`}
-                                            onClick={(e) => handleClick(e, "kundli-predictions.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/kundli-predictions.php" : "kundli-predictions.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -585,7 +585,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका अंकज्योतिष विश्लेषण" : "Numerology analysis for you"}</dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "/hindi/calculator/numerology-calculator.php" : "calculator/numerology-calculator.php"}`}
-                                            onClick={(e) => handleClick(e, "calculator/numerology-calculator.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "/hindi/calculator/numerology-calculator.php" : "calculator/numerology-calculator.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -594,7 +594,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका अंकज्योतिष के अनुकूल अंक" : "Numerology Favorable Points"}</dt>
                                         <a className="text-emerald-500 font-semibold"
                                             href={`${mainURL}${lang === "Hindi" ? "/hindi/favorable-points.php" : "favorable-points.php"}`}
-                                            onClick={(e) => handleClick(e, "favorable-points.php")}
+                                            onClick={(e) => handleClick(e, lang === "Hindi" ? "/hindi/favorable-points.php" : "favorable-points.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
                                         </a>
@@ -612,11 +612,11 @@ export default function Kundli({ data }) {
                                 <li key={item.name} className="lg:w-[9%] md:w-[15%] w-[28%]">
                                     <a
                                         className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
-                                        href={`${mainURL}${item.link}`}
-                                        onClick={(e) => handleClick(e, item.link)}
+                                        href={`${mainURL}${lang === "Hindi" ? item.hindiLink : item.link}`}
+                                        onClick={(e) => handleClick(e, lang === "Hindi" ? item.hindiLink : item.link)}
                                     >
-                                        <Image width={100} height={50} className="w-[100px] aspect-square rounded-[50px]" src={item.imageUrl} alt={item.name} />
-                                        <span>{lang==="Hindi"?item.hindiName:item.text}</span>
+                                        <Image width={100} height={50} className="w-[100px] aspect-square rounded-[50px]" src={item.imageUrl} alt={lang === "Hindi" ? item.hindiName : item.name} />
+                                        <span>{lang === "Hindi" ? item.hindiName : item.text}</span>
                                     </a>
                                 </li>
                             ))}

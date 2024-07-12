@@ -34,13 +34,17 @@ export default function CalculatorForm({ routing, lang = "English" }) {
   const [Mobile, setMobile] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("")
   const [selectedDateTime, setselectedDateTime] = useState("Please Select DOB");
-
+  const [DateNew, setDateNew] = useState("");
+  const [TimeNew, setTimeNew] = useState("");
   useEffect(() => {
     const GetUserData = async () => {
       const savedInputValue = getLocalStorageItem("AutoFillFormDataKey");
       if (savedInputValue !== null) {
         setGender(savedInputValue.gender);
         setName(savedInputValue.name);
+        const [datePart, timePart] = savedInputValue.dob.split(" ")
+        setDateNew(datePart)
+        setTimeNew(timePart)
         setselectedDateTime(savedInputValue.dob);
         setSelectedBirthLocation({
           city_name: savedInputValue.birth_place,
@@ -83,10 +87,6 @@ export default function CalculatorForm({ routing, lang = "English" }) {
 
     let errorMessages = [];
 
-    // Check if the selected date time is valid
-    if (selectedDateTime === "Please Select DOB") {
-      errorMessages.push("Please Select DOB");
-    }
 
     // Check if the name is empty
     if (Name === "") {
@@ -111,110 +111,87 @@ export default function CalculatorForm({ routing, lang = "English" }) {
     }
 
 
-
-    if (selectedDateTime || selectedDateTime) {
-      const convertDateTime = (dateTimeStr) => {
-        const date = new Date(dateTimeStr);
-        console.log("dateTimeStr", date);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
-
-        const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        return formattedDate;
-
-      };
-
-      const formattedDateTime = convertDateTime(selectedDateTime)
-
-      function formatDateIn(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        return `${month}-${day}-${year} ${hours}:${minutes}`;
-      }
-
-      const CurrentDate = formatDateIn(new Date());
-
-      const [DatePart] = formattedDateTime.split(" ");
-      const dataForTimeZone = {
-        latitude: selectedBirthLocation.latitude,
-        longitude: selectedBirthLocation.longitude,
-        date: DatePart,
-      };
-
-
-      let TimeZone;
-      try {
-        const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-        if (astrologyData.status === true) {
-          TimeZone = astrologyData.timezone
-        }
-      } catch (error) { }
-
-
-      const DateFormateforAstrologyAPI = formatDate(formattedDateTime);
-
-      const data = {
-        apiKey: API_KEY,
-        dob: formattedDateTime,
-        birth_place_longitude: selectedBirthLocation.latitude,
-        birth_place_latitude: selectedBirthLocation.longitude,
-        cdate: CurrentDate,
-      };
-
-      const UserInfoData = {
-        name: Name,
-        dob: formattedDateTime,
-        birth_place_longitude: selectedBirthLocation.latitude,
-        birth_place_latitude: selectedBirthLocation.longitude,
-      };
-
-      const UserData = JSON.stringify(data);
-      const AstroDataBack = {
-        dobData: DateFormateforAstrologyAPI,
-        birth_place_longitude: selectedBirthLocation.latitude,
-        birth_place_latitude: selectedBirthLocation.longitude,
-        tzone: TimeZone,
-      }
-
-      const datatoHitBasic = {
-        day: AstroDataBack.dobData.day,
-        month: AstroDataBack.dobData.month,
-        year: AstroDataBack.dobData.year,
-        hour: AstroDataBack.dobData.hour,
-        min: AstroDataBack.dobData.min,
-        lat: AstroDataBack.birth_place_latitude,
-        lon: AstroDataBack.birth_place_longitude,
-        tzone: AstroDataBack.tzone,
-      };
-      const DataAutoFill = {
-        gender: Gender,
-        name: Name,
-        birth_place: selectedBirthLocation.city_name,
-        birth_place_longitude: selectedBirthLocation.longitude,
-        birth_place_latitude: selectedBirthLocation.latitude,
-        dob: formattedDateTime,
-      };
-
-      try {
-        const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
-        setLocalStorageItem("AstroDetailKey", AstroDetail);
-      } catch (error) { }
-
-      try {
-        setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
-        setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
-        router.push(routing);
-      } catch (error) {
-        console.log(error);
-      }
+    function formatDateIn(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${month}-${day}-${year} ${hours}:${minutes}`;
     }
+
+    const CurrentDate = formatDateIn(new Date());
+    const dataForTimeZone = {
+      latitude: selectedBirthLocation.latitude,
+      longitude: selectedBirthLocation.longitude,
+      date: DateNew,
+    };
+    
+    
+    let TimeZone;
+    try {
+      const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
+      if (astrologyData.status === true) {
+        TimeZone = astrologyData.timezone
+      }
+    } catch (error) { }
+    const DOB_DOT = DateNew + " " + TimeNew
+    const DateFormateforAstrologyAPI = formatDate(DOB_DOT);
+
+    const data = {
+      apiKey: API_KEY,
+      dob: DOB_DOT,
+      birth_place_longitude: selectedBirthLocation.latitude,
+      birth_place_latitude: selectedBirthLocation.longitude,
+      cdate: CurrentDate,
+    };
+
+    const UserInfoData = {
+      name: Name,
+      dob: DOB_DOT,
+      birth_place_longitude: selectedBirthLocation.latitude,
+      birth_place_latitude: selectedBirthLocation.longitude,
+    };
+
+    const UserData = JSON.stringify(data);
+    const AstroDataBack = {
+      dobData: DateFormateforAstrologyAPI,
+      birth_place_longitude: selectedBirthLocation.latitude,
+      birth_place_latitude: selectedBirthLocation.longitude,
+      tzone: TimeZone,
+    }
+
+    const datatoHitBasic = {
+      day: AstroDataBack.dobData.day,
+      month: AstroDataBack.dobData.month,
+      year: AstroDataBack.dobData.year,
+      hour: AstroDataBack.dobData.hour,
+      min: AstroDataBack.dobData.min,
+      lat: AstroDataBack.birth_place_latitude,
+      lon: AstroDataBack.birth_place_longitude,
+      tzone: AstroDataBack.tzone,
+    };
+    const DataAutoFill = {
+      gender: Gender,
+      name: Name,
+      birth_place: selectedBirthLocation.city_name,
+      birth_place_longitude: selectedBirthLocation.longitude,
+      birth_place_latitude: selectedBirthLocation.latitude,
+      dob: DOB_DOT,
+    };
+    try {
+      const AstroDetail = await fetchAstrologyData(datatoHitBasic, "astro_details");
+      setLocalStorageItem("AstroDetailKey", AstroDetail);
+    } catch (error) { }
+
+    try {
+      setLocalStorageItem("AutoFillFormDataKey", DataAutoFill);
+      setLocalStorageItem("AstroAPICalculatorKey", AstroDataBack);
+      router.push(routing);
+    } catch (error) {
+      console.log(error);
+    }
+  
 
   };
 
@@ -240,7 +217,7 @@ export default function CalculatorForm({ routing, lang = "English" }) {
             </div>
           </div>
           : null}
-        <div className="space-y-4 mt-5 flex items-center space-x-10 space-y-0">
+        <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
 
           {GenderType.map((item) => (
             <div key={item?.id} className="flex items-center">
@@ -255,7 +232,7 @@ export default function CalculatorForm({ routing, lang = "English" }) {
               <label
                 htmlFor={item?.id}
                 className="ml-3 block text-sm font-medium leading-6 text-gray-900">
-                {item?.title}
+                { lang === "Hindi" ? ( item?.titleHindi ) : ( item?.title ) }
               </label>
             </div>
           ))}
@@ -396,21 +373,41 @@ export default function CalculatorForm({ routing, lang = "English" }) {
           </div>
         </Combobox>
 
-        <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div className="sm:col-span-6">
+        <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 max-md:grid-cols-2">
+          <div className="">
             <label
               htmlFor="first-name"
               className="block text-sm font-medium leading-6 text-gray-900">
               {lang === "Hindi" ? "जन्म तिथि" : "Date of Birth"}
             </label>
             <div className="mt-2">
-              <Datetime
-                inputProps={inputProps}
-                // onChange={handleDateChange}
-                onChange={(e) => setselectedDateTime(e.toString())}
-                closeOnClickOutside={true}
-                className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
-              />
+            <input
+              type="date"
+              name="name"
+              id="name"
+              value={DateNew}
+              onChange={(value) => setDateNew(value.target.value)}
+              className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              placeholder="Enter Your Name"
+            />
+            </div>
+            </div>
+          <div className="">
+            <label
+              htmlFor="first-name"
+              className="block text-sm font-medium leading-6 text-gray-900">
+              {lang === "Hindi" ? "जन्म का समय" : "Time of Birth"}
+            </label>
+            <div className="mt-2">
+            <input
+              type="time"
+              name="name"
+              id="name"
+              value={TimeNew}
+              onChange={(value) => setTimeNew(value.target.value)}
+              className="block w-full bg-gray-100 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              placeholder="Enter Your Name"
+            />
             </div>
           </div>
         </div>

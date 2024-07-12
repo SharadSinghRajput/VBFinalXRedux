@@ -287,9 +287,7 @@ export default function Login({pageslug}) {
       <>      
       {AllProcessComplete ? <>
       <div className='flex-col flex justify-center items-center text-green-500 w-full'>
-
         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check-big"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-        
       </div>
       </>:<>
       {NewUserData ? <>
