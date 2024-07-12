@@ -6,7 +6,7 @@ export default async function handler(HoroscopeSign, TypeToHit, HoroscopeDayWise
   try {
     const options = {
       method: 'POST',
-      url: `${API_NEW_URL}aapkikismat-api-horoscope.php?zodiac_sign=${HoroscopeSign}&api_key=${API_KEY}&language=${language}&type=${TypeToHit}&horoscopeperiod=${HoroscopeDayWise}&date=${finalFormattedDate}`,
+      url: `https://www.aapkikismat.com/aapkikismat-api-horoscope.php?zodiac_sign=${HoroscopeSign}&api_key=${API_KEY}&language=${language}&type=${TypeToHit}&horoscopeperiod=${HoroscopeDayWise}&date=${finalFormattedDate}`,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -15,7 +15,7 @@ export default async function handler(HoroscopeSign, TypeToHit, HoroscopeDayWise
     };
 
     const response = await axios.request(options);
-    
+    console.log(response);
     if (response.data.status === "success") {
       return response.data.message;
     }else{
