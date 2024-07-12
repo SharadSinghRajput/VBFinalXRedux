@@ -524,7 +524,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली के लिए रुद्राक्ष" : "Which gemstones you can wear?"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/gemstone-suggestion" : "calculator/gemstone-suggestion.php"}`}
+                                            href={`${lang === "Hindi" ? "hindi/calculator/gemstone-suggestion" : "calculator/gemstone-suggestion.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/calculator/gemstone-suggestion" : "calculator/gemstone-suggestion.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
@@ -541,7 +541,7 @@ export default function Kundli({ data }) {
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली के आधार पर दैनिक भविष्यवाणी" : "Your kundli based daily prediction"}</dt>
                                         <a
                                             className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "hindi/daily-personalised-forecast" : "daily-personalised-forecast.php"}`}
+                                            href={`${lang === "Hindi" ? "hindi/daily-personalised-forecast" : "daily-personalised-forecast.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/daily-personalised-forecast" : "daily-personalised-forecast.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
@@ -550,7 +550,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका दैनिक जीवन चक्र" : "Your Biorhythms for today"}  </dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "hindi/biorhythm.php" : "biorhythm.php"}`}
+                                            href={`${lang === "Hindi" ? "hindi/biorhythm.php" : "biorhythm.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/biorhythm.php" : "biorhythm.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
@@ -559,7 +559,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका लग्न रिपोर्ट" : "Get your ascendant report"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/ascendant-report.php" : "/calculator/ascendant-report.php"}`}
+                                            href={`${lang === "Hindi" ? "hindi/calculator/ascendant-report.php" : "/calculator/ascendant-report.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/calculator/ascendant-report.php" : "/calculator/ascendant-report.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
@@ -575,7 +575,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपकी कुंडली पर आधारित भविष्यवाणी" : "Read your kundli predictions here"} </dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "hindi/kundli-predictions.php" : "kundli-predictions.php"}`}
+                                            href={`${lang === "Hindi" ? "hindi/kundli-predictions.php" : "kundli-predictions.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/kundli-predictions.php" : "kundli-predictions.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
@@ -584,7 +584,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका अंकज्योतिष विश्लेषण" : "Numerology analysis for you"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "/hindi/calculator/numerology-calculator.php" : "calculator/numerology-calculator.php"}`}
+                                            href={`${lang === "Hindi" ? "/hindi/calculator/numerology-calculator.php" : "calculator/numerology-calculator.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "/hindi/calculator/numerology-calculator.php" : "calculator/numerology-calculator.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}
@@ -593,7 +593,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपका अंकज्योतिष के अनुकूल अंक" : "Numerology Favorable Points"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "/hindi/favorable-points.php" : "favorable-points.php"}`}
+                                            href={`${lang === "Hindi" ? "/hindi/favorable-points.php" : "favorable-points.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "/hindi/favorable-points.php" : "favorable-points.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}

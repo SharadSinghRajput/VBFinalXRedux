@@ -18,6 +18,7 @@ import MetaData from "./pageAssets/MetaData";
 import Title from "./pageAssets/Title";
 
 export default function Kundli({ data }) {
+  const router = useRouter();
   const [GemstoneSuggestion, setGemstoneSuggestion] = useState("");
 
   const [AscendantHindi, setAscendantHindi] = useState('');
@@ -41,6 +42,14 @@ export default function Kundli({ data }) {
           setGemstoneSuggestion(astrologyData);
           setInLocal(astrologyData?.asc_report?.report, "asc_report")
         } catch (error) {}
+      }else{
+        
+        if(data.language == "Hindi"){
+          router.push("/calculator-in-hindi/ascendant-calculator");
+        }else{
+          router.push("/calculator/ascendant-calculator.php");
+        }
+        
       }
     };
     fetchData();

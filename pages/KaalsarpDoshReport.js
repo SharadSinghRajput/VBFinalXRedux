@@ -18,6 +18,7 @@ import ParagraphLineLoder from './pageAssets/ParagraphLineLoder';
 
 
 export default function KaalsarpDoshReport({ data }) {
+  const router = useRouter();
     const [HoroscopeChart, setHoroscopeChart] = useState("");
     const [One_line, setOne_line] = useState("");
     const [Report, setReport] = useState("");
@@ -44,6 +45,13 @@ export default function KaalsarpDoshReport({ data }) {
                   setInLocal(astrologyData?.one_line, "one_line")
                   setInLocal(astrologyData?.report?.report, "report")
               } catch (error) {
+              }
+            }else{
+
+              if(data.language == "Hindi"){
+                router.push("/calculator-in-hindi/kaalsarp-dosh-calculator");
+              }else{
+                router.push("/calculator/kaalsarp-dosh-calculator.php");
               }
             }
         }
