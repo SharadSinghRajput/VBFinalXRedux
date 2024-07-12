@@ -25,7 +25,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/aries.php`,
       imgSrc: AriesImg,
       link: `/horoscope/${dayType}/aries.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/mesh.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/mesh`
     },
     {
       nameHindi: "वृषभ",
@@ -33,7 +33,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/taurus.php`,
       imgSrc: TaurusImg,
       link: `/horoscope/${dayType}/taurus.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/vrshabh.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/vrishabh`
     },
     {
       nameHindi: "मिथुन",
@@ -41,7 +41,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/gemini.php`,
       imgSrc: GeminiImg,
       link: `/horoscope/${dayType}/gemini.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/mithun.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/mithun`
     },
     {
       nameHindi: "कर्क",
@@ -49,7 +49,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/cancer.php`,
       imgSrc: CancerImg,
       link: `/horoscope/${dayType}/cancer.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/kark.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/kark`
     },
     {
       nameHindi: "सिंह",
@@ -57,7 +57,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/leo.php`,
       imgSrc: LeoImg,
       link: `/horoscope/${dayType}/leo.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/singh.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/singh`
     },
     {
       nameHindi: "कन्या",
@@ -65,7 +65,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/virgo.php`,
       imgSrc: VirgoImg,
       link: `/horoscope/${dayType}/virgo.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/kanya.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/kanya`
     },
     {
       nameHindi: "तुला",
@@ -73,7 +73,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/libra.php`,
       imgSrc: LibraImg,
       link: `/horoscope/${dayType}/libra.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/tula.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/tula`
     },
     {
       nameHindi: "वृश्चिक",
@@ -81,7 +81,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/scorpio.php`,
       imgSrc: ScorpioImg,
       link: `/horoscope/${dayType}/scorpio.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/vrshchik.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/vrshchik`
     },
     {
       nameHindi: "धनु",
@@ -89,7 +89,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/sagittarius.php`,
       imgSrc: SagittariusImg,
       link: `/horoscope/${dayType}/sagittarius.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/dhanu.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/dhanu`
     },
     {
       nameHindi: "मकर",
@@ -97,7 +97,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/capricorn.php`,
       imgSrc: CapricornImg,
       link: `/horoscope/${dayType}/capricorn.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/makar.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/makar`
     },
     {
       nameHindi: "कुम्भ",
@@ -105,7 +105,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/aquarius.php`,
       imgSrc: AquariusImg,
       link: `/horoscope/${dayType}/aquarius.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/kumbh.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/kumbh`
     },
     {
       nameHindi: "मीन",
@@ -113,7 +113,7 @@ export const Horoscope = (dayType = "daily-horoscope") => {
       url: `horoscope/${dayType}/pisces.php`,
       imgSrc: PiscesImg,
       link: `/horoscope/${dayType}/pisces.php`,
-      hindiLink: `/hindi/horoscope/${dayType}/meen.php`
+      hindiLink: `/horoscope-in-hindi/${dayType}/meen`
     },
   ];
 };
