@@ -71,7 +71,7 @@ export default function Kundli({ data }) {
       temperature: 0.5,
       max_tokens: 800
     };
-
+// Added Comment 
     const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
       method: 'POST',
       headers: {
