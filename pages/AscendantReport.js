@@ -115,7 +115,7 @@ export default function Kundli({ data }) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer sk-rVgkWDpga53RsZLRr3iVT3BlbkFJFSQtfHqoJb1c3weX'
       },
       body: JSON.stringify(dataGpt)
     });
