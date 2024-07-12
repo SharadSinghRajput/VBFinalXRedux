@@ -515,7 +515,7 @@ export default function Kundli({ data }) {
                                     <div className="flex justify-between gap-x-4 py-3">
                                         <dt className="text-gray-500">{lang === "Hindi" ? "आपको कौन सा राशि रत्न पहनना चाहिए" : "Rudraksha for your Kundli"}</dt>
                                         <a className="text-emerald-500 font-semibold"
-                                            href={`${mainURL}${lang === "Hindi" ? "hindi/calculator/rudraksha-suggestion.php" : "calculator/rudraksha-suggestion.php"}`}
+                                            href={`${lang === "Hindi" ? "hindi/calculator/rudraksha-suggestion.php" : "calculator/rudraksha-suggestion.php"}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? "hindi/calculator/rudraksha-suggestion.php" : "calculator/rudraksha-suggestion.php")}
                                         >
                                             {lang === "Hindi" ? "और पढ़ें" : "Read more"}

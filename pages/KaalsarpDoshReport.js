@@ -10,12 +10,11 @@ import { formatDate } from "../config/formatDatetoAstrologyAPI";
 import fetchAstrologyData from "../config/getAstroAPI";
 import HoroscopeFetchAPI from "../config/horoscopeFetchAPI";
 import { getLocalStorageItem, setLocalStorageItem } from "../config/localStorage";
+import { GPT_URLS, GPT_Key } from "../config/config";
 import Title from './pageAssets/TitlewithBG';
 import Description from './pageAssets/Description';
 import MetaData from './pageAssets/MetaData';
 import ParagraphLineLoder from './pageAssets/ParagraphLineLoder';
-
-
 
 
 export default function KaalsarpDoshReport({ data }) {
@@ -82,11 +81,11 @@ export default function KaalsarpDoshReport({ data }) {
       max_tokens: 800
     };
 
-    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+    const response = await fetch(GPT_URLS, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': GPT_Key
       },
       body: JSON.stringify(dataGpt)
     });
