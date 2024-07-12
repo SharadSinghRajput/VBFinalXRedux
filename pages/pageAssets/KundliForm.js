@@ -269,10 +269,10 @@ const handleClick = (e, url) => {
           ))}
         </div>
         <div className="relative mt-7">
-          <label
+        <label
             htmlFor="name"
-            className="absolute -top-2 left-2 inline-block bg-white px-1 text-xs font-medium text-gray-900">
-            { language === "Hindi" ? ( <>नाम</> ) : ( <>Name</> ) }
+            className="block text-sm font-medium leading-6 text-gray-900">
+            {language === "Hindi" ? "नाम" : "Name"}
           </label>
           <input
             type="text"

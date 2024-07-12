@@ -217,7 +217,7 @@ export default function CalculatorForm({ routing, lang = "English" }) {
             </div>
           </div>
           : null}
-        <div className="space-y-4 mt-5 flex items-center space-x-10 space-y-0">
+        <div className="space-y-4 mt-5 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
 
           {GenderType.map((item) => (
             <div key={item?.id} className="flex items-center">
@@ -232,7 +232,7 @@ export default function CalculatorForm({ routing, lang = "English" }) {
               <label
                 htmlFor={item?.id}
                 className="ml-3 block text-sm font-medium leading-6 text-gray-900">
-                {item?.title}
+                { lang === "Hindi" ? ( item?.titleHindi ) : ( item?.title ) }
               </label>
             </div>
           ))}
