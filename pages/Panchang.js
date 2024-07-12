@@ -17,93 +17,87 @@ export default function Questions({language = "English"}) {
   const [mainURL, setMainURL] = useState(MAIN_URL);
 
   const GetPanchang = async () => {
-    let Latitude;
-    let Longitude;
-    const getUserLocationPromise = () => {
-        return new Promise((resolve) => {
-            getUserLocation(function (location) {
-                resolve(location);
-            });
-        });
+    // let Latitude;
+    // let Longitude;
+    // const getUserLocationPromise = () => {
+    //     return new Promise((resolve) => {
+    //         getUserLocation(function (location) {
+    //             resolve(location);
+    //         });
+    //     });
+    // };
+
+    // const location = await getUserLocationPromise();
+
+    // Latitude = parseFloat(location.Latitude);
+    // Longitude = parseFloat(location.Longitude);
+
+    function formatDateIn(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    const CurrentDate = formatDateIn(new Date());
+    const [DatePart] = CurrentDate.split(" ");
+    const DateFormateforAstrologyAPI = formatDate(CurrentDate);
+
+   
+    
+    function formatDateShow(dateString) {
+        // Parse the date string
+        let date = new Date(dateString);
+        
+        // Define month names
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        
+        // Get the day, month, and year
+        let day = date.getDate();
+        let month = monthNames[date.getMonth()];
+        let year = date.getFullYear();
+        
+        // Format the date as "DD Month YYYY"
+        let formattedDate = `${day} ${month} ${year}`;
+        
+        return formattedDate;
+    }
+    
+    setDatetoShow(formatDateShow(DatePart));
+
+
+
+    // let TimeZone;
+    // try {
+    //     const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
+    //     if (astrologyData.status === true) {
+    //         TimeZone = astrologyData.timezone;
+    //     }
+    // } catch (error) {
+    //     console.error(error);
+    // }
+
+    const data = {
+        day: DateFormateforAstrologyAPI.day,
+        month: DateFormateforAstrologyAPI.month,
+        year: DateFormateforAstrologyAPI.year,
+        hour: DateFormateforAstrologyAPI.hour,
+        min: DateFormateforAstrologyAPI.min,
+        lat: 28.6139,
+        lon: 77.2088,
+        tzone: 5.5,
     };
 
-    const location = await getUserLocationPromise();
-
-    Latitude = parseFloat(location.Latitude);
-    Longitude = parseFloat(location.Longitude);
-
-    if (Latitude && Longitude) {
-        function formatDateIn(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, "0");
-            const day = String(date.getDate()).padStart(2, "0");
-            const hours = String(date.getHours()).padStart(2, "0");
-            const minutes = String(date.getMinutes()).padStart(2, "0");
-            return `${year}-${month}-${day} ${hours}:${minutes}`;
-        }
-
-        const CurrentDate = formatDateIn(new Date());
-        const [DatePart] = CurrentDate.split(" ");
-        const DateFormateforAstrologyAPI = formatDate(CurrentDate);
-
-        const dataForTimeZone = {
-            latitude: Latitude,
-            longitude: Longitude,
-            date: DatePart,
-        };
-        
-        function formatDateShow(dateString) {
-            // Parse the date string
-            let date = new Date(dateString);
-            
-            // Define month names
-            const monthNames = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
-            
-            // Get the day, month, and year
-            let day = date.getDate();
-            let month = monthNames[date.getMonth()];
-            let year = date.getFullYear();
-            
-            // Format the date as "DD Month YYYY"
-            let formattedDate = `${day} ${month} ${year}`;
-            
-            return formattedDate;
-        }
-        
-        setDatetoShow(formatDateShow(DatePart));
-
-
-
-        let TimeZone;
-        try {
-            const astrologyData = await fetchAstrologyData(dataForTimeZone, "timezone_with_dst");
-            if (astrologyData.status === true) {
-                TimeZone = astrologyData.timezone;
-            }
-        } catch (error) {
-            console.error(error);
-        }
-
-        const data = {
-            day: DateFormateforAstrologyAPI.day,
-            month: DateFormateforAstrologyAPI.month,
-            year: DateFormateforAstrologyAPI.year,
-            hour: DateFormateforAstrologyAPI.hour,
-            min: DateFormateforAstrologyAPI.min,
-            lat: Latitude,
-            lon: Longitude,
-            tzone: TimeZone,
-        };
-
-        try {
-            const basicPanchang = await fetchAstrologyData(data, "advanced_panchang");
-            setPanchang(basicPanchang);
-        } catch (error) {
-            console.error(error);
-        }
+    try {
+        const basicPanchang = await fetchAstrologyData(data, "advanced_panchang");
+        setPanchang(basicPanchang);
+    } catch (error) {
+        console.error(error);
     }
 };
 
@@ -116,9 +110,7 @@ useEffect(() => {
 
 
 function convertTimestamp(timestamp) {
-    // Convert milliseconds to seconds
     let date = new Date(parseInt(timestamp));
-    // Format the date to a string
     let formattedDate = date.getFullYear() + '-' +
     ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
     ('0' + date.getDate()).slice(-2) + ' ' +
@@ -151,7 +143,7 @@ const handleClick = (e, url) => {
                   <h3 className="text-lg font-semibold">
                     आज का <span>पंचांग</span>
                   </h3>
-                  <p className="text-sm">नोएडा, उत्तर प्रदेश, भारत</p>
+                  <p className="text-sm">नई दिल्ली, भारत</p>
                 </>
               ) 
               :
@@ -160,7 +152,7 @@ const handleClick = (e, url) => {
                   <h3 className="text-lg font-semibold">
                     Aaj Ka <span>Panchang</span>
                   </h3>
-                  <p className="text-sm">Noida, uttar Pradesh, India</p>
+                  <p className="text-sm">New Delhi, India</p>
                 </>
               )
             }
@@ -171,15 +163,15 @@ const handleClick = (e, url) => {
               <a
                 type="button"
                 className="rounded text-xs bg-orange-500 px-2 py-2 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                href={`${mainURL}today-panchang.php`}
-                onClick={(e) => handleClick(e, `today-panchang.php`)}
+                href={`${mainURL}hindi-panchang`}
+                onClick={(e) => handleClick(e, `/hindi-panchang`)}
               > विस्तृत पंचांग</a>
             </>: <>
               <a
                 type="button"
                 className="rounded text-xs bg-orange-500 px-2 py-2 font-normal text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                href={`${mainURL}today-panchang.php`}
-                onClick={(e) => handleClick(e, `today-panchang.php`)}
+                href={`${mainURL}/panchang`}
+                onClick={(e) => handleClick(e, `panchang/`)}
               > Detailed Panchang </a>
             </>}
           </div>
