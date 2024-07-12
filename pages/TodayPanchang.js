@@ -142,19 +142,18 @@ export default function DefaultPage({ data }) {
     return formattedDate;
   }
 
-
-  const chatGPTAnswer = async (Text) =>  {
+  const chatGPTAnswer = async (Text) => {
     const dataGpt = {
-      prompt: `Convert all value in hindi '${Text}'`,
+      prompt: `convert this paragraph in hindi '${Text}'`,
       temperature: 0.5,
       max_tokens: 800
     };
-
-    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization':`Bearer ${apiKey}`,
       },
       body: JSON.stringify(dataGpt)
     });
@@ -164,9 +163,8 @@ export default function DefaultPage({ data }) {
     }
 
     const result = await response.json();
-    const answer = result.choices[0].text;
-    console.log(answer);
-    return JSON.stringify(answer);
+    const answer = result.choices[0].text.trim();
+    return answer;
   }
 
 

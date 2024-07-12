@@ -88,12 +88,12 @@ export default function KaalsarpDoshReport({ data }) {
       temperature: 0.5,
       max_tokens: 800
     };
-
-    const response = await fetch(GPT_URLS, {
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': GPT_Key
+        'Authorization':`Bearer ${apiKey}`,
       },
       body: JSON.stringify(dataGpt)
     });

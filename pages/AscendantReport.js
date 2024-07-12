@@ -80,12 +80,12 @@ export default function Kundli({ data }) {
       temperature: 0.5,
       max_tokens: 800
     };
-// Added Comment 
-    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization':`Bearer ${apiKey}`,
       },
       body: JSON.stringify(dataGpt)
     });
@@ -95,10 +95,9 @@ export default function Kundli({ data }) {
     }
 
     const result = await response.json();
-    const answer = result.choices[0].text;
-    return JSON.stringify(answer);
+    const answer = result.choices[0].text.trim();
+    return answer;
   }
-
 
 
   return (

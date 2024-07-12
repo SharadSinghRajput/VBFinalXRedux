@@ -21,8 +21,8 @@ export default function CalculatorForm({ routing, lang = "English" }) {
 
 
   const GenderType = [
-    { id: "RepMale", title: "Male" },
-    { id: "RepFemale", title: "Female" },
+    { id: "RepMale", title: "Male", titleHindi: "पुरुष"},
+    { id: "RepFemale", title: "Female", titleHindi: "महिला"},
   ];
 
 
