@@ -143,7 +143,7 @@ export default function Kundli({data}) {
     const [HoroscopeChartBtnActive, setHoroscopeChartBtnActive] = useState("D1");
     const [SvgChart, setSvgChart] = useState('');
     
-    
+    console.log(HoroscopeChart);
 
 
 
@@ -151,6 +151,7 @@ export default function Kundli({data}) {
     const fetchData = async () => {
 
         const GetData = getLocalStorageItem('AstroAPIHitDataKey');
+        console.log(GetData);
         if (GetData){
           const data = {
               day: GetData.dobData.day,
@@ -162,6 +163,7 @@ export default function Kundli({data}) {
               lon: GetData.birth_place_longitude,
               tzone: GetData.tzone,
           };
+          console.log(data);
           try {
               const astrologyData = await fetchAstrologyData(data, "planets");
               setHoroscopeChart(astrologyData);

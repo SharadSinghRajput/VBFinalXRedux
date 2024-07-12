@@ -1,3 +1,22 @@
+import AscendantCalculator from '../public/img/all-side-bar-data/ascendant-calculator1.png';
+import GemstoneSuggestion from '../public/img/all-side-bar-data/gemstone-suggestion.png';
+import RudrakshaSuggestion from '../public/img/all-side-bar-data/rudraksha-suggestion1.png';
+import Numerology from '../public/img/all-side-bar-data/check-numerology1.png';
+import KaalsarpDosha from '../public/img/all-side-bar-data/kalsarpdosh.png';
+import SadesatiCalculator from '../public/img/all-side-bar-data/sadhesati-calculator1.png';
+import PitraDosha from '../public/img/all-side-bar-data/pitra-dosha-calculator1.png';
+import ManglikDosha from '../public/img/all-side-bar-data/maglik-dosha-calculator1.png';
+import MoonSign from '../public/img/all-side-bar-data/moon.jpg';
+// import Consultation from '../public/img/all-side-bar-data/12_Consultation-MAIN.webp';
+// import OnlineReport from '../public/img/all-side-bar-data/1_OLR main.webp';
+// import VoiceReport from '../public/img/all-side-bar-data/14_VR MAIN.webp';
+import AstrologyNews from '../public/img/all-side-bar-data/11_icon-mike.png';
+import BhagyaSamhita from '../public/img/all-side-bar-data/24_274-500-website-banner.png';
+import GovtJob2024 from '../public/img/all-side-bar-data/238_Will-you-get-a-Govt-Job-in-2024.png';
+import FutureLifePartner from '../public/img/all-side-bar-data/240_Assess-status-and-Personality-of.png';
+import BabyNaming from '../public/img/all-side-bar-data/239_Get-Perfect-Unique-Name-for-Your-Baby-in-English.png';
+import FutureLifePartnerProfession from '../public/img/all-side-bar-data/253_What-your-Future-Life-Partner-wi.png';
+import MangalDoshaCalculator from '../public/img/all-side-bar-data/237_web-site-banner-190-500-manglik-.png';
 
 export const Categories = [
     {
@@ -65,58 +84,56 @@ export const Categories = [
             }
         ]
     },
-
     {
         name: "Free Calculators",
-        "links": [
+        links: [
             {
                 text: "Ascendant Calculator",
                 url: "https://www.vinaybajrangi.com/calculator/ascendant-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/ascendant-calculator1.png"
+                imgsrc: AscendantCalculator
             },
             {
                 text: "Gemstone Suggestion",
                 url: "https://www.vinaybajrangi.com/calculator/gemstone-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/gemstone-suggestion.png"
+                imgsrc: GemstoneSuggestion
             },
             {
                 text: "Rudraksha Suggestion",
                 url: "https://www.vinaybajrangi.com/calculator/rudraksha-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/rudraksha-suggestion1.png"
+                imgsrc: RudrakshaSuggestion
             },
             {
                 text: "Numerology For You",
                 url: "https://www.vinaybajrangi.com/calculator/numerology-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/check-numerology1.png"
+                imgsrc: Numerology
             },
             {
                 text: "Kaalsarp Dosha",
                 url: "https://www.vinaybajrangi.com/calculator/kaalsarp-dosh-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/kalsarpdosh.png"
+                imgsrc: KaalsarpDosha
             },
             {
                 text: "Sadesati Calculator",
                 url: "https://www.vinaybajrangi.com/calculator/sadesati-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/sadhesati-calculator1.png"
+                imgsrc: SadesatiCalculator
             },
             {
                 text: "Pitra Dosha Calculator",
                 url: "https://www.vinaybajrangi.com/calculator/pitra-dosha-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/pitra-dosha-calculator1.png"
+                imgsrc: PitraDosha
             },
             {
                 text: "Manglik Dosha Calculator",
                 url: "https://www.vinaybajrangi.com/calculator/manglik-dosha-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/maglik-dosha-calculator1.png"
+                imgsrc: ManglikDosha
             },
             {
                 text: "Moon Sign Calculator",
                 url: "https://www.vinaybajrangi.com/calculator/moon-sign-calculator.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/calculator-img/moon.jpg"
+                imgsrc: MoonSign
             }
         ]
     },
-
     {
         name: "CALCULATORS",
         links: [
@@ -174,215 +191,85 @@ export const Categories = [
                 url: "https://www.vinaybajrangi.com/court-cases.php"
             },
             {
-                text: "Property astrology",
+                text: "Property Issues",
                 url: "https://www.vinaybajrangi.com/property.php"
             },
             {
-                text: "Health Astrology",
-                url: "https://www.vinaybajrangi.com/health-astrology.php"
-            },
-            {
-                text: "Loan and Debt",
-                url: "https://www.vinaybajrangi.com/loan-and-debts.php"
-            },
-            {
-                text: "Betting and Gambling",
-                url: "https://www.vinaybajrangi.com/astrology-for-betting.php"
-            },
-            {
-                text: "Foreign Settlement",
-                url: "https://www.vinaybajrangi.com/foreign-settlement.php"
-            },
-            {
-                text: "Past Life Readings",
-                url: "https://www.vinaybajrangi.com/life-predictions.php"
-            },
-            {
-                text: "Birth Time Correction",
-                url: "https://www.vinaybajrangi.com/time-rectification.php"
-            },
-            {
-                text: "Children Astrology",
+                text: "Delay in Child Birth",
                 url: "https://www.vinaybajrangi.com/children-astrology.php"
             },
             {
-                text: "What is Vastu - All about Vastu",
-                url: "https://www.vinaybajrangi.com/vastu.php"
+                text: "Education Problems",
+                url: "https://www.vinaybajrangi.com/education-astrology.php"
             },
             {
-                text: "Vastu For Commercial",
-                url: "https://www.vinaybajrangi.com/vastu-for-commercial.php"
+                text: "Health Problems",
+                url: "https://www.vinaybajrangi.com/health-astrology.php"
             },
             {
-                text: "Share Market Astrology",
-                url: "https://www.vinaybajrangi.com/share-market-astrology.php"
+                text: "Debt Problems",
+                url: "https://www.vinaybajrangi.com/loan-and-debts.php"
             }
         ]
     },
     {
-        name: "appointment",
+        name: "Paid Services",
         links: [
             {
-                text: "CONSULTATION",
-                url: "https://www.vinaybajrangi.com/services/consultation.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/category_img/12_Consultation MAIN.webp"
+                text: "Online Astrologer",
+                url: "https://www.vinaybajrangi.com/online-consultation.php",
+                // imgsrc: Consultation
             },
             {
-                text: "ONLINE REPORT",
-                url: "https://www.vinaybajrangi.com/services/online-reports.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/category_img/1_OLR main.webp"
+                text: "Order Report Online",
+                url: "https://www.vinaybajrangi.com/order-report.php",
+                // imgsrc: OnlineReport
             },
             {
-                text: "VOICE REPORT",
-                url: "https://www.vinaybajrangi.com/services/voice-report.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/category_img/14_VR MAIN.webp"
-            },
-            {
-                text: "Astrology News & Articles",
-                url: "https://www.vinaybajrangi.com/astrology-news.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/menu-icon/11_icon-mike.png"
-            }
-        ]
-    },
-    {
-        name: "AstrologySecrets",
-        links: [
-            {
-                text: "Today's Panchang",
-                url: "https://www.vinaybajrangi.com/today-panchang.php"
-            },
-            {
-                text: "Stock Market Prediction",
-                url: "https://www.vinaybajrangi.com/share-market-today.php"
-            },
-            {
-                text: "Free Daily Horoscope",
-                url: "https://www.vinaybajrangi.com/horoscope/horoscope.php"
-            },
-            {
-                text: "Planetary Transit",
-                url: "https://www.vinaybajrangi.com/planetary-transit.php"
-            },
-            {
-                text: "Festivals",
-                url: "https://www.vinaybajrangi.com/festivals.php"
-            },
-            {
-                text: "Love Compatibility",
-                url: "https://www.vinaybajrangi.com/zodiac-signs-compatibility.php"
-            },
-            {
-                text: "Kundli Doshas",
-                url: "https://www.vinaybajrangi.com/kundli-doshas.php"
-            },
-            {
-                text: "Nakshatra",
-                url: "https://www.vinaybajrangi.com/nakshatras.php"
-            },
-            {
-                text: "Astrology Articles",
-                url: "https://www.vinaybajrangi.com/astrology-articles.php"
+                text: "Order Voice Report",
+                url: "https://www.vinaybajrangi.com/voice-report.php",
+                // imgsrc: VoiceReport
             },
             {
                 text: "Astrology News",
-                url: "https://www.vinaybajrangi.com/astrology-news.php"
-            },
-            {
-                text: "Planets in Different Houses & Signs",
-                url: "https://www.vinaybajrangi.com/planets.php"
-            },
-            {
-                text: "Astrology Houses",
-                url: "https://www.vinaybajrangi.com/astrology-houses.php"
-            },
-            {
-                text: "Astrology Remedies",
-                url: "https://www.vinaybajrangi.com/astrology-remedies.php"
-            },
-            {
-                text: "Astrology Dasha",
-                url: "https://www.vinaybajrangi.com/dasha.php"
-            },
-            {
-                text: "Astrology Yoga",
-                url: "https://www.vinaybajrangi.com/yoga.php"
-            },
-            {
-                text: "Vrat Dates",
-                url: "https://www.vinaybajrangi.com/vrat.php"
-            },
-            {
-                text: "Hindu Rituals",
-                url: "https://www.vinaybajrangi.com/hindu-rituals.php"
-            },
-            {
-                text: "Jayanti",
-                url: "https://www.vinaybajrangi.com/jayanti.php"
-            },
-            {
-                text: "Muhurata",
-                url: "https://www.vinaybajrangi.com/shubh-muhurat.php"
+                url: "https://www.vinaybajrangi.com/astrology-news.php",
+                imgsrc: AstrologyNews
             }
         ]
     },
     {
-        name: "Premium Products",
-        "links": [
-            {
-                alt: "Bhagya Samhita",
-                url: "https://www.vinaybajrangi.com/services/life-readings/bhagya-samhita.php",
-                imgbanner: "https://www.vinaybajrangi.com/upload/manage-image-banner/24_274-500-website-banner%20(2)%20(1).png"
-            }
-        ]
-    },
-    {
-
+        name: "Predictions",
         links: [
             {
-                alt: "govt job in 2024",
-                url: "https://www.vinaybajrangi.com/services/online-report/govt-job-in-2024.php",
-                imgbanner: "https://www.vinaybajrangi.com/upload/manage-image-banner/238_Will%20you%20get%20a%20Govt%20Job%20in%202024.png"
-            }
-        ]
-    },
-    {
-
-        links: [
+                text: "Bhagya Samhita",
+                url: "https://www.vinaybajrangi.com/horoscope/bhagya-samhita.php",
+                imgsrc: BhagyaSamhita
+            },
             {
-                alt: "future life partner",
-                url: "https://www.vinaybajrangi.com/services/online-report/future-life-partner.php",
-                imgbanner: "https://www.vinaybajrangi.com/upload/manage-image-banner/240_Assess-status-and-Personality-of.png"
-            }
-        ]
-    },
-    {
-
-        links: [
+                text: "Will you get a Govt Job in 2024?",
+                url: "https://www.vinaybajrangi.com/kundli-predictions/govt-job.php",
+                imgsrc: GovtJob2024
+            },
             {
-                alt: "Baby Naming",
-                url: "https://www.vinaybajrangi.com/services/online-report/baby-naming.php",
-                imgbanner: "https://www.vinaybajrangi.com/upload/manage-image-banner/239_Get%20Perfect%20Unique%20Name%20for%20Your%20Baby%20in%20English.png"
-            }
-        ]
-    },
-    {
-
-        links: [
+                text: "Assess status and Personality of Future Life Partner",
+                url: "https://www.vinaybajrangi.com/kundli-predictions/know-life-partner.php",
+                imgsrc: FutureLifePartner
+            },
             {
-                alt: "know future life partner profession",
-                url: "https://www.vinaybajrangi.com/services/online-report/know-future-life-partner-profession.php",
-                imgbanner: "https://www.vinaybajrangi.com/upload/manage-image-banner/253_What-your-Future-Life-Partner-wi.png"
-            }
-        ]
-    },
-    {
-        links: [
+                text: "Get Perfect Unique Name for Your Baby in English",
+                url: "https://www.vinaybajrangi.com/kundli-predictions/know-life-partner.php",
+                imgsrc: BabyNaming
+            },
             {
-                alt: "Mangal Dosha Calclator",
-                url: "https://www.vinaybajrangi.com/services/online-report/mangal-dosha-calculator.php",
-                imgbanner: "https://www.vinaybajrangi.com/upload/manage-image-banner/237_web-site-banner-190-500-manglik-.png"
+                text: "What your Future Life Partner will look like?",
+                url: "https://www.vinaybajrangi.com/kundli-predictions/know-life-partner.php",
+                imgsrc: FutureLifePartnerProfession
+            },
+            {
+                text: "Mangal Dosha Calculator",
+                url: "https://www.vinaybajrangi.com/calculator/manglik-dosha-calculator.php",
+                imgsrc: MangalDoshaCalculator
             }
         ]
-    },
-
+    }
 ];
