@@ -612,7 +612,7 @@ export default function Kundli({ data }) {
                                 <li key={item.name} className="lg:w-[9%] md:w-[15%] w-[28%]">
                                     <a
                                         className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
-                                        href={`${mainURL}${lang === "Hindi" ? item.hindiLink : item.link}`}
+                                        href={`${lang === "Hindi" ? item.hindiLink : item.link}`}
                                         onClick={(e) => handleClick(e, lang === "Hindi" ? item.hindiLink : item.link)}
                                     >
                                         <Image width={100} height={50} className="w-[100px] aspect-square rounded-[50px]" src={item.imageUrl} alt={lang === "Hindi" ? item.hindiName : item.name} />

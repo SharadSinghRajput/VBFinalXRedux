@@ -87,7 +87,7 @@ export default function Kundli({ data }) {
       max_tokens: 800
     };
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-    const response = await fetch('https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions', {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
