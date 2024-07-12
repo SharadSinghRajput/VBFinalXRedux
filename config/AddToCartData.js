@@ -1,3 +1,5 @@
+import Divorce from '../public/img/add-to-cart-data/61.jpg';
+
 export const ServiceProducts = [
     {
         id: 1,
@@ -7,7 +9,7 @@ export const ServiceProducts = [
         servicecategory: 'Marriage Astrology',
         inStock: false,
         leadTime: '7-8 business days',
-        imageSrc: 'https://www.vinaybajrangi.com/upload/prod_pic/large/61.jpg',
+        imageSrc: Divorce,
         imageAlt: 'Consultaion For Delay In Marriage',
     },
     // {
@@ -18,7 +20,7 @@ export const ServiceProducts = [
     //     servicecategory: 'Business Astrology',
     //     inStock: false,
     //     leadTime: '7-8 business days',
-    //     imageSrc: 'https://www.vinaybajrangi.com/upload/prod_pic/large/92.jpg',
+    //     imageSrc: 'public/img/add-to-cart-data/92.jpg',
     //     imageAlt: 'Consultaion For Business Expansion',
     // },
     // {
@@ -29,7 +31,7 @@ export const ServiceProducts = [
     //     servicecategory: 'Career Astrology',
     //     inStock: true,
     //     leadTime: '7-8 business days',
-    //     imageSrc: 'https://www.vinaybajrangi.com/upload/prod_pic/large/101.jpg',
+    //     imageSrc: 'public/img/add-to-cart-data/101.jpg',
     //     imageAlt: 'Consultaion For Job Change Or Promotions',
     // },
     // {
@@ -40,7 +42,7 @@ export const ServiceProducts = [
     //     servicecategory: 'Property Astrology',
     //     inStock: true,
     //     leadTime: '7-8 business days',
-    //     imageSrc: 'https://www.vinaybajrangi.com/upload/prod_pic/large/105.jpg',
+    //     imageSrc: 'public/img/add-to-cart-data/105.jpg',
     //     imageAlt: 'Consultaion For Ancestral Property',
     // },
 ];

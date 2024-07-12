@@ -381,8 +381,8 @@ export default function Kundli({ data }) {
                                     <p className="text-sm font-semibold">{data?.language === "Hindi" ? "प्रश्न पूछें" : "Ask a question"}</p>
                                 </a>
                                 <a
-                                    href={`${data?.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`}
-                                    onClick={(e) => handleClickRouter(e, `${data?.language === "Hindi" ? "/hindi/calculator/moon-sign-calculator.php" : "/calculator/moon-sign-calculator.php"}`)}
+                                    href={`${data?.language === "Hindi" ? "calculator-in-hindi/moon-sign-calculator" : "/calculator/moon-sign-calculator.php"}`}
+                                    onClick={(e) => handleClickRouter(e, `${data?.language === "Hindi" ? "calculator-in-hindi/moon-sign-calculator" : "/calculator/moon-sign-calculator.php"}`)}
 
                                     className="p-2 bg-white rounded-lg flex mt-5 items-center w-full justify-start">
                                     <Image src={moonsignm} width={60} className='w-[60px] p-3 aspect-square rounded-lg' />
@@ -427,7 +427,7 @@ export default function Kundli({ data }) {
                                 <div className="w-full mx-auto mb-5 shadow-lg border-[1px] border-orange-500 bg-white p-2 mt-1 rounded-lg">
                                     <a
                                         href={`${MAIN_URL}${lang === "Hindi" ? item.hindiUrls : item.link}`}
-                                        onClick={(e) => handleClickRouter(e, item.link)}
+                                        onClick={(e) => handleClickRouter(e, lang === "Hindi" ? item.hindiUrls : item.link)}
                                         className="gap-4 min-h-16 flex flex-row justify-start items-center">
                                         <Image width={40} height={40} src={item.image} alt={lang === "Hindi" ? item.hindiName : item.name} className='w-[50px] bg-orange-500 border-2 border-white aspect-square rounded-full' />
                                         <h5 className="text-orange-600 text-sm text-left font-bold">{lang === "Hindi" ? item.hindiName : item.name}</h5>
@@ -492,7 +492,7 @@ export default function Kundli({ data }) {
                                     <SwiperSlide key={index}>
                                         <a
                                             className="text-xs text-white gap-2 text-center no-underline flex flex-col justify-center items-center"
-                                            href={`${mainURL}${lang === "Hindi" ? item.hindiUrl : item.url}`}
+                                            href={`${lang === "Hindi" ? item.hindiUrl : item.url}`}
                                             onClick={(e) => handleClick(e, lang === "Hindi" ? item.hindiUrl : item.url)}
                                         >
                                             <Image src={item.img} width={80} height={50} className='w-[80px] p-3 bg-orange-500 aspect-square rounded-lg' alt={lang === "Hindi" ? item.hindiName : item.name} />

@@ -161,6 +161,7 @@ const handleClick = (e, url) => {
 
 
     const DOB_DOT = DateNew + " " + TimeNew
+    const DateFormateforAstrologyAPI = formatDate(DOB_DOT);
 
     const data = {
         apiKey: API_KEY,
@@ -179,7 +180,7 @@ const handleClick = (e, url) => {
 
     const UserData = JSON.stringify(data);
     const AstroDataBack = {
-        dobData: DOB_DOT,
+        dobData: DateFormateforAstrologyAPI,
         birth_place_longitude: selectedBirthLocation.latitude,
         birth_place_latitude: selectedBirthLocation.longitude,
         tzone: TimeZone,

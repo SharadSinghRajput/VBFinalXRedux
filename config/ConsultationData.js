@@ -1,3 +1,12 @@
+import Img61 from '../public/img/consultation-data/61.jpg';
+import Img82 from '../public/img/consultation-data/82.jpg';
+import Img88 from '../public/img/consultation-data/88.jpg';
+import Img89 from '../public/img/consultation-data/89.jpg';
+import Img60 from '../public/img/consultation-data/60.jpg';
+import Img83 from '../public/img/consultation-data/83.jpg';
+import Img62 from '../public/img/consultation-data/62.jpg';
+import Img285 from '../public/img/consultation-data/285.jpg';
+
 const Consultation = [
     {
         name: "MASTER OF",
@@ -5,61 +14,61 @@ const Consultation = [
             {
                 text: "consultation for DELAY IN...",
                 url: "https://www.vinaybajrangi.com/marriage-astrology/delay-in-marriage-reasons-solutions.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/61.jpg",
-                alt:"Consultation for Delay in Marriage",
+                imgsrc: Img61,
+                alt: "Consultation for Delay in Marriage",
                 price: "7100.00"
-                        
             },
             {
                 text: "Consultation for Divorce",
                 url: "https://www.vinaybajrangi.com/services/consultation/divorce.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/82.jpg",
-                alt:"Consultation for Divorce",
+                imgsrc: Img82,
+                alt: "Consultation for Divorce",
                 price: "7100.00"
             },
             {
                 text: "Consultation for Future Life...",
                 url: "https://www.vinaybajrangi.com/services/consultation/life-partner.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/88.jpg",
+                imgsrc: Img88,
                 price: "7100.00"
             },
             {
                 text: "Consultation for Horoscope...",
                 url: "https://www.vinaybajrangi.com/services/consultation/horoscope-matching.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/89.jpg",
+                imgsrc: Img89,
                 price: "7100.00"
             },
             {
                 text: "Consultation for Love Marriage...",
                 url: "https://www.vinaybajrangi.com/services/consultation/love-marriage-issues.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/60.jpg",
+                imgsrc: Img60,
                 price: "7100.00"
             },
             {
                 text: "Consultation for Manglik Dosh...",
                 url: "https://www.vinaybajrangi.com/services/consultation/manglik-dosh.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/83.jpg",
+                imgsrc: Img83,
                 price: "7100.00"
             },
             {
                 text: "Consultation for Married Life...",
                 url: "https://www.vinaybajrangi.com/services/consultation/married-life-issues.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/62.jpg",
+                imgsrc: Img62,
                 price: "7100.00"
             },
             {
                 text: "Consultation for Post marriage...",
                 url: "https://www.vinaybajrangi.com/services/consultation/post-marriage-counseling.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/285.jpg",
+                imgsrc: Img285,
                 price: "31000.00"
             },
             {
                 text: "Consultation for Pre-Marriage...",
                 url: "https://www.vinaybajrangi.com/services/consultation/pre-marriage-counseling.php",
-                imgsrc: "https://www.vinaybajrangi.com/upload/prod_pic/large/287.jpg",
+                imgsrc: Img287,
                 price: "20000.00"
             },
         ]
     }
-]
+];
+
 export default Consultation;

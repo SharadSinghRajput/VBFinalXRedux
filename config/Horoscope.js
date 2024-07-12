@@ -1,7 +1,19 @@
 // config/Horoscope.js
 // import { MAIN_URL } from '../config/config';
+import AriesImg from '../public/img/horoscope/Aries.png';
+import TaurusImg from '../public/img/horoscope/Tauras.png';
+import GeminiImg from '../public/img/horoscope/Gemini.png';
+import CancerImg from '../public/img/horoscope/Cancer.png';
+import LeoImg from '../public/img/horoscope/Leo.png';
+import VirgoImg from '../public/img/horoscope/Virgo.png';
+import LibraImg from '../public/img/horoscope/Libra.png';
+import ScorpioImg from '../public/img/horoscope/Scorpio.png';
+import SagittariusImg from '../public/img/horoscope/Sagittarius.png';
+import CapricornImg from '../public/img/horoscope/Capricorn.png';
+import AquariusImg from '../public/img/horoscope/Aquarius.png';
+import PiscesImg from '../public/img/horoscope/pices.png';
 
-export const Horoscope = (dayType = "daily-horoscope",) => {
+export const Horoscope = (dayType = "daily-horoscope") => {
   if (dayType === "today-horoscope") {
     dayType = "daily-horoscope";
   }
@@ -11,7 +23,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "मेष",
       name: "Aries",
       url: `horoscope/${dayType}/aries.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Aries.png",
+      imgSrc: AriesImg,
       link: `/horoscope/${dayType}/aries.php`,
       hindiLink: `/hindi/horoscope/${dayType}/mesh.php`
     },
@@ -19,16 +31,15 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "वृषभ",
       name: "Taurus",
       url: `horoscope/${dayType}/taurus.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Tauras.png",
+      imgSrc: TaurusImg,
       link: `/horoscope/${dayType}/taurus.php`,
       hindiLink: `/hindi/horoscope/${dayType}/vrshabh.php`
-      
     },
     {
       nameHindi: "मिथुन",
       name: "Gemini",
       url: `horoscope/${dayType}/gemini.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Gemini.png",
+      imgSrc: GeminiImg,
       link: `/horoscope/${dayType}/gemini.php`,
       hindiLink: `/hindi/horoscope/${dayType}/mithun.php`
     },
@@ -36,7 +47,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "कर्क",
       name: "Cancer",
       url: `horoscope/${dayType}/cancer.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Cancer.png",
+      imgSrc: CancerImg,
       link: `/horoscope/${dayType}/cancer.php`,
       hindiLink: `/hindi/horoscope/${dayType}/kark.php`
     },
@@ -44,7 +55,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "सिंह",
       name: "Leo",
       url: `horoscope/${dayType}/leo.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Leo.png",
+      imgSrc: LeoImg,
       link: `/horoscope/${dayType}/leo.php`,
       hindiLink: `/hindi/horoscope/${dayType}/singh.php`
     },
@@ -52,7 +63,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "कन्या",
       name: "Virgo",
       url: `horoscope/${dayType}/virgo.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Virgo.png",
+      imgSrc: VirgoImg,
       link: `/horoscope/${dayType}/virgo.php`,
       hindiLink: `/hindi/horoscope/${dayType}/kanya.php`
     },
@@ -60,7 +71,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "तुला",
       name: "Libra",
       url: `horoscope/${dayType}/libra.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Libra.png",
+      imgSrc: LibraImg,
       link: `/horoscope/${dayType}/libra.php`,
       hindiLink: `/hindi/horoscope/${dayType}/tula.php`
     },
@@ -68,7 +79,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "वृश्चिक",
       name: "Scorpio",
       url: `horoscope/${dayType}/scorpio.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Scorpio.png",
+      imgSrc: ScorpioImg,
       link: `/horoscope/${dayType}/scorpio.php`,
       hindiLink: `/hindi/horoscope/${dayType}/vrshchik.php`
     },
@@ -76,7 +87,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "धनु",
       name: "Sagittarius",
       url: `horoscope/${dayType}/sagittarius.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Sagittarius.png",
+      imgSrc: SagittariusImg,
       link: `/horoscope/${dayType}/sagittarius.php`,
       hindiLink: `/hindi/horoscope/${dayType}/dhanu.php`
     },
@@ -84,7 +95,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "मकर",
       name: "Capricorn",
       url: `horoscope/${dayType}/capricorn.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Capricorn.png",
+      imgSrc: CapricornImg,
       link: `/horoscope/${dayType}/capricorn.php`,
       hindiLink: `/hindi/horoscope/${dayType}/makar.php`
     },
@@ -92,7 +103,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "कुम्भ",
       name: "Aquarius",
       url: `horoscope/${dayType}/aquarius.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/Aquarius.png",
+      imgSrc: AquariusImg,
       link: `/horoscope/${dayType}/aquarius.php`,
       hindiLink: `/hindi/horoscope/${dayType}/kumbh.php`
     },
@@ -100,7 +111,7 @@ export const Horoscope = (dayType = "daily-horoscope",) => {
       nameHindi: "मीन",
       name: "Pisces",
       url: `horoscope/${dayType}/pisces.php`,
-      imgSrc: "https://www.vinaybajrangi.com/upload/rashi-img/pices.png",
+      imgSrc: PiscesImg,
       link: `/horoscope/${dayType}/pisces.php`,
       hindiLink: `/hindi/horoscope/${dayType}/meen.php`
     },
