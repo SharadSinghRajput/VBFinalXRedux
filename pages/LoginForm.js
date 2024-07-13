@@ -72,7 +72,7 @@ export default function Login({pageslug}) {
       return;
     }
     
-    const apiUrl = `${API_NEW_URL_LOGIN}send-otp.php`;
+    const apiUrl = `${API_NEW_URL}send-otp.php`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -122,7 +122,7 @@ export default function Login({pageslug}) {
       setVerifyOtpLoder(false)
       return;
     }
-    const apiUrl = `${API_NEW_URL_LOGIN}login-api.php`;
+    const apiUrl = `${API_NEW_URL}login-api.php`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
